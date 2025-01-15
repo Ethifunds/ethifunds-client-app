@@ -1,0 +1,229 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	:root {
+		--radius: 0.5rem;
+		font-family: "Nunito", serif;
+	}
+
+	/* typography */
+
+	/* display */
+	.display-1 {
+		@apply text-mobile-display-1 lg:text-desktop-display-1 font-bold leading-mobile-display-1 lg:leading-desktop-display-1 font-nunito;
+	}
+	.display-2 {
+		@apply text-mobile-display-2 lg:text-desktop-display-2 font-bold leading-mobile-display-2 lg:leading-desktop-display-2 font-nunito;
+	}
+	.display-3 {
+		@apply text-mobile-display-3 lg:text-desktop-display-3 font-bold leading-mobile-display-3 lg:leading-desktop-display-3 font-nunito;
+	}
+
+	/* heading */
+	.heading-1 {
+		@apply text-mobile-heading-1 lg:text-desktop-heading-1 font-bold leading-mobile-heading-1 lg:leading-desktop-heading-1 font-nunito;
+	}
+	.heading-2 {
+		@apply text-mobile-heading-2 lg:text-desktop-heading-2 font-bold leading-mobile-heading-2 lg:leading-desktop-heading-2 font-nunito;
+	}
+
+	.heading-3 {
+		@apply text-mobile-heading-3 lg:text-desktop-heading-3 font-bold leading-mobile-heading-3 lg:leading-desktop-heading-3 font-nunito;
+	}
+	.heading-4 {
+		@apply text-mobile-heading-4 lg:text-desktop-heading-4 font-bold leading-mobile-heading-4 lg:leading-desktop-heading-4 font-nunito;
+	}
+
+	/* body */
+
+	/* hero */
+	.hero-bold {
+		@apply text-mobile-body-hero lg:text-desktop-body-hero font-bold leading-mobile-body-hero lg:leading-desktop-body-hero font-nunito;
+	}
+
+	.hero-accent {
+		@apply text-mobile-body-hero lg:text-desktop-body-hero font-semibold leading-mobile-body-hero lg:leading-desktop-body-hero font-nunito;
+	}
+
+	.hero-emphasis {
+		@apply text-mobile-body-hero lg:text-desktop-body-hero italic leading-mobile-body-hero lg:leading-desktop-body-hero font-nunito;
+	}
+
+	.hero-standard {
+		@apply text-mobile-body-hero lg:text-desktop-body-hero font-normal leading-mobile-body-hero lg:leading-desktop-body-hero font-nunito;
+	}
+
+	/* feature */
+	.feature-bold {
+		@apply text-mobile-body-feature lg:text-desktop-body-feature font-bold leading-mobile-body-feature lg:leading-desktop-body-feature font-nunito;
+	}
+
+	.feature-accent {
+		@apply text-mobile-body-feature lg:text-desktop-body-feature font-semibold leading-mobile-body-feature lg:leading-desktop-body-feature font-nunito;
+	}
+
+	.feature-emphasis {
+		@apply text-mobile-body-feature lg:text-desktop-body-feature italic leading-mobile-body-feature lg:leading-desktop-body-feature font-nunito;
+	}
+
+	.feature-standard {
+		@apply text-mobile-body-feature lg:text-desktop-body-feature font-normal leading-mobile-body-feature lg:leading-desktop-body-feature font-nunito;
+	}
+
+	/* highlight */
+
+	.highlight-bold {
+		@apply text-mobile-body-highlight lg:text-desktop-body-highlight font-bold leading-mobile-body-highlight lg:leading-desktop-body-highlight font-nunito;
+	}
+
+	.highlight-accent {
+		@apply text-mobile-body-highlight lg:text-desktop-body-highlight font-semibold leading-mobile-body-highlight lg:leading-desktop-body-highlight font-nunito;
+	}
+
+	.highlight-emphasis {
+		@apply text-mobile-body-highlight lg:text-desktop-body-highlight italic leading-mobile-body-highlight lg:leading-desktop-body-highlight font-nunito;
+	}
+
+	.highlight-standard {
+		@apply text-mobile-body-highlight lg:text-desktop-body-highlight font-normal leading-mobile-body-highlight lg:leading-desktop-body-highlight font-nunito;
+	}
+
+	/* content */
+	.content-bold {
+		@apply text-mobile-body-content lg:text-desktop-body-content font-bold leading-mobile-body-content lg:leading-desktop-body-content font-nunito;
+	}
+
+	.content-accent {
+		@apply text-mobile-body-content lg:text-desktop-body-content font-semibold leading-mobile-body-content lg:leading-desktop-body-content font-nunito;
+	}
+
+	.content-emphasis {
+		@apply text-mobile-body-content lg:text-desktop-body-content italic leading-mobile-body-content lg:leading-desktop-body-content font-nunito;
+	}
+
+	.content-standard {
+		@apply text-mobile-body-content lg:text-desktop-body-content font-normal leading-mobile-body-content lg:leading-desktop-body-content font-nunito;
+	}
+
+	/* caption */
+	.caption-bold {
+		@apply text-mobile-body-caption lg:text-desktop-body-caption font-bold leading-mobile-body-caption lg:leading-desktop-body-caption font-nunito;
+	}
+
+	.caption-accent {
+		@apply text-mobile-body-caption lg:text-desktop-body-caption font-semibold leading-mobile-body-caption lg:leading-desktop-body-caption font-nunito;
+	}
+
+	.caption-emphasis {
+		@apply text-mobile-body-caption lg:text-desktop-body-caption italic leading-mobile-body-caption lg:leading-desktop-body-caption font-nunito;
+	}
+
+	.caption-standard {
+		@apply text-mobile-body-caption lg:text-desktop-body-caption font-normal leading-mobile-body-caption lg:leading-desktop-body-caption font-nunito;
+	}
+
+	/*Button variants  */
+	.button-default {
+		@apply p-3 rounded font-medium font-nunito bg-neutral-base_black hover:bg-opacity-50 disabled:bg-opacity-50 cursor-pointer disabled:cursor-default first-letter:uppercase;
+	}
+	.button-primary {
+		@apply p-3 rounded font-medium font-nunito bg-primary hover:bg-opacity-50 disabled:bg-opacity-50 cursor-pointer disabled:cursor-default first-letter:uppercase;
+	}
+	.button-secondary {
+		@apply p-3 rounded font-medium font-nunito bg-secondary hover:bg-opacity-50 disabled:bg-opacity-50 cursor-pointer disabled:cursor-default first-letter:uppercase;
+	}
+	.button-success {
+		@apply p-3 rounded font-medium font-nunito bg-success hover:bg-opacity-50 disabled:bg-opacity-50 cursor-pointer disabled:cursor-default first-letter:uppercase;
+	}
+	.button-warning {
+		@apply p-3 rounded font-medium font-nunito bg-warning-300 hover:bg-opacity-50 disabled:bg-opacity-50 cursor-pointer disabled:cursor-default first-letter:uppercase;
+	}
+	.button-destructive {
+		@apply p-3 rounded font-medium font-nunito bg-error-300 hover:bg-opacity-50 disabled:bg-opacity-50 cursor-pointer disabled:cursor-default first-letter:uppercase;
+	}
+	.button-muted {
+		@apply p-3 rounded font-medium font-nunito bg-stone-500/50 hover:bg-opacity-50 disabled:bg-opacity-50 cursor-pointer disabled:cursor-default first-letter:uppercase;
+	}
+	.button-ghost {
+		@apply p-3 rounded font-medium font-nunito bg-transparent hover:bg-opacity-50 disabled:bg-opacity-50 cursor-pointer disabled:cursor-default first-letter:uppercase;
+	}
+	.button-outline {
+		@apply p-3 rounded font-medium font-nunito bg-transparent border hover:bg-opacity-50 disabled:bg-opacity-50 cursor-pointer disabled:cursor-default first-letter:uppercase;
+	}
+}
+
+body {
+	margin: 0px;
+	padding: 0px;
+}
+
+* {
+	box-sizing: border-box;
+	transition: 0.2s ease-in-out all;
+}
+html {
+	scroll-behavior: smooth !important;
+}
+
+@keyframes shake {
+	10%,
+	90% {
+		transform: translate3d(-1px, 0, 0);
+	}
+	20%,
+	80% {
+		transform: translate3d(2px, 0, 0);
+	}
+	30%,
+	50%,
+	70% {
+		transform: translate3d(-4px, 0, 0);
+	}
+	40%,
+	60% {
+		transform: translate3d(4px, 0, 0);
+	}
+}
+
+.shake-animation {
+	animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+
+
+.hide-scrollbar {
+  scrollbar-width: none !important;
+}
+
+.thin-scrollbar::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track,
+.thin-scrollbar::-webkit-scrollbar-track {
+  background: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb,
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background: #687489 !important;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover,
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background: #555;
+}

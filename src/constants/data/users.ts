@@ -1,0 +1,38 @@
+import { User } from "@/types/user.types";
+
+export const users: User[] = [
+	{
+		id: "user1",
+		name: "John Doe",
+		username: "johnny",
+		email: "john@example.com",
+		phone_number: "2348071749618",
+		last_login: "",
+		login_attempt_count: 0,
+		status: "active",
+		remark: null,
+		locked_until: null,
+		two_factory_auth_enabled: true,
+		profile_picture: null,
+		email_verified_at: null,
+		created_at: "2024-05-12T08:00:00Z",
+		updated_at: "2024-05-12T08:30:00Z",
+	},
+	{
+		id: "101",
+		name: "John Sam",
+		username: "",
+		email: "johnsam@example.com",
+		phone_number: "2348071749618",
+		last_login: "",
+		login_attempt_count: 0,
+		status: "active",
+		remark: null,
+		locked_until: null,
+		two_factory_auth_enabled: false,
+		profile_picture: null,
+		email_verified_at: null,
+		created_at: "2024-05-09T12:00:00Z",
+		updated_at: "2024-05-09T12:00:00Z",
+	},
+];

@@ -1,0 +1,82 @@
+import { variables } from "@/constants";
+import useCustomNavigation from "@/hooks/use-navigation";
+import useStorage from "@/hooks/use-storage";
+import ensureError from "@/lib/ensure-error";
+import loginAccount from "@/services/account/login-account";
+import useActions from "@/store/actions";
+import * as React from "react";
+
+import { toast } from "sonner";
+import { z } from "zod";
+
+const validate = z.object({
+	email: z.string().trim().toLowerCase().min(5, "Email/Username is required"),
+	password: z.string().trim().min(8, "password is required"),
+});
+
+type FormData = z.infer<typeof validate>;
+const initial: FormData = {
+	email: "",
+	password: "",
+};
+export default function useForm() {
+	const [isLoading, setIsLoading] = React.useState(false);
+	const [formData, setFormData] = React.useState<FormData>(initial);
+	const [errorMsg, setErrorMsg] = React.useState("");
+	const [rememberMe, setRememberMe] = React.useState(false);
+	const { setData } = useStorage(variables.STORAGE.remember_me, false, "sessionStorage");
+
+	const { account } = useActions();
+	const { navigate } = useCustomNavigation();
+
+	const updateForm = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = e.target;
+
+		setFormData((prev) => ({
+			...prev,
+			[name]: value,
+		}));
+	};
+
+	const handleRememberMe = () => {
+		setData(true);
+	};
+
+	const submit = async (e: React.FormEvent) => {
+		e.preventDefault();
+		setIsLoading(true);
+		try {
+			const formValues = validate.parse(formData);
+
+			const response = await loginAccount(formValues);
+			account.changeAccount(response.user);
+			account.changeToken(response.token);
+
+			if (rememberMe) {
+				handleRememberMe();
+			}
+
+			if (response.user.two_factory_auth_enabled) {
+				return navigate("2fa-verify");
+			}
+			return navigate("/home");
+		} catch (error) {
+			const errMsg = ensureError(error);
+			setErrorMsg(errMsg.message);
+			toast.error(errMsg.message, {
+				position: "top-right",
+			});
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
+	return {
+		isLoading,
+		formData,
+		errorMsg,
+		setRememberMe,
+		updateForm,
+		submit,
+	};
+}
