@@ -1,6 +1,6 @@
 import { Input } from "@/components/ui/form-input";
 import useForm from "./use-form";
-import Button from "@/components/ui/button";
+import Button from "@/components/app-button";
 import Render from "@/components/render";
 
 export default function Form() {

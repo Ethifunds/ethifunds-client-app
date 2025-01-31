@@ -1,6 +1,7 @@
 import { variables } from "@/constants";
 import { users } from "@/constants/data/users";
 import axios from "@/lib/axios";
+import { User } from "@/types/user.types";
 
 type Parameters = {
 	email: string;
@@ -11,14 +12,7 @@ type Parameters = {
 	terms: boolean;
 };
 
-type Response = {
-	username: string;
-	email: string;
-	phone_number: string;
-	updated_at: string;
-	created_at: string;
-	id: string;
-};
+type Response = User;
 
 export async function production(data: Parameters): Promise<Response> {
 	const response = await axios.post(`/auth/register`, data);

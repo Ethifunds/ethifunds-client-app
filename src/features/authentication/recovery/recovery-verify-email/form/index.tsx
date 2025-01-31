@@ -1,6 +1,6 @@
 import PinInput from "@/components/ui/form-input/otp-input";
 import useForm from "./use-form";
-import Button from "@/components/ui/button";
+import Button from "@/components/app-button";
 import ResendOtp from "./resend-otp";
 import classNames from "classnames";
 

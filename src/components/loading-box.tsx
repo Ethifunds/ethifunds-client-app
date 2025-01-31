@@ -12,7 +12,7 @@ type LoadingBoxProps = {
 export default React.memo(function LoadingBox(props: LoadingBoxProps) {
 	const { position = "center", spinnerSize = "md", type = "responsive" } = props;
 	const cn = classnames(
-		"flex justify-center bg-white",
+		"flex justify-center",
 		{
 			"w-full h-full": type === "responsive",
 			"w-full h-screen": type === "screen",

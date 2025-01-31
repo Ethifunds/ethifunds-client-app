@@ -1,0 +1,40 @@
+import AppButton from "@/components/app-button";
+import PinInput from "@/components/ui/form-input/otp-input";
+import classNames from "classnames";
+import { PinProps } from ".";
+import { TabsContent } from "@/components/ui/tabs";
+
+export default function SetPin(props: PinProps) {
+	const inputClass = classNames("!size-12 bg-neutral-200 border-white", {
+		"!border-error-200 border-2 shake-animation !bg-white": props.errMsg && props.errMsg.length > 0,
+	});
+	return (
+		<TabsContent
+			value="set_pin"
+			className="flex flex-col gap-4 "
+		>
+			<h1 className="highlight-bold text-neutral-700 text-center">Set Transaction Pin</h1>
+			<div className="text-center space-y-2">
+				<small className="caption-standard text-neutral-500">Kindly set a 4-Digit PIN </small>
+				<PinInput
+					value={props.value}
+					valueLength={4}
+					onChange={(e) => props.updateForm(e, "pin")}
+					inputClass={inputClass}
+				/>
+			</div>
+
+			<div className="text-center pt-5">
+				<AppButton
+					onClick={props.submit}
+					isLoading={props.isLoading}
+					variant="primary"
+					className="text-white w-full rounded-xl !py-3 content-accent"
+					disabled={props.isLoading}
+				>
+					Proceed
+				</AppButton>
+			</div>
+		</TabsContent>
+	);
+}

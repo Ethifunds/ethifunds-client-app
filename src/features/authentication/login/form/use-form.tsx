@@ -1,4 +1,5 @@
 import { variables } from "@/constants";
+import useCookie from "@/hooks/use-cookie";
 import useCustomNavigation from "@/hooks/use-navigation";
 import useStorage from "@/hooks/use-storage";
 import ensureError from "@/lib/ensure-error";
@@ -25,6 +26,7 @@ export default function useForm() {
 	const [errorMsg, setErrorMsg] = React.useState("");
 	const [rememberMe, setRememberMe] = React.useState(false);
 	const { setData } = useStorage(variables.STORAGE.remember_me, false, "sessionStorage");
+	const { setCookie } = useCookie(variables.STORAGE.session, "");
 
 	const { account } = useActions();
 	const { navigate } = useCustomNavigation();
@@ -51,12 +53,13 @@ export default function useForm() {
 			const response = await loginAccount(formValues);
 			account.changeAccount(response.user);
 			account.changeToken(response.token);
+			setCookie(response.token);
 
 			if (rememberMe) {
 				handleRememberMe();
 			}
 
-			if (response.user.two_factory_auth_enabled) {
+			if (response.user.two_factor) {
 				return navigate("2fa-verify");
 			}
 			return navigate("/home");

@@ -15,7 +15,16 @@ type Response = {
 
 export async function production(data: Parameters): Promise<Response> {
 	const response = await axios.post(`/auth/login`, data);
-	return response.data.data;
+	const user = await axios.get("/me", {
+		headers: {
+			Authorization: `Bearer ${response.data.token}`,
+		},
+	});
+
+	return {
+		user: user.data.data,
+		token: response.data.data.token,
+	};
 }
 
 export async function development(): Promise<Response> {

@@ -9,6 +9,7 @@ export type StorageKeys = {
 	email: string;
 	session: string;
 	remember_me: string;
+	currency: string;
 };
 
 export type Environment = "production" | "development";
@@ -23,6 +24,7 @@ const STORAGE: StorageKeys = {
 	email: "_et_email",
 	session: "_et_session",
 	remember_me: "_et_rme",
+	currency: "_et_currency",
 };
 
 const ACTIVE: EnvironmentVariables = {

@@ -2,7 +2,7 @@ import { variables } from "@/constants";
 import useCustomNavigation from "@/hooks/use-navigation";
 import useStorage from "@/hooks/use-storage";
 import ensureError from "@/lib/ensure-error";
-import sterilizeText from "@/lib/sterilize-text";
+import sanitizeText from "@/lib/sanitize-text";
 import getSecurityQuestions from "@/services/account/get-security-questions";
 import verifySecurityQuestions from "@/services/account/verify-security-questions copy";
 import { SecurityAnswer, SecurityQuestion } from "@/types/security-questions.types";
@@ -46,10 +46,8 @@ export default function useForm() {
 
 		if (!userEmail || !savedEmail) return restart();
 
-		if (sterilizeText(savedEmail) !== sterilizeText(userEmail)) return restart();
+		if (sanitizeText(savedEmail) !== sanitizeText(userEmail)) return restart();
 	}, [userEmail, savedEmail, navigate]);
-
-
 
 	const query = useQuery(
 		["security-questions", userEmail],

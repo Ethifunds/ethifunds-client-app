@@ -2,7 +2,7 @@ import { Input } from "@/components/ui/form-input";
 import { formFields } from "./data";
 import useForm from "./use-form";
 import { Link } from "react-router-dom";
-import Button from "@/components/ui/button";
+import Button from "@/components/app-button";
 import { Checkbox } from "@/components/ui/checkbox";
 
 export default function Form() {

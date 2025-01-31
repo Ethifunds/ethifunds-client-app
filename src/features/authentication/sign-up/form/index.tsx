@@ -1,6 +1,6 @@
 import { Input } from "@/components/ui/form-input";
 import useForm from "./use-form";
-import Button from "@/components/ui/button";
+import Button from "@/components/app-button";
 import Password from "./password";
 import Spinner from "@/components/spinner";
 import Terms from "./terms";

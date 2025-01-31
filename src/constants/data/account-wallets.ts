@@ -1,0 +1,38 @@
+import { AccountWallet } from "@/types/wallet.types";
+
+export const AccountWallets: AccountWallet[] = [
+	{
+		id: 1,
+		account_id: 1,
+		bank_name: "Wema Bank",
+		bank_id: "20",
+		bank_slug: "wema-bank",
+		account_name: "ETHIFUND / JOHN DOE",
+		account_number: "9930000737",
+		currency: "NGN",
+		metadata: "null",
+		active: 1,
+		account_type: "PAY-WITH-TRANSFER-RECURRING",
+		assigned_at: "2020-01-06T15:51:24.764Z",
+		customer_id: "CUS_kpb3qj71u1m0rw8",
+		created_at: "2025-01-29T02:35:49.000000Z",
+		updated_at: "2025-01-29T02:35:49.000000Z",
+	},
+	{
+		id: 2,
+		account_id: 1,
+		bank_name: "Titan Paystack",
+		bank_id: "21",
+		bank_slug: "titan-paystack",
+		account_name: "ETHIFUND / JOHN DOE",
+		account_number: "9930000738",
+		currency: "NGN",
+		metadata: "null",
+		active: 1,
+		account_type: "PAY-WITH-TRANSFER-RECURRING",
+		assigned_at: "2020-01-06T15:51:24.764Z",
+		customer_id: "CUS_kpb3qj71u1m0rw8",
+		created_at: "2025-01-29T02:35:49.000000Z",
+		updated_at: "2025-01-29T02:35:49.000000Z",
+	},
+];

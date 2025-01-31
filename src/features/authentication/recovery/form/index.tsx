@@ -1,7 +1,7 @@
 import { Input } from "@/components/ui/form-input";
 import { formFields } from "./data";
 import useForm from "./use-form";
-import Button from "@/components/ui/button";
+import Button from "@/components/app-button";
 
 export default function Form() {
 	const { isLoading, formData, errorMsg, updateForm, submit } = useForm();

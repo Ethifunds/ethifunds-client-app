@@ -1,6 +1,6 @@
 import PinInput from "@/components/ui/form-input/otp-input";
 import useForm from "./use-form";
-import Button from "@/components/ui/button";
+import Button from "@/components/app-button";
 
 export default function Form() {
 	const { isLoading, formData, updateForm, submit } = useForm();

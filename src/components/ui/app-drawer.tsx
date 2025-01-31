@@ -1,0 +1,44 @@
+import {
+	Drawer,
+	DrawerClose,
+	DrawerContent,
+	DrawerDescription,
+	DrawerFooter,
+	DrawerHeader,
+	DrawerTitle,
+} from "@/components/ui/drawer";
+import classNames from "classnames";
+import { X } from "lucide-react";
+import React from "react";
+
+type DrawerProps = {
+	direction: "left" | "right" | "top" | "bottom";
+	children: React.ReactNode;
+	footer?: React.ReactNode;
+	open: boolean;
+	handleChange(state: boolean): void;
+	title: string;
+	className?: string;
+};
+export default function AppDrawer(props: DrawerProps) {
+	const cn = classNames("h-full lg:h-[90%] outline-none !overflow-x-hidden", props.className, {
+		"lg:ml-[68%]": props.direction === "right",
+		"lg:mr-[68%]": props.direction === "left",
+	});
+
+	return (
+		<Drawer direction={props.direction} onOpenChange={props.handleChange} open={props.open}>
+			<DrawerContent className={cn}>
+				<DrawerDescription />
+				<DrawerHeader className="flex justify-between items-center border-b border-neutral-200">
+					<DrawerTitle className="feature-bold text-neutral-1000">{props.title}</DrawerTitle>
+					<DrawerClose>
+						<X />
+					</DrawerClose>
+				</DrawerHeader>
+				{props.children}
+				{props.footer && <DrawerFooter>{props.footer}</DrawerFooter>}
+			</DrawerContent>
+		</Drawer>
+	);
+}
