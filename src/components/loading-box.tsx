@@ -23,7 +23,7 @@ export default React.memo(function LoadingBox(props: LoadingBoxProps) {
 	);
 	return (
 		<div className={cn}>
-			<Spinner size={spinnerSize} />
+			<Spinner size={spinnerSize}  load_type="custom"  />
 		</div>
 	);
 });

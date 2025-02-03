@@ -24,7 +24,7 @@ export default React.memo(function WalletBalance() {
 	return (
 		<div className="flex gap-10 py-3 lg:py-0 overflow-auto lg:overflow-hidden lg:max-w-5xl">
 			<div className={container}>
-				<Render isLoading={isFetching} isError={isError} error={error}>
+				<Render isLoading={isFetching} isError={isError} error={error} >
 					<div className="flex flex-col gap-6">
 						<div className="flex justify-between">
 							<div className="flex flex-col gap-5">

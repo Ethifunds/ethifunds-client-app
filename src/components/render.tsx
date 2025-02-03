@@ -29,7 +29,7 @@ export default React.memo(function Render(props: RenderProps) {
 		errorComponent,
 		loadingComponent,
 		loadingPosition = "top",
-		size = "sm",
+		size = "md",
 		roundedBg = false,
 		loadingBoxClass,
 	} = props;
