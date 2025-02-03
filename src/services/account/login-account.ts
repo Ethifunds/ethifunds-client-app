@@ -4,7 +4,8 @@ import axios from "@/lib/axios";
 import { User } from "@/types/user.types";
 
 type Parameters = {
-	email: string;
+	email?: string;
+	username?:string 
 	password: string;
 };
 

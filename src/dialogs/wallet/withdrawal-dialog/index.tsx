@@ -16,7 +16,7 @@ export default React.memo(function WithdrawalDialog() {
 			open={open}
 			direction="right"
 			handleChange={toggleShow}
-			className="overflow-auto"
+			className="overflow-auto hide-scrollbar"
 			
 		>
 			<Tabs defaultValue={"withdraw_funds"} value={activeTab} onValueChange={changeTab}>

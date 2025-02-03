@@ -28,7 +28,7 @@ export function DatePickerWithRange({
 						id="date"
 						variant={"outline"}
 						className={cn(
-							"w-[200px] justify-start text-left font-normal overflow-x-auto hide-scrollbar",
+							"w-fit justify-start text-left font-normal overflow-x-auto hide-scrollbar",
 							!date && "text-muted-foreground"
 						)}
 						disabled={rest.disabled}

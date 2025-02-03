@@ -11,33 +11,25 @@ import { FilterProps } from ".";
 
 export default function ExportFilter(props: FilterProps) {
 	const { queryParams } = useCustomNavigation();
-	const statusQuery = queryParams.get("exportType");
+	const statusQuery = queryParams.get("export_type");
 	const exportType = React.useMemo(() => {
 		return statusQuery ?? "CVS";
 	}, [statusQuery]);
 
 	const changeStatus = (value: string) => {
-		if (value === "CVS") return queryParams.delete("exportType");
-		queryParams.set("exportType", value);
+		if (value === "csv") return queryParams.delete("export_type");
+		queryParams.set("export_type", value);
 	};
-	// "success" | "failed" | "pending";
+	// "cvs" | "pdf"
 	const statusList = [
 		{
-			name: "CVS",
-			path: "all",
+			name: "CSV",
+			path: "csv",
 		},
 		{
-			name: "success",
-			path: "success",
+			name: "PDF",
+			path: "pdf",
 		},
-		// {
-		// 	name: "pending",
-		// 	path: "pending",
-		// },
-		// {
-		// 	name: "failed",
-		// 	path: "failed",
-		// },
 	];
 
 	return (
@@ -47,7 +39,7 @@ export default function ExportFilter(props: FilterProps) {
 			<Select onValueChange={(value) => changeStatus(value)} disabled={props.disabled}>
 				<SelectTrigger className="w-[99px] p-1 bg-neutral-50">
 					<SelectValue asChild placeholder={exportType}>
-						<span>{exportType}</span>
+						<span className="capitalize">{exportType}</span>
 					</SelectValue>
 				</SelectTrigger>
 				<SelectContent position="popper" side="bottom" className="max-h-60" align="end">

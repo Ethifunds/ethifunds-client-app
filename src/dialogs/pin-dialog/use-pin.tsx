@@ -19,12 +19,13 @@ const init = {
 };
 export default function usePin() {
 	const { dialog } = useAppSelector((state) => state.ui);
+	const { account } = useAppSelector((state) => state.account);
 	const [formData, setFormData] = React.useState(init);
 	const [isLoading, setIsLoading] = React.useState(false);
 	const [activeTab, setActiveTab] = React.useState("set_pin"); // set_pin, confirm_pin, pin_success,
 	const [errMsg, setErrMsg] = React.useState("");
 
-	const { ui } = useActions();
+	const { ui, account: accountActions } = useActions();
 
 	const reset = () => {
 		if (isLoading) return;
@@ -62,12 +63,15 @@ export default function usePin() {
 		setIsLoading(true);
 		try {
 			if (formData.pin !== formData.confirm_pin) throw new Error("Both pins must match");
-			console.log(formData);
 			const formValues = validation.parse({ pin: 1234 });
-
 			await setUserPin(formValues);
+			accountActions.updateAccount({
+				user_verifications: {
+					...account.user_verifications,
+					has_set_pin: true,
+				},
+			});
 			setActiveTab("pin_success");
-			console.log("reach");
 		} catch (error) {
 			const errorMsg = ensureError(error).message;
 			setErrMsg(errorMsg);

@@ -2,7 +2,7 @@ import CurrencyFilter from "./currency-filter";
 import { DateFilter } from "./date-filter";
 import ExportFilter from "./export-filter";
 import StatusFilter from "./status-filter";
-import TableSearchBar from "./table-search-bar";
+import TransactionTypeFilter from "./transaction-type-filter";
 
 export type FilterProps = {
 	disabled: boolean;
@@ -10,7 +10,7 @@ export type FilterProps = {
 export default function TransactionFilters(props: FilterProps) {
 	return (
 		<div className="flex items-center gap-3 py-1 overflow-auto">
-			<TableSearchBar {...props} />
+			<TransactionTypeFilter {...props} />
 			<CurrencyFilter {...props} />
 			<StatusFilter {...props} />
 			<ExportFilter {...props} />

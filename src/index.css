@@ -134,32 +134,36 @@
 	}
 
 	/*Button variants  */
+	.button {
+		@apply px-3 py-3 rounded font-medium font-nunito text-center hover:bg-opacity-50 disabled:bg-opacity-50 cursor-pointer disabled:cursor-default  transition-all duration-300 first-letter:uppercase
+	}
+
 	.button-default {
-		@apply px-3 py-2 rounded font-medium font-nunito text-center bg-neutral-base_black hover:bg-opacity-50 disabled:bg-opacity-50 cursor-pointer disabled:cursor-default  transition-all duration-300 first-letter:uppercase;
+		@apply button bg-neutral-base_black ;
 	}
 	.button-primary {
-		@apply px-3 py-2 rounded font-medium font-nunito text-center bg-primary hover:bg-opacity-50 disabled:bg-opacity-50 cursor-pointer disabled:cursor-default  transition-all duration-300 first-letter:uppercase;
+		@apply button bg-primary ;
 	}
 	.button-secondary {
-		@apply px-3 py-2 rounded font-medium font-nunito text-center bg-secondary hover:bg-opacity-50 disabled:bg-opacity-50 cursor-pointer disabled:cursor-default  transition-all duration-300 first-letter:uppercase;
+		@apply button bg-secondary ;
 	}
 	.button-success {
-		@apply px-3 py-2 rounded font-medium font-nunito text-center bg-success hover:bg-opacity-50 disabled:bg-opacity-50 cursor-pointer disabled:cursor-default  transition-all duration-300 first-letter:uppercase;
+		@apply button bg-success ;
 	}
 	.button-warning {
-		@apply px-3 py-2 rounded font-medium font-nunito text-center bg-warning-300 hover:bg-opacity-50 disabled:bg-opacity-50 cursor-pointer disabled:cursor-default  transition-all duration-300 first-letter:uppercase;
+		@apply button bg-warning-300 ;
 	}
 	.button-destructive {
-		@apply px-3 py-2 rounded font-medium font-nunito text-center bg-error-300 hover:bg-opacity-50 disabled:bg-opacity-50 cursor-pointer disabled:cursor-default  transition-all duration-300 first-letter:uppercase;
+		@apply button bg-error-300 ;
 	}
 	.button-muted {
-		@apply px-3 py-2 rounded font-medium font-nunito text-center bg-stone-500/50 hover:bg-opacity-50 disabled:bg-opacity-50 cursor-pointer disabled:cursor-default  transition-all duration-300 first-letter:uppercase;
+		@apply button bg-stone-500/50 ;
 	}
 	.button-ghost {
-		@apply px-3 py-2 rounded font-medium font-nunito text-center bg-transparent hover:bg-opacity-50 disabled:bg-opacity-50 cursor-pointer disabled:cursor-default  transition-all duration-300 first-letter:uppercase;
+		@apply button bg-transparent ;
 	}
 	.button-outline {
-		@apply px-3 py-2 rounded font-medium font-nunito text-center bg-transparent border hover:bg-opacity-50 disabled:bg-opacity-50 cursor-pointer disabled:cursor-default  transition-all duration-300 first-letter:uppercase;
+		@apply button bg-transparent border ;
 	}
   .dark {
 		--sidebar-background: 240 5.9% 10%;

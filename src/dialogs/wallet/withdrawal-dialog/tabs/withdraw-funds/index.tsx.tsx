@@ -8,6 +8,7 @@ import { PlusCircle } from "lucide-react";
 import { ChangeTab } from "../../use-withdrawal";
 import { BankAccount } from "@/types/bank-account.types";
 import * as React from "react";
+import { sanitizeNumInput } from "@/lib/sanitize-num-input";
 
 type WithdrawFundsProps = {
 	changeTab: ChangeTab;
@@ -44,8 +45,8 @@ export default React.memo(function WithdrawFunds(props: WithdrawFundsProps) {
 	}, [prependToList]);
 
 	return (
-		<TabsContent value="withdraw_funds" className="h-screen ">
-			<div className="flex flex-col px-5 mt-10 space-y-5 h-full">
+		<TabsContent value="withdraw_funds" className=" h-svh lg:h-screen">
+			<div className="flex flex-col px-5 mt-10 space-y-5 h-full overflow-auto">
 				<h1 className="content-standard text-neutral-500">
 					Kindly add amount and select the account you would like to withdraw funds to.
 				</h1>
@@ -53,7 +54,8 @@ export default React.memo(function WithdrawFunds(props: WithdrawFundsProps) {
 				<Input
 					label={`Amount (${currency.sign})`}
 					placeholder="Enter Amount"
-					onChange={(e) => setAmount(e.target.value)}
+					inputMode="numeric"
+					onChange={(e) => setAmount(sanitizeNumInput(e.target.value, true))}
 				/>
 
 				<div className="flex flex-col gap-3">

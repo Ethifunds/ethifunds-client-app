@@ -43,13 +43,12 @@ export default function useFundWallet() {
 	};
 
 	const copy = async (text: string) => {
-		// const text = props.account_number;
 		try {
 			await navigator.clipboard.writeText(text);
 			setCopied(true);
-			console.log("Text copied to clipboard:", text);
 			scrollIntoView();
 		} catch (err) {
+			toast.error("Failed to copy text");
 			console.error("Failed to copy text:", err);
 		}
 	};

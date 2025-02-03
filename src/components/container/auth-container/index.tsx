@@ -11,8 +11,8 @@ export default function AuthContainer({ children, slideIdx }: ContainerProps) {
 	const current = data[slideIdx];
 
 	return (
-		<div className="2xl:max-w-[90rem] mx-auto">
-			<div className="lg:flex justify-between lg:h-screen gap-40 p-5 lg:px-16 lg:pt-10">
+		<div className="2xl:max-w-[90rem] mx-auto h-svh relative">
+			<div className="lg:flex justify-between h-full gap-40 p-5 lg:px-16 lg:pt-10">
 				<div className="hidden lg:flex flex-col space-y-2 lg:w-full 2xl:h-screen">
 					<div className="space-y-4">
 						<p className="highlight-standard text-neutral-base_black">
@@ -33,9 +33,9 @@ export default function AuthContainer({ children, slideIdx }: ContainerProps) {
 					<AppLogo className="size-16 grow" />
 				</div>
 
-				<div className="flex flex-col lg:block h-screen lg:h-auto lg:w-full ">
+				<div className="flex flex-col gap-10 lg:block h-full lg:h-auto lg:w-full">
 					{children}
-					<div className=" flex justify-start items-end lg:hidden grow mb-10 pb-2">
+					<div className=" flex justify-start items-end grow lg:hidden bg-white">
 						<AppLogo className="size-16" />
 					</div>
 				</div>

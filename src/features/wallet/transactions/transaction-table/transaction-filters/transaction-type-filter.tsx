@@ -9,45 +9,45 @@ import useCustomNavigation from "@/hooks/use-navigation";
 import * as React from "react";
 import { FilterProps } from ".";
 
-export default function StatusFilter(props: FilterProps ) {
+export default function TransactionTypeFilter(props: FilterProps) {
 	const { queryParams } = useCustomNavigation();
-	const statusQuery = queryParams.get("status");
-	const status = React.useMemo(() => {
+	const statusQuery = queryParams.get("transaction_type");
+	const transactionType = React.useMemo(() => {
 		return statusQuery ?? "All";
 	}, [statusQuery]);
 
-	const changeStatus = (value: string) => {
-		if (value === "all") return queryParams.delete("status");
-		queryParams.set("status", value);
+	const changeType = (value: string) => {
+		if (value === "all") return queryParams.delete("transaction_type");
+		queryParams.set("transaction_type", value);
 	};
-	// "success" | "failed" | "pending";
+	// "credit" | "debit" | "transfer";
 	const statusList = [
 		{
 			name: "all",
 			path: "all",
 		},
 		{
-			name: "success",
-			path: "success",
+			name: "credit",
+			path: "credit",
 		},
 		{
-			name: "pending",
-			path: "pending",
+			name: "debit",
+			path: "debit",
 		},
 		{
-			name: "failed",
-			path: "failed",
+			name: "transfer",
+			path: "transfer",
 		},
 	];
 
 	return (
 		<div className="flex items-center gap-5">
-			<h1>Status</h1>
+			<h1>Type</h1>
 
-			<Select onValueChange={(value) => changeStatus(value)} disabled={props.disabled}>
+			<Select onValueChange={(value) => changeType(value)} disabled={props.disabled}>
 				<SelectTrigger className="w-[99px] p-1 bg-neutral-50">
-					<SelectValue asChild placeholder={status}>
-						<span className="capitalize">{status}</span>
+					<SelectValue asChild placeholder={transactionType}>
+						<span className="capitalize">{transactionType}</span>
 					</SelectValue>
 				</SelectTrigger>
 				<SelectContent position="popper" side="bottom" className="max-h-60" align="end">

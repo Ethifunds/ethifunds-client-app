@@ -3,7 +3,7 @@ import { FilterProps } from ".";
 
 export function DateFilter(props:FilterProps) {
 	return (
-		<div className="overflow-clip">
+		<div className="overflow-cli">
 			{" "}
             <DatePickerWithRange  {...props} />
 		</div>

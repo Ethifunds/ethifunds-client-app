@@ -19,8 +19,17 @@ type DrawerProps = {
 	handleChange(state: boolean): void;
 	title: string;
 	className?: string;
+	sticky?: string;
+	headerClassName?: string;
 };
 export default function AppDrawer(props: DrawerProps) {
+	const headerClx = classNames(
+		"flex justify-between items-center border-b border-neutral-200",
+		props.headerClassName,
+		{
+			"sticky top-0 z-10 bg-white": props.sticky,
+		}
+	);
 	const cn = classNames("h-full lg:h-[90%] outline-none !overflow-x-hidden", props.className, {
 		"lg:ml-[68%]": props.direction === "right",
 		"lg:mr-[68%]": props.direction === "left",
@@ -30,7 +39,7 @@ export default function AppDrawer(props: DrawerProps) {
 		<Drawer direction={props.direction} onOpenChange={props.handleChange} open={props.open}>
 			<DrawerContent className={cn}>
 				<DrawerDescription />
-				<DrawerHeader className="flex justify-between items-center border-b border-neutral-200">
+				<DrawerHeader className={headerClx}>
 					<DrawerTitle className="feature-bold text-neutral-1000">{props.title}</DrawerTitle>
 					<DrawerClose>
 						<X />

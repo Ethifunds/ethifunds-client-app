@@ -11,13 +11,15 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 const validate = z.object({
-	email: z.string().trim().toLowerCase().min(5, "Email/Username is required"),
+	email: z.string().trim().toLowerCase().email().optional(),
+	username: z.string().trim().min(3, "username must be at least 3 characters long").optional(),
 	password: z.string().trim().min(8, "password is required"),
 });
 
 type FormData = z.infer<typeof validate>;
 const initial: FormData = {
 	email: "",
+	username: "",
 	password: "",
 };
 export default function useForm() {
@@ -30,6 +32,21 @@ export default function useForm() {
 
 	const { account } = useActions();
 	const { navigate } = useCustomNavigation();
+
+	const sanitizePayload = (): FormData => {
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+		if (emailRegex.test(formData.email ?? "")) {
+			return {
+				email: formData.email,
+				password: formData.password,
+			};
+		}
+		return {
+			username: formData.email,
+			password: formData.password,
+		};
+	};
 
 	const updateForm = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -48,7 +65,7 @@ export default function useForm() {
 		e.preventDefault();
 		setIsLoading(true);
 		try {
-			const formValues = validate.parse(formData);
+			const formValues = validate.parse(sanitizePayload());
 
 			const response = await loginAccount(formValues);
 			account.changeAccount(response.user);
