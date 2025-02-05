@@ -1,3 +1,4 @@
+import ErrorBoundary from "@/components/error-boundary";
 import CurrencyFilter from "./currency-filter";
 import { DateFilter } from "./date-filter";
 import ExportFilter from "./export-filter";
@@ -9,12 +10,14 @@ export type FilterProps = {
 };
 export default function TransactionFilters(props: FilterProps) {
 	return (
-		<div className="flex items-center gap-3 py-1 overflow-auto">
-			<TransactionTypeFilter {...props} />
-			<CurrencyFilter {...props} />
-			<StatusFilter {...props} />
-			<ExportFilter {...props} />
-			<DateFilter {...props} />
-		</div>
+		<ErrorBoundary>
+			<div className="flex items-center gap-3 py-1 overflow-auto">
+				<TransactionTypeFilter {...props} />
+				<CurrencyFilter {...props} />
+				<StatusFilter {...props} />
+				<ExportFilter {...props} />
+				<DateFilter {...props} />
+			</div>
+		</ErrorBoundary>
 	);
 }

@@ -20,10 +20,8 @@ export default function RecentTransactions() {
 					)}
 				</div>
 
-				{/* <div className="overflow-auto"> */}
-
 				<TransactionFilters disabled={isFetching} />
-				{/* </div> */}
+
 				<div className="h-full min-h-60 max-h-96 overflow-auto">
 					<Render isLoading={isFetching} isError={isError} error={error}>
 						<TransactionTable data={data ?? []} isEmpty={!data?.length} sign={sign} />

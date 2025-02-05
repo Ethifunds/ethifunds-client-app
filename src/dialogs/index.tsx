@@ -1,24 +1,16 @@
 import * as React from "react";
-import TransactionDetailsDialog from "./wallet/transaction-details.dialog";
-import FundWalletDialog from "./wallet/fund-wallet-dialog";
-import FundingReceiptDialog from "./wallet/fund-wallet-dialog/funding-receipt.dialog";
-import WithdrawalDialog from "./wallet/withdrawal-dialog";
-import WithdrawalReceiptDialog from "./wallet/withdrawal-dialog/withdrawal-receipt.dialog";
+import TransactionDetailsDialog from "./wallet-dialog/transaction-details.dialog";
 import SetPinDialog from "./set-pin-dialog";
-import FundVaultDialog from "./vault/fund-vault-dialog";
-import VaultWithdrawalDialog from "./vault/vault-withdrawal-dialog";
+import InvestmentVaultDialog from "./investment-vault-dialog";
+import WalletDialog from "./wallet-dialog";
 
 export default function Dialogs() {
 	return (
 		<React.Fragment>
 			<TransactionDetailsDialog />
-			<FundWalletDialog />
-			<FundingReceiptDialog />
-			<WithdrawalDialog />
-			<WithdrawalReceiptDialog />
 			<SetPinDialog />
-			<FundVaultDialog />
-			<VaultWithdrawalDialog />
+			<WalletDialog />
+			<InvestmentVaultDialog />
 		</React.Fragment>
 	);
 }

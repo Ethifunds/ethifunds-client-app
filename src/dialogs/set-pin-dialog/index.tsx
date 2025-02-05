@@ -6,6 +6,7 @@ import SetPin from "./set-pin";
 import ConfirmPin from "./confirm-pin";
 import usePin from "./use-pin";
 import PinSuccess from "./pin-success";
+import ErrorBoundary from "@/components/error-boundary";
 
 export type PinProps = {
 	value: string;
@@ -25,29 +26,31 @@ export default React.memo(function SetPinDialog() {
 			open={open}
 			className="relative w-full lg:!w-auto rounded-xl lg:rounded-3xl bg-white shadow-lg border px-4 py-8 lg:px-8 lg:py-5 p-8"
 		>
-			<button
-				onClick={close}
-				className="absolute top-0 right-0 lg:-top-8 lg:-right-8 flex items-center justify-center size-8 p-2 rounded-full bg-white"
-			>
-				<X color="#908b8b" />
-			</button>
+			<ErrorBoundary>
+				<button
+					onClick={close}
+					className="absolute top-0 right-0 lg:-top-8 lg:-right-8 flex items-center justify-center size-8 p-2 rounded-full bg-white"
+				>
+					<X color="#908b8b" />
+				</button>
 
-			<Tabs defaultValue="set_pin" onValueChange={changeTab} value={activeTab}>
-				<SetPin
-					value={formData.pin}
-					updateForm={updateForm}
-					submit={() => changeTab("confirm_pin")}
-				/>
-				<ConfirmPin
-					value={formData.confirm_pin}
-					errMsg={errMsg}
-					isLoading={isLoading}
-					updateForm={updateForm}
-					submit={submit}
-				/>
+				<Tabs defaultValue="set_pin" onValueChange={changeTab} value={activeTab}>
+					<SetPin
+						value={formData.pin}
+						updateForm={updateForm}
+						submit={() => changeTab("confirm_pin")}
+					/>
+					<ConfirmPin
+						value={formData.confirm_pin}
+						errMsg={errMsg}
+						isLoading={isLoading}
+						updateForm={updateForm}
+						submit={submit}
+					/>
 
-				<PinSuccess dismiss={close} />
-			</Tabs>
+					<PinSuccess dismiss={close} />
+				</Tabs>
+			</ErrorBoundary>
 		</PopupModal>
 	);
 });

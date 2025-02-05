@@ -11,7 +11,7 @@ export default function Home() {
 	useUi({ title: `Welcome ${account.username}` });
 
 	return (
-		<AppContainer className="flex flex-col gap-10">
+		<AppContainer className="flex flex-col gap-10">		
 			<WalletBalance />
 			<Todos />
 			<InvestmentOpportunity />
