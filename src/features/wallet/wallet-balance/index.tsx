@@ -19,10 +19,10 @@ export default React.memo(function WalletBalance() {
 	} = useWalletBalance();
 
 	const container = classNames(
-		"py-8 px-6 border rounded-lg shrink-0 lg:shrink w-full lg:w-1/2 min-h-48 lg:min-h-52"
+		"py-8 px-6 border rounded-lg shrink-0 lg:shrink w-[85%] lg:w-1/2 min-h-48 lg:min-h-52"
 	);
 	return (
-		<div className="flex gap-10 py-3 lg:py-0 overflow-auto lg:overflow-hidden lg:max-w-5xl">
+		<div className="flex gap-5 lg:gap-10 py-3 lg:py-0 overflow-auto lg:overflow-hidden lg:max-w-5xl">
 			<div className={container}>
 				<Render isLoading={isFetching} isError={isError} error={error} >
 					<div className="flex flex-col gap-6">

@@ -1,5 +1,5 @@
 import { assets } from "@/constants";
-import { PaginatedResponse } from "@/global.types";
+import { PaginatedResponse } from "@/types/global.types";
 import { Link } from "react-router-dom";
 
 export default function Pagination(props: PaginatedResponse<any>) {

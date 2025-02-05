@@ -1,13 +1,21 @@
 import { User } from "@/types/user.types";
 import { changeAccount, changeCurrency, changeToken, updateAccount } from "./account-slice";
 import { useAppDispatch } from "./hooks";
-import { Currency } from "@/global.types";
-import { changeDialog, DialogPayload } from "./ui-slice";
+import { Currency } from "@/types/global.types";
+import {
+	BackBtnPayload,
+	changeBackBtn,
+	changeDialog,
+	changePageTitle,
+	DialogPayload,
+} from "./ui-slice";
 
 export default function useActions() {
 	const dispatch = useAppDispatch();
 	const ui = {
 		changeDialog: (payload: Partial<DialogPayload>) => dispatch(changeDialog(payload)),
+		changePageTitle: (payload: string) => dispatch(changePageTitle(payload)),
+		changeBackBtn: (payload: BackBtnPayload | null) => dispatch(changeBackBtn(payload)),
 	};
 
 	const account = {

@@ -28,7 +28,7 @@ const Select = React.forwardRef<Ref, SelectProps>((props: SelectProps, ref) => {
 
    const container = classNames("input-container", containerStyle);
 	const cn = classNames(className, {
-		invalid: isInvalid,
+		"invalid": isInvalid,
 	});
 
 	return (

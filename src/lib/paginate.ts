@@ -1,4 +1,4 @@
-import { PaginatedResponse } from "@/global.types";
+import { PaginatedResponse } from "@/types/global.types";
 
 type PaginatePayload<T> = {
 	current_page: number;

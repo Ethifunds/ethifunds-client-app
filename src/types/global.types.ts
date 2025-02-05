@@ -6,6 +6,16 @@ export type Currency = {
 	flag: string;
 };
 
+export type FundingSourceTypes =
+	| "bank_card"
+	| "bank_transfer"
+	| "user_wallet"
+	| "investment_vault"
+	| "investment_account"
+	| "ethicoop_savings";
+
+export type FundingSource = { id: FundingSourceTypes; name: string };
+
 export type PaginatedResponse<T> = {
 	docs: T[];
 	totalDocs: number;
@@ -22,5 +32,4 @@ export type PaginatedResponse<T> = {
 export type PaginationQuery = {
 	page: number;
 	limit: number;
-	pagination: boolean;
 };

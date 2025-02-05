@@ -6,8 +6,8 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { currencyList } from "@/constants/currency-list";
 import sanitizeText from "@/lib/sanitize-text";
+import useExtras from "@/hooks/use-extras";
 
 type CurrencyPickerProps = {
 	currency: string;
@@ -15,14 +15,17 @@ type CurrencyPickerProps = {
 };
 
 export default React.memo(function CurrencyPicker(props: CurrencyPickerProps) {
+	const { supportedCurrencies } = useExtras();
+
 	const currencyIdx = React.useMemo(() => {
-		const match = currencyList.findIndex(
+		console.log("idex", supportedCurrencies)
+		const match = supportedCurrencies.findIndex(
 			(item) => sanitizeText(item.code) === sanitizeText(props.currency)
 		);
 
 		if (match > -1) return match;
 		return 0;
-	}, [props.currency]);
+	}, [props.currency, supportedCurrencies]);
 
 	return (
 		<Select onValueChange={(value) => props.setCurrency(value)}>
@@ -33,36 +36,31 @@ export default React.memo(function CurrencyPicker(props: CurrencyPickerProps) {
 						<div className="flex items-center gap-3">
 							<div className="flex items-center justify-center rounded-full border size-6">
 								<img
-									src={currencyList[currencyIdx].flag}
-									alt={currencyList[currencyIdx].name}
+									src={supportedCurrencies[currencyIdx].flag}
+									alt={supportedCurrencies[currencyIdx].name}
 									className="size-full object-cover rounded-full "
 								/>
 							</div>
 
-							<span>{currencyList[currencyIdx].code.toLocaleUpperCase()}</span>
+							<span>{supportedCurrencies[currencyIdx].code.toLocaleUpperCase()}</span>
 						</div>
 					}
 				>
 					<div className="flex items-center gap-3">
 						<div className="flex items-center justify-center rounded-full border size-6">
 							<img
-								src={currencyList[currencyIdx].flag}
-								alt={currencyList[currencyIdx].name}
+								src={supportedCurrencies[currencyIdx].flag}
+								alt={supportedCurrencies[currencyIdx].name}
 								className="size-full object-cover rounded-full "
 							/>
 						</div>
 
-						<span>{currencyList[currencyIdx].code.toLocaleUpperCase()}</span>
+						<span>{supportedCurrencies[currencyIdx].code.toLocaleUpperCase()}</span>
 					</div>
 				</SelectValue>
 			</SelectTrigger>
-			<SelectContent
-				position="popper"
-				side="bottom"
-				className="max-h-60"
-				align="end"
-			>
-				{currencyList.map((item) => (
+			<SelectContent position="popper" side="bottom" className="max-h-60" align="end">
+				{supportedCurrencies.map((item) => (
 					<SelectItem key={item.code} value={item.code}>
 						<div className="flex items-center gap-3">
 							<div className="flex items-center justify-center rounded-full border size-6">

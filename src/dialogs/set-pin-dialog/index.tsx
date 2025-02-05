@@ -15,7 +15,7 @@ export type PinProps = {
 	errMsg?: string;
 };
 
-export default React.memo(function PinDialog() {
+export default React.memo(function SetPinDialog() {
 	const { open, errMsg, formData, activeTab, isLoading, close, submit, changeTab, updateForm } =
 		usePin();
 

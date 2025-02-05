@@ -13,9 +13,11 @@ export default function RecentTransactions() {
 			<ErrorBoundary>
 				<div className="flex justify-between items-center px-1">
 					<h1 className="highlight-accent text-neutral-1000">Recent Transactions </h1>
-					<Link to={"/wallet/transactions"} className="underline text-primary">
-						View All
-					</Link>
+					{data && data?.length > 0 && (
+						<Link to={"/wallet/transactions"} className="underline text-primary">
+							View All
+						</Link>
+					)}
 				</div>
 
 				{/* <div className="overflow-auto"> */}

@@ -1,5 +1,5 @@
 import { currencyList } from "@/constants/currency-list";
-import { Currency } from "@/global.types";
+import { Currency } from "@/types/global.types";
 import { User } from "@/types/user.types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 

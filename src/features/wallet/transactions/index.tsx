@@ -1,17 +1,28 @@
 import AppContainer from "@/components/container/container";
-import GoBack from "@/components/go-back";
 import TransactionFilters from "./transaction-table/transaction-filters";
 import Render from "@/components/render";
 import TransactionTable from "./transaction-table";
 import useTransactions from "./use-transactions";
 import TablePagination from "./transaction-table/table-pagination";
+import * as React from "react";
+import useUi from "@/hooks/use-ui";
 
 export default function WalletTransactions() {
 	const { isFetching, isError, error, data, sign } = useTransactions();
+	const { changeBackBtn } = useUi({});
+
+	React.useLayoutEffect(() => {
+		changeBackBtn({
+			show: true,
+		});
+
+		return () => {
+			changeBackBtn(null);
+		};
+	}, [changeBackBtn]);
 
 	return (
 		<AppContainer className="space-y-5">
-			<GoBack />
 			<h1 className="hero-accent">Transaction History</h1>
 
 			<TransactionFilters disabled={isFetching} />

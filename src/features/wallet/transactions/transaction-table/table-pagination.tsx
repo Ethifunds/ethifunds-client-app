@@ -1,5 +1,5 @@
 import Pagination from "@/components/ui/pagination";
-import { PaginatedResponse } from "@/global.types";
+import { PaginatedResponse } from "@/types/global.types";
 import { Transaction } from "@/types/transaction.type";
 
 

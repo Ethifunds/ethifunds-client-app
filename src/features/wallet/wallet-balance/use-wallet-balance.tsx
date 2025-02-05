@@ -1,11 +1,11 @@
-import useCurrency from "@/hooks/use-currency";
+import useExtras from "@/hooks/use-extras";
 import getWalletBalance from "@/services/wallet/get-wallet-balance";
 import useActions from "@/store/actions";
 import * as React from "react";
 import { useQuery } from "react-query";
 
 export default function useWalletBalance() {
-	const { sign, currency, changeCurrency } = useCurrency();
+	const { sign, currency, changeCurrency } = useExtras();
 	const { ui } = useActions();
 
 	const [balance, setBalance] = React.useState({

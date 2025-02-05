@@ -1,6 +1,6 @@
 import { variables } from "@/constants";
 import { transactions } from "@/constants/data/transactions";
-import { PaginatedResponse } from "@/global.types";
+import { PaginatedResponse } from "@/types/global.types";
 import axios from "@/lib/axios";
 import buildQueryString from "@/lib/build-query-string";
 import paginate from "@/lib/paginate";

@@ -1,6 +1,6 @@
 import ensureError from "@/lib/ensure-error";
 import addAccount from "@/services/settings/bank/add-account";
-import getBankList from "@/services/settings/bank/get-bank-list";
+import getBankList from "@/services/extras/get-bank-list";
 import verifyAccountNumber from "@/services/settings/bank/verify-account-number";
 import { Bank, BankAccount } from "@/types/bank-account.types";
 import * as React from "react";

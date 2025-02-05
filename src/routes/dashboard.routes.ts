@@ -1,5 +1,9 @@
 import UnderConstruction from "@/components/prompts/under-construction";
+import InvestmentVault from "@/features/investments/investment-vault";
 import HomePage from "@/pages/home";
+import InvestmentsPage from "@/pages/investments";
+import InvestmentVaultOverviewPage from "@/pages/investments/investment-vault/overview";
+import InvestmentVaultTransactionsPage from "@/pages/investments/investment-vault/transactions";
 import WalletPage from "@/pages/wallet/wallet-page";
 import WalletTransactionsPage from "@/pages/wallet/wallet-transactions-page";
 import { RouteProps } from "react-router-dom";
@@ -12,7 +16,21 @@ const dashboardRoutes: CustomRouteProps[] = [
 	{ path: "/wallet/transactions", Component: WalletTransactionsPage },
 	{ path: "/my-investments", Component: UnderConstruction },
 	{ path: "/savings", Component: UnderConstruction },
-	{ path: "/investments", Component: UnderConstruction },
+
+	{ path: "/investments", Component: InvestmentsPage },
+
+	{ path: "/investments/vault", Component: InvestmentVault },
+	{ path: "/investments/vault/overview", Component: InvestmentVaultOverviewPage },
+	{ path: "/investments/vault/transactions", Component: InvestmentVaultTransactionsPage },
+
+	{ path: "/investments/real-estate", Component: UnderConstruction },
+	{ path: "/investments/real-estate/:id", Component: UnderConstruction },
+	{ path: "/investments/real-estate/:id/buy", Component: UnderConstruction },
+
+	{ path: "/investments/savings", Component: UnderConstruction },
+	{ path: "/investments/savings/:id", Component: UnderConstruction },
+	{ path: "/investments/savings/:id/buy", Component: UnderConstruction },
+
 	{ path: "/support", Component: UnderConstruction },
 	{ path: "/settings", Component: UnderConstruction },
 	{ path: "/notifications", Component: UnderConstruction },

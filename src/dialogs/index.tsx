@@ -4,7 +4,9 @@ import FundWalletDialog from "./wallet/fund-wallet-dialog";
 import FundingReceiptDialog from "./wallet/fund-wallet-dialog/funding-receipt.dialog";
 import WithdrawalDialog from "./wallet/withdrawal-dialog";
 import WithdrawalReceiptDialog from "./wallet/withdrawal-dialog/withdrawal-receipt.dialog";
-import PinDialog from "./pin-dialog";
+import SetPinDialog from "./set-pin-dialog";
+import FundVaultDialog from "./vault/fund-vault-dialog";
+import VaultWithdrawalDialog from "./vault/vault-withdrawal-dialog";
 
 export default function Dialogs() {
 	return (
@@ -14,7 +16,9 @@ export default function Dialogs() {
 			<FundingReceiptDialog />
 			<WithdrawalDialog />
 			<WithdrawalReceiptDialog />
-			<PinDialog />
+			<SetPinDialog />
+			<FundVaultDialog />
+			<VaultWithdrawalDialog />
 		</React.Fragment>
 	);
 }
