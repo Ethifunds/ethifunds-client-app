@@ -26,7 +26,7 @@ export const opportunityList: OpportunityCard[] = [
 		image: assets.real_estate_investment,
 		description:
 			"Diversify your portfolio with Ethifund’s Real Estate Investment Trust (REIT) opportunities. Invest in a carefully curated pool of real estate assets that generate income through rental collections and property sales with transparent returns, flexible buy-and-sell options, and potential for capital growth.",
-		path: "",
+		path: "/investments/real-estate",
 		bg: "bg-secondary-200",
 		bg_img: assets.real_estate_investment_bg,
 		boarder: "border-secondary-600",

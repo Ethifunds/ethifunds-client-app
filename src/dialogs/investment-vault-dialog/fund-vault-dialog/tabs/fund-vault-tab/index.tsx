@@ -37,7 +37,7 @@ export default React.memo(function FundVaultTab(props: TabProps) {
 		}
 	};
 
-	const options = fundingSources.map((item) => ({
+	const options = fundingSources.filter(item => !item.id.includes("investment")).map((item) => ({
 		title: item.name,
 		value: item.id,
 	}));

@@ -11,7 +11,9 @@ type DialogType =
 	| "set_pin"
 	| "fund_vault"
 	| "vault_withdrawal"
-	| "vault_transaction_details";
+	| "vault_transaction_details"
+	| "verify_bvn_success"
+	| "verify_bvn_failed";
 
 export type DialogPayload = {
 	id: string;

@@ -20,14 +20,14 @@ type SelectBoxProps = {
 	options?: SelectItem[];
 	value?: string;
 	onchange?: (item: string) => void;
+	disabled?: boolean;
 	placeholder?: string;
 	name?: string;
 	required?: boolean;
-	isLoading?: boolean;
 };
 
 export default React.memo(function SelectBox(props: SelectBoxProps) {
-	const { options = [], isLoading = false, required = false } = props;
+	const { options = [], required = false, disabled = false } = props;
 
 	const container = classnames(props.containerStyle);
 
@@ -40,20 +40,24 @@ export default React.memo(function SelectBox(props: SelectBoxProps) {
 	};
 	return (
 		<div className={container}>
-			{props.label && <label htmlFor={props.name}>{props.label}</label>}
+			{props.label && (
+				<label htmlFor={props.name} className="capitalize">
+					{props.label}
+				</label>
+			)}
 			<Select
 				value={props.value}
 				onValueChange={change}
 				name={props.name}
-				disabled={isLoading && true}
+				disabled={disabled}
 				required={required}
 			>
 				<SelectTrigger className={selectContainer}>
 					<SelectValue placeholder={props.placeholder ?? "Select an item"} />
 				</SelectTrigger>
-				<SelectContent position="popper" side="bottom" >
+				<SelectContent position="popper" side="bottom">
 					{options.map((item, idx) => (
-						<SelectItem value={item.value} key={idx}>
+						<SelectItem value={item.value} key={idx} className="capitalize">
 							{item.title}
 						</SelectItem>
 					))}

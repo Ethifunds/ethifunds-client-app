@@ -1,16 +1,17 @@
 export type FORM_FIELDS = {
-  name: string;
-  type: INPUT_TYPES;
-  label: string;
-  placeholder: string;
-  options?: SelectOptions[];
-  required: boolean;
-  readOnly?: boolean;
-  containerStyle?: string;
+	name: string;
+	type: INPUT_TYPES;
+	label: string;
+	placeholder: string;
+	options?: SelectOptions[];
+	required: boolean;
+	readOnly?: boolean;
+	containerStyle?: string;
+	className?: string;
 };
 export type SelectOptions = {
-  name: string;
-  value: string;
+	title: string;
+	value: string;
 };
 export type INPUT_TYPES =
   | 'text'

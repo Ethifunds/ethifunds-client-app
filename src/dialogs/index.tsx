@@ -3,6 +3,7 @@ import TransactionDetailsDialog from "./wallet-dialog/transaction-details.dialog
 import SetPinDialog from "./set-pin-dialog";
 import InvestmentVaultDialog from "./investment-vault-dialog";
 import WalletDialog from "./wallet-dialog";
+import SettingsDialogs from "./settings-dialogs";
 
 export default function Dialogs() {
 	return (
@@ -11,6 +12,7 @@ export default function Dialogs() {
 			<SetPinDialog />
 			<WalletDialog />
 			<InvestmentVaultDialog />
+			<SettingsDialogs />
 		</React.Fragment>
 	);
 }

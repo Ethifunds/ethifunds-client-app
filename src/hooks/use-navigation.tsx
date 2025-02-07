@@ -26,6 +26,13 @@ const useCustomNavigation = () => {
 				return prev;
 			});
 		},
+		append: (name: string, value: string) => {
+			setQueryParams((prev) => {
+				prev.append(name, value);
+				return prev;
+			});
+		},
+
 		delete: (name: string) => {
 			setQueryParams((prev) => {
 				prev.delete(name);
