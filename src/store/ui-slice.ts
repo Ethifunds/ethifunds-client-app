@@ -1,48 +1,53 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type DialogType =
-	| ""
-	| "transaction_details"
-	| "fund_wallet"
-	| "funding_receipt"
-	| "withdrawal"
-	| "withdrawal_receipt"
-	| "notifications"
-	| "set_pin"
-	| "fund_vault"
-	| "vault_withdrawal"
-	| "vault_transaction_details"
-	| "verify_bvn_success"
-	| "verify_bvn_failed";
+  | ""
+  | "insufficient_funds"
+  | "transaction_details"
+  | "fund_wallet"
+  | "funding_receipt"
+  | "withdrawal"
+  | "withdrawal_receipt"
+  | "notifications"
+  | "enter_pin"
+  | "set_pin"
+  | "fund_vault"
+  | "vault_withdrawal"
+  | "real-estate-purchase-success"
+  | "vault_transaction_details"
+  | "verify_bvn_success"
+  | "verify_bvn_failed";
 
 export type DialogPayload = {
-	id: string;
-	show: boolean;
-	type: DialogType;
+  id: string;
+  show: boolean;
+  type: DialogType;
+  action: ((payload?: any) => Promise<void> | void) | null;
 };
 
 export type BackBtnPayload = {
-	show: boolean;
-	text?: string;
-	action?: () => void;
-	icon?: string;
-	className?: string;
+  show: boolean;
+  text?: string;
+  action?: () => void;
+  icon?: string;
+  className?: string;
 };
 
 type UiState = {
-	dialog: DialogPayload;
-	pageTitle: string;
-	backBtn: BackBtnPayload | null;
+  dialog: DialogPayload;
+  pageTitle: string;
+  backBtn: BackBtnPayload | null;
 };
 
 const initialState: UiState = {
-	dialog: {
-		id: "",
-		show: false,
-		type: "",
-	},
-	pageTitle: "",
-	backBtn: null,
+  dialog: {
+    id: "",
+    show: false,
+    type: "",
+    action: null,
+  },
+  pageTitle: "",
+  backBtn: null,
 };
 
 const uiSlice = createSlice({

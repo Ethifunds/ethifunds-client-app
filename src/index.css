@@ -4,221 +4,230 @@
 @tailwind utilities;
 
 @layer base {
-	:root {
-		--radius: 0.5rem;
-		font-family: "Nunito", serif;
-		--sidebar-background: 0 0% 98%;
-		--sidebar-foreground: 240 5.3% 26.1%;
-		--sidebar-primary: 240 5.9% 10%;
-		--sidebar-primary-foreground: 0 0% 98%;
-		--sidebar-accent: 240 4.8% 95.9%;
-		--sidebar-accent-foreground: 240 5.9% 10%;
-		--sidebar-border: 220 13% 91%;
-		--sidebar-ring: 217.2 91.2% 59.8%;
-	}
+  :root {
+    --radius: 0.5rem;
+    font-family: "Nunito", serif;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+    --chart-1: 173 58% 39%;
+    --chart-2: 12 76% 61%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
 
-	/* typography */
-
-	/* display */
-	.display-1 {
-		@apply text-mobile-display-1 lg:text-desktop-display-1 font-bold leading-mobile-display-1 lg:leading-desktop-display-1 font-nunito;
-	}
-	.display-2 {
-		@apply text-mobile-display-2 lg:text-desktop-display-2 font-bold leading-mobile-display-2 lg:leading-desktop-display-2 font-nunito;
-	}
-	.display-3 {
-		@apply text-mobile-display-3 lg:text-desktop-display-3 font-bold leading-mobile-display-3 lg:leading-desktop-display-3 font-nunito;
-	}
-
-	/* heading */
-	.heading-1 {
-		@apply text-mobile-heading-1 lg:text-desktop-heading-1 font-bold leading-mobile-heading-1 lg:leading-desktop-heading-1 font-nunito;
-	}
-	.heading-2 {
-		@apply text-mobile-heading-2 lg:text-desktop-heading-2 font-bold leading-mobile-heading-2 lg:leading-desktop-heading-2 font-nunito;
-	}
-
-	.heading-3 {
-		@apply text-mobile-heading-3 lg:text-desktop-heading-3 font-bold leading-mobile-heading-3 lg:leading-desktop-heading-3 font-nunito;
-	}
-	.heading-4 {
-		@apply text-mobile-heading-4 lg:text-desktop-heading-4 font-bold leading-mobile-heading-4 lg:leading-desktop-heading-4 font-nunito;
-	}
-
-	/* body */
-
-	/* hero */
-	.hero-bold {
-		@apply text-mobile-body-hero lg:text-desktop-body-hero font-bold leading-mobile-body-hero lg:leading-desktop-body-hero font-nunito;
-	}
-
-	.hero-accent {
-		@apply text-mobile-body-hero lg:text-desktop-body-hero font-semibold leading-mobile-body-hero lg:leading-desktop-body-hero font-nunito;
-	}
-
-	.hero-emphasis {
-		@apply text-mobile-body-hero lg:text-desktop-body-hero italic leading-mobile-body-hero lg:leading-desktop-body-hero font-nunito;
-	}
-
-	.hero-standard {
-		@apply text-mobile-body-hero lg:text-desktop-body-hero font-normal leading-mobile-body-hero lg:leading-desktop-body-hero font-nunito;
-	}
-
-	/* feature */
-	.feature-bold {
-		@apply text-mobile-body-feature lg:text-desktop-body-feature font-bold leading-mobile-body-feature lg:leading-desktop-body-feature font-nunito;
-	}
-
-	.feature-accent {
-		@apply text-mobile-body-feature lg:text-desktop-body-feature font-semibold leading-mobile-body-feature lg:leading-desktop-body-feature font-nunito;
-	}
-
-	.feature-emphasis {
-		@apply text-mobile-body-feature lg:text-desktop-body-feature italic leading-mobile-body-feature lg:leading-desktop-body-feature font-nunito;
-	}
-
-	.feature-standard {
-		@apply text-mobile-body-feature lg:text-desktop-body-feature font-normal leading-mobile-body-feature lg:leading-desktop-body-feature font-nunito;
-	}
-
-	/* highlight */
-
-	.highlight-bold {
-		@apply text-mobile-body-highlight lg:text-desktop-body-highlight font-bold leading-mobile-body-highlight lg:leading-desktop-body-highlight font-nunito;
-	}
-
-	.highlight-accent {
-		@apply text-mobile-body-highlight lg:text-desktop-body-highlight font-semibold leading-mobile-body-highlight lg:leading-desktop-body-highlight font-nunito;
-	}
-
-	.highlight-emphasis {
-		@apply text-mobile-body-highlight lg:text-desktop-body-highlight italic leading-mobile-body-highlight lg:leading-desktop-body-highlight font-nunito;
-	}
-
-	.highlight-standard {
-		@apply text-mobile-body-highlight lg:text-desktop-body-highlight font-normal leading-mobile-body-highlight lg:leading-desktop-body-highlight font-nunito;
-	}
-
-	/* content */
-	.content-bold {
-		@apply text-mobile-body-content lg:text-desktop-body-content font-bold leading-mobile-body-content lg:leading-desktop-body-content font-nunito;
-	}
-
-	.content-accent {
-		@apply text-mobile-body-content lg:text-desktop-body-content font-semibold leading-mobile-body-content lg:leading-desktop-body-content font-nunito;
-	}
-
-	.content-emphasis {
-		@apply text-mobile-body-content lg:text-desktop-body-content italic leading-mobile-body-content lg:leading-desktop-body-content font-nunito;
-	}
-
-	.content-standard {
-		@apply text-mobile-body-content lg:text-desktop-body-content font-normal leading-mobile-body-content lg:leading-desktop-body-content font-nunito;
-	}
-
-	/* caption */
-	.caption-bold {
-		@apply text-mobile-body-caption lg:text-desktop-body-caption font-bold leading-mobile-body-caption lg:leading-desktop-body-caption font-nunito;
-	}
-
-	.caption-accent {
-		@apply text-mobile-body-caption lg:text-desktop-body-caption font-semibold leading-mobile-body-caption lg:leading-desktop-body-caption font-nunito;
-	}
-
-	.caption-emphasis {
-		@apply text-mobile-body-caption lg:text-desktop-body-caption italic leading-mobile-body-caption lg:leading-desktop-body-caption font-nunito;
-	}
-
-	.caption-standard {
-		@apply text-mobile-body-caption lg:text-desktop-body-caption font-normal leading-mobile-body-caption lg:leading-desktop-body-caption font-nunito;
-	}
-
-	/*Button variants  */
-	.button {
-		@apply px-3 py-3 rounded font-medium font-nunito text-center hover:bg-opacity-50 disabled:bg-opacity-50 cursor-pointer disabled:cursor-default  transition-all duration-300 first-letter:uppercase
-	}
-
-	.button-default {
-		@apply button bg-neutral-base_black ;
-	}
-	.button-primary {
-		@apply button bg-primary ;
-	}
-	.button-secondary {
-		@apply button bg-secondary ;
-	}
-	.button-success {
-		@apply button bg-success ;
-	}
-	.button-warning {
-		@apply button bg-warning-300 ;
-	}
-	.button-destructive {
-		@apply button bg-error-300 ;
-	}
-	.button-muted {
-		@apply button bg-stone-500/50 ;
-	}
-	.button-ghost {
-		@apply button bg-transparent ;
-	}
-	.button-outline {
-		@apply button bg-transparent border ;
-	}
   .dark {
-		--sidebar-background: 240 5.9% 10%;
-		--sidebar-foreground: 240 4.8% 95.9%;
-		--sidebar-primary: 224.3 76.3% 48%;
-		--sidebar-primary-foreground: 0 0% 100%;
-		--sidebar-accent: 240 3.7% 15.9%;
-		--sidebar-accent-foreground: 240 4.8% 95.9%;
-		--sidebar-border: 240 3.7% 15.9%;
-		--sidebar-ring: 217.2 91.2% 59.8%;
-	}
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+    --chart-1: 220 70% 50%;
+    --chart-5: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-2: 340 75% 55%;
+  }
+
+  
+  /* typography */
+
+  /* display */
+  .display-1 {
+    @apply font-nunito text-mobile-display-1 font-bold leading-mobile-display-1 lg:text-desktop-display-1 lg:leading-desktop-display-1;
+  }
+  .display-2 {
+    @apply font-nunito text-mobile-display-2 font-bold leading-mobile-display-2 lg:text-desktop-display-2 lg:leading-desktop-display-2;
+  }
+  .display-3 {
+    @apply font-nunito text-mobile-display-3 font-bold leading-mobile-display-3 lg:text-desktop-display-3 lg:leading-desktop-display-3;
+  }
+
+  /* heading */
+  .heading-1 {
+    @apply font-nunito text-mobile-heading-1 font-bold leading-mobile-heading-1 lg:text-desktop-heading-1 lg:leading-desktop-heading-1;
+  }
+  .heading-2 {
+    @apply font-nunito text-mobile-heading-2 font-bold leading-mobile-heading-2 lg:text-desktop-heading-2 lg:leading-desktop-heading-2;
+  }
+
+  .heading-3 {
+    @apply font-nunito text-mobile-heading-3 font-bold leading-mobile-heading-3 lg:text-desktop-heading-3 lg:leading-desktop-heading-3;
+  }
+  .heading-4 {
+    @apply font-nunito text-mobile-heading-4 font-bold leading-mobile-heading-4 lg:text-desktop-heading-4 lg:leading-desktop-heading-4;
+  }
+
+  /* body */
+
+  /* hero */
+  .hero-bold {
+    @apply font-nunito text-mobile-body-hero font-bold leading-mobile-body-hero lg:text-desktop-body-hero lg:leading-desktop-body-hero;
+  }
+
+  .hero-accent {
+    @apply font-nunito text-mobile-body-hero font-semibold leading-mobile-body-hero lg:text-desktop-body-hero lg:leading-desktop-body-hero;
+  }
+
+  .hero-emphasis {
+    @apply font-nunito text-mobile-body-hero italic leading-mobile-body-hero lg:text-desktop-body-hero lg:leading-desktop-body-hero;
+  }
+
+  .hero-standard {
+    @apply font-nunito text-mobile-body-hero font-normal leading-mobile-body-hero lg:text-desktop-body-hero lg:leading-desktop-body-hero;
+  }
+
+  /* feature */
+  .feature-bold {
+    @apply font-nunito text-mobile-body-feature font-bold leading-mobile-body-feature lg:text-desktop-body-feature lg:leading-desktop-body-feature;
+  }
+
+  .feature-accent {
+    @apply font-nunito text-mobile-body-feature font-semibold leading-mobile-body-feature lg:text-desktop-body-feature lg:leading-desktop-body-feature;
+  }
+
+  .feature-emphasis {
+    @apply font-nunito text-mobile-body-feature italic leading-mobile-body-feature lg:text-desktop-body-feature lg:leading-desktop-body-feature;
+  }
+
+  .feature-standard {
+    @apply font-nunito text-mobile-body-feature font-normal leading-mobile-body-feature lg:text-desktop-body-feature lg:leading-desktop-body-feature;
+  }
+
+  /* highlight */
+
+  .highlight-bold {
+    @apply font-nunito text-mobile-body-highlight font-bold leading-mobile-body-highlight lg:text-desktop-body-highlight lg:leading-desktop-body-highlight;
+  }
+
+  .highlight-accent {
+    @apply font-nunito text-mobile-body-highlight font-semibold leading-mobile-body-highlight lg:text-desktop-body-highlight lg:leading-desktop-body-highlight;
+  }
+
+  .highlight-emphasis {
+    @apply font-nunito text-mobile-body-highlight italic leading-mobile-body-highlight lg:text-desktop-body-highlight lg:leading-desktop-body-highlight;
+  }
+
+  .highlight-standard {
+    @apply font-nunito text-mobile-body-highlight font-normal leading-mobile-body-highlight lg:text-desktop-body-highlight lg:leading-desktop-body-highlight;
+  }
+
+  /* content */
+  .content-bold {
+    @apply font-nunito text-mobile-body-content font-bold leading-mobile-body-content lg:text-desktop-body-content lg:leading-desktop-body-content;
+  }
+
+  .content-accent {
+    @apply font-nunito text-mobile-body-content font-semibold leading-mobile-body-content lg:text-desktop-body-content lg:leading-desktop-body-content;
+  }
+
+  .content-emphasis {
+    @apply font-nunito text-mobile-body-content italic leading-mobile-body-content lg:text-desktop-body-content lg:leading-desktop-body-content;
+  }
+
+  .content-standard {
+    @apply font-nunito text-mobile-body-content font-normal leading-mobile-body-content lg:text-desktop-body-content lg:leading-desktop-body-content;
+  }
+
+  /* caption */
+  .caption-bold {
+    @apply font-nunito text-mobile-body-caption font-bold leading-mobile-body-caption lg:text-desktop-body-caption lg:leading-desktop-body-caption;
+  }
+
+  .caption-accent {
+    @apply font-nunito text-mobile-body-caption font-semibold leading-mobile-body-caption lg:text-desktop-body-caption lg:leading-desktop-body-caption;
+  }
+
+  .caption-emphasis {
+    @apply font-nunito text-mobile-body-caption italic leading-mobile-body-caption lg:text-desktop-body-caption lg:leading-desktop-body-caption;
+  }
+
+  .caption-standard {
+    @apply font-nunito text-mobile-body-caption font-normal leading-mobile-body-caption lg:text-desktop-body-caption lg:leading-desktop-body-caption;
+  }
+
+  /*Button variants  */
+  .button {
+    @apply cursor-pointer rounded px-3 py-3 text-center font-nunito font-medium transition-all duration-300 first-letter:uppercase hover:bg-opacity-50 disabled:cursor-default disabled:bg-opacity-50;
+  }
+
+  .button-default {
+    @apply button bg-neutral-base_black;
+  }
+  .button-primary {
+    @apply button bg-primary;
+  }
+  .button-secondary {
+    @apply button bg-secondary;
+  }
+  .button-success {
+    @apply button bg-success;
+  }
+  .button-warning {
+    @apply button bg-warning-300;
+  }
+  .button-destructive {
+    @apply button bg-error-300;
+  }
+  .button-muted {
+    @apply button bg-stone-500/50;
+  }
+  .button-ghost {
+    @apply button bg-transparent;
+  }
+  .button-outline {
+    @apply button border bg-transparent;
+  }
 }
 
 body {
-	margin: 0px !important;
-	padding: 0px !important;
+  margin: 0px !important;
+  padding: 0px !important;
 }
 
 * {
-	box-sizing: border-box;
-	
+  box-sizing: border-box;
 }
 html {
-	scroll-behavior: smooth !important;
+  scroll-behavior: smooth !important;
 }
 
 @keyframes shake {
-	10%,
-	90% {
-		transform: translate3d(-1px, 0, 0);
-	}
-	20%,
-	80% {
-		transform: translate3d(2px, 0, 0);
-	}
-	30%,
-	50%,
-	70% {
-		transform: translate3d(-4px, 0, 0);
-	}
-	40%,
-	60% {
-		transform: translate3d(4px, 0, 0);
-	}
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }
 
-.transition{
-	transition: 0.2s ease-in-out all;
+.transition {
+  transition: 0.2s ease-in-out all;
 }
 
 .shake-animation {
-	animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
-
-
 
 .hide-scrollbar {
   scrollbar-width: none !important;

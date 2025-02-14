@@ -1,18 +1,20 @@
 import * as React from "react";
 import TransactionDetailsDialog from "./wallet-dialog/transaction-details.dialog";
-import SetPinDialog from "./set-pin-dialog";
-import InvestmentVaultDialog from "./investment-vault-dialog";
 import WalletDialog from "./wallet-dialog";
 import SettingsDialogs from "./settings-dialogs";
+import PinDialogs from "./pin-dialogs";
+import InvestmentsDialogs from "./investments-dialogs";
+import InsufficientFundDialog from "./insufficient-fund-dialog";
 
 export default function Dialogs() {
-	return (
-		<React.Fragment>
-			<TransactionDetailsDialog />
-			<SetPinDialog />
-			<WalletDialog />
-			<InvestmentVaultDialog />
-			<SettingsDialogs />
-		</React.Fragment>
-	);
+  return (
+    <React.Fragment>
+      <TransactionDetailsDialog />
+      <PinDialogs />
+      <WalletDialog />
+      <InvestmentsDialogs />
+      <SettingsDialogs />
+      <InsufficientFundDialog />
+    </React.Fragment>
+  );
 }
