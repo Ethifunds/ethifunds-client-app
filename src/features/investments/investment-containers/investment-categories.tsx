@@ -6,11 +6,13 @@ import getInvestmentCategories from "@/services/investments/get-investment-categ
 import * as React from "react";
 import { toast } from "sonner";
 import RealEstateInvestment from "../real-estate-investment";
+import useUi from "@/hooks/use-ui";
 
 export default function InvestmentCategories() {
   const [categoryIdx, setCategoryIdx] = React.useState(-1);
   const [isLoading, setIsLoading] = React.useState(true);
   const { params } = useCustomNavigation();
+  const { changeBackBtn } = useUi({});
   const categoryId = String(params.categoryId ?? "");
 
   const categories = [<RealEstateInvestment />];
@@ -34,8 +36,14 @@ export default function InvestmentCategories() {
   }, [categoryId]);
 
   React.useLayoutEffect(() => {
+    changeBackBtn({
+      show: true,
+    });
     init();
-  }, [init]);
+    return () => {
+      changeBackBtn(null);
+    };
+  }, [changeBackBtn, init]);
 
   return (
     <ErrorBoundary>

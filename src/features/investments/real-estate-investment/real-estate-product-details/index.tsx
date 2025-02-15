@@ -6,19 +6,12 @@ import DetailsBox from "./details-box";
 import MetricsBox from "./metrics-box";
 import { Link } from "react-router-dom";
 
-export default function RealEstateProductDetails(props: InvestMentProduct) {
-  const { changeBackBtn } = useUi({ title: "REITs" });
+export default React.memo(function RealEstateProductDetails(
+  props: InvestMentProduct,
+) {
+  useUi({ title: "REITs" });
   const { params } = useCustomNavigation();
   const categoryId = Number(params.categoryId);
-
-  React.useLayoutEffect(() => {
-    changeBackBtn({
-      show: true,
-    });
-    return () => {
-      changeBackBtn(null);
-    };
-  }, [changeBackBtn]);
 
   if (categoryId !== props.product_category_id) return;
 
@@ -42,10 +35,10 @@ export default function RealEstateProductDetails(props: InvestMentProduct) {
             to={`${!isSoldOut ? "buy" : "marketplace"}`}
             className={`${isSoldOut ? "button-outline border-primary text-primary" : "button-primary text-white"} highlight-bold w-full rounded-lg lg:w-1/3`}
           >
-            {isSoldOut ? "Market Place" : "Buy Now"}
+            {isSoldOut ? "REIT Marketplace" : "Buy Now"}
           </Link>
         </div>
       </div>
     </div>
   );
-}
+});
