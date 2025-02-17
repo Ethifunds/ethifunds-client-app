@@ -22,7 +22,7 @@ type DialogType =
   | "verify_bvn_failed";
 
 export type DialogPayload = {
-  id: string | number;
+  id: string;
   show: boolean;
   type: DialogType;
   data: Record<string, any> | null;

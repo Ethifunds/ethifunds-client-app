@@ -20,7 +20,7 @@ export default React.memo(function RealEstateMarketplaceProductDetails(
     ui.changeDialog({
       show: true,
       type: "real-estate-marketplace-purchase",
-      id: props.id,
+      id: props.id.toString(),
     });
   };
 
