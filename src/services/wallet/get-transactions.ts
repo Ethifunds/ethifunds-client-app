@@ -1,12 +1,12 @@
 import { variables } from "@/constants";
 import { transactions } from "@/constants/data/transactions";
-import { PaginatedResponse } from "@/types/global.types";
+import { PaginatedResponse, PaginationQuery } from "@/types/global.types";
 import axios from "@/lib/axios";
 import buildQueryString from "@/lib/build-query-string";
 import paginate from "@/lib/paginate";
 import { Transaction } from "@/types/transaction.type";
 
-type Parameters = {
+type Parameters = Partial<PaginationQuery>&{
 	currency: string;
 };
 

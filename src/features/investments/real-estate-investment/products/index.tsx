@@ -1,9 +1,9 @@
 import ErrorBoundary from "@/components/error-boundary";
-import { InvestMentProduct } from "@/types/investments.types";
+import { InvestmentProduct } from "@/types/investments.types";
 import ProductCard from "./product-card";
 
 type ProductsProps = {
-	data: InvestMentProduct[];
+  data: InvestmentProduct[];
 };
 export default function Products(props: ProductsProps) {
 	return (

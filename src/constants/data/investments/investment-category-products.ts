@@ -1,6 +1,6 @@
-import { InvestMentProduct } from "@/types/investments.types";
+import { InvestmentProduct } from "@/types/investments.types";
 
-export const investmentProducts: InvestMentProduct[] = [
+export const investmentProducts: InvestmentProduct[] = [
   {
     id: 1,
     name: "Real Estate Investment Trust",

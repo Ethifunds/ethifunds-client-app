@@ -45,14 +45,14 @@ const AppButton = React.forwardRef<Ref, ButtonProps>((props: ButtonProps, ref) =
 	}, [isLoading, rightIcon, leftIcon, loaderType]);
 
 	const cn = classNames(className, {
-		"button-default": variant === "default",
-		"button-primary": variant === "primary",
-		"button-secondary": variant === "secondary",
-		"button-destructive ": variant === "destructive",
-		"button-outline": variant === "outline",
-		"button-muted": variant === "mute",
-		"button-ghost": variant === "ghost",
-	});
+    "button-default": variant === "default",
+    "button-primary text-white": variant === "primary",
+    "button-secondary": variant === "secondary",
+    "button-destructive ": variant === "destructive",
+    "button-outline": variant === "outline",
+    "button-muted": variant === "mute",
+    "button-ghost": variant === "ghost",
+  });
 	return (
 		<button
 			type={type ? "submit" : "button"}

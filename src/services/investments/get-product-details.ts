@@ -1,13 +1,13 @@
 import { variables } from "@/constants";
 import { investmentProducts } from "@/constants/data/investments/investment-category-products";
 import axios from "@/lib/axios";
-import { InvestMentProduct } from "@/types/investments.types";
+import { InvestmentProduct } from "@/types/investments.types";
 
 type Parameters = {
-	productId: number;
+  productId: number;
 };
 
-type Response = InvestMentProduct;
+type Response = InvestmentProduct;
 
 export async function production(data: Parameters): Promise<Response> {
 	const response = await axios.get(`/investment/product/${data.productId}`);

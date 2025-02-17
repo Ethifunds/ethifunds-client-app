@@ -14,14 +14,18 @@ type DialogType =
   | "fund_vault"
   | "vault_withdrawal"
   | "real-estate-purchase-success"
+  | "real-estate-marketplace-purchase"
+  | "real-estate-marketplace-purchase-preview"
+  | "real-estate-marketplace-purchase-success"
   | "vault_transaction_details"
   | "verify_bvn_success"
   | "verify_bvn_failed";
 
 export type DialogPayload = {
-  id: string;
+  id: string | number;
   show: boolean;
   type: DialogType;
+  data: Record<string, any> | null;
   action: ((payload?: any) => Promise<void> | void) | null;
 };
 
@@ -45,6 +49,7 @@ const initialState: UiState = {
     show: false,
     type: "",
     action: null,
+    data: null,
   },
   pageTitle: "",
   backBtn: null,

@@ -7,8 +7,13 @@ import { assets } from "@/constants";
 import { unitsList } from "./data";
 import { Badge } from "@/components/ui/badge";
 import AppButton from "@/components/app-button";
+import useSeo from "@/hooks/use-seo";
+import useUi from "@/hooks/use-ui";
 
 export default function Form(props: FormProps) {
+  useSeo({ pageTitle: "REITs - Buy Now" });
+  useUi({ title: "REIT" });
+
   const { isFetching, currency, wallet, refreshBalance } = useWalletBalance();
   const refresh = () => {
     refreshBalance();

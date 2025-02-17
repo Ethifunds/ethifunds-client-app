@@ -2,28 +2,24 @@ import AppContainer from "@/components/container/container";
 import ErrorBoundary from "@/components/error-boundary";
 import { Badge } from "@/components/ui/badge";
 import useCustomNavigation from "@/hooks/use-navigation";
-import useSeo from "@/hooks/use-seo";
-import useUi from "@/hooks/use-ui";
 import capitalize from "@/lib/capitalize";
-import { InvestMentProduct } from "@/types/investments.types";
+import { InvestmentProduct } from "@/types/investments.types";
 
 import * as React from "react";
 import Form from "./form";
 
 export default React.memo(function BuyRealEstateProduct(
-  props: InvestMentProduct,
+  props: InvestmentProduct,
 ) {
-  useSeo({ pageTitle: "REITs - Buy Now" });
-  useUi({ title: "REIT" });
   const { params } = useCustomNavigation();
   const categoryId = Number(params.categoryId);
 
   if (props.product_category_id !== categoryId) return;
 
-    const formProps = {
-        unit_price: props.unit_price,
-        available_units: props.total_units - props.units_sold
-    }
+  const formProps = {
+    unit_price: props.unit_price,
+    available_units: props.total_units - props.units_sold,
+  };
   return (
     <AppContainer>
       <ErrorBoundary>

@@ -22,7 +22,7 @@ export type InvestmentProductCustodian = {
   updated_at: string;
 };
 
-export type InvestMentProduct = {
+export type InvestmentProduct = {
   id: number;
   name: string;
   product_custodian_id: number;
@@ -53,7 +53,6 @@ export type InvestMentProduct = {
   created_at: string;
   updated_at: string;
   custodian: InvestmentProductCustodian;
-
   category: InvestmentCategory;
 };
 
@@ -69,4 +68,69 @@ export type InvestmentProductHistoricData = {
   created_at: string;
   updated_at: string;
 };
+
+export type InvestmentUserInfo = {
+  id: number;
+  username: string;
+  email: string;
+  phone_number: string;
+  last_login: string | null;
+  login_attempt_count: number;
+  status: string;
+  remark: string | null;
+  locked_until: string | null;
+  profile_picture: string | null;
+  email_verified_at: string | null;
+  created_at: string;
+  updated_at: string;
+  has_set_pin: boolean;
+};
+
+export type SellerInvestmentInfo = {
+  id: number;
+  user_id: number;
+  product_id: number;
+  investment_type: string;
+  status: string;
+  total_invested: string;
+  units_purchased: number;
+  start_at: string;
+  end_at: string | null;
+  matured_at: string | null;
+  canceled_at: string | null;
+  interest_accrued: string;
+  total_roi: string;
+  next_payout_date: string | null;
+  payout_frequency: string | null;
+  last_payout_amount: string | null;
+  profit_withdrawn: string;
+  withdrawable_balance: string;
+  investment_growth: number;
+  transaction_reference: string | null;
+  investment_plan_details: string | null;
+  created_at: string;
+  updated_at: string;
+  user: InvestmentUserInfo;
+};
+
+export type investmentMarketplaceProduct = {
+  id: number;
+  product_id: number;
+  seller_product_id: number;
+  buyer_product_id: number | null;
+  units: number;
+  final_price_per_unit: string;
+  asking_price_per_unit: string;
+  counter_price_per_unit: string;
+  total_price: string;
+  sale_option: string;
+  status: string;
+  created_at: string;
+  updated_at: string;
+  product: Omit<InvestmentProduct, "category"> & {
+    unit_start_price: string | null;
+  };
+  seller_investment_info: SellerInvestmentInfo;
+};
+
 

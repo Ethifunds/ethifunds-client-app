@@ -2,10 +2,13 @@ import { Badge } from "@/components/ui/badge";
 import { amountSeparator } from "@/lib/amount-separator";
 import capitalize from "@/lib/capitalize";
 import { useAppSelector } from "@/store/hooks";
-import { InvestMentProduct } from "@/types/investments.types";
+import { InvestmentProduct } from "@/types/investments.types";
 import ProductProgress from "./product-progress";
+import useUi from "@/hooks/use-ui";
 
-export default function DetailsBox(props: InvestMentProduct) {
+export default function DetailsBox(props: InvestmentProduct) {
+  useUi({ title: "REITs" });
+
   const { currency } = useAppSelector((state) => state.account);
   const isSoldOut = props.units_sold === props.total_units;
   const availableUnits = Math.floor(props.total_units - props.units_sold);

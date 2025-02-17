@@ -2,15 +2,18 @@ import { variables } from "@/constants";
 import { investmentCategories } from "@/constants/data/investments/investment-categories";
 import { investmentProducts } from "@/constants/data/investments/investment-category-products";
 import axios from "@/lib/axios";
-import { InvestmentCategory, InvestMentProduct } from "@/types/investments.types";
+import {
+  InvestmentCategory,
+  InvestmentProduct,
+} from "@/types/investments.types";
 
 type Parameters = {
-	categoryId: string;
+  categoryId: string;
 };
 
 type Response = {
-	category: InvestmentCategory;
-	products: InvestMentProduct[];
+  category: InvestmentCategory;
+  products: InvestmentProduct[];
 };
 
 export async function production({ categoryId }: Parameters): Promise<Response> {

@@ -5,6 +5,8 @@ import HomePage from "@/pages/home";
 import InvestmentsPage from "@/pages/investments";
 import BuyInvestmentProductPage from "@/pages/investments/buy-investment-product";
 import InvestmentCategoriesPage from "@/pages/investments/investment-categories";
+import InvestmentMarketplacePage from "@/pages/investments/investment-marketplace";
+import InvestmentMarketplaceProductDetailsPage from "@/pages/investments/investment-marketplace-product-details";
 import InvestmentProductDetailsPage from "@/pages/investments/investment-product-details";
 import InvestmentVaultOverviewPage from "@/pages/investments/investment-vault/overview";
 import InvestmentVaultTransactionsPage from "@/pages/investments/investment-vault/transactions";
@@ -31,6 +33,8 @@ const dashboardRoutes: CustomRouteProps[] = [
 	{ path: "/investments/:categoryId", Component: InvestmentCategoriesPage },
 	{ path: "/investments/:categoryId/products/:productId", Component: InvestmentProductDetailsPage },
 	{ path: "/investments/:categoryId/products/:productId/buy", Component: BuyInvestmentProductPage },
+	{ path: "/investments/:categoryId/products/:productId/marketplace", Component: InvestmentMarketplacePage },
+	{path: "/investments/:categoryId/products/:productId/marketplace/:listingId", Component: InvestmentMarketplaceProductDetailsPage},
 
 	{ path: "/investments/savings", Component: UnderConstruction },
 	{ path: "/investments/savings/:id", Component: UnderConstruction },

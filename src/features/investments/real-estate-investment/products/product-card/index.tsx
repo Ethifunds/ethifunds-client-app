@@ -1,8 +1,8 @@
-import { InvestMentProduct } from "@/types/investments.types";
+import { InvestmentProduct } from "@/types/investments.types";
 import { Link } from "react-router-dom";
 import * as React from "react";
 
-export default function ProductCard(props: InvestMentProduct) {
+export default function ProductCard(props: InvestmentProduct) {
   const isSoldOut = props.total_units === props.units_sold;
   const availableUnits = Math.floor(props.total_units - props.units_sold);
 

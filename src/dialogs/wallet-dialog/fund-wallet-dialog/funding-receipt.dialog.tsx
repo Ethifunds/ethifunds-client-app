@@ -19,7 +19,7 @@ export default React.memo(function FundingReceiptDialog() {
 		["transaction-id", id],
 		() =>
 			getTransactionDetails({
-				id,
+				id:String(id),
 				currency: currency.code,
 			}),
 		{
