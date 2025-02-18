@@ -45,7 +45,7 @@ export default function EnterPinDialog() {
     <PopupModal
       handleClose={close}
       open={open}
-      className="relative h-60 w-full py-8 lg:h-auto lg:w-1/4"
+      className="relative h-60 w-full rounded-xl py-8 lg:h-auto lg:w-1/4 lg:rounded-3xl"
     >
       <button
         onClick={close}
@@ -59,7 +59,7 @@ export default function EnterPinDialog() {
       <form onSubmit={submit}>
         <div className="space-y-2 text-center">
           <small className="caption-standard text-neutral-500">
-            Enter your transaction pin to initiate this transaction
+            Enter your transaction pin to initiate this action
           </small>
           <PinInput
             value={pin}

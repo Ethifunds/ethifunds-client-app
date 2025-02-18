@@ -27,19 +27,19 @@ export default function Form() {
 					{securityQuestions.map((item, idx) => {
 						const isInvalid = invalidAnswers.find((ans) => ans.question_id === item.id);
 						return (
-							<Input
-								key={idx}
-								name={`response ${idx}`}
-								type="text"
-								label={item.security_question}
-								placeholder="Enter Security Answer"
-								value={formData[idx].answer}
-								onChange={(e) => updateForm(e, idx)}
-								disabled={verifying}
-								overrideInvalid={isInvalid && true}
-								required
-							/>
-						);
+              <Input
+                key={idx}
+                name={`response ${idx}`}
+                type="text"
+                label={item.security_question}
+                placeholder="Enter Security Answer"
+                value={formData[idx].answer}
+                onChange={(e) => updateForm(e, idx)}
+                disabled={verifying}
+                overrideInvalid={isInvalid && true}
+                required
+              />
+            );
 					})}
 
 					<div className="flex items-end pt-5  grow">

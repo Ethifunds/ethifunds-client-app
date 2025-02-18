@@ -18,33 +18,34 @@ interface InputProps extends InputNativeAttributes {
 
 const Input = React.forwardRef<Ref, InputProps>((props: InputProps, ref) => {
 	const {
-		name,
-		type,
-		label,
-		className,
-		placeholder,
-		disabled,
-		containerStyle,
-		hideIcon,
-		invalid,
-		checked,
-		...rest
-	} = props;
-	const [togglePassword, setTogglePassword] = React.useState(false);
+    name,
+    type,
+    label,
+    className,
+    placeholder,
+    disabled,
+    containerStyle,
+    hideIcon,
+    invalid,
+    checked,
+    overrideInvalid: override_invalid,
+    ...rest
+  } = props;
+  const [togglePassword, setTogglePassword] = React.useState(false);
 
-	const showPassword = type === "password" && !hideIcon && togglePassword;
-	const unChecked = type === "checkbox" && !checked;
+  const showPassword = type === "password" && !hideIcon && togglePassword;
+  const unChecked = type === "checkbox" && !checked;
 
-	const { isInvalid } = React.useMemo(() => {
-		let isInvalid = false;
-		const userInput = rest.value?.toString();
-		if (rest.overrideInvalid) {
-			isInvalid = true;
-		} else if (invalid && !userInput && rest.required) {
-			isInvalid = true;
-		}
-		return { isInvalid };
-	}, [invalid, rest.value, rest.required, rest.overrideInvalid]);
+  const { isInvalid } = React.useMemo(() => {
+    let isInvalid = false;
+    const userInput = rest.value?.toString();
+    if (override_invalid) {
+      isInvalid = true;
+    } else if (invalid && !userInput && rest.required) {
+      isInvalid = true;
+    }
+    return { isInvalid };
+  }, [invalid, rest.value, rest.required, override_invalid]);
 
 	const container = classNames("input-container", containerStyle);
 

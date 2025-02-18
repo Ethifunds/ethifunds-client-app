@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type DialogType =
   | ""
+  | "success_dialog"
   | "insufficient_funds"
   | "transaction_details"
   | "fund_wallet"

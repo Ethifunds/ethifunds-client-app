@@ -10,6 +10,7 @@ import auth_img_03 from "@/assets/images/auth-img-03.png";
 //prompts 
 import underConstruction from "@/assets/icons/under-construction.svg"
 import empty_01 from "@/assets/icons/empty_01.svg"
+import verify_bvn_01 from "@/assets/icons/verify-bvn-01.svg"
 
 
 //investment opportunity
@@ -19,6 +20,14 @@ import real_estate_investment from "@/assets/icons/real-estate-investment.svg"
 import real_estate_investment_bg from "@/assets/icons/real-estate-investment-bg.svg"
 import savings_investment from "@/assets/icons/savings-investment.svg"
 import savings_investment_bg from "@/assets/icons/savings-investment-bg.svg"
+
+
+// settings security 
+import change_password_icon_01 from "@/assets/icons/change-password-icon-01.svg"
+import security_questions_icon_01 from "@/assets/icons/security-questions-icon-01.svg"
+import transaction_pin_icon_01 from "@/assets/icons/transaction-pin-icon-01.svg"
+import two_factory_auth_icon_01 from '@/assets/icons/two-factory-auth-icon-01.svg'
+
 
 
 //backgrounds 
@@ -56,6 +65,7 @@ export {
 
     underConstruction,
     empty_01,
+    verify_bvn_01,
 
     investment_vault,
     investment_vault_bg,
@@ -64,6 +74,11 @@ export {
     savings_investment,
     savings_investment_bg,
 
+    change_password_icon_01,
+    security_questions_icon_01,
+    transaction_pin_icon_01,
+    two_factory_auth_icon_01,
+    
     naira_sign_bg_01,
     naira_sign_bg_02,
     dollar_sign_bg,

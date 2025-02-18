@@ -38,16 +38,16 @@ export default function useForm() {
 		e.preventDefault();
 		setIsLoading(true);
 		try {
-			const formValues = validate.parse(formData);
+      const formValues = validate.parse(formData);
 
-			await sendForgotPasswordOtp(formValues);
-			console.log(formData.email);
-			setData(formValues.email);
+      await sendForgotPasswordOtp(formValues);
 
-			toast.success("OTP sent to email");
+      setData(formValues.email);
 
-			navigate("/recovery/verify-email");
-		} catch (error) {
+      toast.success("OTP sent to email");
+
+      navigate("/recovery/verify-email");
+    } catch (error) {
 			const errMsg = ensureError(error);
 			setErrorMsg(errMsg.message);
 			toast.error(errMsg.message, {

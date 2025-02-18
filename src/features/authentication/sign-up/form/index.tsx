@@ -10,80 +10,84 @@ export default function Form() {
 		useForm();
 
 	return (
-		<form
-			className="flex flex-col gap-4 rounded-xl lg:rounded-3xl bg-white shadow border px-4 py-8 lg:px-8 lg:py-6 overflow-auto lg:h-96 2xl:h-auto"
-			onSubmit={submit}
-		>
-			<div className="space-y-1">
-				<Input
-					name="username"
-					type="text"
-					label="username"
-					placeholder="Enter username"
-					value={formData.username}
-					onChange={updateForm}
-					disabled={isLoading}
-					overrideInvalid={usernameTaken}
-					required
-				/>
-				{
-					<div className="flex justify-between">
-						{usernameTaken && (
-							<small className=" caption-standard text-error-200 shake-animation">
-								Username already taken, please try a different one
-							</small>
-						)}
-						{checking && <Spinner size="xs" load_type="spinner" />}
-					</div>
-				}
-			</div>
+    <form
+      className="flex flex-col gap-4 overflow-auto rounded-xl border bg-white px-4 py-8 shadow lg:h-96 lg:rounded-3xl lg:px-8 lg:py-6 2xl:h-auto"
+      onSubmit={submit}
+    >
+      <div className="space-y-1">
+        <Input
+          name="username"
+          type="text"
+          label="username"
+          placeholder="Enter username"
+          value={formData.username}
+          onChange={updateForm}
+          disabled={isLoading}
+          overrideInvalid={usernameTaken}
+          required
+        />
+        {
+          <div className="flex justify-between">
+            {usernameTaken && (
+              <small className="caption-standard shake-animation text-error-200">
+                Username already taken, please try a different one
+              </small>
+            )}
+            {checking && <Spinner size="xs" load_type="spinner" />}
+          </div>
+        }
+      </div>
 
-			<div>
-				<Input
-					name="email"
-					type="email"
-					label="email"
-					placeholder="Enter email"
-					value={formData.email}
-					onChange={updateForm}
-					disabled={isLoading}
-					overrideInvalid={!isEmailValid}
-					required
-				/>
+      <div>
+        <Input
+          name="email"
+          type="email"
+          label="email"
+          placeholder="Enter email"
+          value={formData.email}
+          onChange={updateForm}
+          disabled={isLoading}
+          overrideInvalid={!isEmailValid}
+          required
+        />
 
-				{!isEmailValid && (
-					<small className=" caption-standard text-error-200 shake-animation ">
-						Please enter a valid email address
-					</small>
-				)}
-			</div>
+        {!isEmailValid && (
+          <small className="caption-standard shake-animation text-error-200">
+            Please enter a valid email address
+          </small>
+        )}
+      </div>
 
-			<Password isLoading={isLoading} password={formData.password} updateForm={updateForm} />
+      <Password
+        isLoading={isLoading}
+        password={formData.password}
+        updateForm={updateForm}
+      />
 
-			<div>
-				<Input
-					name="confirm_password"
-					type="text"
-					label="Confirm Password"
-					placeholder="Enter Password"
-					value={formData.confirm_password}
-					onChange={updateForm}
-					disabled={isLoading}
-					required
-				/>
-			</div>
-			<Terms />
-			<div className="pt-5">
-				<Button
-					type="submit"
-					isLoading={isLoading}
-					variant="primary"
-					className="text-white w-full rounded-xl content-accent"
-					disabled={isLoading}
-				>
-					Sign up
-				</Button>
-			</div>
-		</form>
-	);
+      <div>
+        <Input
+          name="confirm_password"
+          type="text"
+          label="Confirm Password"
+          placeholder="Enter Password"
+          value={formData.confirm_password}
+          onChange={updateForm}
+          disabled={isLoading}
+          required
+        />
+      </div>
+      <Terms />
+      <div className="pt-5">
+        <Button
+          type="submit"
+          isLoading={isLoading}
+          variant="primary"
+          className="content-accent w-full rounded-xl text-white"
+          disabled={isLoading}
+        >
+          Sign up
+        </Button>
+      </div>
+    </form>
+  );
 }

@@ -22,9 +22,8 @@ export default function useWithdrawal() {
 		}
 
 		if (tab === "add_account") {
-			console.log(tab);
-			queryParams.set("tab", "add_account");
-		}
+      queryParams.set("tab", "add_account");
+    }
 	};
 
 	const open = React.useMemo(() => {

@@ -3,6 +3,7 @@ import * as React from "react";
 import { useInfiniteQuery } from "react-query";
 import Spinner from "../spinner";
 import ErrorBox from "../error-box";
+import ErrorBoundary from "../error-boundary";
 
 type InfiniteScrollProps<T> = {
   queryKey: string[];
@@ -69,21 +70,23 @@ export default React.memo(function InfiniteScroll<T>({
 
   return (
     <React.Fragment>
-      {items.map((item) => renderItem(item))}
-      
-      {(isFetching || isFetchingNextPage) && (
-        <div className="col-span-full flex w-full justify-center py-2">
-          <Spinner size="sm" />
-        </div>
-      )}
-      {!hasNextPage && !isFetching && (
-        <div className="col-span-full flex justify-center py-2 text-4xl text-neutral-500">
-          ...
-        </div>
-      )}
+      <ErrorBoundary>
+        {items.map((item) => renderItem(item))}
 
-      {isError && <ErrorBox error={error} />}
-      <div ref={loaderRef} style={{ height: "10px" }} />
+        {(isFetching || isFetchingNextPage) && (
+          <div className="col-span-full flex w-full justify-center py-2">
+            <Spinner size="sm" />
+          </div>
+        )}
+        {!hasNextPage && !isFetching && (
+          <div className="col-span-full flex justify-center py-2 text-4xl text-neutral-500">
+            ...
+          </div>
+        )}
+
+        {isError && <ErrorBox error={error} />}
+        <div ref={loaderRef} style={{ height: "10px" }} />
+      </ErrorBoundary>
     </React.Fragment>
   );
 }) as <T>(props: InfiniteScrollProps<T>) => React.ReactNode;

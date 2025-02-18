@@ -18,14 +18,13 @@ export default React.memo(function CurrencyPicker(props: CurrencyPickerProps) {
 	const { supportedCurrencies } = useExtras();
 
 	const currencyIdx = React.useMemo(() => {
-		console.log("idex", supportedCurrencies)
-		const match = supportedCurrencies.findIndex(
-			(item) => sanitizeText(item.code) === sanitizeText(props.currency)
-		);
+    const match = supportedCurrencies.findIndex(
+      (item) => sanitizeText(item.code) === sanitizeText(props.currency),
+    );
 
-		if (match > -1) return match;
-		return 0;
-	}, [props.currency, supportedCurrencies]);
+    if (match > -1) return match;
+    return 0;
+  }, [props.currency, supportedCurrencies]);
 
 	return (
 		<Select onValueChange={(value) => props.setCurrency(value)}>

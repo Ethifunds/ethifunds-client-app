@@ -16,9 +16,7 @@ export function DatePickerWithRange({
 		to: new Date(),
 	});
 
-	React.useMemo(() => {
-		console.log(date);
-	}, [date]);
+
 
 	return (
 		<div className={cn("grid gap-2", className)} {...rest}>

@@ -38,7 +38,6 @@
     --chart-2: 340 75% 55%;
   }
 
-  
   /* typography */
 
   /* display */
@@ -199,6 +198,10 @@ body {
 }
 html {
   scroll-behavior: smooth !important;
+}
+
+.error-message {
+  @apply shake-animation rounded bg-error-200/20 px-2 text-center text-error-200;
 }
 
 @keyframes shake {

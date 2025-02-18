@@ -57,7 +57,7 @@ export default React.memo(function WithdrawFunds(props: WithdrawFundsProps) {
 						label={`Amount (${currency.sign})`}
 						placeholder="Enter Amount"
 						inputMode="numeric"
-						onChange={(e) => setAmount(sanitizeNumInput(e.target.value, true))}
+						onChange={(e) => setAmount(sanitizeNumInput(e.target.value,))}
 					/>
 
 					<div className="flex flex-col gap-3">
