@@ -1,12 +1,12 @@
 import { variables } from "@/constants";
 import axios from "@/lib/axios";
-import { SecurityQuestion } from "@/types/security-questions.types";
+import { UserSecurityQuestion } from "@/types/security-questions.types";
 
 type Parameters = {
   email: string;
 };
 
-type Response = SecurityQuestion;
+type Response = UserSecurityQuestion;
 
 export async function production(data: Parameters): Promise<Response[]> {
   const response = await axios.get(

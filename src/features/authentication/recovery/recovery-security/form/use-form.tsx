@@ -7,7 +7,7 @@ import getUserSecurityQuestions from "@/services/account/get-user-security-quest
 import verifySecurityQuestions from "@/services/account/verify-user-security-questions";
 import {
   SecurityAnswer,
-  SecurityQuestion,
+  UserSecurityQuestion,
 } from "@/types/security-questions.types";
 import * as React from "react";
 import { useQuery } from "react-query";
@@ -35,7 +35,7 @@ export default function useForm() {
     "sessionStorage",
   );
   const [securityQuestions, setSecurityQuestions] = React.useState<
-    SecurityQuestion[]
+    UserSecurityQuestion[]
   >([]);
   const [invalidAnswers, setInvalidAnswers] = React.useState<FormData>([]);
 

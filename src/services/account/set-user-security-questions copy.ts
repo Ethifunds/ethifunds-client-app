@@ -2,7 +2,10 @@ import { variables } from "@/constants";
 import axios from "@/lib/axios";
 import { SecurityAnswer,  } from "@/types/security-questions.types";
 
-type Parameters = Omit<SecurityAnswer, "correct">[];
+type Parameters = {
+  email: string;
+  questions: Omit<SecurityAnswer, "correct">[];
+};
 
 type Response = void;
 

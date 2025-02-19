@@ -2,8 +2,6 @@ import { variables } from "@/constants";
 import axios from "@/lib/axios";
 import { SecurityQuestion } from "@/types/security-questions.types";
 
-
-
 type Response = SecurityQuestion;
 
 export async function production(): Promise<Response[]> {
@@ -18,23 +16,53 @@ export async function development(): Promise<Response[]> {
         resolve([
           {
             id: 1,
-            security_question: "What is your mother's maiden name?",
+            question: "What is your mother's maiden name?",
+            is_active: 1,
           },
           {
             id: 2,
-            security_question: "What was the name of your primary school?",
+            question: "What was the name of your first pet?",
+            is_active: 1,
           },
           {
             id: 3,
-            security_question: "In what city were you born?",
+            question: "What is the name of the street you grew up on?",
+            is_active: 1,
           },
           {
             id: 4,
-            security_question: "What’s your favorite sport?",
+            question: "What was the make and model of your first car?",
+            is_active: 1,
           },
           {
             id: 5,
-            security_question: "What’s your oldest child's middle name?",
+            question: "What was your high school mascot?",
+            is_active: 1,
+          },
+          {
+            id: 6,
+            question: "What is the name of your favorite childhood friend?",
+            is_active: 1,
+          },
+          {
+            id: 7,
+            question: "What is your favorite food?",
+            is_active: 1,
+          },
+          {
+            id: 8,
+            question: "In what city were you born?",
+            is_active: 1,
+          },
+          {
+            id: 9,
+            question: "What was the name of your elementary school?",
+            is_active: 1,
+          },
+          {
+            id: 10,
+            question: "What is your favorite color?",
+            is_active: 1,
           },
         ]),
       2000,

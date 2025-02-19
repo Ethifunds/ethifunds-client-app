@@ -15,12 +15,12 @@ export default function Form() {
     formData,
     securityQuestions,
     updateForm,
-    enterPinDialog,
+    submit,
   } = useForm();
 
   const options1 = React.useMemo(() => {
     return securityQuestions.map((item) => ({
-      title: item.security_question,
+      title: item.question,
       value: String(item.id),
     }));
   }, [securityQuestions]);
@@ -29,7 +29,7 @@ export default function Form() {
     return securityQuestions
       .filter((item) => item.id !== Number(formData.question_1))
       .map((item) => ({
-        title: item.security_question,
+        title: item.question,
         value: String(item.id),
       }));
   }, [formData.question_1, securityQuestions]);
@@ -83,7 +83,7 @@ export default function Form() {
         <AppButton
           variant="primary"
           className="rounded-lg"
-          onClick={enterPinDialog}
+          onClick={submit}
           isLoading={isLoading}
         >
           Save

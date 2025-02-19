@@ -7,7 +7,6 @@ import ensureError from "@/lib/ensure-error";
 import setUserSecurityQuestions from "@/services/account/set-user-security-questions copy";
 import useActions from "@/store/actions";
 import { useAppSelector } from "@/store/hooks";
-import { toast } from "sonner";
 
 const validation = z.object({
   question_1: z.string().min(1, "question 1 is required"),
@@ -79,30 +78,6 @@ export default function useForm() {
     });
   };
 
-  const enterPinDialog = () => {
-    if (!account.user_verifications.has_set_pin) {
-      toast.info(
-        "you have not setup a Pin yet, setup a pin first to continue",
-        {
-          duration: 5000,
-        },
-      );
-
-      return ui.changeDialog({
-        show: true,
-        type: "set_pin",
-      });
-    }
-
-    return ui.changeDialog({
-      show: true,
-      type: "enter_pin",
-      action: submit,
-    });
-  };
-
-  
-  // TODO:add a pin to the submit payload
   const submit = async () => {
     setErrorMsg("");
     setIsLoading(true);
@@ -110,16 +85,19 @@ export default function useForm() {
     try {
       const formValues = validation.parse(formData);
 
-      const payload = [
-        {
-          question_id: Number(formValues.question_1),
-          answer: formValues.answer_1,
-        },
-        {
-          question_id: Number(formValues.question_2),
-          answer: formValues.answer_2,
-        },
-      ];
+      const payload = {
+        email: account.email,
+        questions: [
+          {
+            question_id: Number(formValues.question_1),
+            answer: formValues.answer_1,
+          },
+          {
+            question_id: Number(formValues.question_2),
+            answer: formValues.answer_2,
+          },
+        ],
+      };
 
       await setUserSecurityQuestions(payload);
       showSuccess();
@@ -139,6 +117,6 @@ export default function useForm() {
     formData,
     securityQuestions,
     updateForm,
-    enterPinDialog,
+    submit,
   };
 }
