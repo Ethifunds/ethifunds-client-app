@@ -54,6 +54,8 @@ import info_icon_01 from "@/assets/icons/info-icon-01.svg"
 import info_icon_02 from "@/assets/icons/info-icon-02.svg"
 import safe_box_01 from "@/assets/icons/safe-box-01.svg"
 import error_icon_01 from "@/assets/icons/error-icon-01.svg"
+import inbox_01 from "@/assets/icons/inbox-01.svg"
+import phone_01 from "@/assets/icons/phone-01.svg"
 
 export {
     logo_01,
@@ -101,4 +103,6 @@ export {
     info_icon_02,
     safe_box_01,
     error_icon_01,
+    inbox_01,
+    phone_01,
 }

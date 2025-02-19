@@ -7,6 +7,7 @@ import useCustomNavigation from "@/hooks/use-navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAppSelector } from "@/store/hooks";
 import { Link } from "react-router-dom";
+import EmptyData from "@/components/empty-data";
 
 export default function Marketplace() {
   useUi({ title: "REIT Marketplace" });
@@ -74,6 +75,12 @@ export default function Marketplace() {
               </Card>
             </Link>
           )}
+          emptyData={
+            <EmptyData
+              className="col-span-full"
+              text="No marketplace listing available for this product at the moment"
+            />
+          }
         />
       </div>
     </ErrorBoundary>

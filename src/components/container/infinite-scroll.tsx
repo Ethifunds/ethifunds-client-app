@@ -5,16 +5,19 @@ import Spinner from "../spinner";
 import ErrorBox from "../error-box";
 import ErrorBoundary from "../error-boundary";
 
+
 type InfiniteScrollProps<T> = {
   queryKey: string[];
   fetchData: (page: number) => Promise<PaginatedResponse<T>>;
   renderItem: (item: T) => React.ReactNode;
+  emptyData: React.ReactNode;
 };
 
 export default React.memo(function InfiniteScroll<T>({
   queryKey,
   fetchData,
   renderItem,
+  emptyData,
 }: InfiniteScrollProps<T>) {
   const loaderRef = React.useRef<HTMLDivElement | null>(null);
 
@@ -70,23 +73,27 @@ export default React.memo(function InfiniteScroll<T>({
 
   return (
     <React.Fragment>
-      <ErrorBoundary>
-        {items.map((item) => renderItem(item))}
+      {items.length < 1 ? (
+        emptyData
+      ) : (
+        <ErrorBoundary>
+          {items.map((item) => renderItem(item))}
 
-        {(isFetching || isFetchingNextPage) && (
-          <div className="col-span-full flex w-full justify-center py-2">
-            <Spinner size="sm" />
-          </div>
-        )}
-        {!hasNextPage && !isFetching && (
-          <div className="col-span-full flex justify-center py-2 text-4xl text-neutral-500">
-            ...
-          </div>
-        )}
+          {(isFetching || isFetchingNextPage) && (
+            <div className="col-span-full flex w-full justify-center py-2">
+              <Spinner size="sm" />
+            </div>
+          )}
+          {!hasNextPage && !isFetching && (
+            <div className="col-span-full flex justify-center py-2 text-4xl text-neutral-500">
+              ...
+            </div>
+          )}
 
-        {isError && <ErrorBox error={error} />}
-        <div ref={loaderRef} style={{ height: "10px" }} />
-      </ErrorBoundary>
+          {isError && <ErrorBox error={error} />}
+          <div ref={loaderRef} style={{ height: "10px" }} />
+        </ErrorBoundary>
+      )}
     </React.Fragment>
   );
 }) as <T>(props: InfiniteScrollProps<T>) => React.ReactNode;

@@ -27,6 +27,8 @@ const STORAGE: StorageKeys = {
 	currency: "_et_currency",
 };
 
+
+
 const ACTIVE: EnvironmentVariables = {
 	base_url: BASE_URL,
 	server: SERVER,
@@ -34,6 +36,11 @@ const ACTIVE: EnvironmentVariables = {
 	socket_url: SOCKET_URL,
 };
 
+const CONTACTS = {
+  phone: "0814 444 4444",
+  support_email: "support@ethifunds.com",
+};
+
 const INACTIVE_LIMIT = 5;
 
-export { NODE_ENV, ACTIVE, BASE_URL, SERVER, SOCKET, SOCKET_URL, INACTIVE_LIMIT, STORAGE };
+export { NODE_ENV, ACTIVE, BASE_URL, SERVER, SOCKET, SOCKET_URL, INACTIVE_LIMIT, STORAGE, CONTACTS };

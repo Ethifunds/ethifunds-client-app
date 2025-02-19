@@ -11,6 +11,8 @@ import InvestmentProductDetailsPage from "@/pages/investments/investment-product
 import InvestmentVaultOverviewPage from "@/pages/investments/investment-vault/overview";
 import InvestmentVaultTransactionsPage from "@/pages/investments/investment-vault/transactions";
 import SettingsPage from "@/pages/settings";
+import SupportPage from "@/pages/support";
+import FaqPage from "@/pages/support/faq";
 import WalletPage from "@/pages/wallet/wallet-page";
 import WalletTransactionsPage from "@/pages/wallet/wallet-transactions-page";
 import { RouteProps } from "react-router-dom";
@@ -40,7 +42,9 @@ const dashboardRoutes: CustomRouteProps[] = [
 	{ path: "/investments/savings/:id", Component: UnderConstruction },
 	{ path: "/investments/savings/:id/buy", Component: UnderConstruction },
 
-	{ path: "/support", Component: UnderConstruction },
+	{ path: "/support", Component: SupportPage },
+	{ path: "/support/faq", Component: FaqPage },
+
 	{ path: "/settings", Component: SettingsPage },
 	{ path: "/notifications", Component: UnderConstruction },
 	{ path: "*", Component: NotFound },
