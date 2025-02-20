@@ -3,6 +3,8 @@ export type TabsValues =
   | "security"
   | "documents"
   | "card_bank"
+  | "card"
+  | "bank"
   | "notifications"
   | "change_password"
   | "security_questions"

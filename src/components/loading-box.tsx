@@ -1,4 +1,4 @@
-import Spinner from "./spinner";
+import Spinner, { LOADER_TYPE } from "./spinner";
 import * as React from "react";
 import classnames from "classnames";
 
@@ -7,10 +7,11 @@ type LoadingBoxProps = {
 	position?: "top" | "center";
 	spinnerSize?: "sm" | "md" | "lg";
 	classNames?: string;
+	load_type?: LOADER_TYPE
 };
 
 export default React.memo(function LoadingBox(props: LoadingBoxProps) {
-	const { position = "center", spinnerSize = "md", type = "responsive" } = props;
+	const { position = "center", spinnerSize = "md", type = "responsive", load_type="custom" } = props;
 	const cn = classnames(
 		"flex justify-center",
 		{
@@ -23,7 +24,7 @@ export default React.memo(function LoadingBox(props: LoadingBoxProps) {
 	);
 	return (
 		<div className={cn}>
-			<Spinner size={spinnerSize}  load_type="custom"  />
+			<Spinner size={spinnerSize}  load_type={load_type} />
 		</div>
 	);
 });

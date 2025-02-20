@@ -20,7 +20,12 @@ type DialogType =
   | "real-estate-marketplace-purchase-success"
   | "vault_transaction_details"
   | "verify_bvn_success"
-  | "verify_bvn_failed";
+  | "verify_bvn_failed"
+  | "add_new_bank"
+  | "remove_bank"
+  | "add_new_card"
+  | "remove_card";
+
 
 export type DialogPayload = {
   id: string;

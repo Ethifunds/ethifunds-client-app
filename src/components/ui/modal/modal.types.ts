@@ -5,6 +5,7 @@ export type ModalRef = HTMLDivElement;
 export interface PopupModalProps extends DivNativeAttributes {
   open: boolean;
   handleClose: () => void;
+  showCloseBtn?: boolean;
   children: React.ReactNode;
 }
 

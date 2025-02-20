@@ -50,12 +50,16 @@ import calendar_icon_01 from "@/assets/icons/calender-icon-01.svg"
 import arrow_left_01 from "@/assets/icons/arrow-left-01.svg" //black
 import copy_icon_01 from "@/assets/icons/copy-icon-01.svg"
 import bank_01 from "@/assets/icons/bank-01.svg"
+import bank_02 from "@/assets/icons/bank-02.svg"
+import cards_01 from "@/assets/icons/cards-01.svg"
 import info_icon_01 from "@/assets/icons/info-icon-01.svg"
 import info_icon_02 from "@/assets/icons/info-icon-02.svg"
 import safe_box_01 from "@/assets/icons/safe-box-01.svg"
 import error_icon_01 from "@/assets/icons/error-icon-01.svg"
 import inbox_01 from "@/assets/icons/inbox-01.svg"
 import phone_01 from "@/assets/icons/phone-01.svg"
+import default_icon_01 from "@/assets/icons/default-icon-01.svg"
+
 
 export {
     logo_01,
@@ -99,10 +103,13 @@ export {
     arrow_left_01,
     copy_icon_01,
     bank_01,
+    bank_02,
+    cards_01,
     info_icon_01,
     info_icon_02,
     safe_box_01,
     error_icon_01,
     inbox_01,
     phone_01,
+    default_icon_01,
 }

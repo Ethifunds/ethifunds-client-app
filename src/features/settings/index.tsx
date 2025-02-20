@@ -5,6 +5,7 @@ import { settingsTab } from "./data";
 import Profile from "./profile";
 import useCustomNavigation from "@/hooks/use-navigation";
 import Security from "./security";
+import BankCard from "./bank-card";
 
 export default function Settings() {
   useUi({ title: "Settings" });
@@ -17,7 +18,10 @@ export default function Settings() {
   return (
     <AppContainer>
       {/* TODO: Set the defaultValue to profile */}
-      <Tabs defaultValue={activeTab ?? "security"} className="!p-0 outline-none">
+      <Tabs
+        defaultValue={activeTab ?? "security"}
+        className="!p-0 outline-none"
+      >
         <TabsList className="hide-scrollbar w-full justify-start gap-2 overflow-x-auto overflow-y-hidden rounded-none border-b-2 bg-transparent !p-0 !pb-3 lg:gap-5 lg:border-b">
           {settingsTab.map((item, idx) => {
             return (
@@ -35,6 +39,8 @@ export default function Settings() {
 
         <Profile />
         <Security />
+
+        <BankCard />
       </Tabs>
     </AppContainer>
   );

@@ -2,22 +2,24 @@ import * as React from "react";
 import LoadingBox from "./loading-box";
 import ErrorBox from "./error-box";
 import classNames from "classnames";
+import { LOADER_TYPE } from "./spinner";
 
 type RenderProps = {
-	children?: any;
-	isError?: boolean;
-	error?: unknown;
-	loadingComponent?:
-		| React.ReactNode
-		| (() => React.ReactNode)
-		| ((...args: any[]) => React.ReactNode);
-	loadingComponentArgs?: any[];
-	errorComponent?: React.ReactNode;
-	isLoading?: boolean;
-	roundedBg?: boolean;
-	loadingPosition?: "top" | "center";
-	loadingBoxClass? : string
-	size?: "sm" | "md" | "lg";
+  children?: any;
+  isError?: boolean;
+  error?: unknown;
+  loadingComponent?:
+    | React.ReactNode
+    | (() => React.ReactNode)
+    | ((...args: any[]) => React.ReactNode);
+  loadingComponentArgs?: any[];
+  errorComponent?: React.ReactNode;
+  isLoading?: boolean;
+  roundedBg?: boolean;
+  loadingPosition?: "top" | "center";
+  loadingBoxClass?: string;
+  loadType?: LOADER_TYPE;
+  size?: "sm" | "md" | "lg";
 };
 
 export default React.memo(function Render(props: RenderProps) {
@@ -32,6 +34,7 @@ export default React.memo(function Render(props: RenderProps) {
 		size = "md",
 		roundedBg = false,
 		loadingBoxClass,
+		loadType,
 	} = props;
 
 	const loadingBoxClx = classNames(loadingBoxClass, {
@@ -43,7 +46,7 @@ export default React.memo(function Render(props: RenderProps) {
 				return loadingComponent(...(props?.loadingComponentArgs ?? []));
 			return loadingComponent;
 		} else
-			return <LoadingBox classNames={loadingBoxClx} spinnerSize={size} position={loadingPosition} />;
+			return <LoadingBox classNames={loadingBoxClx} spinnerSize={size} position={loadingPosition} load_type={loadType} />;
 	}
 	if (isError) {
 		if (errorComponent) return errorComponent;

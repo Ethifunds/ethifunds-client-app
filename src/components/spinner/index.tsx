@@ -13,7 +13,7 @@ export default React.memo(function Spinner({ load_type = "simple", size = "sm" }
 	const cn = classNames(`${load_type}`, {
 		"size-3": size === "xs",
 		"size-5": size === "sm",
-		"size-14": size === "md",
+		"size-12": size === "md",
 		"size-24": size === "lg",
 		"size-32": size === "xl",
 		"size-44": size === "2xl",

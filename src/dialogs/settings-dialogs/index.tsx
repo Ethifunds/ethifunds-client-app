@@ -1,11 +1,12 @@
 import * as React from "react";
-import BvnSuccessDialog from "./profile-dialogs/bvn-success-dialog";
-import BvnErrorDialog from "./profile-dialogs/bvn-error-dialog";
+
+import ProfileDialogs from "./profile-dialogs";
+import CardBankDialogs from "./card-bank-dialogs";
 export default function SettingsDialogs() {
-	return (
-		<React.Fragment>
-			<BvnSuccessDialog />
-			<BvnErrorDialog />
-		</React.Fragment>
-	);
+  return (
+    <React.Fragment>
+      <ProfileDialogs />
+      <CardBankDialogs />
+    </React.Fragment>
+  );
 }
