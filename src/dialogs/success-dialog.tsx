@@ -16,7 +16,7 @@ export default React.memo(function SuccessDialog() {
     if (dialog.action) {
       dialog.action();
     }
-    ui.changeDialog({ show: false, type: "", data: null, action: null });
+    ui.resetDialog();
   };
 
   if (!dialog.data) return;

@@ -21,11 +21,12 @@ export default function EnterPinDialog() {
 
   const close = () => {
     setPin("");
-    ui.changeDialog({
-      show: false,
-      id: "",
-      action: null,
-    });
+    
+    ui.resetDialog();
+
+    if (dialog.dismiss) {
+      dialog.dismiss();
+    }
   };
 
   const submit = async (e: React.FormEvent) => {

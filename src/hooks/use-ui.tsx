@@ -10,6 +10,7 @@ export default function useUi(props: Partial<UiProps>) {
 	const { ui } = useActions();
 	React.useLayoutEffect(() => {
 		ui.changePageTitle(props?.title ?? "");
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [props.title]);
 
 	const changeBackBtn = (payload: BackBtnPayload | null) => {

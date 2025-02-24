@@ -10,6 +10,9 @@ import InvestmentMarketplaceProductDetailsPage from "@/pages/investments/investm
 import InvestmentProductDetailsPage from "@/pages/investments/investment-product-details";
 import InvestmentVaultOverviewPage from "@/pages/investments/investment-vault/overview";
 import InvestmentVaultTransactionsPage from "@/pages/investments/investment-vault/transactions";
+import MyInvestmentsPage from "@/pages/my-investments";
+import MyInvestmentCategoryPage from "@/pages/my-investments/my-investment-category"
+import MyInvestmentTransactionPage from "@/pages/my-investments/transactions";
 import SettingsPage from "@/pages/settings";
 import SupportPage from "@/pages/support";
 import FaqPage from "@/pages/support/faq";
@@ -23,7 +26,12 @@ const dashboardRoutes: CustomRouteProps[] = [
 	{ path: "/home", Component: HomePage },
 	{ path: "/wallet", Component: WalletPage },
 	{ path: "/wallet/transactions", Component: WalletTransactionsPage },
-	{ path: "/my-investments", Component: UnderConstruction },
+
+	{ path: "/my-investments", Component: MyInvestmentsPage },
+	{ path: "/my-investments/:categoryId/overview", Component: MyInvestmentCategoryPage },
+	{path: "/my-investments/:categoryId/transactions", Component: MyInvestmentTransactionPage},
+
+
 	{ path: "/savings", Component: UnderConstruction },
 
 	{ path: "/investments", Component: InvestmentsPage },

@@ -1,0 +1,105 @@
+import {
+  MyActiveInvestment,
+  MyInvestmentTransactions,
+} from "@/types/my-investments.types";
+
+export const myActiveInvestmentsRecentTransactions: MyInvestmentTransactions[] =
+  [
+    {
+      id: 18,
+      account_id: "7",
+      transaction_type: "credit",
+      transaction_reference: "INVESTMENT-1-20",
+      description: "Purchased of 20 units for 2000",
+      amount: "2000.00",
+      status: "success",
+      account_balance_before: "0.00",
+      account_balance_after: "2000.00",
+      transaction_date: "2025-02-20T16:24:24.000000Z",
+      remark: null,
+      fee: "0.00",
+      created_at: "2025-02-20T16:24:24.000000Z",
+      updated_at: "2025-02-20T16:24:24.000000Z",
+    },
+    {
+      id: 15,
+      account_id: "7",
+      transaction_type: "credit",
+      transaction_reference: "INVESTMENT-1-20",
+      description: "Purchased of 20 units for 2000",
+      amount: "2000.00",
+      status: "success",
+      account_balance_before: "0.00",
+      account_balance_after: "0.00",
+      transaction_date: "2025-02-20T16:14:11.000000Z",
+      remark: null,
+      fee: "0.00",
+      created_at: "2025-02-20T16:14:11.000000Z",
+      updated_at: "2025-02-20T16:14:11.000000Z",
+    },
+  ];
+
+export const myActiveInvestments: MyActiveInvestment[] = [
+  {
+    category: {
+      id: 1,
+      name: "Real Estate Investment",
+      display_image:
+        "https://res.cloudinary.com/dtfbkxzmc/image/upload/v1738885847/Buy_House_yesqry.png",
+      description:
+        "Diversify your portfolio with Ethifund’s Real Estate Investment Trust (REIT) opportunities. Invest in a carefully curated pool of real estate assets that generate income through rental collections and property sales with transparent returns, flexible buy-and-sell options, and potential for capital growth.",
+      display_title: "Real Estate Investment",
+      type: "unitized",
+      status: "active",
+      created_at: null,
+      updated_at: null,
+    },
+    investments: [
+      {
+        id: 1,
+        user_id: 1,
+        product_id: 1,
+        investment_type: "unitized",
+        status: "active",
+        total_invested: "4000.00",
+        units_purchased: 40,
+        start_at: "2025-02-08T01:51:19.000000Z",
+        end_at: null,
+        matured_at: null,
+        canceled_at: null,
+        interest_accrued: "0.00",
+        total_roi: "0.00",
+        next_payout_date: null,
+        payout_frequency: null,
+        last_payout_amount: null,
+        profit_withdrawn: "0.00",
+        withdrawable_balance: "0.00",
+        investment_growth: 0,
+        transaction_reference: null,
+        investment_plan_details: null,
+        created_at: "2025-02-08T01:51:19.000000Z",
+        updated_at: "2025-02-08T02:07:06.000000Z",
+      },
+    ],
+    sum: 4000,
+    recent_transactions: myActiveInvestmentsRecentTransactions,
+  },
+  {
+    category: {
+      id: 2,
+      name: "Ethivest Investment ",
+      display_image:
+        "https://res.cloudinary.com/dtfbkxzmc/image/upload/v1738885847/Buy_House-2_ejinwy.png",
+      description:
+        "Secure your financial future with ethifund’s Savings Investment options. Our Shariah-compliant savings plans allow you to grow your wealth steadily, without the worry of interest-based returns. With flexible saving options and guaranteed security, managing your savings has never been easier.",
+      display_title: "Growth Funds",
+      type: "fixed-tenor",
+      status: "active",
+      created_at: null,
+      updated_at: null,
+    },
+    investments: [],
+    sum: 0,
+    recent_transactions: myActiveInvestmentsRecentTransactions,
+  },
+];

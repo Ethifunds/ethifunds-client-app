@@ -10,6 +10,7 @@ import auth_img_03 from "@/assets/images/auth-img-03.png";
 //prompts 
 import underConstruction from "@/assets/icons/under-construction.svg"
 import empty_01 from "@/assets/icons/empty_01.svg"
+import empty_investment   from "@/assets/icons/empty_investment.svg"
 import verify_bvn_01 from "@/assets/icons/verify-bvn-01.svg"
 
 
@@ -54,11 +55,13 @@ import bank_02 from "@/assets/icons/bank-02.svg"
 import cards_01 from "@/assets/icons/cards-01.svg"
 import info_icon_01 from "@/assets/icons/info-icon-01.svg"
 import info_icon_02 from "@/assets/icons/info-icon-02.svg"
+import info_icon_03 from "@/assets/icons/info-icon-03.svg"
 import safe_box_01 from "@/assets/icons/safe-box-01.svg"
 import error_icon_01 from "@/assets/icons/error-icon-01.svg"
 import inbox_01 from "@/assets/icons/inbox-01.svg"
 import phone_01 from "@/assets/icons/phone-01.svg"
 import default_icon_01 from "@/assets/icons/default-icon-01.svg"
+import edit_01 from "@/assets/icons/edit-01.svg"
 
 
 export {
@@ -71,6 +74,7 @@ export {
 
     underConstruction,
     empty_01,
+    empty_investment,
     verify_bvn_01,
 
     investment_vault,
@@ -107,9 +111,11 @@ export {
     cards_01,
     info_icon_01,
     info_icon_02,
+    info_icon_03,
     safe_box_01,
     error_icon_01,
     inbox_01,
     phone_01,
     default_icon_01,
+    edit_01
 }

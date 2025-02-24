@@ -73,7 +73,7 @@ export default React.memo(function InfiniteScroll<T>({
 
   return (
     <React.Fragment>
-      {items.length < 1 ? (
+      {!isFetching && items.length < 1 ? (
         emptyData
       ) : (
         <ErrorBoundary>

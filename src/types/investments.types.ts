@@ -1,3 +1,5 @@
+export type SaleOption = "ethifunds" | "marketplace";
+
 export type InvestmentCategory = {
   id: number;
   name: string;
@@ -123,7 +125,7 @@ export type investmentMarketplaceProduct = {
   asking_price_per_unit: string;
   counter_price_per_unit: string;
   total_price: string;
-  sale_option: string;
+  sale_option: SaleOption;
   status: string;
   created_at: string;
   updated_at: string;
@@ -132,5 +134,3 @@ export type investmentMarketplaceProduct = {
   };
   seller_investment_info: SellerInvestmentInfo;
 };
-
-

@@ -3,7 +3,9 @@ import classnames from "classnames";
 import { assets } from "@/constants";
 
 type EmptyDataProps = {
+  title?: string;
   text?: string;
+  icon?: string;
   className?: string;
 };
 export default React.memo(function EmptyData(props: EmptyDataProps) {
@@ -13,8 +15,15 @@ export default React.memo(function EmptyData(props: EmptyDataProps) {
   );
   return (
     <div className={container}>
-      <img src={assets.empty_01} alt="empty-icon" className="size-24" />
-      <p className="font-bold tracking-tight text-neutral-500 text-center">
+      <img
+        src={props.icon ?? assets.empty_01}
+        alt="empty-icon"
+        className="size-24"
+      />
+      {props.title && (
+        <h1 className="feature-accent text-neutral-1000">{props.title}</h1>
+      )}
+      <p className="text-center font-bold tracking-tight text-neutral-500">
         {props.text ?? "No Data available"}
       </p>
     </div>
