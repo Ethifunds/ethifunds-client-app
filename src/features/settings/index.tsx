@@ -6,6 +6,7 @@ import Profile from "./profile";
 import useCustomNavigation from "@/hooks/use-navigation";
 import Security from "./security";
 import BankCard from "./bank-card";
+import Notifications from "./notifications";
 
 export default function Settings() {
   useUi({ title: "Settings" });
@@ -19,7 +20,7 @@ export default function Settings() {
     <AppContainer>
       {/* TODO: Set the defaultValue to profile */}
       <Tabs
-        defaultValue={activeTab ?? "security"}
+        defaultValue={activeTab ?? "notifications"}
         className="!p-0 outline-none"
       >
         <TabsList className="hide-scrollbar w-full justify-start gap-2 overflow-x-auto overflow-y-hidden rounded-none border-b-2 bg-transparent !p-0 !pb-3 lg:gap-5 lg:border-b">
@@ -41,6 +42,7 @@ export default function Settings() {
         <Security />
 
         <BankCard />
+        <Notifications />
       </Tabs>
     </AppContainer>
   );

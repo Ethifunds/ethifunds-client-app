@@ -11,7 +11,10 @@ export type TabsValues =
   | "transaction_pin"
   | "2fa"
   | "default"
-  | "security_questions";
+  | "security_questions"
+  | "email"
+  | "in-app"
+  | "push";
 
 export type SettingsTab = {
   title: string;

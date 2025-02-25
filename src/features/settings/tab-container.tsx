@@ -19,7 +19,7 @@ export default function TabContainer(props: ContainerProps) {
   return (
     <TabsContent value={props.value} className={cn}>
       {props.title && props.subTitle && (
-        <div className="flex items-center justify-between focus-within:">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
           <div className="lg:w-3/5">
             <h1 className="highlight-accent text-neutral-1000">
               {props.title}
