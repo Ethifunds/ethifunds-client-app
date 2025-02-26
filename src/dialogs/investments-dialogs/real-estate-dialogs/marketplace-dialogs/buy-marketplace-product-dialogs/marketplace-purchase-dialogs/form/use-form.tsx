@@ -61,13 +61,20 @@ export default function useForm(data: investmentMarketplaceProduct) {
       action: submit,
     });
   };
+  const counter_price_per_unit = React.useMemo(() => {
+    const counter_price =
+      String(formData.counter_price_per_unit).length > 0
+        ? formData.counter_price_per_unit
+        : data.asking_price_per_unit;
+    return counter_price;
+  }, [data.asking_price_per_unit, formData.counter_price_per_unit]);
 
   const showPreview = () => {
     const payload = {
       seller_username: data.seller_investment_info.user.username,
       interest_rate: `${data.product.expected_roi}%`,
-      counter_offer_price: formData.counter_price_per_unit,
-      purchasing_cost: formData.units * Number(formData.counter_price_per_unit),
+      counter_offer_price: counter_price_per_unit,
+      purchasing_cost: formData.units * Number(counter_price_per_unit),
       purchasing_unit: `${formData.units} ${formData.units > 1 ? "units" : "unit"} `,
     };
     ui.changeDialog({
@@ -75,7 +82,28 @@ export default function useForm(data: investmentMarketplaceProduct) {
       type: "real-estate-marketplace-purchase-preview",
       action: enterPinDialog,
       data: payload,
+      dismiss: reset,
     });
+  };
+
+  const submit = async (pin: string) => {
+    setIsLoading(true);
+
+    try {
+      const formValues = validation.parse({
+        ...formData,
+        counter_price_per_unit,
+        pin,
+      });
+      await buyMarketplaceProduct(formValues);
+      showSuccessDialog();
+    } catch (err) {
+      const errMsg = ensureError(err).message;
+      if (errMsg.includes("insufficient")) return showInsufficientDialog();
+      toast.error(errMsg);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const showSuccessDialog = () => {
@@ -93,35 +121,21 @@ export default function useForm(data: investmentMarketplaceProduct) {
       action: reset,
     });
   };
-  const submit = async (pin: string) => {
-    setIsLoading(true);
-    try {
-      const formValues = validation.parse({ ...formData, pin });
-      await buyMarketplaceProduct(formValues);
-        showSuccessDialog();
-    } catch (err) {
-      const errMsg = ensureError(err).message;
-      if (errMsg.includes("insufficient")) return showInsufficientDialog();
-      toast.error(errMsg);
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
-  React.useMemo(() => {
-    if (formData.counter_price_per_unit.length > 0) return;
+  // React.useMemo(() => {
+  //   if (formData.counter_price_per_unit.length > 0) return;
 
-    setFormData((prev) => ({
-      ...prev,
-      counter_price_per_unit: String(
-        Number(data.asking_price_per_unit) * formData.units,
-      ),
-    }));
-  }, [
-    data.asking_price_per_unit,
-    formData.counter_price_per_unit,
-    formData.units,
-  ]);
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     counter_price_per_unit: String(
+  //       Number(data.asking_price_per_unit) * formData.units,
+  //     ),
+  //   }));
+  // }, [
+  //   data.asking_price_per_unit,
+  //   formData.counter_price_per_unit,
+  //   formData.units,
+  // ]);
   return {
     currency,
     formData,

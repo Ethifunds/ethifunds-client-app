@@ -2,15 +2,12 @@ import ErrorBoundary from "@/components/error-boundary";
 import AppDrawer from "@/components/ui/app-drawer";
 import * as React from "react";
 import useEditListed from "./use-edit-listed";
-import { assets } from "@/constants";
 import Render from "@/components/render";
 import { Input } from "@/components/ui/form-input";
 import { unitsList } from "./data";
 import classNames from "classnames";
 import { amountSeparator } from "@/lib/amount-separator";
 import { Separator } from "@/components/ui/separator";
-import { Switch } from "@/components/ui/switch";
-import AppTooltip from "@/components/ui/app-tooltip";
 import AppButton from "@/components/app-button";
 
 export default React.memo(function EditListedDialog() {
@@ -19,15 +16,12 @@ export default React.memo(function EditListedDialog() {
     isError,
     error,
     open,
-    warningMsg,
     formData,
     productDetails,
-    showAskPrice,
     isLoading,
     unitCosts,
     currency,
     updateForm,
-    toggleAskPrice,
     toggleDrawer,
     setSaleOption,
     submit,
@@ -40,6 +34,7 @@ export default React.memo(function EditListedDialog() {
       open={open}
       handleChange={toggleDrawer}
       footer={
+        !isFetching &&
         formData.product_id && (
           <div className="flex h-full grow items-end justify-between gap-5 [&_button]:w-full">
             <AppButton
@@ -69,11 +64,6 @@ export default React.memo(function EditListedDialog() {
     >
       <ErrorBoundary>
         <div className="flex h-full flex-col gap-10 overflow-auto px-4 py-10">
-          <div className="flex items-start gap-3 rounded-lg bg-error-100/20 p-4">
-            <img src={assets.info_icon_01} alt="info" />
-            <p>{warningMsg}</p>
-          </div>
-
           <Render
             isLoading={isFetching}
             isError={isError}
@@ -137,43 +127,13 @@ export default React.memo(function EditListedDialog() {
                 />
 
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <label
-                      htmlFor="asking_price"
-                      className="flex items-center gap-1"
-                    >
-                      Add Asking Price
-                      <AppTooltip
-                        trigger={
-                          <img src={assets.info_icon_02} alt="info icon" />
-                        }
-                        content={
-                          <p className="caption-standard w-full !bg-primary-100 p-2">
-                            {" "}
-                            Toggle Add asking price to enter an ask price
-                            <br />
-                            defaults to the current price if not set.
-                          </p>
-                        }
-                      />
-                    </label>
-
-                    <Switch
-                      checked={showAskPrice}
-                      className="data-[state=checked]:bg-primary"
-                      onCheckedChange={toggleAskPrice}
-                      disabled={isLoading}
-                      aria-readonly
-                    />
-                  </div>
-                  {showAskPrice && (
-                    <Input
-                      name="asking_price"
-                      value={`${formData.asking_price}`}
-                      onChange={(e) => updateForm("asking_price", e)}
-                      disabled={isLoading}
-                    />
-                  )}
+                  <Input
+                    name="asking_price"
+                    label=" Add Asking Price"
+                    value={`${formData.asking_price}`}
+                    onChange={(e) => updateForm("asking_price", e)}
+                    disabled={isLoading}
+                  />
                 </div>
               </React.Fragment>
             </div>

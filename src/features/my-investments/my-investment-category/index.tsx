@@ -30,8 +30,13 @@ export default function MyInvestmentCategory() {
   });
 
   return (
-    <AppContainer className="space-y-5">
-      <Render isLoading={isFetching} isError={isError} error={error}>
+    <AppContainer className="h-full space-y-5">
+      <Render
+        isLoading={isFetching}
+        isError={isError}
+        error={error}
+        loadingPosition="center"
+      >
         {data && (
           <React.Fragment>
             <Balance

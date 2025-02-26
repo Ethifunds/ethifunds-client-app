@@ -32,7 +32,7 @@ const PopupModal = React.forwardRef<ModalRef, PopupModalProps>(
             {showCloseBtn && (
               <button
                 onClick={handleClose}
-                className="absolute right-0 top-0 flex size-8 items-center justify-center rounded-full bg-white p-2 lg:-right-8 lg:-top-8"
+                className="absolute right-0 top-0 flex size-8 items-center justify-center rounded-full bg-white p-2"
               >
                 <X color="#908b8b" />
               </button>

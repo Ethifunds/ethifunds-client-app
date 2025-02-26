@@ -25,7 +25,7 @@ export default function Marketplace() {
           }
           renderItem={(item) => (
             <Link to={`${item.id}`}>
-              <Card className="cursor-pointer space-y-5 transition hover:shadow ">
+              <Card className="cursor-pointer space-y-5 transition hover:shadow lg:space-y-0">
                 <CardHeader className="p-0">
                   <div className="max-h-56">
                     <img

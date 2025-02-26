@@ -33,11 +33,11 @@ export default React.memo(function ExploreMarketPlace() {
               />
             ) : (
               data?.map((item) => (
-                  <Link
-                      key={item.id}
+                <Link
+                  key={item.id}
                   to={`/investments/${item.product.product_category_id}/products/${item.product_id}/marketplace/${item.id}`}
                 >
-                  <Card className="space-y- hover: cursor-pointer transition hover:shadow">
+                  <Card className="cursor-pointer space-y-5 transition hover:shadow lg:space-y-0">
                     <CardHeader className="p-0">
                       <div className="max-h-56">
                         <img

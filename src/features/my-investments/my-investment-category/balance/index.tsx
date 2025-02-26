@@ -41,7 +41,7 @@ export default React.memo(function Balance(props: BalanceProps) {
             </div>
           </div>
 
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col justify-between gap-5 lg:flex-row lg:items-center">
             <div className="flex w-full min-w-20 max-w-fit flex-nowrap items-center gap-3 rounded-sm border p-2">
               <span>{amountSeparator(props.aggregate)} Units</span>
 
@@ -54,17 +54,17 @@ export default React.memo(function Balance(props: BalanceProps) {
                 }
               />
             </div>
-            <div className="flex w-full grow justify-end gap-5">
+            <div className="flex w-full grow gap-5 lg:justify-end">
               <button
                 onClick={buyUnits}
-                className="button-primary !rounded-lg !py-2 text-white lg:w-1/3"
+                className="button-primary w-full !rounded-lg !py-2 text-white lg:w-1/3"
               >
                 Buy Units
               </button>
 
               <button
                 onClick={sellUnits}
-                className="button-outline !rounded-lg !border-primary !py-2 text-primary lg:w-1/3"
+                className="button-outline w-full !rounded-lg !border-primary !py-2 text-primary lg:w-1/3"
               >
                 Sell Units
               </button>

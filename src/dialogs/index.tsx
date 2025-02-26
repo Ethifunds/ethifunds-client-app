@@ -1,5 +1,5 @@
 import * as React from "react";
-import TransactionDetailsDialog from "./wallet-dialog/transaction-details.dialog";
+import TransactionDetailsDialog from "./transaction-details.dialog";
 import WalletDialog from "./wallet-dialog";
 import SettingsDialogs from "./settings-dialogs";
 import PinDialogs from "./pin-dialogs";

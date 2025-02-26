@@ -55,7 +55,7 @@ export default React.memo(function TransactionDetailsDialog() {
 	return (
 		<PopupModal handleClose={close} open={open} className="relative w-full lg:w-1/2 h-96 p-8">
 			<ErrorBoundary>
-				<Render isLoading={isFetching} isError={isError} error={error}>
+				<Render isLoading={isFetching} isError={isError} error={error} loadingPosition="center">
 					<button
 						onClick={close}
 						className="absolute top-0 right-0 lg:-top-8 lg:-right-8 flex items-center justify-center size-8 p-2 rounded-full bg-white"

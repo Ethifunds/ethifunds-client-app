@@ -15,10 +15,6 @@ import { useQuery } from "react-query";
 import { toast } from "sonner";
 import { z } from "zod";
 
-const initWarningMsg =
-  "Warning message to inform the users of the sales charges";
-const askingPriceMsg =
-  "Set your asking price: Choose a competitive price per unit to attract buyers and maximize your returns";
 
 const validation = z.object({
   product_id: z
@@ -41,29 +37,18 @@ type FormData = z.infer<typeof validation>;
 export default function useEditListed() {
   const { currency } = useAppSelector((state) => state.account);
   const { dialog } = useAppSelector((state) => state.ui);
-  const data = dialog.data as MyInvestmentMarketplace;
+  const data = dialog?.data as MyInvestmentMarketplace;
 
-  const init: FormData = React.useMemo(
-    () => ({
-      product_id: data?.product_id ?? "",
-      units: data?.units,
-      sale_option: data?.sale_option,
-      asking_price: Number(data?.asking_price_per_unit),
-      pin: "",
-    }),
-    [
-      data?.asking_price_per_unit,
-      data?.product_id,
-      data?.sale_option,
-      data?.units,
-    ],
-  );
+  const init: FormData = {
+    product_id: "" as any,
+    units: 0,
+    sale_option: "ethifunds",
+    asking_price: 0,
+    pin: "",
+  };
 
   const [formData, setFormData] = React.useState(init);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [warningMsg, setWarningMsg] = React.useState(initWarningMsg);
-
-  const [showAskPrice, setShowAskPrice] = React.useState(false);
 
   const [productList, setProductList] = React.useState<
     (ActiveInvestmentInvestments & { name: string; unit_price: string })[]
@@ -72,7 +57,25 @@ export default function useEditListed() {
   const { queryParams } = useCustomNavigation();
   const { ui } = useActions();
 
-  const categoryId = data?.product?.product_category_id?.toString();
+  const categoryId = React.useMemo(
+    () => data?.product?.product_category_id?.toString(),
+    [data?.product?.product_category_id],
+  );
+
+  React.useMemo(() => {
+    setFormData({
+      product_id: data?.product_id ?? "",
+      units: data?.units,
+      sale_option: data?.sale_option,
+      asking_price: Number(data?.asking_price_per_unit),
+      pin: "",
+    });
+  }, [
+    data?.asking_price_per_unit,
+    data?.product_id,
+    data?.sale_option,
+    data?.units,
+  ]);
 
   const { isFetching, isError, error } = useQuery(
     ["listed-investment-category-details", categoryId],
@@ -106,18 +109,9 @@ export default function useEditListed() {
     if (isLoading) return;
     setFormData(init);
     setIsLoading(false);
-    setShowAskPrice(false);
-    setWarningMsg(initWarningMsg);
     queryParams.delete("sale_option");
     queryParams.delete("action");
   };
-
-  const productOptions = React.useMemo(() => {
-    return productList.map((item) => ({
-      title: item.name,
-      value: item.id.toString(),
-    }));
-  }, [productList]);
 
   const productDetails = React.useMemo(() => {
     if (!formData.product_id) return null;
@@ -169,19 +163,6 @@ export default function useEditListed() {
       id: "",
     });
     reset();
-  };
-
-  const toggleAskPrice = (value: boolean) => {
-    if (value) {
-      setWarningMsg(askingPriceMsg);
-    } else {
-      setWarningMsg(initWarningMsg);
-      setFormData((prev) => ({
-        ...prev,
-        asking_price: unitCosts,
-      }));
-    }
-    setShowAskPrice(value);
   };
 
   const showPreview = async (payload: typeof formData) => {
@@ -277,25 +258,21 @@ export default function useEditListed() {
     });
   };
 
+  console.log("init", init, formData, productDetails);
+
   return {
     isFetching,
     isError,
     error,
     open,
-    warningMsg,
-    isLoading,
-    productList,
-    showAskPrice,
     formData,
     productDetails,
-    productOptions,
-    currency,
+    isLoading,
     unitCosts,
-    setSaleOption,
+    currency,
     updateForm,
-    toggleAskPrice,
-    showPreview,
-    submit,
     toggleDrawer,
+    setSaleOption,
+    submit,
   };
 }

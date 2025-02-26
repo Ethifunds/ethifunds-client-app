@@ -2,13 +2,15 @@ import AppButton from "@/components/app-button";
 import ErrorBoundary from "@/components/error-boundary";
 import { PopupModal } from "@/components/ui/modal";
 import { amountSeparator } from "@/lib/amount-separator";
+import useActions from "@/store/actions";
 import { useAppSelector } from "@/store/hooks";
-import { X } from "lucide-react";
 import * as React from "react";
 
 export default React.memo(function PreviewDialog() {
   const { dialog } = useAppSelector((state) => state.ui);
   const { currency } = useAppSelector((state) => state.account);
+  const { ui } = useActions();
+
   const open = React.useMemo(() => {
     return (
       dialog.show && dialog.type === "real-estate-marketplace-purchase-preview"
@@ -21,6 +23,13 @@ export default React.memo(function PreviewDialog() {
   const click = () => {
     if (dialog.action) {
       dialog.action();
+    }
+  };
+
+  const close = () => {
+    ui.resetDialog();
+    if (dialog.dismiss) {
+      dialog.dismiss();
     }
   };
   const data = {
@@ -36,7 +45,7 @@ export default React.memo(function PreviewDialog() {
     charges: `${currency.sign} ${amountSeparator(charges)}`,
     status: "pending",
     total_cost: (
-      <strong >
+      <strong>
         {currency.sign}{" "}
         {amountSeparator(dialog.data.purchasing_cost + charges)}{" "}
       </strong>
@@ -47,15 +56,10 @@ export default React.memo(function PreviewDialog() {
     <PopupModal
       handleClose={close}
       open={open}
-      className="h- relative w-full p-8 lg:w-2/5 overflow-auto"
+      className="relative w-full overflow-auto p-8 lg:w-2/5"
+      showCloseBtn
     >
       <ErrorBoundary>
-        <button
-          onClick={close}
-          className="absolute right-0 top-0 flex size-8 items-center justify-center rounded-full bg-white p-2 lg:-right-8 lg:-top-8"
-        >
-          <X color="#908b8b" />
-        </button>
         <div className="flex flex-col gap-10">
           <h1 className="highlight-standard text-neutral-1000">Preview</h1>
 
@@ -72,7 +76,11 @@ export default React.memo(function PreviewDialog() {
               );
             })}
           </div>
-          <AppButton onClick={click} variant="primary" className="w-full rounded-lg">
+          <AppButton
+            onClick={click}
+            variant="primary"
+            className="w-full rounded-lg"
+          >
             Continue
           </AppButton>
         </div>
