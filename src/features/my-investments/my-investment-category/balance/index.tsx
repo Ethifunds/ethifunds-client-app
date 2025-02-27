@@ -5,7 +5,7 @@ import classNames from "classnames";
 import useBalance from "./use-balance";
 import ErrorBoundary from "@/components/error-boundary";
 import { MyActiveInvestment } from "@/types/my-investments.types";
-import { assets } from "@/constants";
+import { assets, infos } from "@/constants";
 import AppTooltip from "@/components/ui/app-tooltip";
 
 type BalanceProps = {
@@ -47,11 +47,7 @@ export default React.memo(function Balance(props: BalanceProps) {
 
               <AppTooltip
                 trigger={<img src={assets.info_icon_03} alt="info icon" />}
-                content={
-                  <p className="!bg-primary-100">
-                    This is an aggregate of all the units purchased{" "}
-                  </p>
-                }
+                content={infos.tooltipInfo.units_aggregate.content}
               />
             </div>
             <div className="flex w-full grow gap-5 lg:justify-end">

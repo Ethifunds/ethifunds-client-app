@@ -2,7 +2,7 @@ import ErrorBoundary from "@/components/error-boundary";
 import AppDrawer from "@/components/ui/app-drawer";
 import * as React from "react";
 import useSellUnits from "./use-sell-units";
-import { assets } from "@/constants";
+import { assets, infos } from "@/constants";
 import Render from "@/components/render";
 import SelectBox from "@/components/select-box";
 import { Input } from "@/components/ui/form-input";
@@ -162,14 +162,8 @@ export default React.memo(function SellUnits() {
                           trigger={
                             <img src={assets.info_icon_02} alt="info icon" />
                           }
-                          content={
-                            <p className="caption-standard w-full !bg-primary-100 p-2">
-                              {" "}
-                              Toggle Add asking price to enter an ask price
-                              <br />
-                              defaults to the current price if not set.
-                            </p>
-                          }
+                          title={infos.tooltipInfo.asking_price.title}
+                          content={infos.tooltipInfo.asking_price.content}
                         />
                       </label>
 

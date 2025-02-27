@@ -1,4 +1,5 @@
 import ensureError from "@/lib/ensure-error";
+import { sanitizeNumInput } from "@/lib/sanitize-num-input";
 import buyMarketplaceProduct from "@/services/investments/buy-marketplace-product";
 import useActions from "@/store/actions";
 import { useAppSelector } from "@/store/hooks";
@@ -8,8 +9,12 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 const validation = z.object({
-  product_id: z.number().positive("product Id must be valid"),
-  units: z.number().positive("units is required"),
+  product_id: z
+    .number({ message: "Product Id must be a number" })
+    .positive("product Id must be valid"),
+  units: z
+    .number({ message: "units must be a number" })
+    .positive("units is required"),
   pin: z.string().trim().length(4, "pin is required"),
   counter_price_per_unit: z.string().min(1, "counter price unit is required"),
 });
@@ -49,7 +54,10 @@ export default function useForm(data: investmentMarketplaceProduct) {
     setFormData((prev) => {
       return {
         ...prev,
-        [name]: e.target.value,
+        [name]:
+          typeof formData[name] === "number"
+            ? sanitizeNumInput(e.target.value)
+            : e.target.value,
       };
     });
   };
@@ -122,20 +130,6 @@ export default function useForm(data: investmentMarketplaceProduct) {
     });
   };
 
-  // React.useMemo(() => {
-  //   if (formData.counter_price_per_unit.length > 0) return;
-
-  //   setFormData((prev) => ({
-  //     ...prev,
-  //     counter_price_per_unit: String(
-  //       Number(data.asking_price_per_unit) * formData.units,
-  //     ),
-  //   }));
-  // }, [
-  //   data.asking_price_per_unit,
-  //   formData.counter_price_per_unit,
-  //   formData.units,
-  // ]);
   return {
     currency,
     formData,
