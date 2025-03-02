@@ -36,6 +36,9 @@ import naira_sign_bg_01 from "@/assets/icons/naira-sign-bg-01.svg"
 import naira_sign_bg_02 from "@/assets/icons/naira-sign-bg-02.svg";
 import dollar_sign_bg from "@/assets/icons/dollar-sign-bg.svg"
 
+//files 
+import sample_pdf from "@/assets/files/sample-pdf.pdf"
+
 // utility icons 
 import alert_icon_01 from "@/assets/icons/alert-icon-01.svg"
 import success_badge_01 from "@/assets/icons/success-badge-01.svg"
@@ -62,6 +65,8 @@ import inbox_01 from "@/assets/icons/inbox-01.svg"
 import phone_01 from "@/assets/icons/phone-01.svg"
 import default_icon_01 from "@/assets/icons/default-icon-01.svg"
 import edit_01 from "@/assets/icons/edit-01.svg"
+import file_01 from "@/assets/icons/file-01.svg"
+import download_01 from "@/assets/icons/download-01.svg"
 
 
 export {
@@ -93,6 +98,9 @@ export {
     naira_sign_bg_02,
     dollar_sign_bg,
 
+
+    sample_pdf,
+
     alert_icon_01,
     success_badge_01,
     logout_01,
@@ -117,5 +125,7 @@ export {
     inbox_01,
     phone_01,
     default_icon_01,
-    edit_01
+    edit_01,
+    file_01,
+    download_01,
 }

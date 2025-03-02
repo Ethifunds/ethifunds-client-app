@@ -3,10 +3,10 @@ import axios from "@/lib/axios";
 import { generateDigits } from "@/lib/generate-digits";
 
 type Parameters = {
+  listingId: number;
   product_id: number;
   units: number;
-  sale_option: "marketplace" | "ethifunds";
-  asking_price: number;
+  asking_price_per_unit: number;
   pin: string;
 };
 
@@ -16,7 +16,6 @@ type Response = {
   units: number;
   asking_price_per_unit: number;
   total_price: number;
-  sale_option: Parameters["sale_option"];
   updated_at: string;
   created_at: string;
   id: number;
@@ -34,8 +33,7 @@ export async function development(data: Parameters): Promise<Response> {
         resolve({
           product_id: data.product_id,
           units: data.units,
-          sale_option: data.sale_option,
-          asking_price_per_unit: data.asking_price,
+          asking_price_per_unit: data.asking_price_per_unit,
           total_price: generateDigits(9999),
           seller_product_id: 1,
           updated_at: "2025-02-08T00:41:09.000000Z",

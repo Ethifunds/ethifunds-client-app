@@ -15,7 +15,7 @@ type refresh = () => void;
 const validation = z.object({
   units: z.number().positive("units must be a positive number"),
   pin: z.string().trim().length(4, "pin is required"),
-  productId: z.number().positive("product id is required"),
+  product_id: z.number().positive("product id is required"),
 });
 
 type FormData = z.infer<typeof validation>;
@@ -26,7 +26,7 @@ export default function useForm(data: FormProps & { refresh: refresh }) {
   const init: FormData = {
     units: "" as any,
     pin: "",
-    productId,
+    product_id: productId,
   };
   const [formData, setFormData] = React.useState(init);
   const [isLoading, setIsLoading] = React.useState(false);

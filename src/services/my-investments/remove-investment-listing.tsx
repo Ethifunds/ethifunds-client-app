@@ -7,8 +7,8 @@ type Parameters = {
 
 type Response = void;
 export async function production(data: Parameters): Promise<Response> {
-  const response = await axios.post(
-    `/investment/sell-units/${data.listing_id}`,
+  const response = await axios.delete(
+    `/my-investment/remove-listing/${data.listing_id}`,
   );
   return response.data.data;
 }

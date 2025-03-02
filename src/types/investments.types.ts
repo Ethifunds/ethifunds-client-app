@@ -1,3 +1,5 @@
+import { MyInvestmentProduct } from "./my-investments.types";
+
 export type SaleOption = "ethifunds" | "marketplace";
 
 export type InvestmentCategory = {
@@ -33,6 +35,8 @@ export type InvestmentProduct = {
   account_id: number;
   type: string;
   description: string;
+  label: string;
+  section: string;
   minimum_investment: string;
   maximum_investment: string;
   expected_roi: number;
@@ -133,4 +137,34 @@ export type investmentMarketplaceProduct = {
     unit_start_price: string | null;
   };
   seller_investment_info: SellerInvestmentInfo;
+};
+
+export type ActiveInvestmentProduct = {
+  id: number;
+  user_id: number;
+  product_id: number;
+  investment_type: string;
+  status: string;
+  total_invested: string;
+  units_purchased: number;
+  start_at: string;
+  end_at: string | null;
+  matured_at: string | null;
+  canceled_at: string | null;
+  interest_accrued: string;
+  total_roi: string;
+  next_payout_date: string | null;
+  payout_frequency: string | null;
+  last_payout_amount: string | null;
+  profit_withdrawn: string;
+  withdrawable_balance: string;
+  investment_growth: number;
+  transaction_reference: string | null;
+  investment_plan_details: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
+export type CompletedInvestmentProduct = ActiveInvestmentProduct & {
+  product: Omit<MyInvestmentProduct, "custodian">;
 };

@@ -2,7 +2,7 @@ import { variables } from "@/constants";
 import axios from "@/lib/axios";
 
 type Parameters = {
-  productId: number;
+  product_id: number;
   units: number;
   pin: string;
 };

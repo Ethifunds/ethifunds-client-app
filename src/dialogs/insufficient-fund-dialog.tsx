@@ -17,10 +17,10 @@ export default React.memo(function InsufficientFundDialog() {
   }, [dialog.show, dialog.type]);
 
   const dismiss = () => {
-    ui.changeDialog({
-      show: false,
-      type: "",
-    });
+    ui.resetDialog();
+    if (dialog.dismiss) {
+      dialog.dismiss();
+    }
   };
 
   const action = () => {

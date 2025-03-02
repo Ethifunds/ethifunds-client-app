@@ -7,6 +7,7 @@ import * as React from "react";
 import { toast } from "sonner";
 import RealEstateInvestment from "../real-estate-investment";
 import useUi from "@/hooks/use-ui";
+import EthivestInvestment from "../ethivest-investment";
 
 export default function InvestmentCategories() {
   const [categoryIdx, setCategoryIdx] = React.useState(-1);
@@ -15,7 +16,7 @@ export default function InvestmentCategories() {
   const { changeBackBtn } = useUi({});
   const categoryId = String(params.categoryId ?? "");
 
-  const categories = [<RealEstateInvestment />];
+  const categories = [<RealEstateInvestment />, <EthivestInvestment />];
 
   const init = React.useCallback(async () => {
     try {

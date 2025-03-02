@@ -10,7 +10,7 @@ type EmptyDataProps = {
 };
 export default React.memo(function EmptyData(props: EmptyDataProps) {
   const container = classnames(
-    "w-full h-full flex  flex-col items-center justify-center",
+    "w-full h-full flex col-span-full flex-col items-center justify-center",
     props.className,
   );
   return (

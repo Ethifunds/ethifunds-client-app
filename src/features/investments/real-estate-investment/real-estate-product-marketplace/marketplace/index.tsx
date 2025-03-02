@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAppSelector } from "@/store/hooks";
 import { Link } from "react-router-dom";
 import EmptyData from "@/components/empty-data";
+import { amountSeparator } from "@/lib/amount-separator";
 
 export default function Marketplace() {
   useUi({ title: "REIT Marketplace" });
@@ -47,7 +48,7 @@ export default function Marketplace() {
 
                   <div className="flex items-center gap-3">
                     <h1 className="highlight-bold text-neutral-1000">
-                      {currency.sign} {item.asking_price_per_unit}{" "}
+                      {currency.sign} {amountSeparator(item.asking_price_per_unit)}{" "}
                     </h1>
                     <span className="highlight-accent text-primary">
                       Per Unit
@@ -65,7 +66,7 @@ export default function Marketplace() {
 
                   <div className="flex items-center gap-3">
                     <h1 className="highlight-bold text-neutral-1000">
-                      {item.units}
+                      {amountSeparator(item.units)}
                     </h1>
                     <span className="highlight-accent text-secondary">
                       Available Units

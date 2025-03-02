@@ -55,6 +55,7 @@ export default function ListCard(
     ui.changeDialog({
       show: true,
       type: "edit-investment-listing",
+      id: props.id.toString(),
       data: props,
     });
     queryParams.set("action", "edit_listing");

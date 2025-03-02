@@ -2,8 +2,8 @@ import useCustomNavigation from "@/hooks/use-navigation";
 import { amountSeparator } from "@/lib/amount-separator";
 import ensureError from "@/lib/ensure-error";
 import getProductDetails from "@/services/investments/get-product-details";
+import editListedInvestment from "@/services/my-investments/edit-listed-investment";
 import getMyInvestmentCategoryDetails from "@/services/my-investments/get-my-investment-category-details";
-import sellInvestmentUnits from "@/services/my-investments/sell-investment-units";
 import useActions from "@/store/actions";
 import { useAppSelector } from "@/store/hooks";
 import {
@@ -15,7 +15,6 @@ import { useQuery } from "react-query";
 import { toast } from "sonner";
 import { z } from "zod";
 
-
 const validation = z.object({
   product_id: z
     .number({ message: "product Id must be a number" })
@@ -23,10 +22,7 @@ const validation = z.object({
   units: z
     .number({ message: "units must be a number" })
     .positive("units must be positive"),
-  sale_option: z.enum(["marketplace", "ethifunds"], {
-    message: "Sale Option must be valid",
-  }),
-  asking_price: z
+  asking_price_per_unit: z
     .number({ message: "asking price must be a number" })
     .positive("Asking price must be a positive value"),
   pin: z.string().length(4, "Pin is required"),
@@ -42,8 +38,7 @@ export default function useEditListed() {
   const init: FormData = {
     product_id: "" as any,
     units: 0,
-    sale_option: "ethifunds",
-    asking_price: 0,
+    asking_price_per_unit: 0,
     pin: "",
   };
 
@@ -66,16 +61,10 @@ export default function useEditListed() {
     setFormData({
       product_id: data?.product_id ?? "",
       units: data?.units,
-      sale_option: data?.sale_option,
-      asking_price: Number(data?.asking_price_per_unit),
+      asking_price_per_unit: Number(data?.asking_price_per_unit),
       pin: "",
     });
-  }, [
-    data?.asking_price_per_unit,
-    data?.product_id,
-    data?.sale_option,
-    data?.units,
-  ]);
+  }, [data?.asking_price_per_unit, data?.product_id, data?.units]);
 
   const { isFetching, isError, error } = useQuery(
     ["listed-investment-category-details", categoryId],
@@ -128,7 +117,7 @@ export default function useEditListed() {
     const numTypeNames: (typeof name)[] = [
       "product_id",
       "units",
-      "asking_price",
+      "asking_price_per_unit",
     ];
     const value = typeof e === "string" ? e : e.target.value;
     setFormData((prev) => ({
@@ -140,8 +129,7 @@ export default function useEditListed() {
       setFormData({
         [name]: Number(value),
         units: 1,
-        sale_option: "" as FormData["sale_option"],
-        asking_price: 0,
+        asking_price_per_unit: 0,
         pin: "",
       });
     }
@@ -151,10 +139,6 @@ export default function useEditListed() {
     () => Number(productDetails?.unit_price) * formData.units,
     [formData.units, productDetails?.unit_price],
   );
-
-  const setSaleOption = (option: typeof formData.sale_option) => {
-    queryParams.set("sale_option", option);
-  };
 
   const toggleDrawer = (value: boolean) => {
     ui.changeDialog({
@@ -170,10 +154,10 @@ export default function useEditListed() {
       const formValues = validation.omit({ pin: true }).parse(payload);
 
       const data = {
-        asking_price: `${currency.sign} ${amountSeparator(formValues.asking_price)}`,
+        asking_price: `${currency.sign} ${amountSeparator(formValues.asking_price_per_unit)}`,
         number_of_units_to_sell: amountSeparator(formValues.units),
-        "value_of_the_unit(s)": `${amountSeparator(formValues.asking_price * formValues.units)}`,
-        sale_option: formValues.sale_option,
+        "value_of_the_unit(s)": `${amountSeparator(formValues.asking_price_per_unit * formValues.units)}`,
+        sale_option: dialog?.data?.sale_option,
       };
 
       ui.changeDialog({
@@ -193,20 +177,24 @@ export default function useEditListed() {
   };
 
   const submit = async (pin: string) => {
+    if (!dialog.id) {
+      toast.error("listing Id is required");
+      return;
+    }
     setIsLoading(true);
 
     const asking_price = Number(
-      formData.asking_price ? formData.asking_price : unitCosts,
+      formData.asking_price_per_unit
+        ? formData.asking_price_per_unit
+        : unitCosts,
     );
 
-    const saleOption = queryParams.get("sale_option") ?? "";
 
     const payload = {
       ...formData,
       product_id: Number(formData.product_id),
       pin,
       asking_price,
-      sale_option: saleOption as typeof formData.sale_option,
     };
 
     if (!pin) {
@@ -216,7 +204,10 @@ export default function useEditListed() {
     try {
       const formValues = validation.parse(payload);
 
-      await sellInvestmentUnits(formValues);
+      await editListedInvestment({
+        ...formValues,
+        listingId: Number(dialog.id),
+      });
 
       showSuccess();
     } catch (error) {
@@ -258,7 +249,6 @@ export default function useEditListed() {
     });
   };
 
-  console.log("init", init, formData, productDetails);
 
   return {
     isFetching,
@@ -270,9 +260,9 @@ export default function useEditListed() {
     isLoading,
     unitCosts,
     currency,
+    reset,
     updateForm,
     toggleDrawer,
-    setSaleOption,
     submit,
   };
 }

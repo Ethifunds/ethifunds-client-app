@@ -23,7 +23,6 @@ export default React.memo(function EditListedDialog() {
     currency,
     updateForm,
     toggleDrawer,
-    setSaleOption,
     submit,
   } = useEditListed();
 
@@ -41,22 +40,18 @@ export default React.memo(function EditListedDialog() {
               variant="primary"
               className="rounded-lg"
               onClick={() => {
-                setSaleOption("ethifunds");
                 submit("");
               }}
             >
-              Sell to Ethifunds
+              Update Listing
             </AppButton>
 
             <AppButton
               variant="outline"
               className="rounded-lg border-primary"
-              onClick={() => {
-                setSaleOption("marketplace");
-                submit("");
-              }}
+              onClick={() => toggleDrawer(false)}
             >
-              List to Marketplace
+              Cancel
             </AppButton>
           </div>
         )
@@ -128,10 +123,10 @@ export default React.memo(function EditListedDialog() {
 
                 <div className="space-y-2">
                   <Input
-                    name="asking_price"
+                    name="asking_price_per_unit"
                     label=" Add Asking Price"
-                    value={`${formData.asking_price}`}
-                    onChange={(e) => updateForm("asking_price", e)}
+                    value={`${formData.asking_price_per_unit}`}
+                    onChange={(e) => updateForm("asking_price_per_unit", e)}
                     disabled={isLoading}
                   />
                 </div>

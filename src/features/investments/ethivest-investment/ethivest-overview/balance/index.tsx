@@ -1,0 +1,67 @@
+import * as React from "react";
+import CurrencyPicker from "@/components/currency-picker";
+import { amountSeparator } from "@/lib/amount-separator";
+import classNames from "classnames";
+import useBalance from "./use-balance";
+import ErrorBoundary from "@/components/error-boundary";
+import Render from "@/components/render";
+
+export default React.memo(function AvailableBalance() {
+  const {
+    isFetching,
+    isError,
+    error,
+    currency,
+    sign,
+    balance,
+    changeCurrency,
+    fundWallet,
+    withdrawal,
+  } = useBalance();
+
+  const container = classNames(
+    "py-8 px-6 border rounded-lg shrink-0 lg:shrink w-full lg:w-1/2 min-h-48 lg:min-h-52",
+  );
+  return (
+    <ErrorBoundary>
+      <div className={container}>
+        <Render isLoading={isFetching} isError={isError} error={error}>
+          <div className="flex flex-col gap-6">
+            <div className="flex justify-between">
+              <div className="flex flex-col gap-5">
+                <h1 className="content-standard text-neutral-700">
+                  Investment Balance
+                </h1>
+                <h2 className="heading-4 uppercase">
+                  {sign} {amountSeparator(balance)}
+                </h2>
+              </div>
+
+              <div>
+                <CurrencyPicker
+                  currency={currency}
+                  setCurrency={changeCurrency}
+                />
+              </div>
+            </div>
+            <div className="flex grow justify-end gap-5">
+              <button
+                onClick={fundWallet}
+                className="button-primary !rounded-lg !py-2 text-white lg:w-1/3"
+              >
+                Fund Vault
+              </button>
+
+              <button
+                onClick={withdrawal}
+                className="button-outline !rounded-lg !border-primary !py-2 text-primary lg:w-1/3"
+              >
+                Withdraw
+              </button>
+            </div>
+          </div>
+        </Render>
+      </div>
+    </ErrorBoundary>
+  );
+});
