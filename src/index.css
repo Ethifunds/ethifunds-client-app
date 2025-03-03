@@ -156,7 +156,7 @@
 
   /*Button variants  */
   .button {
-    @apply cursor-pointer rounded px-3 py-3 text-center font-nunito font-medium transition-all duration-300 first-letter:uppercase hover:bg-opacity-50 disabled:cursor-default disabled:bg-opacity-50;
+    @apply cursor-pointer rounded px-3 py-3 text-center font-nunito font-medium transition-all duration-300 first-letter:uppercase active:text-opacity-50 active:bg-opacity-50 hover:lg:bg-opacity-50 disabled:cursor-default disabled:bg-opacity-50;
   }
 
   .button-default {

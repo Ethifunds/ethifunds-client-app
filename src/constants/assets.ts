@@ -53,6 +53,7 @@ import option_icon_01 from "@/assets/icons/option-icon-01.svg"
 import calendar_icon_01 from "@/assets/icons/calender-icon-01.svg"
 import arrow_left_01 from "@/assets/icons/arrow-left-01.svg" //black
 import copy_icon_01 from "@/assets/icons/copy-icon-01.svg"
+import copy_icon_02 from "@/assets/icons/copy-icon-02.svg"
 import bank_01 from "@/assets/icons/bank-01.svg"
 import bank_02 from "@/assets/icons/bank-02.svg"
 import cards_01 from "@/assets/icons/cards-01.svg"
@@ -67,6 +68,7 @@ import default_icon_01 from "@/assets/icons/default-icon-01.svg"
 import edit_01 from "@/assets/icons/edit-01.svg"
 import file_01 from "@/assets/icons/file-01.svg"
 import download_01 from "@/assets/icons/download-01.svg"
+import safe_lock_01 from "@/assets/icons/safe-lock-01.svg"
 
 
 export {
@@ -114,6 +116,7 @@ export {
     calendar_icon_01,
     arrow_left_01,
     copy_icon_01,
+    copy_icon_02,
     bank_01,
     bank_02,
     cards_01,
@@ -128,4 +131,5 @@ export {
     edit_01,
     file_01,
     download_01,
+    safe_lock_01,
 }

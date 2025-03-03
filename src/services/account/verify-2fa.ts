@@ -18,8 +18,8 @@ export async function development(): Promise<Response> {
 	});
 }
 
-export default async function twoFactoryVerify(data: Parameters): Promise<Response> {
-	if (variables.NODE_ENV === "development") return development();
+export default async function verify2fa(data: Parameters): Promise<Response> {
+  if (variables.NODE_ENV === "development") return development();
 
-	return production(data);
+  return production(data);
 }

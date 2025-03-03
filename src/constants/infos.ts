@@ -3,6 +3,7 @@ type TooltipInfo = {
   title: string;
   content: string;
 };
+
 export const tooltipInfo: Record<TooltipInfoKeys, TooltipInfo> = {
   asking_price: {
     title: "What’s the Asking Price",

@@ -3,6 +3,7 @@ import DefaultTab from "./default-tab";
 import TransactionPinTab from "./transaction-pin-tab/index.tsx";
 import SecurityQuestionsTab from "./security-questions-tab";
 import ChangePasswordTab from "./change-password-tab";
+import TwoFactoryAuthTab from "./two-factory-auth-tab";
 
 export default function SecurityTabs() {
   return (
@@ -11,6 +12,7 @@ export default function SecurityTabs() {
       <TransactionPinTab />
       <SecurityQuestionsTab />
       <ChangePasswordTab />
+      <TwoFactoryAuthTab />
     </React.Fragment>
   );
 }
