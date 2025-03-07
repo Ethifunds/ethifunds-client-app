@@ -69,6 +69,7 @@ import edit_01 from "@/assets/icons/edit-01.svg"
 import file_01 from "@/assets/icons/file-01.svg"
 import download_01 from "@/assets/icons/download-01.svg"
 import safe_lock_01 from "@/assets/icons/safe-lock-01.svg"
+import upload_icon_01 from "@/assets/icons/upload-icon-01.svg"
 
 
 export {
@@ -132,4 +133,5 @@ export {
     file_01,
     download_01,
     safe_lock_01,
+    upload_icon_01,
 }

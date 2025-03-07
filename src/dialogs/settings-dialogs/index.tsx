@@ -1,14 +1,16 @@
 import * as React from "react";
 import ProfileDialogs from "./profile-dialogs";
 import CardBankDialogs from "./card-bank-dialogs";
-import TwoFactoryAuthDialogs from "./two-factory-auth-dialogs";
+import DocumentsDialogs from "./documents-dialogs";
+import SecurityDialogs from "./security-dialogs";
 
 export default function SettingsDialogs() {
   return (
     <React.Fragment>
       <ProfileDialogs />
+      <SecurityDialogs />
       <CardBankDialogs />
-      <TwoFactoryAuthDialogs />
+      <DocumentsDialogs />
     </React.Fragment>
   );
 }

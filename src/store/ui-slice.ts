@@ -28,6 +28,7 @@ type DialogType =
   | "ethivest_product_preview"
   | "verify_bvn_success"
   | "verify_bvn_failed"
+  | "upload_documents"
   | "add_new_bank"
   | "remove_bank"
   | "add_new_card"
