@@ -37,11 +37,11 @@ export default function MarketplacePurchaseDialog() {
           open={open}
           direction="right"
           handleChange={toggleShow}
-          className="hide-scrollbar"
+          className="hide-scrollbar overflow-auto h-full"
         >
           <div className="flex h-full flex-col space-y-10 overflow-auto px-4 py-10">
             <h1 className="content-standard text-neutral-500">
-              Use the form below to buy units from other in this investment.
+              Use the form below to purchase units from from this seller.
             </h1>
 
             <Render isLoading={isFetching} isError={isError} error={error}>

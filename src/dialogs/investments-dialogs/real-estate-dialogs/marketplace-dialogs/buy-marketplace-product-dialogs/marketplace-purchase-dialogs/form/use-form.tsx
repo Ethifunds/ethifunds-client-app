@@ -78,6 +78,10 @@ export default function useForm(data: investmentMarketplaceProduct) {
   }, [data.asking_price_per_unit, formData.counter_price_per_unit]);
 
   const showPreview = () => {
+    if (formData.units > data.units) {
+      toast.error("Entered units exceeds the amount of available units");
+      return;
+    }
     const payload = {
       seller_username: data.seller_investment_info.user.username,
       interest_rate: `${data.product.expected_roi}%`,
@@ -100,6 +104,7 @@ export default function useForm(data: investmentMarketplaceProduct) {
     try {
       const formValues = validation.parse({
         ...formData,
+        units: Number(formData.units),
         counter_price_per_unit,
         pin,
       });

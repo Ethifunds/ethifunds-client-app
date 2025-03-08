@@ -1,12 +1,13 @@
 import * as React from "react";
 import useVaultWithdrawal from "./use-vault-withdrawal";
 import { Tabs } from "@/components/ui/tabs";
-import FundVaultTab from "./tabs/vault-withdrawal-tab";
+import VaultWithdrawalTab from "./tabs/vault-withdrawal-tab";
 import PreviewTab from "./tabs/preview-tab";
 import PinTab from "./tabs/pin-tab";
 import SuccessTab from "./tabs/success-tab";
 import InsufficientFundsTab from "./tabs/insufficient-funds-tab";
 import ErrorBoundary from "@/components/error-boundary";
+import { amountSeparator } from "@/lib/amount-separator";
 
 export default React.memo(function VaultWithdrawalDialog() {
 	const {
@@ -30,7 +31,7 @@ export default React.memo(function VaultWithdrawalDialog() {
 	return (
 		<ErrorBoundary>
 			<Tabs defaultValue="vault_withdrawal" value={activeTab}>
-				<FundVaultTab
+				<VaultWithdrawalTab
 					openDrawer={openDrawer}
 					sign={sign}
 					fromValue={formData}
@@ -59,7 +60,7 @@ export default React.memo(function VaultWithdrawalDialog() {
 					submit={submit}
 				/>
 
-				<SuccessTab open={activeTab === "success"} dismiss={close} />
+				<SuccessTab open={activeTab === "success"} dismiss={close} amount={`${sign} ${amountSeparator(formData.amount)}`} />
 				<InsufficientFundsTab
 					open={activeTab === "insufficient_funds"}
 					dismiss={close}

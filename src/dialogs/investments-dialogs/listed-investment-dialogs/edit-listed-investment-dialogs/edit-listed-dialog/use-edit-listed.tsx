@@ -1,9 +1,8 @@
 import useCustomNavigation from "@/hooks/use-navigation";
 import { amountSeparator } from "@/lib/amount-separator";
 import ensureError from "@/lib/ensure-error";
-import getProductDetails from "@/services/investments/get-product-details";
 import editListedInvestment from "@/services/my-investments/edit-listed-investment";
-import getMyInvestmentCategoryDetails from "@/services/my-investments/get-my-investment-category-details";
+import getMyActiveInvestments from "@/services/my-investments/get-my-active-investments";
 import useActions from "@/store/actions";
 import { useAppSelector } from "@/store/hooks";
 import {
@@ -33,7 +32,8 @@ type FormData = z.infer<typeof validation>;
 export default function useEditListed() {
   const { currency } = useAppSelector((state) => state.account);
   const { dialog } = useAppSelector((state) => state.ui);
-  const data = dialog?.data as MyInvestmentMarketplace;
+
+  const listedProductDetails = dialog?.data as MyInvestmentMarketplace;
 
   const init: FormData = {
     product_id: "" as any,
@@ -44,55 +44,62 @@ export default function useEditListed() {
 
   const [formData, setFormData] = React.useState(init);
   const [isLoading, setIsLoading] = React.useState(false);
-
-  const [productList, setProductList] = React.useState<
-    (ActiveInvestmentInvestments & { name: string; unit_price: string })[]
-  >([]);
+  const [activeInvestmentDetails, setActiveInvestmentDetails] =
+    React.useState<ActiveInvestmentInvestments | null>(null);
 
   const { queryParams } = useCustomNavigation();
   const { ui } = useActions();
 
-  const categoryId = React.useMemo(
-    () => data?.product?.product_category_id?.toString(),
-    [data?.product?.product_category_id],
-  );
-
-  React.useMemo(() => {
+  React.useEffect(() => {
     setFormData({
-      product_id: data?.product_id ?? "",
-      units: data?.units,
-      asking_price_per_unit: Number(data?.asking_price_per_unit),
+      product_id: listedProductDetails?.product_id ?? "",
+      units: listedProductDetails?.units,
+      asking_price_per_unit: Number(
+        listedProductDetails?.asking_price_per_unit,
+      ),
       pin: "",
     });
-  }, [data?.asking_price_per_unit, data?.product_id, data?.units]);
-
-  const { isFetching, isError, error } = useQuery(
-    ["listed-investment-category-details", categoryId],
-    () => getMyInvestmentCategoryDetails({ categoryId }),
-    {
-      onSuccess: async (data) => {
-        const getProductList = data.investments.map(async (item) => {
-          const res = await getProductDetails({ productId: item.product_id });
-
-          return {
-            name: res.name,
-            unit_price: res.unit_price,
-            ...item,
-          };
-        });
-
-        const list = await Promise.all(getProductList);
-
-        if (list.length) {
-          setProductList(list);
-        }
-      },
-    },
-  );
+  }, [
+    listedProductDetails?.asking_price_per_unit,
+    listedProductDetails?.product_id,
+    listedProductDetails?.units,
+  ]);
 
   const open = React.useMemo(() => {
     return dialog.show && dialog.type === "edit-investment-listing";
   }, [dialog.show, dialog.type]);
+
+// making a call to get product details.
+  const { isFetching, isError, error } = useQuery(
+    [
+      "active-investment-category-details",
+      listedProductDetails?.product_id,
+      open,
+    ],
+    () => getMyActiveInvestments({ currency: currency.code }),
+    {
+      onSuccess: async (response) => {
+        const match = response.find(
+          (item) =>
+            item.category.id ===
+            listedProductDetails?.product?.product_category_id,
+        );
+
+        console.log("match", match, "product_id", listedProductDetails?.product_id);
+
+        if (match) {
+          const product = match.investments.find(
+            (item) => item.product_id === listedProductDetails?.product_id,
+          );
+
+          console.log("product", product);
+          if (product) {
+            setActiveInvestmentDetails(product);
+          }
+        }
+      },
+    },
+  );
 
   const reset = () => {
     if (isLoading) return;
@@ -102,13 +109,7 @@ export default function useEditListed() {
     queryParams.delete("action");
   };
 
-  const productDetails = React.useMemo(() => {
-    if (!formData.product_id) return null;
-    return (
-      productList.find((item) => item.id === Number(formData.product_id)) ??
-      null
-    );
-  }, [formData.product_id, productList]);
+
 
   const updateForm = (
     name: keyof typeof formData,
@@ -135,16 +136,13 @@ export default function useEditListed() {
     }
   };
 
-  const unitCosts = React.useMemo(
-    () => Number(productDetails?.unit_price) * formData.units,
-    [formData.units, productDetails?.unit_price],
-  );
 
   const toggleDrawer = (value: boolean) => {
     ui.changeDialog({
       show: value,
       type: "",
       id: "",
+      data: null,
     });
     reset();
   };
@@ -156,7 +154,7 @@ export default function useEditListed() {
       const data = {
         asking_price: `${currency.sign} ${amountSeparator(formValues.asking_price_per_unit)}`,
         number_of_units_to_sell: amountSeparator(formValues.units),
-        "value_of_the_unit(s)": `${amountSeparator(formValues.asking_price_per_unit * formValues.units)}`,
+        value_of_the_units: `${amountSeparator(formValues.asking_price_per_unit * formValues.units)}`,
         sale_option: dialog?.data?.sale_option,
       };
 
@@ -186,9 +184,8 @@ export default function useEditListed() {
     const asking_price = Number(
       formData.asking_price_per_unit
         ? formData.asking_price_per_unit
-        : unitCosts,
+        : listedProductDetails.product.unit_price,
     );
-
 
     const payload = {
       ...formData,
@@ -249,16 +246,15 @@ export default function useEditListed() {
     });
   };
 
-
   return {
+    open,
     isFetching,
     isError,
     error,
-    open,
     formData,
-    productDetails,
+    activeInvestmentDetails,
+    listedProductDetails,
     isLoading,
-    unitCosts,
     currency,
     reset,
     updateForm,

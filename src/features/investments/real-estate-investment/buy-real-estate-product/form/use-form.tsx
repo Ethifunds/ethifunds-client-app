@@ -24,7 +24,7 @@ export default function useForm(data: FormProps & { refresh: refresh }) {
   const { params } = useCustomNavigation();
   const productId = Number(params.productId);
   const init: FormData = {
-    units: "" as any,
+    units: 10,
     pin: "",
     product_id: productId,
   };
@@ -70,6 +70,10 @@ export default function useForm(data: FormProps & { refresh: refresh }) {
   }, [formData.units, data.unit_price]);
 
   const proceed = () => {
+    if (formData.units > data.available_units) {
+      toast.error("Entered units exceeds the amount of available units");
+      return;
+    }
     ui.changeDialog({
       show: true,
       type: "enter_pin",

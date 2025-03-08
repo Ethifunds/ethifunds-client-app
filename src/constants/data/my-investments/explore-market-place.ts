@@ -58,7 +58,7 @@ export const exploreMarketplaceList: MyInvestmentMarketplace[] = [
 
   {
     id: 2,
-    product_id: 2,
+    product_id: 1,
     seller_product_id: 2,
     buyer_product_id: null,
     units: 5,
@@ -112,8 +112,8 @@ export const exploreMarketplaceList: MyInvestmentMarketplace[] = [
   },
   {
     id: 3,
-    product_id: 3,
-    seller_product_id: 3,
+    product_id: 1,
+    seller_product_id: 1,
     buyer_product_id: null,
     units: 5,
     final_price_per_unit: "0.00",

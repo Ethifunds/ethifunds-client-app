@@ -29,7 +29,7 @@ export default function ListCard(
   };
 
   const data = {
-    data: new Date(props.created_at).toLocaleDateString("en-us", {
+    date: new Date(props.created_at).toLocaleDateString("en-us", {
       dateStyle: "full",
     }),
     asking_price: `${props.sign} ${amountSeparator(props.asking_price_per_unit)}(per unit)`,

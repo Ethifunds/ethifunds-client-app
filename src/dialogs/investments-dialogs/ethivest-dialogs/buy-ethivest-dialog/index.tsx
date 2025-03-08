@@ -66,6 +66,7 @@ export default React.memo(function BuyEthivestDialog() {
           </div>
         )
       }
+      className="overflow-y-auto hideScrollbar"
     >
       <Tabs
         defaultValue={activeTab}

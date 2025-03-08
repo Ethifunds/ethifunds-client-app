@@ -37,7 +37,7 @@ type FormData = z.infer<typeof validation>;
 
 const init: FormData = {
   product_id: "" as any,
-  units: 1,
+  units: 10,
   sale_option: "" as FormData["sale_option"],
   asking_price: "" as any,
   pin: "",
@@ -171,13 +171,18 @@ export default function useSellUnits() {
   };
 
   const showPreview = async (payload: typeof formData) => {
+    if(!productDetails) return
     try {
+
       const formValues = validation.omit({ pin: true }).parse(payload);
+      if (formData.units > productDetails?.units_purchased) {
+        throw new Error("Entered units exceeds the amount of purchased units");
+    }
 
       const data = {
         asking_price: `${currency.sign} ${amountSeparator(formValues.asking_price)}`,
         number_of_units_to_sell: amountSeparator(formValues.units),
-        "value_of_the_unit(s)": `${amountSeparator(formValues.asking_price * formValues.units)}`,
+        value_of_the_units: `${amountSeparator(formValues.asking_price * formValues.units)}`,
         sale_option: formValues.sale_option,
       };
 
@@ -247,7 +252,7 @@ export default function useSellUnits() {
     const data = {
       title: "Congratulations!!!",
       subtitle:
-        "Your listing is live!!. Buyers can now view and purchase your investment.",
+        "You’ve successfully sold your REIT units to Ethifunds. If a counteroffer is made, you’ll be notified to review and accept or decline.",
     };
     ui.changeDialog({
       show: true,

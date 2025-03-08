@@ -15,11 +15,11 @@ export default React.memo(function EditListedDialog() {
     isFetching,
     isError,
     error,
+    listedProductDetails,
     open,
     formData,
-    productDetails,
+    activeInvestmentDetails,
     isLoading,
-    unitCosts,
     currency,
     updateForm,
     toggleDrawer,
@@ -67,12 +67,12 @@ export default React.memo(function EditListedDialog() {
           >
             <div className="h-full space-y-5">
               <React.Fragment>
-                {productDetails && (
+                {activeInvestmentDetails && (
                   <div className="flex items-center justify-between gap-10 rounded-lg bg-primary-100 px-10 py-3">
                     <div className="space-y-1 text-center text-neutral-1000">
                       <span className="content-standard">Available Units</span>
                       <h4 className="content-bold">
-                        {productDetails.units_purchased}
+                        {activeInvestmentDetails.units_purchased}
                       </h4>
                     </div>
                     <Separator
@@ -82,7 +82,8 @@ export default React.memo(function EditListedDialog() {
                     <div className="space-y-1 text-center text-neutral-1000">
                       <span className="content-standard">Current Rate</span>
                       <h4 className="content-bold">
-                        {currency.sign} {productDetails.unit_price}
+                        {currency.sign}{" "}
+                        {amountSeparator(listedProductDetails?.product?.unit_price)}
                       </h4>
                     </div>
                   </div>
@@ -116,7 +117,7 @@ export default React.memo(function EditListedDialog() {
                 </div>
 
                 <Input
-                  value={`${currency.sign} ${amountSeparator(unitCosts)} `}
+                  value={`${currency.sign} ${amountSeparator(Number(listedProductDetails?.product?.unit_price) * formData.units)} `}
                   disabled
                   readOnly
                 />
@@ -124,7 +125,7 @@ export default React.memo(function EditListedDialog() {
                 <div className="space-y-2">
                   <Input
                     name="asking_price_per_unit"
-                    label=" Add Asking Price"
+                    label={`Add Asking Price Per Unit (${currency.sign})`}
                     value={`${formData.asking_price_per_unit}`}
                     onChange={(e) => updateForm("asking_price_per_unit", e)}
                     disabled={isLoading}

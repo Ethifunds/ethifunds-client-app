@@ -61,6 +61,7 @@ export default function useBuyEthivest() {
   const reset = () => {
     if (isLoading) return;
     setFormData(init);
+    setActiveTab("product_details");
   };
 
   const updateForm = (
@@ -108,6 +109,11 @@ export default function useBuyEthivest() {
   const proceedToPayment = () => {
     if (!response) return;
 
+    if (formData.units > response?.total_units) {
+      toast.error("Entered units exceeds the amount of available units");
+      return;
+    }
+
     const purchasing_cost = Math.floor(
       Number(response.unit_price) * formData.units,
     );
@@ -145,7 +151,7 @@ export default function useBuyEthivest() {
 
   const submit = async (pin: string) => {
     if (!productId) {
-      toast.error("No Product id found");
+      toast.error("No Product details found");
       return;
     }
 
@@ -169,9 +175,9 @@ export default function useBuyEthivest() {
 
   function showSuccess() {
     const data = {
-      title: "Successful!!!",
+      title: "Investment Successful! ",
       subtitle:
-        "Your Investment subscription was successfully. Kindly check your email for your transfer details .",
+        "Your funds are now allocated to Real Estate Investment Trust. Track your returns in your portfolio.",
     };
 
     ui.changeDialog({

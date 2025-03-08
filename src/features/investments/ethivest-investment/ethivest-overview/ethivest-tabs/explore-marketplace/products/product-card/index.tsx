@@ -1,7 +1,7 @@
 import { InvestmentProduct } from "@/types/investments.types";
 
 import * as React from "react";
-import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import {  CardContent, CardTitle } from "@/components/ui/card";
 import { useAppSelector } from "@/store/hooks";
 import { amountSeparator } from "@/lib/amount-separator";
 import ProductImg from "./product-img";
@@ -25,7 +25,7 @@ export default function ProductCard(props: InvestmentProduct) {
   return (
     <React.Fragment>
       <div onClick={click}>
-        <Card className="cursor-pointer space-y-5 transition hover:shadow lg:space-y-0">
+        <div className="cursor-pointer space-y-5 rounded-lg border transition hover:shadow lg:space-y-0">
           <ProductImg
             name={props.name}
             section={props.section}
@@ -80,7 +80,7 @@ export default function ProductCard(props: InvestmentProduct) {
               )}
             </div>
           </CardContent>
-        </Card>
+        </div>
       </div>
     </React.Fragment>
   );

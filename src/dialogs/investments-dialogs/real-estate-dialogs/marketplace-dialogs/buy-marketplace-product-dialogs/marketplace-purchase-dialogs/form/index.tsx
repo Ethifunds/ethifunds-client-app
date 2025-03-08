@@ -14,10 +14,10 @@ export default function Form(props: FormProps) {
     props.data,
   );
 
-  console.log(props.data.units.toString().length);
+
 
   return (
-    <div className="flex h-full flex-1 flex-col gap-5">
+    <div className="flex h-full flex-1 flex-col gap-5 overflow-auto">
       <form className="flex flex-col gap-5">
         <Input
           name="seller_name"
@@ -62,10 +62,10 @@ export default function Form(props: FormProps) {
 
         <Input
           name="counter_price_per_unit"
-          label="Amount you are willing to trade each unit"
+          label={`Preferred Price Per Unit (${currency.sign})`}
           value={formData.counter_price_per_unit}
           containerStyle="[&_label]:text-neutral-700"
-          placeholder={`${Number(props.data.asking_price_per_unit) * formData.units}`}
+          placeholder={`${amountSeparator(Number(props.data.asking_price_per_unit) * formData.units)}`}
           onChange={(e) => updateForm("counter_price_per_unit", e)}
         />
       </form>

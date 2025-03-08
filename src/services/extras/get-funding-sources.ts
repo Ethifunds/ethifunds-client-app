@@ -25,7 +25,7 @@ export async function development(): Promise<Response> {
 					},
 					{
 						id: "user_wallet",
-						name: "Ethifund Savings Wallet",
+						name: "Ethifund Wallet",
 					},
 					{
 						id: "investment_vault",

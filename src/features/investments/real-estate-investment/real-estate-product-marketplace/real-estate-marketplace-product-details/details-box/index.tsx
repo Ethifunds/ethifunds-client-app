@@ -25,7 +25,7 @@ export default function DetailsBox(props: investmentMarketplaceProduct) {
           </span>
         </div>
         <div className="flex items-center">
-          Sellers Username:
+          Seller's Username:
           <span className="highlight-accent">
             {capitalize(props.seller_investment_info.user.username)}
           </span>
@@ -51,12 +51,12 @@ export default function DetailsBox(props: investmentMarketplaceProduct) {
           </div>
         </div>
       </div>
-      <div>
+      {/* <div>
         <p className="highlight-standard text-neutral-500">
           {props.product.description}
         </p>
-      </div>
-      <div className="flex flex-col gap-5 lg:flex-row lg:justify-between">
+      </div> */}
+      <div className="flex flex-col gap-5 lg:flex-row lg:justify-between lg:items-center">
         <h1 className="feature-bold flex items-center gap-3 text-neutral-1000">
           <span className="highlight-accent">Asking price</span>
           {currency.sign}
@@ -71,14 +71,7 @@ export default function DetailsBox(props: investmentMarketplaceProduct) {
           })}
         </h1>
       </div>
-      {/* TODO: work on the progress bar */}
-      {/* 
-      <ProductProgress
-        unit_price={props.unit_price}
-        units_sold={props.units_sold}
-        total_units={props.total_units}
-        sign={currency.sign}
-      /> */}
+  
     </div>
   );
 }

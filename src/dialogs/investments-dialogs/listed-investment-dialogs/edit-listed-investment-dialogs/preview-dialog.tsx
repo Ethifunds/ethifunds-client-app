@@ -33,7 +33,7 @@ export default React.memo(function PreviewDialog() {
     expected_earnings: (
       <strong>
         {currency.sign}{" "}
-        {amountSeparator(dialog.data["value_of_the_unit(s)"])}{" "}
+        {amountSeparator(dialog.data["value_of_the_units"])}{" "}
       </strong>
     ),
   };

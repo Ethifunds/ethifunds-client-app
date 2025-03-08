@@ -157,13 +157,14 @@ export default React.memo(function SellUnits() {
                         htmlFor="asking_price"
                         className="flex items-center gap-1"
                       >
-                        Add Asking Price
+                        Add Asking Price Per Unit ({currency.sign})
                         <AppTooltip
                           trigger={
                             <img src={assets.info_icon_02} alt="info icon" />
                           }
                           title={infos.tooltipInfo.asking_price.title}
                           content={infos.tooltipInfo.asking_price.content}
+                          contentClassNames="right-0"
                         />
                       </label>
 

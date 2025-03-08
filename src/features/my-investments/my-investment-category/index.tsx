@@ -30,7 +30,7 @@ export default function MyInvestmentCategory() {
   });
 
   return (
-    <AppContainer className="h-full space-y-5">
+    <AppContainer className="h-full space-y-5 ">
       <Render
         isLoading={isFetching}
         isError={isError}

@@ -46,57 +46,61 @@ export default React.memo(function WithdrawFunds(props: WithdrawFundsProps) {
 	}, [prependToList]);
 
 	return (
-		<ErrorBoundary>
-			<TabsContent value="withdraw_funds" className=" h-svh lg:h-screen">
-				<div className="flex flex-col px-5 mt-10 space-y-5 h-full overflow-auto">
-					<h1 className="content-standard text-neutral-500">
-						Kindly add amount and select the account you would like to withdraw funds to.
-					</h1>
+    <ErrorBoundary>
+      <TabsContent value="withdraw_funds" className="h-svh lg:h-screen">
+        <div className="mt-10 flex h-full flex-col space-y-5 overflow-auto px-5">
+          <h1 className="content-standard text-neutral-500">
+            Please enter the amount and select the bank account you wish to
+            withdraw funds to.
+          </h1>
 
-					<Input
-						label={`Amount (${currency.sign})`}
-						placeholder="Enter Amount"
-						inputMode="numeric"
-						onChange={(e) => setAmount(sanitizeNumInput(e.target.value,))}
-					/>
+          <Input
+            label={`Amount (${currency.sign})`}
+            placeholder="Enter Amount"
+            inputMode="numeric"
+            onChange={(e) => setAmount(sanitizeNumInput(e.target.value))}
+          />
 
-					<div className="flex flex-col gap-3">
-						<Render
-							isLoading={isFetching}
-							isError={isError}
-							error={error}
-							loadingBoxClass="!h-auto"
-						>
-							{bankAccounts.map((item) => (
-								<AccountCard
-									key={item.id}
-									{...item}
-									selected={selected?.id === item.id}
-									select={select}
-								/>
-							))}
-						</Render>
-						<button
-							onClick={changeTab}
-							className="flex items-center gap-5 py-4 px-5 text-primary rounded-lg bg-primary-100 "
-						>
-							<PlusCircle size={40} strokeWidth={1} />
-							<span>Add New Bank Account</span>
-						</button>
-					</div>
-					<div ref={submitRef} className="flex flex-col justify-end gap-10 grow pb-10">
-						<AppButton
-							onClick={submit}
-							isLoading={sending}
-							variant="primary"
-							className="highlight-accent w-full text-neutral-base_white"
-							disabled={sending}
-						>
-							Continue
-						</AppButton>
-					</div>
-				</div>
-			</TabsContent>
-		</ErrorBoundary>
-	);
+          <div className="flex flex-col gap-3">
+            <Render
+              isLoading={isFetching}
+              isError={isError}
+              error={error}
+              loadingBoxClass="!h-auto"
+            >
+              {bankAccounts.map((item) => (
+                <AccountCard
+                  key={item.id}
+                  {...item}
+                  selected={selected?.id === item.id}
+                  select={select}
+                />
+              ))}
+            </Render>
+            <button
+              onClick={changeTab}
+              className="flex items-center gap-5 rounded-lg bg-primary-100 px-5 py-4 text-primary"
+            >
+              <PlusCircle size={40} strokeWidth={1} />
+              <span>Add New Bank Account</span>
+            </button>
+          </div>
+          <div
+            ref={submitRef}
+            className="flex grow flex-col justify-end gap-10 pb-10"
+          >
+            <AppButton
+              onClick={submit}
+              isLoading={sending}
+              variant="primary"
+              className="highlight-accent w-full text-neutral-base_white"
+              disabled={sending}
+            >
+              Continue
+            </AppButton>
+          </div>
+        </div>
+      </TabsContent>
+    </ErrorBoundary>
+  );
 });
