@@ -2,21 +2,15 @@ import AppDrawer from "@/components/ui/app-drawer";
 import * as React from "react";
 import useUploadDocument from "./use-upload-document";
 import SelectBox from "@/components/select-box";
-import { documentUploadTypes, identityType } from "./data";
+import { documentUploadTypes } from "./data";
 import { Badge } from "@/components/ui/badge";
 import { assets } from "@/constants";
 import AppButton from "@/components/app-button";
+import { Input } from "@/components/ui/form-input";
 
 export default React.memo(function UploadDocumentDialog() {
-  const {
-    isLoading,
-    open,
-    uploadType,
-    formData,
-    changeUploadType,
-    updateForm,
-    toggleDrawer,
-  } = useUploadDocument();
+  const { isLoading, open, formData, updateForm, toggleDrawer, submit } =
+    useUploadDocument();
 
   return (
     <AppDrawer
@@ -32,24 +26,26 @@ export default React.memo(function UploadDocumentDialog() {
 
         <div className="flex flex-col gap-4">
           <SelectBox
-            value={uploadType}
+            value={formData.document_type}
             placeholder="Select Upload Type"
-            onchange={(e) => changeUploadType(e)}
+            onchange={(e) => updateForm("document_type", e)}
             options={documentUploadTypes}
             disabled={isLoading}
           />
 
-          {uploadType === "identity_card" && (
-            <SelectBox
-              value={formData.type}
-              placeholder="Select Identity type"
-              onchange={(e) => updateForm("type", e)}
-              options={identityType}
+          {formData.document_type === "id" && (
+            <Input
+              name="id_number"
+              // label="Identity Number"
+              placeholder="enter ID number(NIN, Passport No, license No)"
+              value={formData.id_number}
+              onChange={(e) => updateForm("id_number", e.target.value)}
+              className="placeholder:text-sm"
               disabled={isLoading}
             />
           )}
 
-          {uploadType && (
+          {formData.document_type && (
             <div className="flex justify-center rounded-lg border p-3">
               <label
                 htmlFor="upload-doc"
@@ -58,7 +54,9 @@ export default React.memo(function UploadDocumentDialog() {
                 <Badge className="size-10 rounded-full bg-neutral-100">
                   <img src={assets.upload_icon_01} alt="upload-icon" />
                 </Badge>
-                <span className="caption-accent">Click to Upload</span>
+                <span className="caption-accent">
+                  {formData?.document?.name ?? "Click to Upload"}
+                </span>
                 <span className="caption-standard text-neutral-500">
                   SVG, PNG, JPG (max. 800x400px)
                 </span>
@@ -68,7 +66,12 @@ export default React.memo(function UploadDocumentDialog() {
                 type="file"
                 name="upload-doc"
                 id="upload-doc"
+                accept=".png, .jpg, .jpeg, .pdf"
                 className="hidden"
+                onChange={(e) => {
+                  const file = e.target.files?.[0] || null;
+                  if (file) updateForm("document", file);
+                }}
                 disabled={isLoading}
               />
             </div>
@@ -76,7 +79,12 @@ export default React.memo(function UploadDocumentDialog() {
         </div>
 
         <div className="flex h-full grow items-end">
-          <AppButton variant="primary" className="w-full" isLoading={isLoading}>
+          <AppButton
+            variant="primary"
+            className="w-full"
+            isLoading={isLoading}
+            onClick={submit}
+          >
             Submit
           </AppButton>
         </div>

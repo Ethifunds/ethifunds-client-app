@@ -1,21 +1,11 @@
 export const documentUploadTypes = [
   {
     title: "Identity card",
-    value: "identity_card",
+    value: "id",
   },
   {
     title: "Utility",
-    value: "utility",
+    value: "proof_of_address",
   },
 ];
 
-export const identityType = [
-  {
-    title: "National Identity Card",
-    value: "identity_card",
-  },
-  {
-    title: "Drivers License",
-    value: "utility",
-  },
-];

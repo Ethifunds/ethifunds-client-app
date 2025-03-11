@@ -1,19 +1,31 @@
 import * as React from "react";
 import TabContainer from "../tab-container";
 import AppButton from "@/components/app-button";
-
 import { UploadIcon } from "lucide-react";
 import useActions from "@/store/actions";
+import useCustomNavigation from "@/hooks/use-navigation";
+import DocumentList from "./document-list";
 
 export default React.memo(function Documents() {
   const { ui } = useActions();
+  const { queryParams } = useCustomNavigation();
+  const hasAction = React.useMemo(
+    () => queryParams.has("action"),
+    [queryParams],
+  );
 
   const showUploadDialog = () => {
+    queryParams.set("action", "upload_document");
     ui.changeDialog({
       show: true,
       type: "upload_documents",
     });
   };
+
+  React.useLayoutEffect(() => {
+    queryParams.delete("action");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <TabContainer
@@ -30,8 +42,9 @@ export default React.memo(function Documents() {
           Upload Document
         </AppButton>
       }
+      className="space-y-5"
     >
-      upload document
+      <DocumentList hasAction={hasAction} openUpload={showUploadDialog} />
     </TabContainer>
   );
 });

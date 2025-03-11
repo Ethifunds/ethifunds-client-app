@@ -16,6 +16,9 @@ export default React.memo(function SuccessDialog() {
     if (dialog.action) {
       dialog.action();
     }
+    if (dialog.dismiss) {
+      dialog.dismiss();
+    }
     ui.resetDialog();
   };
 
