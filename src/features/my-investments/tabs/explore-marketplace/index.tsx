@@ -26,7 +26,7 @@ export default React.memo(function ExploreMarketPlace() {
         loadingBoxClass="col-span-full"
       >
         <ErrorBoundary>
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+          <div className="flex flex-col md:grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
             {data && data?.length < 1 ? (
               <EmptyData
                 className="col-span-full"
