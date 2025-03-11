@@ -4,7 +4,6 @@ import { useQuery } from "react-query";
 import exploreMarketplace from "@/services/my-investments/explore-marketplace";
 import EmptyData from "@/components/empty-data";
 import { Link } from "react-router-dom";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAppSelector } from "@/store/hooks";
 import ErrorBoundary from "@/components/error-boundary";
 import Render from "@/components/render";
@@ -13,7 +12,9 @@ export default React.memo(function ExploreMarketPlace() {
   const { currency } = useAppSelector((state) => state.account);
   const { isFetching, isError, error, data } = useQuery(
     ["explore-marketplace"],
-    () => exploreMarketplace(),
+    () => exploreMarketplace(), {
+      refetchOnMount:false
+    }
   );
 
   return (
@@ -37,8 +38,8 @@ export default React.memo(function ExploreMarketPlace() {
                   key={item.id}
                   to={`/investments/${item.product.product_category_id}/products/${item.product_id}/marketplace/${item.id}`}
                 >
-                  <Card className="cursor-pointer space-y-5 transition hover:shadow lg:space-y-0">
-                    <CardHeader className="p-0">
+                  <div className="cursor-pointer space-y-5 rounded-lg border border-neutral-200 bg-white text-stone-950 shadow-sm transition hover:lg:shadow lg:space-y-0">
+                    
                       <div className="max-h-56">
                         <img
                           src={item.product.display_image}
@@ -46,16 +47,15 @@ export default React.memo(function ExploreMarketPlace() {
                           className="size-full object-cover"
                         />
                       </div>
-                    </CardHeader>
-                    <CardContent className="space-y-3 px-2 py-4">
-                      <CardTitle className="md:h-16">
+                    <div className="space-y-3 px-2 py-4">
+                      <div className="md:h-16">
                         <h1 className="highlight-bold line-clamp-2">
                           {item.product.name}
                         </h1>
                         <span className="highlight-accent line-clamp-1 text-neutral-500">
                           {item.product.custodian?.name}
                         </span>
-                      </CardTitle>
+                      </div>
 
                       <div className="flex items-center gap-3">
                         <h1 className="highlight-bold text-neutral-1000">
@@ -83,8 +83,8 @@ export default React.memo(function ExploreMarketPlace() {
                           Available Units
                         </span>
                       </div>
-                    </CardContent>
-                  </Card>
+                    </div>
+                  </div>
                 </Link>
               ))
             )}
