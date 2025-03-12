@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { assets } from "@/constants";
 import MakeDefault from "./make-default";
-import DeleteAccount from "./delete-account";
+import DeleteCard from "./delete-card";
 
 export default function Actions(props: { id: number }) {
   return (
@@ -23,7 +23,7 @@ export default function Actions(props: { id: number }) {
           <MakeDefault id={props.id} />
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <DeleteAccount id={props.id} />
+          <DeleteCard id={props.id} />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

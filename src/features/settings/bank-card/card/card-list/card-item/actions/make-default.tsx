@@ -1,13 +1,13 @@
 import { assets } from "@/constants";
 import ensureError from "@/lib/ensure-error";
-import setDefaultBankAccount from "@/services/settings/bank/set-default-bank";
+import setDefaultCard from "@/services/settings/card/set-default-card";
 import { toast } from "sonner";
 
 export default function MakeDefault(props: { id: number }) {
   const click = async () => {
     try {
-      await setDefaultBankAccount({ user_bank_account_id: props.id });
-      toast.success("Account set as default");
+      await setDefaultCard({ user_saved_card_id: props.id });
+      toast.success("Card set as default");
     } catch (err) {
       const errMsg = ensureError(err).message;
       toast.error(errMsg);

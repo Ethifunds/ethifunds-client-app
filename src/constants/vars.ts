@@ -41,6 +41,27 @@ const CONTACTS = {
   support_email: "support@ethifunds.com",
 };
 
+
+const PAYSTACK_SECRET_KEY = import.meta.env.VITE_PAYSTACK_SECRET_KEY || "";
+const PAYSTACK_PUBLIC_KEY = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY || "";
+
+const PAYSTACK = {
+  secret_key: PAYSTACK_SECRET_KEY,
+  public_key: PAYSTACK_PUBLIC_KEY,
+  charge_amount: 1000,
+};
+
 const INACTIVE_LIMIT = 5;
 
-export { NODE_ENV, ACTIVE, BASE_URL, SERVER, SOCKET, SOCKET_URL, INACTIVE_LIMIT, STORAGE, CONTACTS };
+export {
+  NODE_ENV,
+  ACTIVE,
+  BASE_URL,
+  SERVER,
+  SOCKET,
+  SOCKET_URL,
+  INACTIVE_LIMIT,
+  STORAGE,
+  CONTACTS,
+  PAYSTACK,
+};
