@@ -13,7 +13,7 @@ import { z } from "zod";
 const validate = z.object({
 	email: z.string().trim().toLowerCase().email().optional(),
 	username: z.string().trim().min(3, "username must be at least 3 characters long").optional(),
-	password: z.string().trim().min(8, "password is required"),
+	password: z.string().trim().min(1, "Password is required"),
 });
 
 type FormData = z.infer<typeof validate>;
