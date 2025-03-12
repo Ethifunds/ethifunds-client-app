@@ -15,12 +15,19 @@ const validation = z.object({
     .string()
     .min(8, "Id number must be at least 8 characters long")
     .optional(),
+  address: z
+    .string()
+    .trim()
+    .min(5, "Address must be at least 5 characters ")
+    .optional(),
 });
 type FormData = z.infer<typeof validation>;
 
 const init: FormData = {
   document_type: "" as FormData["document_type"],
   document: {} as File,
+  id_number: "",
+  address: "",
 };
 export default function useUploadDocument() {
   const { dialog } = useAppSelector((state) => state.ui);
@@ -46,7 +53,7 @@ export default function useUploadDocument() {
     setFormData(init);
     queryParams.delete("action");
   };
-  
+
   const toggleDrawer = (value: boolean) => {
     ui.changeDialog({
       show: value,
@@ -70,6 +77,9 @@ export default function useUploadDocument() {
       formDataToSend.append("document", formValues.document);
       if (formValues.id_number) {
         formDataToSend.append("id_number", formValues.id_number);
+      }
+      if (formValues.address) {
+        formDataToSend.append("address", formValues.address);
       }
       await uploadUserDocument(formDataToSend);
 

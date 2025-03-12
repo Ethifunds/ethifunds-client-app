@@ -12,8 +12,8 @@ type Parameters = {
 	date_of_birth: string;
 	gender: string;
 	// address?: string;
-	occupation: string;
-	income_level?: string;
+	// occupation: string;
+	// income_level?: string;
 };
 
 type Response = User;

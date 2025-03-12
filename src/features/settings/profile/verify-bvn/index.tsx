@@ -27,96 +27,106 @@ export default function VerifyBvn() {
 	const [errorMsg, setErrorMsg] = React.useState("");
 	const { ui } = useActions();
 
-	const reset = () => {
-		setFormData(init);
-		setErrorMsg("");
-	};
 
-	const updateForm = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const { name, value } = e.target;
-		if (errorMsg) {
-			setErrorMsg("");
-		}
+	const hasVerifiedBvn = React.useMemo(
+    () => account.user_verifications.has_verified_bvn,
+    [account.user_verifications.has_verified_bvn],
+  );
 
-		setFormData((prev) => ({
-			...prev,
-			[name]: value,
-		}));
-	};
+  const reset = () => {
+    setFormData(init);
+    setErrorMsg("");
+  };
 
-	const submit = async () => {
-		setErrorMsg("");
-		setIsLoading(true);
-		try {
-			const formValues = validation.parse(formData);
+  const updateForm = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    if (errorMsg) {
+      setErrorMsg("");
+    }
 
-			await verifyBvn({ ...formValues, bvn: Number(formValues.bvn) });
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
-			ui.changeDialog({
-				show: true,
-				type: "verify_bvn_success",
-			});
-			accountActions.updateAccount({
-				...account,
-				user_verifications: {
-					...account.user_verifications,
-					has_verified_bvn: true,
-				},
-			});
-			reset();
-		} catch (e) {
-			const errMsg = ensureError(e).message;
-			setErrorMsg(errMsg);
-			toast.error(errMsg);
-			ui.changeDialog({
-				show: true,
-				type: "verify_bvn_failed",
-			});
-		} finally {
-			setIsLoading(false);
-		}
-	};
-	return (
-		<TabsContent
-			value="verify_bvn"
-			className="rounded-lg border lg:w-1/2 px-3 py-5 lg:p-8 space-y-8 lg:mt-8"
-		>
-			<h1 className="content-standard text-neutral-1000">Kindly Verify your BVN Details</h1>
-			<div className="space-y-5">
-				<Input
-					name="bvn"
-					label="BVN"
-					placeholder="enter BVN"
-					value={formData.bvn}
-					onChange={updateForm}
-					invalid={errorMsg.length > 0}
-					required
-					disabled={isLoading}
-				/>
+  const submit = async () => {
+    setErrorMsg("");
+    setIsLoading(true);
+    try {
+      const formValues = validation.parse(formData);
 
-				<div className="flex items-start gap-3 px-3">
-					<img src={assets.info_icon_02} alt="info-icon" />
-					<p className="content-standard text-neutral-500">
-						We require your BVN to verify your identity securely and ensure compliance with CBN
-						financial regulations. This helps us keep your account safe and provide you with
-						seamless access to all Ethifund services.
-					</p>
-				</div>
-				<div className="bg-[#F1F3FF] p-3 rounded-md">
-					<small className="text-neutral-1000 caption-standard">
-						Your BVN does not give us access to your bank account, transactions or any other
-						information.
-					</small>
-				</div>
-			</div>
-			<AppButton
-				isLoading={isLoading}
-				onClick={submit}
-				variant="primary"
-				className="w-full text-white"
-			>
-				Verify
-			</AppButton>
-		</TabsContent>
-	);
+      await verifyBvn({ ...formValues, bvn: Number(formValues.bvn) });
+
+      ui.changeDialog({
+        show: true,
+        type: "verify_bvn_success",
+      });
+      accountActions.updateAccount({
+        ...account,
+        user_verifications: {
+          ...account.user_verifications,
+          has_verified_bvn: true,
+        },
+      });
+      reset();
+    } catch (e) {
+      const errMsg = ensureError(e).message;
+      setErrorMsg(errMsg);
+      toast.error(errMsg);
+      ui.changeDialog({
+        show: true,
+        type: "verify_bvn_failed",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  return (
+    <TabsContent
+      value="verify_bvn"
+      className="space-y-8 rounded-lg border px-3 py-5 lg:mt-8 lg:w-1/2 lg:p-8"
+    >
+      <h1 className="content-standard text-neutral-1000">
+        Kindly Verify your BVN Details
+      </h1>
+      <div className="space-y-5">
+        <Input
+          name="bvn"
+          label="BVN"
+          placeholder="enter BVN"
+          value={formData.bvn}
+          onChange={updateForm}
+          invalid={errorMsg.length > 0}
+          required
+          disabled={isLoading}
+        />
+
+        <div className="flex items-start gap-3 px-3">
+          <img src={assets.info_icon_02} alt="info-icon" />
+          <p className="content-standard text-neutral-500">
+            We require your BVN to verify your identity securely and ensure
+            compliance with CBN financial regulations. This helps us keep your
+            account safe and provide you with seamless access to all Ethifund
+            services.
+          </p>
+        </div>
+        <div className="rounded-md bg-[#F1F3FF] p-3">
+          <small className="caption-standard text-neutral-1000">
+            Your BVN does not give us access to your bank account, transactions
+            or any other information.
+          </small>
+        </div>
+      </div>
+      <AppButton
+        isLoading={isLoading}
+        onClick={submit}
+        variant={hasVerifiedBvn ? "mute" : "primary"}
+        className="w-full text-white"
+        disabled={hasVerifiedBvn}
+      >
+        {hasVerifiedBvn ? "Verified" : "Verify"}
+      </AppButton>
+    </TabsContent>
+  );
 }

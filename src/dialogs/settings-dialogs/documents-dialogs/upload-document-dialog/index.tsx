@@ -45,6 +45,23 @@ export default React.memo(function UploadDocumentDialog() {
             />
           )}
 
+          {formData.document_type === "proof_of_address" && (
+            <div>
+              <label htmlFor="proof_of_address" className="inline-flex gap-1 items-center">
+                <span className="caption-accent"> Residential Address </span>
+                <small className="cation-standard">(must match with address in bill)</small>
+              </label>
+              <Input
+                name="proof_of_address"
+                placeholder="Enter Residential Address"
+                value={formData.address}
+                onChange={(e) => updateForm("address", e.target.value)}
+                className="placeholder:text-sm"
+                disabled={isLoading}
+              />
+            </div>
+          )}
+
           {formData.document_type && (
             <div className="flex justify-center rounded-lg border p-3">
               <label
