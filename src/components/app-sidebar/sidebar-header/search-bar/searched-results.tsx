@@ -2,7 +2,7 @@ import * as React from "react";
 import { FeatureList } from "./data";
 import classNames from "classnames";
 import { Badge } from "@/components/ui/badge";
-import { File, FileSearch, SearchCheckIcon, SearchCode } from "lucide-react";
+import { FileSearch } from "lucide-react";
 import ErrorBoundary from "@/components/error-boundary";
 
 type ResultProps = {
