@@ -40,4 +40,24 @@ export type SavingsCycle = {
   updated_at: string;
 };
 
+export type SavingsTransactionType = "credit" | "debit" | "transfer";
+
+export type SavingsTransactionStatus = "success" | "failed" | "pending";
+
+export type SavingsTransaction = {
+  id: number;
+  account_id: string;
+  transaction_type: SavingsTransactionType;
+  transaction_reference: string;
+  description: string;
+  amount: string;
+  status: SavingsTransactionStatus;
+  account_balance_before: string;
+  account_balance_after: string;
+  transaction_date: string;
+  remark: string | null;
+  fee: string;
+  created_at: string;
+  updated_at: string;
+};
 
