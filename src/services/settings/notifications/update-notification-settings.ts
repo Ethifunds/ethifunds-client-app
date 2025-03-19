@@ -1,6 +1,6 @@
 import { variables } from "@/constants";
 import axios from "@/lib/axios";
-import { NotificationSettings } from "@/types/notifications.types";
+import { NotificationSettings } from "@/types/notifications-settings.types";
 
 type Parameters = Pick<
   NotificationSettings,
