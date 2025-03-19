@@ -1,5 +1,4 @@
 import NotFound from "@/components/prompts/not-found";
-import UnderConstruction from "@/components/prompts/under-construction";
 import InvestmentVault from "@/features/investments/investment-vault";
 import HomePage from "@/pages/home";
 import InvestmentsPage from "@/pages/investments";
@@ -13,6 +12,9 @@ import InvestmentVaultTransactionsPage from "@/pages/investments/investment-vaul
 import MyInvestmentsPage from "@/pages/my-investments";
 import MyInvestmentCategoryPage from "@/pages/my-investments/my-investment-category"
 import MyInvestmentTransactionPage from "@/pages/my-investments/transactions";
+import SavingsPage from "@/pages/savings"
+import SavingsOverviewPage from "@/pages/savings/savings-overview"
+import SavingsTransactionsPage from "@/pages/savings/savings-transactions";
 import SettingsPage from "@/pages/settings";
 import SupportPage from "@/pages/support";
 import FaqPage from "@/pages/support/faq";
@@ -32,10 +34,11 @@ const dashboardRoutes: CustomRouteProps[] = [
 	{path: "/my-investments/:categoryId/transactions", Component: MyInvestmentTransactionPage},
 
 
-	{ path: "/savings", Component: UnderConstruction },
+	{ path: "/savings", Component: SavingsPage },
+	{ path: "/savings/overview", Component: SavingsOverviewPage },
+	{path:"/savings/transactions", Component:SavingsTransactionsPage},
 
 	{ path: "/investments", Component: InvestmentsPage },
-
 	{ path: "/investments/vault", Component: InvestmentVault },
 	{ path: "/investments/vault/overview", Component: InvestmentVaultOverviewPage },
 	{ path: "/investments/vault/transactions", Component: InvestmentVaultTransactionsPage },
@@ -46,15 +49,11 @@ const dashboardRoutes: CustomRouteProps[] = [
 	{ path: "/investments/:categoryId/products/:productId/marketplace", Component: InvestmentMarketplacePage },
 	{path: "/investments/:categoryId/products/:productId/marketplace/:listingId", Component: InvestmentMarketplaceProductDetailsPage},
 
-	{ path: "/investments/savings", Component: UnderConstruction },
-	{ path: "/investments/savings/:id", Component: UnderConstruction },
-	{ path: "/investments/savings/:id/buy", Component: UnderConstruction },
-
 	{ path: "/support", Component: SupportPage },
 	{ path: "/support/faq", Component: FaqPage },
 
 	{ path: "/settings", Component: SettingsPage },
-	{ path: "/notifications", Component: UnderConstruction },
+	
 	{ path: "*", Component: NotFound },
 ];
 

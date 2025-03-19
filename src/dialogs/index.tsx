@@ -6,14 +6,18 @@ import PinDialogs from "./pin-dialogs";
 import InvestmentsDialogs from "./investments-dialogs";
 import InsufficientFundDialog from "./insufficient-fund-dialog";
 import SuccessDialog from "./success-dialog";
+// import NotificationDialogs from "./notification-dialogs";
+import SavingsDialogs from "./savings-dialogs";
 
 export default function Dialogs() {
   return (
     <React.Fragment>
+      {/* <NotificationDialogs /> */}
       <TransactionDetailsDialog />
       <PinDialogs />
       <WalletDialog />
       <InvestmentsDialogs />
+      <SavingsDialogs />
       <SettingsDialogs />
       <InsufficientFundDialog />
       <SuccessDialog />
