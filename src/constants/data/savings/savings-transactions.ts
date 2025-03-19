@@ -1,0 +1,36 @@
+import { SavingsTransaction } from "@/types/savings.types";
+
+export const savingsTransactions: SavingsTransaction[] = [
+  {
+    id: 6,
+    account_id: "9",
+    transaction_type: "credit",
+    transaction_reference: "trx_67D55A4E27AE6379",
+    description: "Ethicoop contribution",
+    amount: "2000.00",
+    status: "success",
+    account_balance_before: "110000.00",
+    account_balance_after: "112000.00",
+    transaction_date: "2025-03-15T10:45:34.000000Z",
+    remark: null,
+    fee: "0.00",
+    created_at: "2025-03-15T10:45:34.000000Z",
+    updated_at: "2025-03-15T10:45:34.000000Z",
+  },
+  {
+    id: 4,
+    account_id: "9",
+    transaction_type: "credit",
+    transaction_reference: "trx_67D557A5EEE6E571",
+    description: "Ethicoop contribution",
+    amount: "10000.00",
+    status: "success",
+    account_balance_before: "100000.00",
+    account_balance_after: "110000.00",
+    transaction_date: "2025-03-15T10:34:13.000000Z",
+    remark: null,
+    fee: "0.00",
+    created_at: "2025-03-15T10:34:13.000000Z",
+    updated_at: "2025-03-15T10:34:13.000000Z",
+  },
+];

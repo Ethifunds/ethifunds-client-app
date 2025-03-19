@@ -10,10 +10,10 @@ export default function ViewDetails(props: ViewDetailsProps) {
 
 	const toggleShow = () => {
 		ui.changeDialog({
-			id: props.id,
-			show: true,
-			type: "transaction_details",
-		});
+      id: props.id,
+      show: true,
+      type: "savings_transaction_details",
+    });
 	};
 
 	return (
