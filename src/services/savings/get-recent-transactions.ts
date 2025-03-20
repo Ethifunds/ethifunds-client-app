@@ -13,7 +13,7 @@ type Response = SavingsTransaction[];
 export async function production(data: Parameters): Promise<Response> {
   const query_string = buildQueryString(data);
   const response = await axios.get(
-    `/account/recent-transactions?${query_string}`,
+    `/ethicoop/transactions/?filter=recent&${query_string}`,
   );
   return response.data.data;
 }

@@ -1,5 +1,5 @@
 export const amountSeparator = (num: string | number, separator = ",") => {
-  if (!num) return num;
+  if (!num) return num as string;
 
   // Split the number into integer and decimal parts
   const [integerPart, decimalPart] = num.toString().split(".");

@@ -10,7 +10,7 @@ type Parameters = {
 type Response = SavingsTransaction;
 
 export async function production({ id }: Parameters): Promise<Response> {
-  const response = await axios.get(`/account/recent-transactions/${id}`);
+  const response = await axios.get(`/ethicoop/transactions/${id}`);
   return response.data.data;
 }
 

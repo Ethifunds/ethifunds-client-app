@@ -14,9 +14,7 @@ type Response = PaginatedResponse<SavingsTransaction>;
 
 export async function production(data: Parameters): Promise<Response> {
   const query_string = buildQueryString(data);
-  const response = await axios.get(
-    `/account/recent-transactions?${query_string}`,
-  );
+  const response = await axios.get(`/ethicoop/transactions?${query_string}`);
   return paginate(response.data.data);
 }
 

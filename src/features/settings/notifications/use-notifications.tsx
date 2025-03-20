@@ -2,7 +2,7 @@ import useCustomNavigation from "@/hooks/use-navigation";
 import ensureError from "@/lib/ensure-error";
 import getNotificationSettings from "@/services/settings/notifications/get-notification-settings";
 import updateNotificationSettings from "@/services/settings/notifications/update-notification-settings";
-import { NotificationSettingsSection } from "@/types/notifications.types";
+import { NotificationSettingsSection } from "@/types/notifications-settings.types";
 import * as React from "react";
 import { useQuery } from "react-query";
 import { toast } from "sonner";

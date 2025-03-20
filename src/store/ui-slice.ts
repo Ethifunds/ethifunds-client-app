@@ -26,6 +26,8 @@ type DialogType =
   | "ethivest_product_details"
   | "buy_ethivest_product"
   | "ethivest_product_preview"
+  | "savings_preference"
+  | "savings_transaction_details"
   | "verify_bvn_success"
   | "verify_bvn_failed"
   | "upload_documents"

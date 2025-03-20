@@ -1,4 +1,3 @@
-import getTransactionDetails from "@/services/wallet/get-transaction-details";
 import { useAppSelector } from "@/store/hooks";
 import * as React from "react";
 import { useQuery } from "react-query";
