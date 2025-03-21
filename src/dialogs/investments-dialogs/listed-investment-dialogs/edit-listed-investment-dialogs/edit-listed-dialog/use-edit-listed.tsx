@@ -175,11 +175,19 @@ export default function useEditListed() {
   };
 
   const submit = async (pin: string) => {
-    if (!dialog.id) {
+    if (!dialog.id || !activeInvestmentDetails) {
       toast.error("listing Id is required");
       return;
     }
+
+    if (formData.units > activeInvestmentDetails?.units_purchased) {
+      toast.error("Entered units exceeds the amount of purchased units");
+      return;
+    }
+
+    
     setIsLoading(true);
+
 
     const asking_price = Number(
       formData.asking_price_per_unit
@@ -236,6 +244,7 @@ export default function useEditListed() {
       type: "success_dialog",
       data,
       action: reset,
+      dismiss: reset,
     });
   };
 

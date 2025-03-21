@@ -19,7 +19,7 @@ export default function SavingsTerms() {
     setIsSettingUp(true);
     try {
       await setupVault({ currency: currency.code });
-      navigate("/investments/vault/overview", { replace: true });
+      navigate("/savings/overview", { replace: true });
     } catch (error) {
       const err = ensureError(error);
       toast.error(err.message);
