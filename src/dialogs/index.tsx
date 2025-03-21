@@ -8,6 +8,7 @@ import InsufficientFundDialog from "./insufficient-fund-dialog";
 import SuccessDialog from "./success-dialog";
 import NotificationDialogs from "./notification-dialogs";
 import SavingsDialogs from "./savings-dialogs";
+import LogoutDialog from "./logout.-dialog";
 
 export default function Dialogs() {
   return (
@@ -21,6 +22,7 @@ export default function Dialogs() {
       <SettingsDialogs />
       <InsufficientFundDialog />
       <SuccessDialog />
+      <LogoutDialog/>
     </React.Fragment>
   );
 }

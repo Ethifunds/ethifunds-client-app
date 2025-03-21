@@ -35,7 +35,8 @@ type DialogType =
   | "remove_bank"
   | "add_new_card"
   | "remove_card"
-  | "show_2fa_qr_code";
+  | "show_2fa_qr_code"
+  | "logout";
 
 export type DialogPayload = {
   id: string;
