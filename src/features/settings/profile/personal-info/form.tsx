@@ -41,6 +41,7 @@ export default function Form() {
             onChange={(e) =>
               updateForm(item.name as keyof typeof formData, e.target.value)
             }
+            className="read-only:bg-neutral-100"
             value={capitalize(formData[item.name])}
             disabled={!edit || isLoading}
             invalid={errorMsg.length > 0}
@@ -52,7 +53,7 @@ export default function Form() {
         {edit ? (
           <React.Fragment>
             <AppButton variant="mute" onClick={reset} disabled={isLoading}>
-              Reset
+              Cancel
             </AppButton>
             <AppButton
               variant="primary"
