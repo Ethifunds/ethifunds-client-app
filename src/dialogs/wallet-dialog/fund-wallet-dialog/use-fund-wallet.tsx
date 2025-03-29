@@ -16,15 +16,20 @@ export default function useFundWallet() {
 
 	const copiedRef = React.useRef<HTMLDivElement>(null);
 
-	const query = useQuery(["account-wallets", code], () => getAccountWallets({ currency: code }));
+	const open = React.useMemo(() => {
+    return dialog.show && dialog.type === "fund_wallet";
+  }, [dialog.show, dialog.type]);
+
+  const query = useQuery(
+    ["account-wallets", code],
+    () => getAccountWallets({ currency: code }),
+    { enabled: open },
+  );
 
 	const toggleShow = (val: boolean) => {
 		ui.changeDialog({ show: val, type: "", id: "" });
 	};
 
-	const open = React.useMemo(() => {
-		return dialog.show && dialog.type === "fund_wallet";
-	}, [dialog.show, dialog.type]);
 
 	React.useMemo(() => {
 		if (!copied) return;

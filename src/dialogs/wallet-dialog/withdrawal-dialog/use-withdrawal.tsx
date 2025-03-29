@@ -5,35 +5,35 @@ import * as React from "react";
 
 export type ChangeTab = (tab: string, closeDrawer?: boolean) => void;
 export default function useWithdrawal() {
-	const { dialog } = useAppSelector((state) => state.ui);
-	const [activeTab, setActiveTab] = React.useState("withdraw_funds"); //withdraw_funds | add_account
-	const { queryParams } = useCustomNavigation();
-	const { ui } = useActions();
+  const { dialog } = useAppSelector((state) => state.ui);
+  const [activeTab, setActiveTab] = React.useState("withdraw_funds"); //withdraw_funds | add_account
+  const { queryParams } = useCustomNavigation();
+  const { ui } = useActions();
 
-	const toggleShow = (val: boolean) => {
-		ui.changeDialog({ show: val, type: "", id: "" });
-		changeTab("withdraw_funds");
-	};
+  const open = React.useMemo(() => {
+    return dialog.show && dialog.type === "withdrawal";
+  }, [dialog.show, dialog.type]);
 
-	const changeTab = (tab: typeof activeTab, closeDrawer = false) => {
-		setActiveTab(tab);
-		if (closeDrawer) {
-			toggleShow(false);
-		}
+  const toggleShow = (val: boolean) => {
+    ui.changeDialog({ show: val, type: "", id: "" });
+    changeTab("withdraw_funds");
+  };
 
-		if (tab === "add_account") {
+  const changeTab = (tab: typeof activeTab, closeDrawer = false) => {
+    setActiveTab(tab);
+    if (closeDrawer) {
+      toggleShow(false);
+    }
+
+    if (tab === "add_account") {
       queryParams.set("tab", "add_account");
     }
-	};
+  };
 
-	const open = React.useMemo(() => {
-		return dialog.show && dialog.type === "withdrawal";
-	}, [dialog.show, dialog.type]);
-
-	return {
-		open,
-		activeTab,
-		changeTab,
-		toggleShow,
-	};
+  return {
+    open,
+    activeTab,
+    changeTab,
+    toggleShow,
+  };
 }

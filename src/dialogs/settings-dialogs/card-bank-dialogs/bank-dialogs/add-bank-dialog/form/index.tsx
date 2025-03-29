@@ -7,6 +7,7 @@ import AppButton from "@/components/app-button";
 
 export type FormProps = {
   toggleDrawer: (value: boolean) => void;
+  open:boolean
 };
 
 export default function Form(props: FormProps) {

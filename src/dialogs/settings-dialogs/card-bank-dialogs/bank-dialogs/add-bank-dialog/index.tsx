@@ -16,7 +16,7 @@ export default React.memo(function AddBankDialog() {
           handleChange={toggleDrawer}
           className="hide-scrollbar overflow-auto"
         >
-          <Form toggleDrawer={toggleDrawer} />
+          <Form toggleDrawer={toggleDrawer} open={open} />
         </AppDrawer>
       </ErrorBoundary>
     </React.Fragment>

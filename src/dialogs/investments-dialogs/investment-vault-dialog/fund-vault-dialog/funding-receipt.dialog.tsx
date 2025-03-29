@@ -9,74 +9,81 @@ import Render from "@/components/render";
 import { amountSeparator } from "@/lib/amount-separator";
 
 export default React.memo(function FundingReceiptDialog() {
-	const { currency } = useAppSelector((state) => state.account);
-	const { dialog } = useAppSelector((state) => state.ui);
-	const id = dialog.id;
+  const { currency } = useAppSelector((state) => state.account);
+  const { dialog } = useAppSelector((state) => state.ui);
+  const id = dialog.id;
 
-	const { ui } = useActions();
-	const { isFetching, isError, error, data } = useQuery(
-		["transaction-id", id],
-		() =>
-			getTransactionDetails({
-				id,
-				currency: currency.code,
-			}),
-		{
-			enabled: dialog.type === "funding_receipt",
-		}
-	);
+  const { ui } = useActions();
 
-	const toggleShow = (val: boolean) => {
-		ui.changeDialog({ show: val, type: "", id: "" });
-	};
+  const open = React.useMemo(() => {
+    return dialog.show && dialog.type === "funding_receipt";
+  }, [dialog.show, dialog.type]);
 
-	const open = React.useMemo(() => {
-		return dialog.show && dialog.type === "funding_receipt";
-	}, [dialog.show, dialog.type]);
+  const { isFetching, isError, error, data } = useQuery(
+    ["transaction-id", id],
+    () =>
+      getTransactionDetails({
+        id,
+        currency: currency.code,
+      }),
+    {
+      enabled: open,
+    },
+  );
 
-	const close = () => {
-		toggleShow(false);
-	};
+  const toggleShow = (val: boolean) => {
+    ui.changeDialog({ show: val, type: "", id: "" });
+  };
 
-	const details = React.useMemo(() => {
-		return {
-			session_ID: data?.transaction_reference || "",
-			date: new Date(data?.created_at ?? "").toLocaleDateString("en-us", {
-				dateStyle: "full",
-			}),
-			transaction_type: data?.transaction_type || "",
-			amount: `${currency.sign} ${amountSeparator(data?.amount ?? "")}`,
-			status: data?.status || "",
-		};
-	}, [data, currency.sign]);
+  const close = () => {
+    toggleShow(false);
+  };
 
-	return (
-		<PopupModal handleClose={close} open={open} className="relative w-full lg:w-1/2 h-96 p-8">
-			<Render isLoading={isFetching} isError={isError} error={error}>
-				<button
-					onClick={close}
-					className="absolute top-0 right-0 lg:-top-8 lg:-right-8 flex items-center justify-center size-8 p-2 rounded-full bg-white"
-				>
-					<X color="#908b8b" />
-				</button>
-				<div className="flex flex-col gap-10">
-					<h1 className="highlight-standard text-neutral-1000">Transaction Receipt</h1>
+  const details = React.useMemo(() => {
+    return {
+      session_ID: data?.transaction_reference || "",
+      date: new Date(data?.created_at ?? "").toLocaleDateString("en-us", {
+        dateStyle: "full",
+      }),
+      transaction_type: data?.transaction_type || "",
+      amount: `${currency.sign} ${amountSeparator(data?.amount ?? "")}`,
+      status: data?.status || "",
+    };
+  }, [data, currency.sign]);
 
-					<div className="space-y-5">
-						{Object.entries(details).map(([key, value]) => {
-							return (
-								<div
-									key={key}
-									className="flex justify-between capitalize text-neutral-700 caption-standard"
-								>
-									<span className="w-full">{key.replace("_", " ")} </span>
-									<span className="w-full">{value}</span>
-								</div>
-							);
-						})}
-					</div>
-				</div>
-			</Render>
-		</PopupModal>
-	);
+  return (
+    <PopupModal
+      handleClose={close}
+      open={open}
+      className="relative h-96 w-full p-8 lg:w-1/2"
+    >
+      <Render isLoading={isFetching} isError={isError} error={error}>
+        <button
+          onClick={close}
+          className="absolute right-0 top-0 flex size-8 items-center justify-center rounded-full bg-white p-2 lg:-right-8 lg:-top-8"
+        >
+          <X color="#908b8b" />
+        </button>
+        <div className="flex flex-col gap-10">
+          <h1 className="highlight-standard text-neutral-1000">
+            Transaction Receipt
+          </h1>
+
+          <div className="space-y-5">
+            {Object.entries(details).map(([key, value]) => {
+              return (
+                <div
+                  key={key}
+                  className="caption-standard flex justify-between capitalize text-neutral-700"
+                >
+                  <span className="w-full">{key.replace("_", " ")} </span>
+                  <span className="w-full">{value}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </Render>
+    </PopupModal>
+  );
 });

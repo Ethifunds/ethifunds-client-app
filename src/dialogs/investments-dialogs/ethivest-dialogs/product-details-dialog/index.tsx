@@ -16,14 +16,18 @@ export default React.memo(function ProductDetailsDialog() {
 
   const productId = dialog.id;
 
-  const { isFetching, isError, error, data } = useQuery(
-    ["ethivest-product-details-dialog", productId],
-    () => getProductDetails({ productId: Number(productId) }),
-  );
-
   const open = React.useMemo(() => {
     return dialog.show && dialog.type === "ethivest_product_details";
   }, [dialog.show, dialog.type]);
+
+  const { isFetching, isError, error, data } = useQuery(
+    ["ethivest-product-details-dialog", productId],
+    () => getProductDetails({ productId: Number(productId) }),
+    {
+      enabled: open,
+    },
+  );
+
 
   const toggleDrawer = (value: boolean) => {
     ui.changeDialog({

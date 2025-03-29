@@ -18,7 +18,6 @@ export default React.memo(function PreviewDialog() {
   }, [dialog.show, dialog.type]);
 
   const charges = "0.00";
-  if (!dialog.data) return;
 
   const click = () => {
     if (dialog.action) {
@@ -32,6 +31,9 @@ export default React.memo(function PreviewDialog() {
       dialog.dismiss();
     }
   };
+
+  if (!dialog.data) return;
+  
   const data = {
     seller_username: dialog.data.seller_username,
     date: new Date().toLocaleDateString("en-us", {

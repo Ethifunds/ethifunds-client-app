@@ -10,7 +10,7 @@ import * as React from "react";
 
 export default React.memo(function PreviewDialog() {
   const { dialog } = useAppSelector((state) => state.ui);
-  
+
   const open = React.useMemo(() => {
     return dialog.show && dialog.type === "ethivest_product_preview";
   }, [dialog.show, dialog.type]);
@@ -41,6 +41,7 @@ export default React.memo(function PreviewDialog() {
     }
     ui.resetDialog();
   };
+
   return (
     <PopupModal
       handleClose={close}

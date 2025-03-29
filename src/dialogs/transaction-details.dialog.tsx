@@ -16,6 +16,11 @@ export default React.memo(function TransactionDetailsDialog() {
 	const id = dialog.id;
 
 	const { ui } = useActions();
+	
+	const open = React.useMemo(() => {
+		return dialog.show && dialog.type === "transaction_details";
+	}, [dialog.show, dialog.type]);
+
 	const { isFetching, isError, error, data } = useQuery(
 		["transaction-id", id],
 		() =>
@@ -24,7 +29,7 @@ export default React.memo(function TransactionDetailsDialog() {
 				currency: currency.code,
 			}),
 		{
-			enabled: dialog.type === "transaction_details",
+			enabled: open,
 		}
 	);
 
@@ -32,9 +37,6 @@ export default React.memo(function TransactionDetailsDialog() {
 		ui.changeDialog({ show: val, type: "", id: "" });
 	};
 
-	const open = React.useMemo(() => {
-		return dialog.show && dialog.type === "transaction_details";
-	}, [dialog.show, dialog.type]);
 
 	const close = () => {
 		toggleShow(false);

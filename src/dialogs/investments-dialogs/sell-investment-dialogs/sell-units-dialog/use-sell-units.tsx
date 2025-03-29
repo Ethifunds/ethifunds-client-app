@@ -59,12 +59,17 @@ export default function useSellUnits() {
   const { params, queryParams } = useCustomNavigation();
   const { ui } = useActions();
 
+  const open = React.useMemo(() => {
+    return dialog.show && dialog.type === "sell-investment-units";
+  }, [dialog.show, dialog.type]);
+
   const categoryId = params.categoryId ?? "";
 
   const { isFetching, isError, error } = useQuery(
     ["investment-category-details", categoryId],
     () => getMyInvestmentCategoryDetails({ categoryId }),
     {
+      enabled: open,
       onSuccess: async (data) => {
         const getProductList = data.investments.map(async (item) => {
           const res = await getProductDetails({ productId: item.product_id });
@@ -85,9 +90,7 @@ export default function useSellUnits() {
     },
   );
 
-  const open = React.useMemo(() => {
-    return dialog.show && dialog.type === "sell-investment-units";
-  }, [dialog.show, dialog.type]);
+
 
   const reset = () => {
     if (isLoading) return;

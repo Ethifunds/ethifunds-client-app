@@ -31,7 +31,7 @@ export default React.memo(function NotificationUserInvestmentDialog() {
     error,
     data: investmentDetails,
   } = useQuery([productId], () => getProductDetails({ productId }), {
-    enabled: productId && true,
+    enabled: !productId && false,
   });
 
   const close = () => {

@@ -23,23 +23,26 @@ export default React.memo(function RemoveBankDialog() {
   const { ui } = useActions();
   const { queryParams } = useCustomNavigation();
 
-  const { isFetching, isError, error } = useQuery(
-    ["user-accounts-remove", dialog.id, currency.code],
-    () => getUserAccounts({ currency: currency.code }),
-    {
-      onSuccess(data) {
-        const match = data.find((item) => item.id === Number(dialog.id));
+    const open = React.useMemo(() => {
+      return dialog.show && dialog.type === "remove_bank";
+    }, [dialog.show, dialog.type]);
 
-        if (match) {
-          return setAccount(match);
-        }
+    const { isFetching, isError, error } = useQuery(
+      ["user-accounts-remove", dialog.id, currency.code],
+      () => getUserAccounts({ currency: currency.code }),
+      {
+        enabled: open,
+        onSuccess(data) {
+          const match = data.find((item) => item.id === Number(dialog.id));
+
+          if (match) {
+            return setAccount(match);
+          }
+        },
       },
-    },
-  );
+    );
 
-  const open = React.useMemo(() => {
-    return dialog.show && dialog.type === "remove_bank";
-  }, [dialog.show, dialog.type]);
+
 
   const close = () => {
     if (isLoading) return;

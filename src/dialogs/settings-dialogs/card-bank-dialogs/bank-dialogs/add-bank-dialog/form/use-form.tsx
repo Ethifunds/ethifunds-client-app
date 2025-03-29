@@ -34,6 +34,18 @@ export default function useForm(data: FormProps) {
   const { ui } = useActions();
   const submitRef = React.useRef<HTMLDivElement>(null);
 
+  React.useMemo(async () => {
+    if (!data.open) return;
+    try {
+      const response = await getBankList();
+      setBankList(response);
+    } catch (error) {
+      const err = ensureError(error);
+
+      toast.error(err.message);
+    }
+  }, [data.open]);
+
   const deleteQueryParams = () => {
     queryParams.delete("action");
   };
@@ -83,17 +95,6 @@ export default function useForm(data: FormProps) {
       bank_code: value,
     }));
   };
-
-  React.useMemo(async () => {
-    try {
-      const response = await getBankList();
-      setBankList(response);
-    } catch (error) {
-      const err = ensureError(error);
-
-      toast.error(err.message);
-    }
-  }, []);
 
   const verifyAccount = React.useCallback(async () => {
     if (!formData.bank_code || !formData.account_number.trim()) return;

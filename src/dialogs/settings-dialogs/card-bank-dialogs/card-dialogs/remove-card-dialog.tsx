@@ -23,10 +23,15 @@ export default React.memo(function RemoveCardDialog() {
   const { ui } = useActions();
   const { queryParams } = useCustomNavigation();
 
+  const open = React.useMemo(() => {
+    return dialog.show && dialog.type === "remove_card";
+  }, [dialog.show, dialog.type]);
+
   const { isFetching, isError, error } = useQuery(
     ["remove-savedCard", dialog.id],
     () => getSavedCards(),
     {
+      enabled: open,
       onSuccess(data) {
         const match = data.find((item) => item.id === Number(dialog.id));
 
@@ -43,10 +48,6 @@ export default React.memo(function RemoveCardDialog() {
       (item) => sanitizeText(item.name) === sanitizeText(card.brand),
     );
   }, [card]);
-
-  const open = React.useMemo(() => {
-    return dialog.show && dialog.type === "remove_card";
-  }, [dialog.show, dialog.type]);
 
   const close = () => {
     if (isLoading) return;

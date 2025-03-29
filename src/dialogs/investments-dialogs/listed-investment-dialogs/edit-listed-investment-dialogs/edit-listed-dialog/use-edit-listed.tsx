@@ -50,56 +50,56 @@ export default function useEditListed() {
   const { queryParams } = useCustomNavigation();
   const { ui } = useActions();
 
-  React.useEffect(() => {
-    setFormData({
-      product_id: listedProductDetails?.product_id ?? "",
-      units: listedProductDetails?.units,
-      asking_price_per_unit: Number(
-        listedProductDetails?.asking_price_per_unit,
-      ),
-      pin: "",
-    });
-  }, [
-    listedProductDetails?.asking_price_per_unit,
-    listedProductDetails?.product_id,
-    listedProductDetails?.units,
-  ]);
+    const open = React.useMemo(() => {
+      return dialog.show && dialog.type === "edit-investment-listing";
+    }, [dialog.show, dialog.type]);
 
-  const open = React.useMemo(() => {
-    return dialog.show && dialog.type === "edit-investment-listing";
-  }, [dialog.show, dialog.type]);
-
-// making a call to get product details.
-  const { isFetching, isError, error } = useQuery(
-    [
-      "active-investment-category-details",
-      listedProductDetails?.product_id,
+    React.useEffect(() => {
+      if (!open) return;
+      setFormData({
+        product_id: listedProductDetails?.product_id ?? "",
+        units: listedProductDetails?.units,
+        asking_price_per_unit: Number(
+          listedProductDetails?.asking_price_per_unit,
+        ),
+        pin: "",
+      });
+    }, [
       open,
-    ],
-    () => getMyActiveInvestments({ currency: currency.code }),
-    {
-      onSuccess: async (response) => {
-        const match = response.find(
-          (item) =>
-            item.category.id ===
-            listedProductDetails?.product?.product_category_id,
-        );
+      listedProductDetails?.asking_price_per_unit,
+      listedProductDetails?.product_id,
+      listedProductDetails?.units,
+    ]);
 
-        console.log("match", match, "product_id", listedProductDetails?.product_id);
-
-        if (match) {
-          const product = match.investments.find(
-            (item) => item.product_id === listedProductDetails?.product_id,
+    // making a call to get product details.
+    const { isFetching, isError, error } = useQuery(
+      [
+        "active-investment-category-details",
+        listedProductDetails?.product_id,
+        open,
+      ],
+      () => getMyActiveInvestments({ currency: currency.code }),
+      {
+        enabled: open,
+        onSuccess: async (response) => {
+          const match = response.find(
+            (item) =>
+              item.category.id ===
+              listedProductDetails?.product?.product_category_id,
           );
 
-          console.log("product", product);
-          if (product) {
-            setActiveInvestmentDetails(product);
+          if (match) {
+            const product = match.investments.find(
+              (item) => item.product_id === listedProductDetails?.product_id,
+            );
+
+            if (product) {
+              setActiveInvestmentDetails(product);
+            }
           }
-        }
+        },
       },
-    },
-  );
+    );
 
   const reset = () => {
     if (isLoading) return;

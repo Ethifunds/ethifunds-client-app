@@ -11,18 +11,28 @@ import * as React from "react";
 export default React.memo(function PreviewDialog() {
   const { dialog } = useAppSelector((state) => state.ui);
   const { currency } = useAppSelector((state) => state.account);
+
   const open = React.useMemo(() => {
     return dialog.show && dialog.type === "sell-investment-preview";
   }, [dialog.show, dialog.type]);
 
   const { ui } = useActions();
-  if (!dialog.data) return;
 
   const click = () => {
     if (dialog.action) {
       dialog.action();
     }
   };
+
+  const close = () => {
+    if (dialog.dismiss) {
+      dialog.dismiss();
+    }
+    ui.resetDialog();
+  };
+
+  if (!dialog.data) return;
+
   const data = {
     date: new Date().toLocaleDateString("en-us", {
       dateStyle: "full",
@@ -38,12 +48,6 @@ export default React.memo(function PreviewDialog() {
     ),
   };
 
-  const close = () => {
-    if (dialog.dismiss) {
-      dialog.dismiss();
-    }
-    ui.resetDialog();
-  };
   return (
     <PopupModal
       handleClose={close}
@@ -52,7 +56,7 @@ export default React.memo(function PreviewDialog() {
     >
       <button
         onClick={close}
-        className="absolute top-0 right-0 flex size-8 items-center justify-center rounded-full bg-white p-2"
+        className="absolute right-0 top-0 flex size-8 items-center justify-center rounded-full bg-white p-2"
       >
         <X color="#908b8b" />
       </button>

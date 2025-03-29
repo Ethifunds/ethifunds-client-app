@@ -49,13 +49,19 @@ export default function useBuyEthivest() {
 
   const productId = dialog.id;
 
+    const open = React.useMemo(() => {
+      return dialog.show && dialog.type === "buy_ethivest_product";
+    }, [dialog.show, dialog.type]);
+
   const {
     isFetching,
     isError,
     error,
     data: response,
-  } = useQuery(["ethivest-product-details-dialog", productId], () =>
-    getProductDetails({ productId: Number(productId) }),
+  } = useQuery(
+    ["ethivest-product-details-dialog", productId],
+    () => getProductDetails({ productId: Number(productId) }),
+    { enabled: open },
   );
 
   const reset = () => {
@@ -81,9 +87,7 @@ export default function useBuyEthivest() {
     }));
   };
 
-  const open = React.useMemo(() => {
-    return dialog.show && dialog.type === "buy_ethivest_product";
-  }, [dialog.show, dialog.type]);
+
 
   const changeTab = (value: typeof activeTab) => {
     setActiveTab(value);

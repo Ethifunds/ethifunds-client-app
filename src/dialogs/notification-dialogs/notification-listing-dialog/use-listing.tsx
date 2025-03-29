@@ -44,14 +44,14 @@ export default function useListing() {
     error,
     data: investmentDetails,
   } = useQuery([productId], () => getProductDetails({ productId }), {
-    enabled: productId && true,
+    enabled: open && productId && true,
   });
 
   const { isFetching: fetchingUser, data: userData } = useQuery(
     ["user-by-id", buyerId],
     () => getUserById({ id: buyerId ?? "" }),
     {
-      enabled: !buyerId && false,
+      enabled: (!buyerId || !open) && false,
       onError(err) {
         const errMsg = ensureError(err).message;
         toast.error(errMsg);
