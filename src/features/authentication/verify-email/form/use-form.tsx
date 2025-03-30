@@ -25,35 +25,38 @@ export default function useForm() {
 	const { data: email, deleteData } = useStorage(variables.STORAGE.email, "", "sessionStorage");
 
 	const updateForm = (e: string) => {
-		setFormData((prev) => ({
-			...prev,
-			otp_code: e,
-		}));
-	};
+    setErrorMsg("");
+    setFormData((prev) => ({
+      ...prev,
+      otp_code: e,
+    }));
+  };
 
-	const submit = async (e: React.FormEvent) => {
-		e.preventDefault();
-		setIsLoading(true);
-		try {
-			const formValues = validate.parse(formData);
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMsg("");
+    setIsLoading(true);
+    try {
+      if (!email) throw new Error("No email found");
+      const formValues = validate.parse(formData);
 
-			await verifyAccountEmail({ email, otp_code: formValues.otp_code });
+      await verifyAccountEmail({ email, otp_code: formValues.otp_code });
 
-			toast.success("Email verified successfully");
+      toast.success("Email verified successfully");
 
-			deleteData();
+      deleteData();
 
-			navigate("/", { replace: true });
-		} catch (error) {
-			const errMsg = ensureError(error);
-			setErrorMsg(errMsg.message);
-			toast.error(errMsg.message, {
-				position: "top-right",
-			});
-		} finally {
-			setIsLoading(false);
-		}
-	};
+      navigate("/", { replace: true });
+    } catch (error) {
+      const errMsg = ensureError(error);
+      setErrorMsg(errMsg.message);
+      toast.error(errMsg.message, {
+        position: "top-right",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
 	return {
 		isLoading,

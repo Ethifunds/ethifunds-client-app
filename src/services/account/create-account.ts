@@ -8,7 +8,7 @@ type Parameters = {
 	username: string;
 	// phone_number: string;
 	password: string;
-	confirm_password: string;
+	password_confirmation: string;
 	terms: boolean;
 };
 

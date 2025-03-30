@@ -6,7 +6,7 @@ import { User } from "@/types/user.types";
 type Parameters = {
 	email: string;
 	password: string;
-	confirm_password: string;
+	password_confirmation: string;
 };
 
 type Response = User;

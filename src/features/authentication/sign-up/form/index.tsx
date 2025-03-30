@@ -1,15 +1,22 @@
 import { Input } from "@/components/ui/form-input";
 import useForm from "./use-form";
 import Button from "@/components/app-button";
-import Password from "./password";
 import Spinner from "@/components/spinner";
 import Terms from "./terms";
+import Password from "@/components/ui/form-input/password";
 
 export default function Form() {
-	const { isLoading, formData, isEmailValid, usernameTaken, checking, updateForm, submit } =
-		useForm();
+  const {
+    isLoading,
+    formData,
+    isEmailValid,
+    usernameTaken,
+    checking,
+    updateForm,
+    submit,
+  } = useForm();
 
-	return (
+  return (
     <form
       className="flex flex-col gap-4 overflow-auto rounded-xl border bg-white px-4 py-8 shadow lg:h-96 lg:rounded-3xl lg:px-8 lg:py-6 2xl:h-auto"
       onSubmit={submit}
@@ -59,18 +66,21 @@ export default function Form() {
       </div>
 
       <Password
+        name="password"
+        label="password"
+        placeholder="Enter password"
         isLoading={isLoading}
-        password={formData.password}
+        value={formData.password}
         updateForm={updateForm}
       />
 
       <div>
         <Input
-          name="confirm_password"
+          name="password_confirmation"
           type="text"
           label="Confirm Password"
           placeholder="Enter Password"
-          value={formData.confirm_password}
+          value={formData.password_confirmation}
           onChange={updateForm}
           disabled={isLoading}
           required

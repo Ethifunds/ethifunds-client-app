@@ -1,36 +1,52 @@
 import { variables } from "@/constants";
 import useCountdown from "@/hooks/use-countdown";
 import useStorage from "@/hooks/use-storage";
+import ensureError from "@/lib/ensure-error";
 import sendOtp from "@/services/account/send-otp";
 import * as React from "react";
 import { toast } from "sonner";
 
 export default React.memo(function ResendOtp() {
-	const [counter, reset] = useCountdown(60);
-	const { data: email } = useStorage(variables.STORAGE.email, "", "sessionStorage");
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [counter, reset] = useCountdown(60);
+  const { data: email } = useStorage(
+    variables.STORAGE.email,
+    "",
+    "sessionStorage",
+  );
 
-	const resendOtp = async () => {
-		try {
-			await sendOtp({ email });
-			toast.success("OTP sent successfully");
-		} catch {
-			toast.error("error sending OTP");
-		}
+  const resendOtp = async () => {
+    setIsLoading(true);
+    try {
+      if (!email) throw new Error("No email found");
+      await sendOtp({ email });
+      toast.success("OTP sent successfully");
+      reset();
+    } catch (err) {
+      const errMsg = ensureError(err).message;
+      toast.error(errMsg);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-		reset();
-	};
-	return (
-		<React.Fragment>
-			{" "}
-			<button
-				className="content-bold text-secondary disabled:cursor-not-allowed active:text-opacity-30"
-				onClick={resendOtp}
-				disabled={counter > 0}
-			>
-				{" "}
-				Resend Code
-			</button>{" "}
-			in <span className="content-bold text-primary"> {counter}</span>
-		</React.Fragment>
-	);
+  return (
+    <React.Fragment>
+      {" "}
+      <button
+        className="content-bold text-secondary active:text-opacity-30 disabled:cursor-not-allowed"
+        onClick={resendOtp}
+        disabled={counter > 0}
+      >
+        {" "}
+        {isLoading ? "Resending" : "Resend"} Code
+      </button>{" "}
+      {counter > 0 && (
+        <span>
+          {" "}
+          in <span className="content-bold text-primary"> {counter}</span>{" "}
+        </span>
+      )}
+    </React.Fragment>
+  );
 });

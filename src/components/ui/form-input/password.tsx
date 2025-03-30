@@ -1,40 +1,26 @@
 import { Input } from "@/components/ui/form-input";
+import { passwordValidations } from "@/constants/password-validations";
 import classNames from "classnames";
 import * as React from "react";
 
 type PasswordProps = {
-  label: string;
-  name: string;
   value: string;
   updateForm(e: React.ChangeEvent<HTMLInputElement>): void;
   isLoading: boolean;
+  name: string;
+  label: string;
+  placeholder: string;
 };
 
 export default React.memo(function Password({
-  name,
-  label,
   value,
   updateForm,
   isLoading,
+  name,
+  label,
+  placeholder,
 }: PasswordProps) {
-  const checks = React.useMemo(
-    () => [
-      {
-        check: (t: string) => t.length >= 8,
-        message: "Minimum of 8 characters",
-      },
-      {
-        check: (t: string) => /[A-Z]/.test(t) && /[a-z]/.test(t),
-        message: "uppercase and lower case",
-      },
-
-      {
-        check: (t: string) => /[!@#$%^&*(),.?":{}|<>]/.test(t),
-        message: "must contain number and special character e.g @#$%^&)",
-      },
-    ],
-    [],
-  );
+  const checks = React.useMemo(() => passwordValidations, []);
 
   const validations = React.useMemo(
     () => checks.map((item) => item.check(value)),
@@ -51,7 +37,7 @@ export default React.memo(function Password({
         name={name}
         type="password"
         label={label}
-        placeholder="Enter New password"
+        placeholder={placeholder}
         value={value}
         onChange={updateForm}
         disabled={isLoading}
@@ -68,6 +54,7 @@ export default React.memo(function Password({
               !validations[idx] && value.length > 0, // Invalid state
           });
 
+          if (validations[idx]) return;
           return (
             <small key={idx} className={cn}>
               {item.message}

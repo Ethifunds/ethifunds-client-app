@@ -1,7 +1,7 @@
 import { Input } from "@/components/ui/form-input";
 import useForm from "./use-form";
-import Password from "./password";
 import AppButton from "@/components/app-button";
+import Password from "@/components/ui/form-input/password";
 
 export default function Form() {
   const { isLoading, errorMsg, formData, updateForm, submit } = useForm();
@@ -29,6 +29,7 @@ export default function Form() {
       <Password
         name="new_password"
         label="New Password"
+        placeholder="Enter New password"
         value={formData.new_password}
         updateForm={updateForm}
         isLoading={isLoading}
