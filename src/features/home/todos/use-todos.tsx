@@ -19,11 +19,10 @@ export default function useTodos() {
   const { account } = useAppSelector((state) => state.account);
   const { ui, account: accountActions } = useActions();
   const [hasSecurity, setHasSecurity] = React.useState(false);
-  // const [isActive, setIsActive] = React.useState(false);
 
   const { navigate } = useCustomNavigation();
 
-  const { isFetching, data } = useQuery(["whoami"], () => whoami(), {
+  const { isFetching } = useQuery(["whoami"], () => whoami(), {
     onSuccess(data) {
       accountActions.updateAccount(data);
     },
@@ -44,30 +43,16 @@ export default function useTodos() {
     }
   }, [account.email]);
 
-  const savingsOrInvestments = React.useCallback(async () => {
-    // try {
-    // 	// const services= [whoami]
-    // 	// const responses =await Promise.all(services.map(service=> service()))
-    // 	setIsActive(false);
-    // } catch (err) {
-    // 	const error = ensureError(err);
-    // 	toast.error(error.message);
-    // }
-  }, []);
-
   React.useEffect(() => {
     hasSecurityQuestions();
-    savingsOrInvestments();
-  }, [hasSecurityQuestions, savingsOrInvestments]);
+  }, [hasSecurityQuestions]);
 
   const todos = React.useMemo(
     (): Todos[] => [
       {
         title: "Add your BVN",
         path: "/settings?tab=profile",
-        isDone:
-          data?.user_verifications.has_verified_bvn ||
-          account.user_verifications.has_verified_bvn,
+        isDone: account.user_verifications.has_verified_bvn,
         action: (path: string) => {
           navigate(path);
         },
@@ -75,9 +60,7 @@ export default function useTodos() {
       {
         title: "Add Personal Information",
         path: "/settings?tab=profile&sub_tab=personal_info",
-        isDone:
-          (account.user_profile !== null || data?.user_profile !== null) &&
-          true,
+        isDone: account.user_profile !== null,
         action: (path: string) => {
           navigate(path);
         },
@@ -90,18 +73,11 @@ export default function useTodos() {
           navigate(path);
         },
       },
-      // {
-      // 	title: "Setup your first savings or investment",
-      // 	path: "",
-      // isDone: isActive,
-      // 	action: (path: string) => {
-      // 		navigate(path);
-      // 	},
-      // },
+
       {
         title: "Setup your Pin",
         path: "",
-        isDone: account.user_verifications.has_set_pin,
+        isDone: account.has_set_pin,
         action: (path: string) => {
           ui.changeDialog({
             show: true,
@@ -111,16 +87,29 @@ export default function useTodos() {
         },
       },
     ],
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [
-      account.user_verifications.has_set_pin,
+      account.has_set_pin,
+      account.user_profile,
       account.user_verifications.has_verified_bvn,
-      data?.user_profile,
-      data?.user_verifications.has_verified_bvn,
       hasSecurity,
       navigate,
     ],
   );
 
-  return { isFetching, todos };
+  const progress = React.useMemo(() => {
+    const isDoneCount = todos.filter((item) => item.isDone).length;
+    const value = (isDoneCount / todos.length) * 100;
+    return value;
+  }, [todos]);
+
+  const continueBtn = React.useCallback(() => {
+    const todo = todos.find((item) => !item.isDone);
+    if (todo) {
+      todo.action(todo.path);
+    }
+  }, [todos]);
+
+  return { isFetching, todos, progress, continueBtn };
 }

@@ -59,6 +59,11 @@ export default function useNotifications() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [edit, setEdit] = React.useState(false);
 
+  const isNotifications = React.useMemo(
+    () => queryParams.has("tab", "notifications"),
+    [queryParams],
+  );
+
   const activeSubTab = React.useMemo(() => {
     return queryParams.get("sub_tab")?.trim() as keyof typeof formData;
   }, [queryParams]);
@@ -69,6 +74,7 @@ export default function useNotifications() {
     error,
     data: _data,
   } = useQuery(["user-settings"], () => getNotificationSettings(), {
+    enabled: isNotifications,
     onSuccess(data) {
       const getSection = (key: keyof typeof formData) => {
         const list = data.filter((item) => item.section === key)[0];

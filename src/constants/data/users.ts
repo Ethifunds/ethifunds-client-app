@@ -14,6 +14,7 @@ export const users: User[] = [
     profile_picture: null,
     email_verified_at: null,
     created_at: "2025-01-23T23:32:15.000000Z",
+    has_set_pin: false,
     updated_at: "2025-01-23T23:32:15.000000Z",
     user_verifications: {
       id: 1,
@@ -21,7 +22,6 @@ export const users: User[] = [
       has_verified_email: true,
       email_verified_at: "2025-01-23T23:33:25.000000Z",
       has_verified_phone: true,
-      has_set_pin: false,
       phone_verified_at: "2025-01-23T23:34:47.000000Z",
       has_verified_bvn: false,
       bvn_verified_at: null,
@@ -75,6 +75,7 @@ export const users: User[] = [
     locked_until: null,
     profile_picture: null,
     email_verified_at: null,
+    has_set_pin: false,
     created_at: "2025-01-23T23:32:15.000000Z",
     updated_at: "2025-01-23T23:32:15.000000Z",
     user_verifications: {
@@ -82,7 +83,6 @@ export const users: User[] = [
       user_id: 1,
       has_verified_email: true,
       email_verified_at: "2025-01-23T23:33:25.000000Z",
-      has_set_pin: false,
       has_verified_phone: true,
       phone_verified_at: "2025-01-23T23:34:47.000000Z",
       has_verified_bvn: false,

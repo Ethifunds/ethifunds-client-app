@@ -14,6 +14,7 @@ export type User = {
 	email_verified_at: string | null;
 	user_verifications: UserVerification;
 	user_profile: UserProfile | null;
+	has_set_pin:boolean
 	two_factor:TwoFactor| null
 	created_at: string;
 	updated_at: string;
@@ -24,7 +25,6 @@ export type UserVerification = {
 	user_id: number;
 	has_verified_email: boolean;
 	email_verified_at: string;
-	has_set_pin:boolean
 	has_verified_phone: boolean;
 	phone_verified_at: string;
 	has_verified_bvn: boolean;

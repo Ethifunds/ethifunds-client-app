@@ -71,9 +71,9 @@ export default React.memo(function SetPinForm() {
       await setTransactionPin(formValues);
       accountActions.updateAccount({
         ...account,
+        has_set_pin: true,
         user_verifications: {
           ...account.user_verifications,
-          has_set_pin: true,
         },
       });
 

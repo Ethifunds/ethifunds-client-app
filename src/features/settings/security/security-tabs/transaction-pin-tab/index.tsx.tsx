@@ -9,8 +9,8 @@ export default React.memo(function TransactionPinTab() {
   // const [changePin, setChangePin] = React.useState(false);
 
   const hasPin = React.useMemo(() => {
-    return account.user_verifications.has_set_pin;
-  }, [account.user_verifications.has_set_pin]);
+    return account.has_set_pin;
+  }, [account.has_set_pin]);
 
   // const toggle = () => {
   //   setChangePin(!changePin);

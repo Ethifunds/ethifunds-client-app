@@ -5,7 +5,7 @@ import { SecurityQuestion } from "@/types/security-questions.types";
 type Response = SecurityQuestion;
 
 export async function production(): Promise<Response[]> {
-  const response = await axios.get(`/auth/user-security-questions`);
+  const response = await axios.get(`/auth/security-questions`);
   return response.data.data;
 }
 

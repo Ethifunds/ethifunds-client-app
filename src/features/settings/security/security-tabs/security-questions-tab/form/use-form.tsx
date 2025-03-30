@@ -4,9 +4,10 @@ import * as React from "react";
 import { z } from "zod";
 import { SecurityQuestion } from "@/types/security-questions.types";
 import ensureError from "@/lib/ensure-error";
-import setUserSecurityQuestions from "@/services/account/set-user-security-questions copy";
+import setUserSecurityQuestions from "@/services/account/set-user-security-questions";
 import useActions from "@/store/actions";
 import { useAppSelector } from "@/store/hooks";
+import useCustomNavigation from "@/hooks/use-navigation";
 
 const validation = z.object({
   question_1: z.string().min(1, "question 1 is required"),
@@ -30,15 +31,21 @@ export default function useForm() {
   const [securityQuestions, setSecurityQuestions] = React.useState<
     SecurityQuestion[]
   >([]);
-
+  const { queryParams } = useCustomNavigation();
   const [isLoading, setIsLoading] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState("");
   const { ui } = useActions();
+
+  const enable = React.useMemo(
+    () => queryParams.has("sub_tab", "security_questions"),
+    [queryParams],
+  );
 
   const { isLoading: _, ...query } = useQuery(
     ["security-questions"],
     () => getSecurityQuestions(),
     {
+      enabled: enable,
       onSuccess(data) {
         setSecurityQuestions(data);
       },
@@ -50,6 +57,7 @@ export default function useForm() {
     setErrorMsg("");
     setFormData(init);
   };
+
   const updateForm = (
     name: keyof typeof formData,
     e: React.ChangeEvent<HTMLInputElement> | string,

@@ -10,7 +10,7 @@ type Parameters = {
 type Response = void;
 
 export async function production(data: Parameters): Promise<Response> {
-  const response = await axios.post(`/auth/user-security-questions`, data);
+  const response = await axios.post(`/auth/set-security-questions`, data);
   return response.data.data;
 }
 

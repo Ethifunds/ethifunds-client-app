@@ -10,8 +10,8 @@ type Parameters = Partial<{
 
 type Response = Notification[];
 
-export async function production(data: Parameters): Promise<Response> {
-  const response = await axios.get(`/notifications?page=${data.page}`);
+export async function production({ page = 1 }: Parameters): Promise<Response> {
+  const response = await axios.get(`/notifications?page=${page}`);
   return response.data.data;
 }
 
