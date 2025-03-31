@@ -1,20 +1,11 @@
 import { Input } from "@/components/ui/form-input";
 import useForm from "./use-form";
 import Button from "@/components/app-button";
-import Spinner from "@/components/spinner";
 import Terms from "./terms";
 import Password from "@/components/ui/form-input/password";
 
 export default function Form() {
-  const {
-    isLoading,
-    formData,
-    isEmailValid,
-    usernameTaken,
-    checking,
-    updateForm,
-    submit,
-  } = useForm();
+  const { isLoading, formData, isEmailValid, updateForm, submit } = useForm();
 
   return (
     <form
@@ -30,19 +21,8 @@ export default function Form() {
           value={formData.username}
           onChange={updateForm}
           disabled={isLoading}
-          overrideInvalid={usernameTaken}
           required
         />
-        {
-          <div className="flex justify-between">
-            {usernameTaken && (
-              <small className="caption-standard shake-animation text-error-200">
-                Username already taken, please try a different one
-              </small>
-            )}
-            {checking && <Spinner size="xs" load_type="spinner" />}
-          </div>
-        }
       </div>
 
       <div>

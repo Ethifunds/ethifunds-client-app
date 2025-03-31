@@ -4,7 +4,6 @@ import useStorage from "@/hooks/use-storage";
 import ensureError from "@/lib/ensure-error";
 import createAccount from "@/services/account/create-account";
 import sendOtp from "@/services/account/send-otp";
-import verifyUsername from "@/services/account/verify-username";
 import * as React from "react";
 
 import { toast } from "sonner";
@@ -29,8 +28,6 @@ const initial: FormData = {
 export default function useForm() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [formData, setFormData] = React.useState<FormData>(initial);
-  const [checking, setChecking] = React.useState(false);
-  const [usernameTaken, setUsernameTaken] = React.useState(false);
   const { setData } = useStorage(variables.STORAGE.email, "", "sessionStorage");
 
   const { navigate } = useCustomNavigation();
@@ -38,22 +35,6 @@ export default function useForm() {
   const reset = () => {
     setFormData(initial);
   };
-
-  React.useMemo(async () => {
-    if (formData.username.length < 3) return;
-    setChecking(true);
-    try {
-      const response = await verifyUsername({ username: formData.username });
-      if (response) {
-        setUsernameTaken(true);
-      } else setUsernameTaken(false);
-    } catch (error) {
-      const errMsg = ensureError(error);
-      throw errMsg.message;
-    } finally {
-      setChecking(false);
-    }
-  }, [formData.username]);
 
   const isEmailValid = React.useMemo(() => {
     if (formData.email.length < 3) return true;
@@ -83,7 +64,7 @@ export default function useForm() {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!isEmailValid || usernameTaken) {
+    if (!isEmailValid) {
       return toast.error("Form input invalid");
     }
     if (formData.password !== formData.password_confirmation) {
@@ -115,9 +96,7 @@ export default function useForm() {
   return {
     isLoading,
     formData,
-    usernameTaken,
     isEmailValid,
-    checking,
     updateForm,
     submit,
   };
