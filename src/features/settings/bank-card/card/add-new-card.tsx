@@ -40,6 +40,9 @@ export default React.memo(function AddNewCard(props: AddNewCardProps) {
     firstName: account.user_profile?.first_name,
     lastName: account.user_profile?.last_name,
     amount: variables.PAYSTACK.charge_amount,
+    metadata: {
+      email: account.email,
+    },
     onSuccess,
     onCancel,
     onError,

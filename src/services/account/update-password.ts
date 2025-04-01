@@ -2,15 +2,15 @@ import { variables } from "@/constants";
 import axios from "@/lib/axios";
 
 type Parameters = {
-  current_password: string;
+  old_password: string;
   new_password: string;
-  confirm_password: string;
+  email: string;
 };
 
 type Response = void;
 
 export async function production(data: Parameters): Promise<Response> {
-  const response = await axios.post(`/auth/login`, data);
+  const response = await axios.post(`/auth/change-password`, data);
   return response.data;
 }
 

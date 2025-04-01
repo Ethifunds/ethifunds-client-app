@@ -2,23 +2,18 @@ import { variables } from "@/constants";
 import axios from "@/lib/axios";
 import { NotificationSettings } from "@/types/notifications-settings.types";
 
-type Parameters = Pick<
-  NotificationSettings,
-  | "notifications_from_admin"
-  | "login_notification"
-  | "wallet_threshold"
-  | "section"
-> & { section: string };
+type Parameters = {
+  section: NotificationSettings["section"];
+
+  settings: Pick<
+    NotificationSettings,
+    "notifications_from_admin" | "login_notification" | "wallet_threshold"
+  >[];
+};
 type Response = void;
 
-export async function production({
-  section,
-  ...data
-}: Parameters): Promise<Response> {
-  const response = await axios.post(
-    `/settings/notification-settings/${section}`,
-    data,
-  );
+export async function production({ ...data }: Parameters): Promise<Response> {
+  const response = await axios.post(`/settings/notification-settings`, data);
   return response.data.data;
 }
 

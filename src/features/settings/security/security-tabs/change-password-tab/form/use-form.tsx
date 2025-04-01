@@ -1,6 +1,7 @@
 import ensureError from "@/lib/ensure-error";
 import updatePassword from "@/services/account/update-password";
 import useActions from "@/store/actions";
+import useAppSelectors from "@/store/use-app-selectors";
 import * as React from "react";
 import { z } from "zod";
 
@@ -27,6 +28,7 @@ const init: FormData = {
 };
 
 export default function useForm() {
+  const { account } = useAppSelectors("account");
   const [formData, setFormData] = React.useState(init);
   const [isLoading, setIsLoading] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState("");
@@ -60,6 +62,12 @@ export default function useForm() {
 
   const submit = async () => {
     setErrorMsg("");
+
+    if (!account.email) {
+      return setErrorMsg(
+        "Email is required for this action, try refreshing the page",
+      );
+    }
     if (formData.new_password === formData.current_password) {
       return setErrorMsg("Cannot use current password as new password");
     }
@@ -70,7 +78,13 @@ export default function useForm() {
     setIsLoading(true);
     try {
       const formValues = validations.parse(formData);
-      await updatePassword(formValues);
+
+      await updatePassword({
+        old_password: formValues.current_password,
+        new_password: formValues.new_password,
+        email: account.email,
+      });
+      
       showSuccessDialog();
     } catch (error) {
       const err = ensureError(error);

@@ -4,23 +4,23 @@ import axios from "@/lib/axios";
 import { User } from "@/types/user.types";
 
 type Parameters = {
-	first_name: string;
-	last_name: string;
-	middle_name?: string;
-	phone_number: string;
-	username: string;
-	date_of_birth: string;
-	gender: string;
-	// address?: string;
-	// occupation: string;
-	// income_level?: string;
+  // first_name: string;
+  // last_name: string;
+  // middle_name?: string;
+  // phone_number: string;
+  user_tag: string;
+  // date_of_birth: string;
+  // gender: string;
+  // address?: string;
+  // occupation: string;
+  // income_level?: string;
 };
 
 type Response = User;
 
 export async function production(data: Parameters): Promise<Response> {
-	const response = await axios.post(`/auth/login`, data);
-	return response.data;
+  const response = await axios.post(`/auth/update-profile`, data);
+  return response.data;
 }
 
 export async function development(): Promise<Response> {

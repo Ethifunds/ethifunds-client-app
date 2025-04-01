@@ -59,8 +59,6 @@ export default function useNotifications() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [edit, setEdit] = React.useState(false);
 
-
-
   const isNotifications = React.useMemo(
     () => queryParams.has("tab", "notifications"),
     [queryParams],
@@ -186,7 +184,30 @@ export default function useNotifications() {
     setIsLoading(true);
     try {
       const formValues = validation.parse(formData[section]);
-      await updateNotificationSettings({ ...formValues, section });
+      const payload = {
+        section,
+        settings: [
+          {
+            notifications_from_admin: {
+              news_and_updates:
+                formValues.notifications_from_admin.news_and_updates,
+              tips_and_tutorials:
+                formValues.notifications_from_admin.tips_and_tutorials,
+            },
+            login_notification: {
+              notify_me: formValues.login_notification.notify_me,
+            },
+            wallet_threshold: {
+              notify_me: formValues.wallet_threshold.notify_me,
+            },
+          },
+        ],
+      };
+      console.log(payload);
+      await updateNotificationSettings(payload);
+
+      toast.success(`Changes to the ${section} section was successful`);
+      setEdit(false);
     } catch (error) {
       const errMsg = ensureError(error).message;
       toast.error(errMsg);
