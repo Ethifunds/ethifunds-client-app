@@ -1,9 +1,10 @@
 import ErrorBoundary from "@/components/error-boundary";
 import useForm from "./use-form";
 import { Input } from "@/components/ui/form-input";
-import SelectBank from "./select.bank";
 import Spinner from "@/components/spinner";
 import AppButton from "@/components/app-button";
+import SelectBank from "@/components/select.bank";
+
 
 export type FormProps = {
   toggleDrawer: (value: boolean) => void;

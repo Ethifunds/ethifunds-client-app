@@ -2,11 +2,11 @@ import { Input } from "@/components/ui/form-input";
 import { TabsContent } from "@/components/ui/tabs";
 import useAddAccount from "./use-add-account";
 import Spinner from "@/components/spinner";
-import SelectBank from "./select.bank";
 import AppButton from "@/components/app-button";
 import { BankAccount } from "@/types/bank-account.types";
 import * as React from "react";
 import ErrorBoundary from "@/components/error-boundary";
+import SelectBank from "@/components/select.bank";
 
 type AddAccountProps = {
 	changeTab(tab: string): void;

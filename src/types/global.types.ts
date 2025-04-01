@@ -30,6 +30,7 @@ export type PaginatedResponse<T> = {
 };
 
 export type PaginationQuery = {
-	page: number;
-	limit: number;
+  page: number;
+  limit: number;
+  query_string: string;
 };

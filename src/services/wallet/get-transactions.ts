@@ -2,20 +2,21 @@ import { variables } from "@/constants";
 import { transactions } from "@/constants/data/transactions";
 import { PaginatedResponse, PaginationQuery } from "@/types/global.types";
 import axios from "@/lib/axios";
-import buildQueryString from "@/lib/build-query-string";
 import paginate from "@/lib/paginate";
 import { Transaction } from "@/types/transaction.type";
 
-type Parameters = Partial<PaginationQuery>&{
-	currency: string;
+type Parameters = Partial<PaginationQuery> & {
+  currency: string;
 };
 
 type Response = PaginatedResponse<Transaction>;
 
 export async function production(data: Parameters): Promise<Response> {
-	const query_string = buildQueryString(data);
-	const response = await axios.get(`/account/recent-transactions?${query_string}`);
-	return paginate(response.data.data);
+  console.log(data.query_string);
+  const response = await axios.get(
+    `/account/transactions${data.query_string}`,
+  );
+  return paginate(response.data.data);
 }
 
 export async function development(): Promise<Response> {

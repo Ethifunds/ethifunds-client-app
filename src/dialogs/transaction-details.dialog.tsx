@@ -22,16 +22,15 @@ export default React.memo(function TransactionDetailsDialog() {
 	}, [dialog.show, dialog.type]);
 
 	const { isFetching, isError, error, data } = useQuery(
-		["transaction-id", id],
-		() =>
-			getTransactionDetails({
-				id,
-				currency: currency.code,
-			}),
-		{
-			enabled: open,
-		}
-	);
+    ["transaction-id", id],
+    () =>
+      getTransactionDetails({
+        id,
+      }),
+    {
+      enabled: open,
+    },
+  );
 
 	const toggleShow = (val: boolean) => {
 		ui.changeDialog({ show: val, type: "", id: "" });
