@@ -44,6 +44,7 @@ export default React.memo(function Notifications() {
             variant="primary"
             className="w-full"
             onClick={() => (edit ? submit(activeSubTab) : toggleEdit(true))}
+            isLoading={isLoading}
           >
             {edit ? "Save" : "Edit"}
           </AppButton>

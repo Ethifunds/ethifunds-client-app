@@ -59,13 +59,16 @@ export default function useNotifications() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [edit, setEdit] = React.useState(false);
 
+
+
   const isNotifications = React.useMemo(
     () => queryParams.has("tab", "notifications"),
     [queryParams],
   );
 
   const activeSubTab = React.useMemo(() => {
-    return queryParams.get("sub_tab")?.trim() as keyof typeof formData;
+    return (queryParams.get("sub_tab") ??
+      "email"?.trim()) as keyof typeof formData;
   }, [queryParams]);
 
   const {
@@ -73,36 +76,40 @@ export default function useNotifications() {
     isError,
     error,
     data: _data,
-  } = useQuery(["user-settings"], () => getNotificationSettings(), {
-    enabled: isNotifications,
-    onSuccess(data) {
-      const getSection = (key: keyof typeof formData) => {
-        const list = data.filter((item) => item.section === key)[0];
+  } = useQuery(
+    ["user-settings", activeSubTab],
+    () => getNotificationSettings({ section: activeSubTab }),
+    {
+      enabled: isNotifications,
+      onSuccess(data) {
+        const getSection = (key: keyof typeof formData) => {
+          const list = data.filter((item) => item.section === key)[0];
 
-        if (!list) return { [key]: init };
+          if (!list) return { [key]: init };
 
-        const sections = Object.entries(list)
-          .filter(([_key]) => Object.keys(init).includes(_key))
-          .map(([_key, value]) => [_key, value]);
+          const sections = Object.entries(list)
+            .filter(([_key]) => Object.keys(init).includes(_key))
+            .map(([_key, value]) => [_key, value]);
 
-        const converted = Object.fromEntries(sections);
+          const converted = Object.fromEntries(sections);
 
-        return {
-          [key]: { ...init, ...converted },
+          return {
+            [key]: { ...init, ...converted },
+          };
         };
-      };
 
-      const updates = Object.keys(formData).reduce(
-        (acc, key) => {
-          const sectionUpdate = getSection(key as keyof typeof formData);
-          return { ...acc, ...sectionUpdate };
-        },
-        {} as typeof formData,
-      );
+        const updates = Object.keys(formData).reduce(
+          (acc, key) => {
+            const sectionUpdate = getSection(key as keyof typeof formData);
+            return { ...acc, ...sectionUpdate };
+          },
+          {} as typeof formData,
+        );
 
-      setFormData(updates);
+        setFormData(updates);
+      },
     },
-  });
+  );
 
   const initFormData = (data: typeof _data) => {
     if (!data) return;
@@ -170,6 +177,7 @@ export default function useNotifications() {
   };
 
   const click = (path: string) => {
+    if (edit) return toast.info("Save or reset this section before proceeding");
     queryParams.set("sub_tab", path);
     reset();
   };

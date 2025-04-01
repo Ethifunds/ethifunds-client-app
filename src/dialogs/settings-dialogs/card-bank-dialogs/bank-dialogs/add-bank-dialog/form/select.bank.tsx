@@ -22,37 +22,54 @@ export default function SelectBank(props: SelectBankProps) {
 		return props.bankList.find((item) => item.code === props.value)?.name ?? "Select Bank";
 	}, [props.value, props.bankList]);
 	return (
-		<Select onValueChange={props.changeForm} disabled={props.disabled}>
-			<SelectTrigger className="w-full p-2 bg-neutral-50">
-				<SelectValue
-					asChild
-					placeholder={
-						<div className="flex items-center gap-3">
-							<img src={assets.bank_01} alt="bank icon" className="object-cover size-6" />
+    <Select onValueChange={props.changeForm} disabled={props.disabled}>
+      <SelectTrigger className="w-full bg-neutral-50 p-2">
+        <SelectValue
+          asChild
+          placeholder={
+            <div className="flex items-center gap-3">
+              <img
+                src={assets.bank_01}
+                alt="bank icon"
+                className="size-6 object-cover"
+              />
 
-							<span>Select Bank</span>
-						</div>
-					}
-					className="flex items-center gap-3"
-				>
-					<div className="flex items-center gap-3">
-						<img src={assets.bank_01} alt="bank icon" className="object-cover size-6" />
+              <span>Select Bank</span>
+            </div>
+          }
+          className="flex items-center gap-3"
+        >
+          <div className="flex items-center gap-3">
+            <img
+              src={assets.bank_01}
+              alt="bank icon"
+              className="size-6 object-cover"
+            />
 
-						<span>{bankName}</span>
-					</div>
-				</SelectValue>
-			</SelectTrigger>
-			<SelectContent position="popper" side="bottom" className="max-h-60" align="end">
-				{props.bankList.map((item) => (
-					<SelectItem key={item.code} value={item.code} className="capitalize">
-						<div className="flex items-center gap-3">
-							<img src={assets.bank_01} alt="bank icon" className="object-cover size-6" />
+            <span>{bankName}</span>
+          </div>
+        </SelectValue>
+      </SelectTrigger>
+      <SelectContent
+        position="popper"
+        side="bottom"
+        className="max-h-60 max-w-[23rem]"
+        align="end"
+      >
+        {props.bankList.map((item, idx) => (
+          <SelectItem key={idx} value={item.code} className="capitalize">
+            <div className="flex items-center gap-3">
+              <img
+                src={assets.bank_01}
+                alt="bank icon"
+                className="size-6 object-cover"
+              />
 
-							<span>{item.name.toLocaleUpperCase()}</span>
-						</div>
-					</SelectItem>
-				))}
-			</SelectContent>
-		</Select>
-	);
+              <span className="">{item.name.toLocaleUpperCase()}</span>
+            </div>
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  );
 }

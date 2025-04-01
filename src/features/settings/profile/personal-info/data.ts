@@ -6,7 +6,8 @@ export const formFields: FORM_FIELDS[] = [
     type: "text",
     label: "First Name",
     placeholder: "enter first name",
-    required: true,
+    required: false,
+    readOnly: true,
     containerStyle: "col-span-2 lg:col-span-1",
   },
   {
@@ -14,7 +15,8 @@ export const formFields: FORM_FIELDS[] = [
     type: "text",
     label: "Last Name",
     placeholder: "Enter last name",
-    required: true,
+    required: false,
+    readOnly: true,
     containerStyle: "col-span-2 lg:col-span-1",
   },
   {
@@ -57,7 +59,8 @@ export const formFields: FORM_FIELDS[] = [
     label: "Date of Birth",
     containerStyle: "col-span-2 [&_input]:!w-full",
     placeholder: "",
-    required: true,
+    readOnly: true,
+    required: false,
   },
   {
     name: "gender",
@@ -69,6 +72,7 @@ export const formFields: FORM_FIELDS[] = [
       { title: "male", value: "male" },
       { title: "female", value: "female" },
     ],
+    readOnly: true,
     required: false,
   },
   {
@@ -104,14 +108,14 @@ export const formFields: FORM_FIELDS[] = [
   //     required: false,
   //     readOnly: true
   // },
-  {
-    name: "referral_code",
-    type: "text",
-    label: "Referral Code",
-    placeholder: "",
-    containerStyle: "col-span-2",
-    required: false,
-    readOnly: true,
-  },
+  // {
+  //   name: "referral_code",
+  //   type: "text",
+  //   label: "Referral Code",
+  //   placeholder: "",
+  //   containerStyle: "col-span-2",
+  //   required: false,
+  //   readOnly: true,
+  // },
 ];
 

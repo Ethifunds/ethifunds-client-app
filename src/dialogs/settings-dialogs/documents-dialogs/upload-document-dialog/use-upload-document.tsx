@@ -14,12 +14,14 @@ const validation = z.object({
   id_number: z
     .string()
     .min(8, "Id number must be at least 8 characters long")
-    .optional(),
+    .optional()
+    .or(z.literal("")),
   address: z
     .string()
     .trim()
     .min(5, "Address must be at least 5 characters ")
-    .optional(),
+    .optional()
+    .or(z.literal("")),
 });
 type FormData = z.infer<typeof validation>;
 

@@ -13,7 +13,10 @@ type Response = {
 };
 
 export async function production(payload: Parameters): Promise<Response> {
-	const response = await axios.post(`/settings/add-bank`, payload);
+	const response = await axios.post(
+    `/settings/verify-account-details`,
+    payload,
+  );
 
 	return response.data.data;
 }

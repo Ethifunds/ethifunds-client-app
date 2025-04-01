@@ -4,8 +4,12 @@ import { NotificationSettings } from "@/types/notifications-settings.types";
 
 type Response = NotificationSettings[];
 
-export async function production(): Promise<Response> {
-  const response = await axios.get(`/settings/notification-settings`);
+type Parameters = {
+  section: string;
+};
+
+export async function production(data: Parameters): Promise<Response> {
+  const response = await axios.get(`/settings/notification-settings/${data}`);
   return response.data.data;
 }
 
@@ -71,8 +75,10 @@ export async function development(): Promise<Response> {
   });
 }
 
-export default async function getNotificationSettings(): Promise<Response> {
+export default async function getNotificationSettings(
+  data: Parameters,
+): Promise<Response> {
   if (variables.NODE_ENV === "development") return development();
 
-  return production();
+  return production(data);
 }

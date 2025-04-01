@@ -8,11 +8,12 @@ import Security from "./security";
 import BankCard from "./bank-card";
 import Notifications from "./notifications";
 import Documents from "./documents";
+import * as React from "react";
 
 export default function Settings() {
   useUi({ title: "Settings" });
   const { queryParams, navigate } = useCustomNavigation();
-  const activeTab = queryParams.get("tab");
+  const activeTab = React.useMemo(() => queryParams.get("tab"), [queryParams]);
 
   const click = (value: string) => {
     navigate(`?tab=${value}`);

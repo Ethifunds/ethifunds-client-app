@@ -91,7 +91,11 @@ export default function useForm() {
     try {
       const formValues = validation.parse(formData);
 
-      const response = await updateUser(formValues);
+      const response = await updateUser({
+        ...formValues,
+        user_tag: formValues.username,
+      });
+      
       accountActions.updateAccount({
         ...account,
         ...response,

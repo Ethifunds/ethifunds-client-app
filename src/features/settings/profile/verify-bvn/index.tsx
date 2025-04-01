@@ -33,6 +33,7 @@ export default function VerifyBvn() {
     [account.user_verifications.has_verified_bvn],
   );
 
+
   const reset = () => {
     setFormData(init);
     setErrorMsg("");

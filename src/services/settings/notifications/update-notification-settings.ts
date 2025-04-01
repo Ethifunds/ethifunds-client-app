@@ -8,11 +8,17 @@ type Parameters = Pick<
   | "login_notification"
   | "wallet_threshold"
   | "section"
->;
+> & { section: string };
 type Response = void;
 
-export async function production(data: Parameters): Promise<Response> {
-  const response = await axios.post(`/settings/notification-settings`, data);
+export async function production({
+  section,
+  ...data
+}: Parameters): Promise<Response> {
+  const response = await axios.post(
+    `/settings/notification-settings/${section}`,
+    data,
+  );
   return response.data.data;
 }
 

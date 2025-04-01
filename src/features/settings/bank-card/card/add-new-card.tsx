@@ -3,12 +3,14 @@ import PaystackPop from "@paystack/inline-js";
 import { variables } from "@/constants";
 import { toast } from "sonner";
 import useCustomNavigation from "@/hooks/use-navigation";
+import useAppSelectors from "@/store/use-app-selectors";
 
 type AddNewCardProps = {
   close: () => void;
 };
 
 export default React.memo(function AddNewCard(props: AddNewCardProps) {
+  const { account } = useAppSelectors("account");
   const { queryParams } = useCustomNavigation();
   const initiate = React.useMemo(
     () => queryParams.has("action", "add_card_popup"),
@@ -34,9 +36,9 @@ export default React.memo(function AddNewCard(props: AddNewCardProps) {
 
   paystackInstance.newTransaction({
     key: variables.PAYSTACK.public_key,
-    email: "demo@paystack.com",
-    firstName: "jon",
-    lastName: "doe",
+    email: account.email,
+    firstName: account.user_profile?.first_name,
+    lastName: account.user_profile?.last_name,
     amount: variables.PAYSTACK.charge_amount,
     onSuccess,
     onCancel,
