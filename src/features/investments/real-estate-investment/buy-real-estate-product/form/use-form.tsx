@@ -114,7 +114,7 @@ export default function useForm(data: FormProps & { refresh: refresh }) {
     } catch (error) {
       const errMsg = ensureError(error).message;
       const err = ensureError(error);
-      if (err.message.includes("insufficient")) {
+      if (err.message.toLowerCase().includes("insufficient")) {
         return showInsufficientFundsDialog();
       }
       toast.error(errMsg);

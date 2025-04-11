@@ -31,7 +31,7 @@ export default React.memo(function BuyRealEstateProduct(
             <div className="flex flex-col justify-between gap-2 text-neutral-1000">
               <h1 className="feature-bold capitalize">{props.name}</h1>
               <span className="highlight-accent">
-                {capitalize(props.custodian.name)}
+                {capitalize(props.custodian?.name??"")}
               </span>
             </div>
             {/* <span>Buy your way into an investment of a lifetime.</span> */}

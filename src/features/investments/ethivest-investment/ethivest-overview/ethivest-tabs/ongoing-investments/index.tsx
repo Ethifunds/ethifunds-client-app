@@ -9,34 +9,45 @@ import Render from "@/components/render";
 import getProductDetails from "@/services/investments/get-product-details";
 import ensureError from "@/lib/ensure-error";
 import { toast } from "sonner";
-import { useAppSelector } from "@/store/hooks";
 import EmptyData from "@/components/empty-data";
 import { assets } from "@/constants";
 import ErrorBoundary from "@/components/error-boundary";
 import useActions from "@/store/actions";
 import { ActiveInvestmentProduct } from "@/types/investments.types";
+import useAppSelectors from "@/store/use-app-selectors";
 
 type List = ActiveInvestmentProduct & {
   display_image: string;
   product_name: string;
 };
 export default React.memo(function OngoingInvestments() {
-  const { currency } = useAppSelector((state) => state.account);
-  const { params } = useCustomNavigation();
+  const { currency } = useAppSelectors("account");
+  const { params, queryParams } = useCustomNavigation();
   const [list, setList] = React.useState<List[]>([]);
   const [settled, setSettled] = React.useState(false);
 
-  const categoryId = params.categoryId ?? "";
-
   const { ui } = useActions();
+  const categoryId = React.useMemo(
+    () => params.categoryId ?? "",
+    [params.categoryId],
+  );
+  const enable = React.useMemo(
+    () => queryParams.has("tab", "ongoing_investments") ,
+    [queryParams],
+  );
 
   const { isFetching, isError, error } = useQuery(
-    ["ongoing-ethivest-investment"],
+    ["ongoing-ethivest-investment",enable],
     () => getMyInvestmentCategoryDetails({ categoryId }),
     {
+      // enabled:enable,
       onSuccess: async (data) => {
         const investments = data.investments.map((item) => item);
+        if (investments.length < 1) {
+          setSettled(true);
 
+          return;
+        }
         const productList = await Promise.all(
           investments.map(async (item) => {
             try {
@@ -90,7 +101,7 @@ export default React.memo(function OngoingInvestments() {
               list?.map((item, idx) => (
                 <div
                   key={idx}
-                  className="flex rounded-xl border p-4 transition hover:shadow-md cursor-pointer"
+                  className="flex cursor-pointer rounded-xl border p-4 transition hover:shadow-md"
                   onClick={() => click(item.id.toString())}
                 >
                   <div className="flex grow items-center gap-5">

@@ -112,9 +112,9 @@ export default function useVaultWithdrawal() {
 			setActiveTab("success");
 		} catch (error) {
 			const err = ensureError(error);
-			if (err.message.includes("insufficient")) {
-				return setActiveTab("insufficient_funds");
-			}
+			if (err.message.toLocaleLowerCase().includes("enough")) {
+        return setActiveTab("insufficient_funds");
+      }
 			toast.error(err.message);
 			setErrMsg(err.message);
 		} finally {

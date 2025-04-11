@@ -11,15 +11,25 @@ import Render from "@/components/render";
 
 export default React.memo(function ExploreMarketplace() {
   const [list, setList] = React.useState<InvestmentProduct[]>([]);
-  const { params } = useCustomNavigation();
+  const { params, queryParams } = useCustomNavigation();
 
-  const categoryId = params.categoryId ?? "";
+  const categoryId = React.useMemo(
+    () => params.categoryId ?? "",
+    [params.categoryId],
+  );
+
+  const hasActions = React.useMemo(
+    () => queryParams.has("actions"),
+    [queryParams],
+  );
 
   const { isFetching, isError, error } = useQuery(
     ["ethivest-marketplace", categoryId],
     () => getInvestmentCategoryDetails({ categoryId }),
     {
+      enabled: !hasActions && true,
       onSuccess(data) {
+        console.log(data, "prosucst")
         setList(data.products);
       },
     },

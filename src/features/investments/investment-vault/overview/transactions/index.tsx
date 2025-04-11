@@ -15,6 +15,7 @@ export default function VaultTransactions() {
 	React.useLayoutEffect(() => {
 		changeBackBtn({
 			show: true,
+			path:"/investments/vault/overview"
 		});
 
 		return () => {

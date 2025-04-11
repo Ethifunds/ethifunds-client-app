@@ -112,7 +112,8 @@ export default function useForm(data: investmentMarketplaceProduct) {
       showSuccessDialog();
     } catch (err) {
       const errMsg = ensureError(err).message;
-      if (errMsg.includes("insufficient")) return showInsufficientDialog();
+      if (errMsg.toLocaleLowerCase().includes("insufficient"))
+        return showInsufficientDialog();
       toast.error(errMsg);
     } finally {
       setIsLoading(false);

@@ -2,10 +2,16 @@ import { variables } from "@/constants";
 import axios from "@/lib/axios";
 import { CompletedInvestmentProduct } from "@/types/investments.types";
 
+
+type Parameters = {
+  category_id: string;
+};
 type Response = CompletedInvestmentProduct[];
 
-export async function production(): Promise<Response> {
-  const response = await axios.get(`/my-investment/completed-investments`);
+export async function production(data: Parameters): Promise<Response> {
+  const response = await axios.get(
+    `/my-investment/completed-investments?category_id=${data.category_id}`,
+  );
   return response.data.data;
 }
 
@@ -78,8 +84,10 @@ export async function development(): Promise<Response> {
   });
 }
 
-export default async function getCompletedInvestments(): Promise<Response> {
+export default async function getCompletedInvestments(
+  data: Parameters,
+): Promise<Response> {
   if (variables.NODE_ENV === "development") return development();
 
-  return production();
+  return production(data);
 }

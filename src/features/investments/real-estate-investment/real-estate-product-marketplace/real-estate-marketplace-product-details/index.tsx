@@ -1,7 +1,6 @@
 import useCustomNavigation from "@/hooks/use-navigation";
 import * as React from "react";
 import DetailsBox from "./details-box";
-import MetricsBox from "./metrics-box";
 import { investmentMarketplaceProduct } from "@/types/investments.types";
 import ErrorBoundary from "@/components/error-boundary";
 import AppButton from "@/components/app-button";
@@ -37,7 +36,7 @@ export default React.memo(function RealEstateMarketplaceProductDetails(
 
         <div className="w-full space-y-8">
           <DetailsBox {...props} />
-          <MetricsBox />
+          {/* <MetricsBox /> */}
           <div className="">
             <AppButton
               variant="primary"

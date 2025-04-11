@@ -27,8 +27,7 @@ export default React.memo(function EthivestInvestment() {
         loadingPosition="center"
         loadingBoxClass="!h-96"
       >
-        {/* TODO: remove the inverse ! */}
-        {!showOverview ? (
+        {showOverview ? (
           <EthivestOverview />
         ) : (
           <EthivestTerms showOverview={setShowOverview} />

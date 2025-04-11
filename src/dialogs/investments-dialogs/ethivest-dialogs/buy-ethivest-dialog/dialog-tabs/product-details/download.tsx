@@ -4,14 +4,17 @@ import ensureError from "@/lib/ensure-error";
 import { InvestmentProduct } from "@/types/investments.types";
 import { toast } from "sonner";
 
-export default function DownloadMemo(props: { id: InvestmentProduct["id"] }) {
+export default function DownloadMemo(props: {
+  url: InvestmentProduct["product_memo"];
+  name: string;
+}) {
   const download = async () => {
-    if (!props.id) return;
+    if (!props.url) return;
     try {
-      const fileUrl = assets.sample_pdf;
+      const fileUrl = props.url;
       const link = document.createElement("a");
       link.href = fileUrl;
-      link.setAttribute("download", "Investment_Memo.pdf");
+      link.setAttribute("download", props.name + ".pdf");
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);

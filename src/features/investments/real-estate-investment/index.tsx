@@ -12,6 +12,7 @@ export default function RealEstateInvestment() {
 	useSeo({ pageTitle: "REITs" });
 	useUi({ title: "REIT" });
 	const { isFetching, isError, error, data } = useRealEstateInvestment();
+	console.log(data);
 
 	return (
 		<AppContainer className="space-y-5 h-full">

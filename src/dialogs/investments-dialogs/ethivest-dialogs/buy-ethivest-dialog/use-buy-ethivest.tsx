@@ -1,3 +1,4 @@
+import useCustomNavigation from "@/hooks/use-navigation";
 import { amountSeparator } from "@/lib/amount-separator";
 import ensureError from "@/lib/ensure-error";
 import buyUnits from "@/services/investments/buy-units";
@@ -45,13 +46,15 @@ export default function useBuyEthivest() {
   const [formData, setFormData] = React.useState(init);
   const [isLoading, setIsLoading] = React.useState(false);
 
+  const { queryParams } = useCustomNavigation();
+
   const { ui } = useActions();
 
   const productId = dialog.id;
 
-    const open = React.useMemo(() => {
-      return dialog.show && dialog.type === "buy_ethivest_product";
-    }, [dialog.show, dialog.type]);
+  const open = React.useMemo(() => {
+    return dialog.show && dialog.type === "buy_ethivest_product";
+  }, [dialog.show, dialog.type]);
 
   const {
     isFetching,
@@ -59,15 +62,18 @@ export default function useBuyEthivest() {
     error,
     data: response,
   } = useQuery(
-    ["ethivest-product-details-dialog", productId],
+    ["ethivest-product-details-dialog", productId, open],
     () => getProductDetails({ productId: Number(productId) }),
     { enabled: open },
-  );
+    );
+  
+  console.log(response)
 
   const reset = () => {
     if (isLoading) return;
     setFormData(init);
     setActiveTab("product_details");
+    queryParams.delete("actions");
   };
 
   const updateForm = (
@@ -87,10 +93,11 @@ export default function useBuyEthivest() {
     }));
   };
 
-
-
   const changeTab = (value: typeof activeTab) => {
     setActiveTab(value);
+    if (value === "buy_product") {
+      queryParams.set("actions", value);
+    }
   };
 
   const toggleDrawer = (value: boolean) => {
@@ -111,6 +118,7 @@ export default function useBuyEthivest() {
   };
 
   const proceedToPayment = () => {
+    console.log(response);
     if (!response) return;
 
     if (formData.units > response?.total_units) {
@@ -127,8 +135,8 @@ export default function useBuyEthivest() {
     );
 
     const data = {
-      section: response.section,
-      trustee: response.custodian.name,
+      section: response.product_section.name,
+      trustee: response?.custodian?.name,
       interest_rate: `${response.expected_roi}% ROI`,
       purchasing_cost: `${currency.sign} ${amountSeparator(purchasing_cost)}`,
       available_units: `${amountSeparator(available_units)} units`,
@@ -163,6 +171,7 @@ export default function useBuyEthivest() {
     try {
       const formValues = validation.parse({
         ...formData,
+        units: Number(formData.units),
         product_id: Number(productId),
         pin,
       });
@@ -170,7 +179,8 @@ export default function useBuyEthivest() {
       showSuccess();
     } catch (err) {
       const errMsg = ensureError(err).message;
-      if (errMsg.includes("insufficient")) return showInsufficientDialog();
+      if (errMsg.toLocaleLowerCase().includes("insufficient"))
+        return showInsufficientDialog();
       toast.error(errMsg);
     } finally {
       setIsLoading(false);

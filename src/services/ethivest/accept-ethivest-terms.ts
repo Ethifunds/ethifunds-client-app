@@ -3,7 +3,7 @@ import axios from "@/lib/axios";
 
 type Response = void;
 export async function production(): Promise<Response> {
-  const response = await axios.get(`/investment/vault?`);
+  const response = await axios.post(`/investment/agree-to-ethivest-terms`);
   return response.data.data;
 }
 

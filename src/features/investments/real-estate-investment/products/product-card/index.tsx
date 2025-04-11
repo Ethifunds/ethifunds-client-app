@@ -1,6 +1,7 @@
 import { InvestmentProduct } from "@/types/investments.types";
 import { Link } from "react-router-dom";
 import * as React from "react";
+import capitalize from "@/lib/capitalize";
 
 export default function ProductCard(props: InvestmentProduct) {
   const isSoldOut = props.total_units === props.units_sold;
@@ -25,7 +26,9 @@ export default function ProductCard(props: InvestmentProduct) {
           <div className="flex-1 space-y-2 py-3">
             <div className="text-neutral-1000">
               <h1 className="content-bold line-clamp-1">{props.name}</h1>
-              <span className="content-standard">{props.custodian.name}</span>
+              <span className="content-standard">
+                {capitalize(props.custodian?.name ?? "")}
+              </span>
             </div>
 
             <h2 className="content-bold text-neutral-1000">
@@ -69,7 +72,9 @@ export default function ProductCard(props: InvestmentProduct) {
           <div className="space-y-2 py-3">
             <div className="text-neutral-1000">
               <h1 className="feature-accent line-clamp-1">{props.name}</h1>
-              <span className="content-standard">{props.custodian.name}</span>
+              <span className="content-standard">
+                {capitalize(props.custodian?.name ?? "")}
+              </span>
             </div>
 
             <h2 className="highlight-bold text-neutral-1000">
@@ -91,7 +96,7 @@ export default function ProductCard(props: InvestmentProduct) {
               ) : (
                 <h2 className="highlight-accent text-neutral-500">
                   {" "}
-                  {props.total_units}{" "}
+                  {availableUnits}{" "}
                   <span className="text-secondary">Available Units</span>
                 </h2>
               )}

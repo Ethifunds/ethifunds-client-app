@@ -21,9 +21,9 @@ export default function DetailsBox(props: InvestmentProduct) {
         </Badge>
         <div className="flex flex-col justify-between gap-2 text-neutral-1000 lg:flex-row lg:items-center">
           <h1 className="feature-bold capitalize">{props.name}</h1>
-          <span className="highlight-accent">
-            by {capitalize(props.custodian.name)}
-          </span>
+         {props.custodian?.name && <span className="highlight-accent">
+            by {capitalize(props.custodian?.name??"")} 
+          </span>}
         </div>
 
         <div className="flex items-center justify-between lg:justify-normal lg:gap-10">

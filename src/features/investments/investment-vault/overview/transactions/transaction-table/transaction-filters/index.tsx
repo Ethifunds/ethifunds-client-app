@@ -1,23 +1,23 @@
 import ErrorBoundary from "@/components/error-boundary";
-import CurrencyFilter from "./currency-filter";
-import { DateFilter } from "./date-filter";
-import ExportFilter from "./export-filter";
-import StatusFilter from "./status-filter";
-import TransactionTypeFilter from "./transaction-type-filter";
+import CurrencyFilter from "@/components/table-filters/currency-filter";
+import { DateFilter } from "@/components/table-filters/data-filter";
+import ExportFilter from "@/components/table-filters/export-filter";
+import StatusFilter from "@/components/table-filters/status-filter";
+import TransactionTypeFilter from "@/components/table-filters/transaction-type-filter";
 
 export type FilterProps = {
-	disabled: boolean;
+  disabled: boolean;
 };
 export default function TransactionFilters(props: FilterProps) {
-	return (
-		<ErrorBoundary>
-			<div className="flex items-center gap-3 py-1 overflow-auto">
-				<TransactionTypeFilter {...props} />
-				<CurrencyFilter {...props} />
-				<StatusFilter {...props} />
-				<ExportFilter {...props} />
-				<DateFilter {...props} />
-			</div>
-		</ErrorBoundary>
-	);
+  return (
+    <ErrorBoundary>
+      <div className="flex items-center gap-3 overflow-auto py-1">
+        <TransactionTypeFilter {...props} />
+        <CurrencyFilter {...props} />
+        <StatusFilter {...props} />
+        <ExportFilter {...props} url="" />
+        <DateFilter {...props} />
+      </div>
+    </ErrorBoundary>
+  );
 }

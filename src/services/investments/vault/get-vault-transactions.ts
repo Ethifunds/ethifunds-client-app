@@ -2,19 +2,16 @@ import { variables } from "@/constants";
 import { vaultTransactions } from "@/constants/data/vault";
 import { PaginatedResponse, PaginationQuery } from "@/types/global.types";
 import axios from "@/lib/axios";
-import buildQueryString from "@/lib/build-query-string";
 import paginate from "@/lib/paginate";
 import { InvestmentVaultTransaction } from "@/types/investment-vault.types";
 
-type Parameters = Partial<PaginationQuery> & {
-	currency: string;
-};
+type Parameters = Partial<PaginationQuery> & {};
 
 type Response = PaginatedResponse<InvestmentVaultTransaction>;
 
 export async function production(data: Parameters): Promise<Response> {
-	const query_string = buildQueryString(data);
-	const response = await axios.get(`/investment/vault/transactions?${query_string}`);
+	
+	const response = await axios.get(`/investment/vault/transactions${data.query_string}`);
 	return paginate(response.data.data);
 }
 

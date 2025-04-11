@@ -35,8 +35,6 @@ export type InvestmentProduct = {
   account_id: number;
   type: string;
   description: string;
-  label: string;
-  section: string;
   minimum_investment: string;
   maximum_investment: string;
   expected_roi: number;
@@ -60,6 +58,19 @@ export type InvestmentProduct = {
   updated_at: string;
   custodian: InvestmentProductCustodian;
   category: InvestmentCategory;
+  product_label: InvestmentProductLabel;
+  product_section: InvestmentProductLabel;
+  product_memo: string;
+};
+
+export type InvestmentProductLabel = {
+  active: 1;
+  created_at: null;
+  description: string;
+  id: 2;
+  name: string;
+  product_id: null;
+  updated_at: null;
 };
 
 export type InvestmentProductHistoricData = {

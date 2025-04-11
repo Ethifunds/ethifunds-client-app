@@ -14,6 +14,7 @@ import ErrorBoundary from "@/components/error-boundary";
 import useActions from "@/store/actions";
 import getCompletedInvestments from "@/services/investments/get-completed-investments";
 import { CompletedInvestmentProduct } from "@/types/investments.types";
+import useCustomNavigation from "@/hooks/use-navigation";
 
 type List = CompletedInvestmentProduct & {
   display_image: string;
@@ -23,16 +24,20 @@ export default React.memo(function CompletedInvestments() {
   const { currency } = useAppSelector((state) => state.account);
   const [list, setList] = React.useState<List[]>([]);
   const [settled, setSettled] = React.useState(false);
+  const { params } = useCustomNavigation();
+
+  const category_id = params.categoryId ?? "";
 
   const { ui } = useActions();
 
-  
   const { isFetching, isError, error } = useQuery(
-    ["completed-investments"],
-    () => getCompletedInvestments(),
+    ["completed-investments", category_id],
+    () => getCompletedInvestments({ category_id }),
     {
       onSuccess: async (data) => {
         const investments = data.map((item) => item);
+
+        if (investments.length < 1) return setSettled(true);
 
         const productList = await Promise.all(
           investments.map(async (item) => {
@@ -58,6 +63,9 @@ export default React.memo(function CompletedInvestments() {
           setSettled(true);
         }
       },
+      onError() {
+        setSettled(true);
+      },
     },
   );
 
@@ -80,8 +88,8 @@ export default React.memo(function CompletedInvestments() {
           <div className="flex flex-col gap-5">
             {settled && list.length < 1 ? (
               <EmptyData
-                title="No ongoing Investment"
-                text="You don't have an Active Investment. All ongoing investment will appear here."
+                title="No Completed Investment Yet"
+                text="You don't have any Completed Investment. All completed investments will appear here."
               />
             ) : (
               list?.map((item) => (

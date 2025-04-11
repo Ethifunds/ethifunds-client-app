@@ -13,7 +13,7 @@ export default function Products(props: ProductsProps) {
         {props.data.length < 1 ? (
           <EmptyData text="No listing available at the moment" />
         ) : (
-          props.data.map((item) => <ProductCard {...item} />)
+          props.data.map((item) => <ProductCard key={item.id} {...item} />)
         )}
       </div>
     </ErrorBoundary>

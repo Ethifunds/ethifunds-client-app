@@ -10,6 +10,7 @@ export default React.memo(function Details(props: InvestmentProduct) {
   const { currency } = useAppSelector((state) => state.account);
   const data = props;
 
+  console.log(data);
   const statusBadge = (
     <Badge
       className={`capitalize ${data.status === "active" ? "bg-success-200/20 text-success-300" : "bg-error-200/20 text-error-300"}`}
@@ -23,14 +24,14 @@ export default React.memo(function Details(props: InvestmentProduct) {
   const infoData = {
     status: statusBadge,
     investment_name: data.name,
-    trustee: data.custodian.name,
+    trustee: data?.custodian?.name,
     expected_return: `${amountSeparator(data.expected_roi)}%`,
     current_unit_price: `${currency.sign} ${data.unit_price}`,
     tenure: `${data.tenor_value} ${data.tenor_unit}`,
-    section: `${data.section.replace("_", " ")}`,
+    section: `${data?.product_section?.name?.replace("_", " ")}`,
     label: (
       <Badge className="bg-primary-100 capitalize text-primary">
-        {data.label}
+        {data.product_label?.name}
       </Badge>
     ),
     available_units: `${amountSeparator(available_units)} Units`,
@@ -40,7 +41,6 @@ export default React.memo(function Details(props: InvestmentProduct) {
         dateStyle: "medium",
       },
     ),
-    investment: data.id,
   };
 
   return (
