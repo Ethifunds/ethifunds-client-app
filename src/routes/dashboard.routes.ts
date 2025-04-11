@@ -36,7 +36,7 @@ const dashboardRoutes: CustomRouteProps[] = [
 
 	{ path: "/savings", Component: SavingsPage },
 	{ path: "/savings/overview", Component: SavingsOverviewPage },
-	{path:"/savings/transactions", Component:SavingsTransactionsPage},
+	{path:"/savings/:cycle_id/transactions", Component:SavingsTransactionsPage},
 
 	{ path: "/investments", Component: InvestmentsPage },
 	{ path: "/investments/vault", Component: InvestmentVault },

@@ -1,5 +1,5 @@
 export default function capitalize(value: string, type: "inital" | "all" = "inital"): string {
-  if (value.length < 1) return value
+  if (!value || value.length < 1) return value;
   const toUpperFirst = (word: string): string => {
     const firstLetter = word[0];
     const capitalizedFirstLetter = firstLetter.toUpperCase();

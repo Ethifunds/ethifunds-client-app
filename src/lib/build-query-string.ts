@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-
 /**
  *used to build query string
  *
@@ -16,3 +15,10 @@ export default function buildQueryString(query: Record<string, any>): string {
     .join("&");
 }
 
+export function formatSearchString(
+  search: string,
+  defaultQueries: Record<string, any> = {},
+): string {
+  const queries = buildQueryString(defaultQueries);
+  return search ? `${search}&${queries}` : `?${queries}`;
+}
