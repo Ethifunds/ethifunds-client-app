@@ -13,8 +13,9 @@ export default function WalletTransactions() {
 
 	React.useLayoutEffect(() => {
 		changeBackBtn({
-			show: true,
-		});
+      show: true,
+      path: "/wallet",
+    });
 
 		return () => {
 			changeBackBtn(null);
