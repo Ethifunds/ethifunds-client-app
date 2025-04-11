@@ -9,7 +9,7 @@ export const notifications: Notification[] = [
   {
     id: 12,
     data: {
-      type: "ACCOUNT",
+      type: "ACCOUNT_NOTIFICATION",
       message:
         "your account has been successfully verified and you have full access to all the features in the application",
     },
@@ -20,7 +20,7 @@ export const notifications: Notification[] = [
   {
     id: 11,
     data: {
-      type: "SYSTEM",
+      type: "SYSTEM_NOTIFICATION",
       message:
         "system maintenance has been concluded and application is back at full capacity, thanks for your patience.",
     },
@@ -32,7 +32,7 @@ export const notifications: Notification[] = [
   {
     id: 30,
     data: {
-      type: "PROMOTIONAL",
+      type: "PROMOTIONAL_NOTIFICATION",
       message:
         "New investment opportunities available for grabs check out the investments for more details",
       product: investmentProducts[0],
@@ -44,7 +44,7 @@ export const notifications: Notification[] = [
   {
     id: 1,
     data: {
-      type: "INVESTMENT_OFFERS",
+      type: "INVESTMENT_OFFER_NOTIFICATION",
       message:
         "Your counter offer of ₦5 per unit for 3 units of REIT Product 1 has been sent to the seller. You'll be notified once they respond!",
     },
@@ -56,7 +56,7 @@ export const notifications: Notification[] = [
   {
     id: 310,
     data: {
-      type: "TRANSACTIONS",
+      type: "TRANSACTIONS_NOTIFICATION",
       message:
         "NGN 5,000 was successfully transferred from your Vault to your wallet",
     },
@@ -67,7 +67,7 @@ export const notifications: Notification[] = [
   {
     id: 2,
     data: {
-      type: "INVESTMENT_OFFERS",
+      type: "INVESTMENT_OFFER_NOTIFICATION",
       message:
         "Note that a counter offer has been made on your REIT investment",
       listing: exploreMarketplaceList[0],
@@ -80,7 +80,7 @@ export const notifications: Notification[] = [
   {
     id: 3,
     data: {
-      type: "PROMOTIONAL",
+      type: "PROMOTIONAL_NOTIFICATION",
       message:
         "New REIT investment opportunity up for grabs check investments for details",
       product: investmentProducts[0],
@@ -93,7 +93,7 @@ export const notifications: Notification[] = [
   {
     id: 4,
     data: {
-      type: "INVESTMENT_TRANSACTIONS",
+      type: "INVESTMENT_TRANSACTIONS_NOTIFICATION",
       message: "you have successfully renewed your savings investment",
       user_savings: savings[0],
     },
@@ -105,7 +105,7 @@ export const notifications: Notification[] = [
   {
     id: 29,
     data: {
-      type: "INVESTMENT_TRANSACTIONS",
+      type: "INVESTMENT_TRANSACTIONS_NOTIFICATION",
       message: "you have successfully purchased your an investment",
       user_investment: myActiveInvestments[0].investments[0],
     },
