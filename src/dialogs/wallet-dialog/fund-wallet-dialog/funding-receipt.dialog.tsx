@@ -25,7 +25,6 @@ export default React.memo(function FundingReceiptDialog() {
     () =>
       getTransactionDetails({
         id: String(id),
-        currency: currency.code,
       }),
     {
       enabled: open,

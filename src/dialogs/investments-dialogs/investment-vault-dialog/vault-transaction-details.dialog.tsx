@@ -26,7 +26,6 @@ export default React.memo(function VaultTransactionDetailsDialog() {
     () =>
       getTransactionDetails({
         id,
-        currency: currency.code,
       }),
     {
       enabled: open,

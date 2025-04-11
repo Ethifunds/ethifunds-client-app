@@ -33,6 +33,7 @@ export async function development(): Promise<Response> {
             last_payout_amount: null,
             profit_withdrawn: "0.00",
             withdrawable_balance: "0.00",
+            units_sold: 0,
             investment_growth: 0,
             transaction_reference: null,
             investment_plan_details: null,

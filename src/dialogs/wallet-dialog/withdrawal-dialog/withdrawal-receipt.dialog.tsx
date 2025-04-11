@@ -26,7 +26,6 @@ export default React.memo(function WithdrawalReceiptDialog() {
     () =>
       getTransactionDetails({
         id,
-        currency: currency.code,
       }),
     {
       enabled: open,
