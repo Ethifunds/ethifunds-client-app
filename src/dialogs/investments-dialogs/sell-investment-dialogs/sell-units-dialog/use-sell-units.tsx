@@ -235,7 +235,8 @@ export default function useSellUnits() {
       showSuccess();
     } catch (error) {
       const errMsg = ensureError(error).message;
-      if (errMsg.includes("insufficient")) return showInsufficientFund();
+      if (errMsg.toLocaleLowerCase().includes("insufficient"))
+        return showInsufficientFund();
       toast.error(errMsg);
     } finally {
       setIsLoading(true);

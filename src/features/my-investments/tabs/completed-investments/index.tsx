@@ -10,14 +10,23 @@ import { amountSeparator } from "@/lib/amount-separator";
 import { Badge } from "@/components/ui/badge";
 import getMyInvestmentCategoryDetails from "@/services/my-investments/get-my-investment-category-details";
 import Spinner from "@/components/spinner";
+import useCustomNavigation from "@/hooks/use-navigation";
 
 export default React.memo(function CompletedInvestments() {
   const { currency } = useAppSelector((state) => state.account);
+  const { queryParams } = useCustomNavigation();
+
+  const isActiveTab = React.useMemo(
+    () => queryParams.has("tab", "completed_investments"),
+    [queryParams],
+  );
 
   const { isFetching, isError, error, data } = useQuery(
-    ["completed-investments"],
+    ["completed-investments", isActiveTab],
     () => getMyCompletedInvestments(),
   );
+
+
   return (
     <TabContainer value="completed_investments">
       <Render isLoading={isFetching} isError={isError} error={error}>

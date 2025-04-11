@@ -35,6 +35,8 @@ export default React.memo(function SellUnits() {
     submit,
   } = useSellUnits();
 
+  console.log(productDetails)
+
   return (
     <ErrorBoundary>
       <AppDrawer

@@ -10,12 +10,20 @@ import RecentTransactions from "./transactions/recent-transactions";
 
 export default function MyInvestmentCategory() {
   const { changeBackBtn } = useUi({ title: "My Investment" });
-  const { params } = useCustomNavigation();
+  const { params, queryParams } = useCustomNavigation();
 
   const categoryId = params.categoryId ?? "";
+  const hasAction = React.useMemo(
+    () => queryParams.has("sale_option"),
+    [queryParams],
+  );
+
   const { isFetching, isError, error, data } = useQuery(
     ["investment-category-details"],
     () => getMyInvestmentCategoryDetails({ categoryId }),
+    {
+      enabled: !hasAction && true,
+    },
   );
 
   React.useLayoutEffect(() => {
@@ -30,7 +38,7 @@ export default function MyInvestmentCategory() {
   });
 
   return (
-    <AppContainer className="h-full space-y-5 ">
+    <AppContainer className="h-full space-y-5">
       <Render
         isLoading={isFetching}
         isError={isError}
@@ -43,7 +51,8 @@ export default function MyInvestmentCategory() {
               category={data?.category}
               sum={data?.sum ?? 0}
               aggregate={data.investments.reduce(
-                (acc, current) => acc + current.units_purchased,
+                (acc, current) =>
+                  acc + (current.units_purchased - (current.units_sold ?? 0)),
                 0,
               )}
             />

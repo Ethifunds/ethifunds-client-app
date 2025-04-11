@@ -7,14 +7,22 @@ import { Link } from "react-router-dom";
 import { useAppSelector } from "@/store/hooks";
 import ErrorBoundary from "@/components/error-boundary";
 import Render from "@/components/render";
+import useCustomNavigation from "@/hooks/use-navigation";
 
 export default React.memo(function ExploreMarketPlace() {
   const { currency } = useAppSelector((state) => state.account);
+  const { queryParams } = useCustomNavigation();
+  const isActiveTab = React.useMemo(
+    () => queryParams.has("tab", "marketplace"),
+    [queryParams],
+  );
+
   const { isFetching, isError, error, data } = useQuery(
-    ["explore-marketplace"],
-    () => exploreMarketplace(), {
-      refetchOnMount:false
-    }
+    ["explore-marketplace", isActiveTab],
+    () => exploreMarketplace(),
+    // {
+    //   enabled: isActiveTab
+    // }
   );
 
   return (
@@ -26,7 +34,7 @@ export default React.memo(function ExploreMarketPlace() {
         loadingBoxClass="col-span-full"
       >
         <ErrorBoundary>
-          <div className="flex flex-col md:grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+          <div className="flex grid-cols-1 flex-col gap-5 md:grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
             {data && data?.length < 1 ? (
               <EmptyData
                 className="col-span-full"
@@ -38,15 +46,14 @@ export default React.memo(function ExploreMarketPlace() {
                   key={item.id}
                   to={`/investments/${item.product.product_category_id}/products/${item.product_id}/marketplace/${item.id}`}
                 >
-                  <div className="cursor-pointer space-y-5 rounded-lg border border-neutral-200 bg-white text-stone-950 shadow-sm transition hover:lg:shadow lg:space-y-0">
-                    
-                      <div className="max-h-56">
-                        <img
-                          src={item.product.display_image}
-                          alt={item.product.name}
-                          className="size-full object-cover"
-                        />
-                      </div>
+                  <div className="cursor-pointer space-y-5 rounded-lg border border-neutral-200 bg-white text-stone-950 shadow-sm transition lg:space-y-0 hover:lg:shadow">
+                    <div className="max-h-56">
+                      <img
+                        src={item.product.display_image}
+                        alt={item.product.name}
+                        className="size-full object-cover"
+                      />
+                    </div>
                     <div className="space-y-3 px-2 py-4">
                       <div className="md:h-16">
                         <h1 className="highlight-bold line-clamp-2">
