@@ -43,7 +43,7 @@ export default function useTodos() {
     }
   }, [account.email]);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     hasSecurityQuestions();
   }, [hasSecurityQuestions]);
 
