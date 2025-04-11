@@ -23,7 +23,7 @@ export default React.memo(function EmptyData(props: EmptyDataProps) {
       {props.title && (
         <h1 className="feature-accent text-neutral-1000">{props.title}</h1>
       )}
-      <p className="text-center font-bold tracking-tight text-neutral-500">
+      <p className="text-center font-semibold tracking-tight text-neutral-500">
         {props.text ?? "No Data available"}
       </p>
     </div>

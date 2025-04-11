@@ -16,7 +16,7 @@ export default React.memo(function AppSidebarFooter() {
     return `${account.user_profile?.first_name} ${account.user_profile?.last_name}`;
   }, [account.user_profile?.first_name, account.user_profile?.last_name]);
 
-	const showLogoutDialog = () => {
+  const showLogoutDialog = () => {
     ui.changeDialog({
       show: true,
       type: "logout",
@@ -26,9 +26,11 @@ export default React.memo(function AppSidebarFooter() {
     <SidebarFooter>
       <div className="flex items-start justify-between p-3 group-data-[collapsible=icon]:hidden">
         <div className="flex flex-col">
-          <span className="content-standard line-clamp-1 capitalize text-neutral-1000">
-            {fullName}
-          </span>
+          {fullName && (
+            <span className="content-standard line-clamp-1 capitalize text-neutral-1000">
+              {fullName}
+            </span>
+          )}
           <small className="caption-standard text-[#667085]">
             @{account.username}
           </small>
