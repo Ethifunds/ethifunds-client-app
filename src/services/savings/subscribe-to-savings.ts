@@ -4,7 +4,7 @@ import axios from "@/lib/axios";
 type Response = void;
 
 export async function production(): Promise<Response> {
-  const response = await axios.get(`/ethicoop/start`);
+  const response = await axios.post(`/ethicoop/start`);
   return response.data.data;
 }
 

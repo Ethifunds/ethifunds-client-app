@@ -10,7 +10,7 @@ import { useQuery } from "react-query";
 export default function Savings() {
   useUi({ title: "Savings" });
   const { isFetching, isError, error, data } = useQuery(
-    ["ethicoop-balance"],
+    ["ethicoop-savings-balance"],
     () => getSavingsBalance(),
   );
 
@@ -24,7 +24,7 @@ export default function Savings() {
           loadingPosition="center"
           loadingBoxClass="!h-96"
         >
-          {data && typeof data === "number" ? (
+          {typeof data === "number" ? (
             <Redirect to="/savings/overview" replace />
           ) : (
             <SavingsTerms />

@@ -40,6 +40,8 @@ export default function useOverview() {
       }
     },
   });
+  
+  
 
   const reset = () => {
     setShowManualFunding(false);
@@ -47,7 +49,6 @@ export default function useOverview() {
 
   const openSavingsDialog = () => {
     queryParams.set("action", "savings_preference");
-    console.log(savings);
     ui.changeDialog({
       show: true,
       type: "savings_preference",

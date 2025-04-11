@@ -21,7 +21,9 @@ export default function SavingsOverview() {
         <SavingsDetails {...rest} />
       </div>
 
-      {!rest.isFetching && rest.savings && <RecentTransactions />}
+      {!rest.isFetching && rest.savings && (
+        <RecentTransactions cycle_id={rest?.savings?.ethicoop_cycle_id} />
+      )}
     </AppContainer>
   );
 }

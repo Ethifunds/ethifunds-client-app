@@ -3,10 +3,10 @@ import * as React from "react";
 import { useAppSelector } from "@/store/hooks";
 import useCustomNavigation from "@/hooks/use-navigation";
 import { toast } from "sonner";
-import setupVault from "@/services/investments/vault/setup-vault";
 import ensureError from "@/lib/ensure-error";
 import AppButton from "@/components/app-button";
 import ErrorBoundary from "@/components/error-boundary";
+import subscribeToSavings from "@/services/savings/subscribe-to-savings";
 
 export default function SavingsTerms() {
   const { currency } = useAppSelector((state) => state.account);
@@ -18,7 +18,7 @@ export default function SavingsTerms() {
       return toast.error("no currency set, try switching currency");
     setIsSettingUp(true);
     try {
-      await setupVault({ currency: currency.code });
+      await subscribeToSavings();
       navigate("/savings/overview", { replace: true });
     } catch (error) {
       const err = ensureError(error);

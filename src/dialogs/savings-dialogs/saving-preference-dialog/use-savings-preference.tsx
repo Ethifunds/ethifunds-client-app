@@ -1,14 +1,15 @@
 import useCustomNavigation from "@/hooks/use-navigation";
 import ensureError from "@/lib/ensure-error";
+import getActiveCycle from "@/services/savings/get-active-cycle";
 import initiateFundingCycle from "@/services/savings/initiate-funding-cycle";
 import useActions from "@/store/actions";
 import useAppSelectors from "@/store/use-app-selectors";
 import {
-  Savings,
   savingsFundingPreference,
   savingsFundingSources,
 } from "@/types/savings.types";
 import * as React from "react";
+import { useQuery } from "react-query";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -47,9 +48,9 @@ export default function useSavingsPreference() {
     return dialog.show && dialog.type === "savings_preference";
   }, [dialog.show, dialog.type]);
 
-  const data = React.useMemo(
-    () => (dialog.data ? (dialog.data as Savings) : null),
-    [dialog?.data],
+  const { isFetching, isError, error, data } = useQuery(
+    ["get-active-cycle"],
+    () => getActiveCycle(),
   );
 
   const updateForm = (name: keyof typeof formData, value: string | Date) => {
@@ -75,12 +76,10 @@ export default function useSavingsPreference() {
   };
 
   const submit = async () => {
-    console.log(formData);
-    if (!data?.ethicoop_cycle_id) {
+    if (!data?.cycle.id) {
       return toast.error("Cycle Id not found, try refreshing the page");
     }
 
-      
     setIsLoading(true);
     try {
       const formValues = validation.parse({
@@ -91,13 +90,13 @@ export default function useSavingsPreference() {
       await initiateFundingCycle({
         ...formValues,
         contribution_date: formValues.contribution_date.toISOString(),
-        cycle_id: data.ethicoop_cycle_id,
+        cycle_id: data.cycle.id,
       });
 
       showSuccessDialog();
     } catch (error) {
       const errMsg = ensureError(error).message;
-      if (errMsg.includes("insufficient")) {
+      if (errMsg.toLocaleLowerCase().includes("insufficient")) {
         return insufficientFundsDialog();
       }
       toast.error(errMsg);
@@ -140,6 +139,9 @@ export default function useSavingsPreference() {
   return {
     open,
     isLoading,
+    isFetching,
+    isError,
+    error,
     data,
     formData,
     sign: currency.sign,

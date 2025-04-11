@@ -1,19 +1,17 @@
 import { variables } from "@/constants";
 import { savingsTransactions } from "@/constants/data/savings/savings-transactions";
 import axios from "@/lib/axios";
-import buildQueryString from "@/lib/build-query-string";
 import { SavingsTransaction } from "@/types/savings.types";
 
 type Parameters = {
-  currency: string;
+  cycle_id: number;
 };
 
 type Response = SavingsTransaction[];
 
 export async function production(data: Parameters): Promise<Response> {
-  const query_string = buildQueryString(data);
   const response = await axios.get(
-    `/ethicoop/transactions/?filter=recent&${query_string}`,
+    `/ethicoop/transactions/${data.cycle_id}?filter=recent`,
   );
   return response.data.data;
 }

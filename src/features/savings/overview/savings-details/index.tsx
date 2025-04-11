@@ -11,9 +11,9 @@ export default React.memo(function SavingsDetails(props: SavingDetailsProps) {
   const { isFetching, isError, error, savings, openSavingsDialog } = props;
 
   const container = classNames(
-    "border rounded-lg shrink-0 lg:shrink w-full lg:w-[60%] min-h-48 lg:max-h-96 lg:min-h-52 overflow-auto",
+    "border rounded-lg shrink-0 lg:shrink w-full lg:w-[60%] flex flex-col h-full min-h-48 lg:max-h-96 lg:min-h-52 overflow-auto",
     {
-      "py-8 px-3 lg:px-6": !isFetching,
+      "py-4 px-3 lg:px-6": !isFetching,
     },
   );
 
@@ -35,7 +35,7 @@ export default React.memo(function SavingsDetails(props: SavingDetailsProps) {
           {!savings ? (
             <NoActiveSavings open={openSavingsDialog} />
           ) : (
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-1 flex-col gap-6">
               <div className="flex items-start justify-between">
                 <h1 className="content-accent text-neutral-1000">
                   {savings.ethicoop_cycle.title}
@@ -48,7 +48,7 @@ export default React.memo(function SavingsDetails(props: SavingDetailsProps) {
               <p className="content-standard text-neutral-700">
                 {savings.ethicoop_cycle.description}
               </p>
-              <div className="[&_span]:caption-standard flex items-center justify-between capitalize text-neutral-500">
+              <div className="[&_span]:caption-standard flex h-full flex-1 items-end justify-between capitalize text-neutral-500">
                 <span>
                   started: {getDate(savings.ethicoop_cycle.start_date)}
                 </span>

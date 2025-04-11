@@ -4,8 +4,10 @@ import TransactionTable from "../transaction-table";
 import { Link } from "react-router-dom";
 import ErrorBoundary from "@/components/error-boundary";
 
-export default function RecentTransactions() {
-  const { isFetching, isError, error, data, sign } = useRecentTransactions();
+export default function RecentTransactions(props: { cycle_id: number }) {
+  const { isFetching, isError, error, data, sign } = useRecentTransactions(
+    props.cycle_id,
+  );
 
   return (
     <div className="space-y-5">
@@ -15,7 +17,10 @@ export default function RecentTransactions() {
             Recent Transactions{" "}
           </h1>
           {data && data?.length > 0 && (
-            <Link to={"/savings/transactions"} className="text-primary underline">
+            <Link
+              to={`/savings/${props.cycle_id}/transactions`}
+              className="text-primary underline"
+            >
               View All
             </Link>
           )}
