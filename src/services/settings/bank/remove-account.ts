@@ -3,13 +3,13 @@ import axios from "@/lib/axios";
 import { BankAccount } from "@/types/bank-account.types";
 
 type Parameters = {
-  id: BankAccount["id"];
+  bank_id: BankAccount["id"];
 };
 
 type Response = void;
 
 export async function production(payload: Parameters): Promise<Response> {
-  const response = await axios.post(`/settings/add-bank`, payload);
+  const response = await axios.post(`/settings/remove-bank`, payload);
   return response.data.data;
 }
 

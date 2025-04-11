@@ -3,13 +3,13 @@ import axios from "@/lib/axios";
 import { SavedCard } from "@/types/saved-card.types";
 
 type Parameters = {
-  id: SavedCard["id"];
+  user_saved_card_id: SavedCard["id"];
 };
 
 type Response = void;
 
 export async function production(payload: Parameters): Promise<Response> {
-  const response = await axios.post(`/settings/add-card`, payload);
+  const response = await axios.post(`/settings/remove-card`, payload);
   return response.data.data;
 }
 

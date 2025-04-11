@@ -77,7 +77,7 @@ export default React.memo(function RemoveBankDialog() {
 
     setIsLoading(true);
     try {
-      await removeAccount({ id: account.id });
+      await removeAccount({ bank_id: account.id });
       showSuccess();
     } catch (error) {
       const errMsg = ensureError(error).message;

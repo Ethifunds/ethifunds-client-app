@@ -81,7 +81,7 @@ export default React.memo(function RemoveCardDialog() {
 
     setIsLoading(true);
     try {
-      await removeCard({ id: card.id });
+      await removeCard({ user_saved_card_id: card.id });
       showSuccess();
     } catch (error) {
       const errMsg = ensureError(error).message;
