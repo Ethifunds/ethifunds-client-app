@@ -18,6 +18,7 @@ export default React.memo(function NotificationListingDialog() {
     productDetails,
     toggleShow,
     data,
+    details,
     account,
     submit,
   } = useListing();
@@ -59,7 +60,7 @@ export default React.memo(function NotificationListingDialog() {
 
             <div className="flex gap-5 [&_button]:w-full">
               <AppButton
-                variant="primary"
+                variant={details?.status === "pending" ? "primary" : "mute"}
                 onClick={() => submit("approved")}
                 isLoading={loadingType === "approved"}
               >
@@ -67,7 +68,7 @@ export default React.memo(function NotificationListingDialog() {
               </AppButton>
 
               <AppButton
-                variant="outline"
+                variant={details?.status === "pending" ? "outline" : "mute"}
                 onClick={() => submit("rejected")}
                 className="border-primary"
                 isLoading={loadingType === "rejected"}

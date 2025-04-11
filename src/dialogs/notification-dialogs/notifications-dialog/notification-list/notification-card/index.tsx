@@ -32,6 +32,7 @@ export default function NotificationCard(props: Notification) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  
   const showDetails = () => {
     const data = props.data;
 
@@ -49,9 +50,11 @@ export default function NotificationCard(props: Notification) {
     markAsRead(props.id.toString());
   };
 
+  console.log(props);
+
   return (
     <div className="flex items-start justify-between gap-3">
-      <NotificationIcon type={props.data.type} />
+      <NotificationIcon type={(props as any).type} />
       <div className="flex flex-col gap-2">
         <p className={msgCn}>{props.data.message}</p>
         <div className="content-standard flex items-center justify-between text-neutral-700">

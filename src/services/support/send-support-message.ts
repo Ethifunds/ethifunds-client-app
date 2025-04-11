@@ -9,7 +9,7 @@ type Parameters = {
 type Response = void;
 
 export async function production(data: Parameters): Promise<Response> {
-  const response = await axios.post(``, data);
+  const response = await axios.post(`/settings/contact-support`, data);
   return response.data.data;
 }
 

@@ -9,8 +9,19 @@ import SuccessDialog from "./success-dialog";
 import NotificationDialogs from "./notification-dialogs";
 import SavingsDialogs from "./savings-dialogs";
 import LogoutDialog from "./logout.-dialog";
+import useActions from "@/store/actions";
 
 export default function Dialogs() {
+  const { ui } = useActions();
+
+  React.useEffect(() => {
+    return () => {
+      ui.resetDialog();
+    };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <React.Fragment>
       <NotificationDialogs />
@@ -22,7 +33,7 @@ export default function Dialogs() {
       <SettingsDialogs />
       <InsufficientFundDialog />
       <SuccessDialog />
-      <LogoutDialog/>
+      <LogoutDialog />
     </React.Fragment>
   );
 }

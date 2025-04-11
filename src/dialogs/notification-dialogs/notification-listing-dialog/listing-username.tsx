@@ -12,7 +12,7 @@ export default React.memo(function ListingUsername(
       <span className="w-full">
         {props.isBuyer ? "Seller username" : "Buyer username"}{" "}
       </span>
-      <span className="w-full">{props.user.username}</span>
+      <span className="w-full">{props?.user?.username}</span>
     </div>
   );
 });

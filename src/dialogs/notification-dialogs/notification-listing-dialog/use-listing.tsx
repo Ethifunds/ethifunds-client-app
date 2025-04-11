@@ -77,17 +77,21 @@ export default function useListing() {
 
   const details = notificationData?.listing as MyInvestmentMarketplace;
 
+  console.log(details);
+
   const productDetails = {
     date: getDate(details?.created_at),
-    investment_type: investmentDetails?.category.display_title,
+    investment_type: investmentDetails?.category?.display_title,
     counter_price_per_unit: `${currency.sign} ${amountSeparator(details?.counter_price_per_unit)}`,
-    purchasing_price: `${currency.sign} ${amountSeparator(details?.offer.offer_price)}`,
-    purchasing_units: amountSeparator(details?.offer.units),
+    purchasing_price: `${currency.sign} ${amountSeparator(details?.offer?.offer_price)}`,
+    purchasing_units: amountSeparator(details?.offer?.units),
     status: <Badge className="bg-primary-500"> {details?.status} </Badge>,
   };
 
   const submit = async (status: "approved" | "rejected") => {
-    if (!details?.id) return toast.error("listing Id not found, try refreshing");
+    if (details.status !== "pending") return;
+    if (!details?.id)
+      return toast.error("listing Id not found, try refreshing");
 
     setLoadingType(status);
     try {
@@ -135,6 +139,7 @@ export default function useListing() {
     loadingType,
     productDetails,
     data,
+    details,
     account,
     toggleShow,
     submit,

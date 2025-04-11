@@ -18,13 +18,16 @@ export default React.memo(function NotificationIcon(props: IconProps) {
     color: "#e4932b",
     size: 20,
   };
+
+  console.log(props.type);
+
   const icons: Record<NotificationType, any> = {
-    SYSTEM: <Settings {...iconUtils} />,
-    PROMOTIONAL: <Megaphone {...iconUtils} />,
-    ACCOUNT: <User {...iconUtils} />,
-    TRANSACTIONS: <ArrowLeftRight {...iconUtils} />,
-    INVESTMENT_OFFERS: <TrendingUp {...iconUtils} />,
-    INVESTMENT_TRANSACTIONS: <TrendingUp {...iconUtils} />,
+    SYSTEM_NOTIFICATION: <Settings {...iconUtils} />,
+    PROMOTIONAL_NOTIFICATION: <Megaphone {...iconUtils} />,
+    ACCOUNT_NOTIFICATION: <User {...iconUtils} />,
+    TRANSACTIONS_NOTIFICATION: <ArrowLeftRight {...iconUtils} />,
+    INVESTMENT_OFFER_NOTIFICATION: <TrendingUp {...iconUtils} />,
+    INVESTMENT_TRANSACTIONS_NOTIFICATION: <TrendingUp {...iconUtils} />,
   };
 
   return (

@@ -7,7 +7,7 @@ import verifyBvn from "@/services/settings/verify-bvn";
 import useActions from "@/store/actions";
 import { useAppSelector } from "@/store/hooks";
 import * as React from "react";
-import { toast } from "sonner";
+import { toast } from "sonner"; 
 import { z } from "zod";
 
 const validation = z.object({
@@ -52,6 +52,7 @@ export default function VerifyBvn() {
   };
 
   const submit = async () => {
+    if (!formData.bvn) return; //  TODO: apply this check to this line || hasVerifiedBvn
     setErrorMsg("");
     setIsLoading(true);
     try {
@@ -124,7 +125,7 @@ export default function VerifyBvn() {
         onClick={submit}
         variant={hasVerifiedBvn ? "mute" : "primary"}
         className="w-full text-white"
-        disabled={hasVerifiedBvn}
+        // disabled={hasVerifiedBvn}
       >
         {hasVerifiedBvn ? "Verified" : "Verify"}
       </AppButton>
