@@ -9,30 +9,36 @@ import { useAppSelector } from "@/store/hooks";
 import * as React from "react";
 import { toast } from "sonner"; 
 import { z } from "zod";
+import { formFields } from "./data";
 
 const validation = z.object({
-	bvn: z.string().length(11, "Enter a valid BVN").regex(/^\d+$/, "BVN must contain only numbers"),
+  bvn: z
+    .string()
+    .length(11, "Enter a valid BVN")
+    .regex(/^\d+$/, "BVN must contain only numbers"),
+  firstname: z.string().min(3, "First name is required"),
+  lastname: z.string().min(3, "Last name is required"),
 });
 
 type FormData = z.infer<typeof validation>;
 
 const init: FormData = {
-	bvn: "",
+  bvn: "",
+  firstname: "",
+  lastname: "",
 };
 export default function VerifyBvn() {
-	const { account } = useAppSelector((state) => state.account);
-	const [isLoading, setIsLoading] = React.useState(false);
-	const [formData, setFormData] = React.useState(init);
-	const { account: accountActions } = useActions();
-	const [errorMsg, setErrorMsg] = React.useState("");
-	const { ui } = useActions();
+  const { account } = useAppSelector((state) => state.account);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [formData, setFormData] = React.useState(init);
+  const { account: accountActions } = useActions();
+  const [errorMsg, setErrorMsg] = React.useState("");
+  const { ui } = useActions();
 
-
-	const hasVerifiedBvn = React.useMemo(
+  const hasVerifiedBvn = React.useMemo(
     () => account.user_verifications.has_verified_bvn,
     [account.user_verifications.has_verified_bvn],
   );
-
 
   const reset = () => {
     setFormData(init);
@@ -87,22 +93,25 @@ export default function VerifyBvn() {
   return (
     <TabsContent
       value="verify_bvn"
-      className="space-y-8 rounded-lg border px-3 py-5 lg:mt-8 lg:w-1/2 lg:p-8"
+      className="px-3 py-5 space-y-8 border rounded-lg lg:mt-8 lg:w-1/2 lg:p-8"
     >
       <h1 className="content-standard text-neutral-1000">
         Kindly Verify your BVN Details
       </h1>
       <div className="space-y-5">
-        <Input
-          name="bvn"
-          label="BVN"
-          placeholder="enter BVN"
-          value={formData.bvn}
-          onChange={updateForm}
-          invalid={errorMsg.length > 0}
-          required
-          disabled={isLoading}
-        />
+        {formFields.map((field) => (
+          <Input
+            key={field.name}
+            name={field.name}
+            label={field.label}
+            placeholder={field.placeholder}
+            value={formData[field.name as keyof FormData]}
+            onChange={updateForm}
+            invalid={errorMsg.length > 0}
+            required
+            disabled={isLoading || hasVerifiedBvn}
+          />
+        ))}
 
         <div className="flex items-start gap-3 px-3">
           <img src={assets.info_icon_02} alt="info-icon" />

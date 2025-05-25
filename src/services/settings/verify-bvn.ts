@@ -3,6 +3,8 @@ import axios from "@/lib/axios";
 
 type Parameters = {
 	bvn: number;
+	firstname: string;
+	lastname: string;
 };
 
 type Response = void;
