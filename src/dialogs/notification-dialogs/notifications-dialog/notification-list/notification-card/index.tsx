@@ -50,14 +50,13 @@ export default function NotificationCard(props: Notification) {
     markAsRead(props.id.toString());
   };
 
-  console.log(props);
 
   return (
     <div className="flex items-start justify-between gap-3">
       <NotificationIcon type={(props as any).type} />
       <div className="flex flex-col gap-2">
         <p className={msgCn}>{props.data.message}</p>
-        <div className="content-standard flex items-center justify-between text-neutral-700">
+        <div className="flex items-center justify-between content-standard text-neutral-700">
           <span>
             {date.toLocaleDateString("en-us", {
               day: "numeric",

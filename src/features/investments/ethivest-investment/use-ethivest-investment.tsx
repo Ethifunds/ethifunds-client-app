@@ -7,7 +7,6 @@ export default function useEthivestInvestment() {
   const query = useQuery(["ethivest-terms"], () => getEthivestConsent(), {
     onSuccess(data) {
       const responseData = data as any;
-      console.log(data);
       if (responseData !== null) {
         setShowOverview(true);
       }

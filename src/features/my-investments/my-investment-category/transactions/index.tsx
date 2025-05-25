@@ -27,9 +27,9 @@ export default function MyInvestmentTransactions() {
 
       <TransactionFilters disabled={isFetching} />
 
-      <div className="flex h-screen flex-col">
+      <div className="flex flex-col h-screen">
         <Render isLoading={isFetching} isError={isError} error={error}>
-          <div className="grow overflow-auto">
+          <div className="overflow-auto grow">
             <TransactionTable
               data={data?.docs?.slice(0) ?? []}
               isEmpty={!data?.docs?.length}

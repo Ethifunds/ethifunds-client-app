@@ -35,7 +35,6 @@ export default React.memo(function SellUnits() {
     submit,
   } = useSellUnits();
 
-  console.log(productDetails)
 
   return (
     <ErrorBoundary>
@@ -72,8 +71,8 @@ export default React.memo(function SellUnits() {
           )
         }
       >
-        <div className="flex h-full flex-col gap-10 overflow-auto px-4 py-10">
-          <div className="flex items-start gap-3 rounded-lg bg-error-100/20 p-4">
+        <div className="flex flex-col h-full gap-10 px-4 py-10 overflow-auto">
+          <div className="flex items-start gap-3 p-4 rounded-lg bg-error-100/20">
             <img src={assets.info_icon_01} alt="info" />
             <p>{warningMsg}</p>
           </div>
@@ -98,7 +97,7 @@ export default React.memo(function SellUnits() {
               {formData.product_id && (
                 <React.Fragment>
                   {productDetails && (
-                    <div className="flex items-center justify-between gap-10 rounded-lg bg-primary-100 px-10 py-3">
+                    <div className="flex items-center justify-between gap-10 px-10 py-3 rounded-lg bg-primary-100">
                       <div className="space-y-1 text-center text-neutral-1000">
                         <span className="content-standard">
                           Available Units

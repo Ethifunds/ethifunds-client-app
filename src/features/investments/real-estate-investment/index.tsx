@@ -12,10 +12,10 @@ export default function RealEstateInvestment() {
 	useSeo({ pageTitle: "REITs" });
 	useUi({ title: "REIT" });
 	const { isFetching, isError, error, data } = useRealEstateInvestment();
-	console.log(data);
+	
 
 	return (
-		<AppContainer className="space-y-5 h-full">
+		<AppContainer className="h-full space-y-5">
 			<ErrorBoundary>
 				<Render isLoading={isFetching} isError={isError} error={error} loadingPosition="center">
 					<div className="flex flex-wrap lg:gap-16">

@@ -17,9 +17,6 @@ export default React.memo(function TwoFactoryAuthTab() {
     return account.two_factor ? true : false;
   }, [account.two_factor]);
 
- console.log(account);
- 
-
   const [enable2fa, setEnable2fa] = React.useState(is2faEnabled);
   const [isLoading, setIsLoading] = React.useState(false);
 

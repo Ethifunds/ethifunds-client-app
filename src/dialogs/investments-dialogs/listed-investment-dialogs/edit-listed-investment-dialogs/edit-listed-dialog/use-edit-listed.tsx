@@ -50,56 +50,56 @@ export default function useEditListed() {
   const { queryParams } = useCustomNavigation();
   const { ui } = useActions();
 
-    const open = React.useMemo(() => {
-      return dialog.show && dialog.type === "edit-investment-listing";
-    }, [dialog.show, dialog.type]);
+  const open = React.useMemo(() => {
+    return dialog.show && dialog.type === "edit-investment-listing";
+  }, [dialog.show, dialog.type]);
 
-    React.useEffect(() => {
-      if (!open) return;
-      setFormData({
-        product_id: listedProductDetails?.product_id ?? "",
-        units: listedProductDetails?.units,
-        asking_price_per_unit: Number(
-          listedProductDetails?.asking_price_per_unit,
-        ),
-        pin: "",
-      });
-    }, [
-      open,
-      listedProductDetails?.asking_price_per_unit,
+  React.useEffect(() => {
+    if (!open) return;
+    setFormData({
+      product_id: listedProductDetails?.product_id ?? "",
+      units: listedProductDetails?.units,
+      asking_price_per_unit: Number(
+        listedProductDetails?.asking_price_per_unit,
+      ),
+      pin: "",
+    });
+  }, [
+    open,
+    listedProductDetails?.asking_price_per_unit,
+    listedProductDetails?.product_id,
+    listedProductDetails?.units,
+  ]);
+
+  // making a call to get product details.
+  const { isFetching, isError, error } = useQuery(
+    [
+      "active-investment-category-details",
       listedProductDetails?.product_id,
-      listedProductDetails?.units,
-    ]);
+      open,
+    ],
+    () => getMyActiveInvestments({ currency: currency.code }),
+    {
+      enabled: open,
+      onSuccess: async (response) => {
+        const match = response.find(
+          (item) =>
+            item.category.id ===
+            listedProductDetails?.product?.product_category_id,
+        );
 
-    // making a call to get product details.
-    const { isFetching, isError, error } = useQuery(
-      [
-        "active-investment-category-details",
-        listedProductDetails?.product_id,
-        open,
-      ],
-      () => getMyActiveInvestments({ currency: currency.code }),
-      {
-        enabled: open,
-        onSuccess: async (response) => {
-          const match = response.find(
-            (item) =>
-              item.category.id ===
-              listedProductDetails?.product?.product_category_id,
+        if (match) {
+          const product = match.investments.find(
+            (item) => item.product_id === listedProductDetails?.product_id,
           );
 
-          if (match) {
-            const product = match.investments.find(
-              (item) => item.product_id === listedProductDetails?.product_id,
-            );
-
-            if (product) {
-              setActiveInvestmentDetails(product);
-            }
+          if (product) {
+            setActiveInvestmentDetails(product);
           }
-        },
+        }
       },
-    );
+    },
+  );
 
   const reset = () => {
     if (isLoading) return;
@@ -108,8 +108,6 @@ export default function useEditListed() {
     queryParams.delete("sale_option");
     queryParams.delete("action");
   };
-
-
 
   const updateForm = (
     name: keyof typeof formData,
@@ -135,7 +133,6 @@ export default function useEditListed() {
       });
     }
   };
-
 
   const toggleDrawer = (value: boolean) => {
     ui.changeDialog({
@@ -185,9 +182,7 @@ export default function useEditListed() {
       return;
     }
 
-    
     setIsLoading(true);
-
 
     const asking_price = Number(
       formData.asking_price_per_unit
@@ -212,12 +207,14 @@ export default function useEditListed() {
       await editListedInvestment({
         ...formValues,
         listingId: Number(dialog.id),
+        sale_option: dialog?.data?.sale_option,
       });
 
       showSuccess();
     } catch (error) {
       const errMsg = ensureError(error).message;
-      if (errMsg.toLocaleLowerCase().includes("insufficient")) return showInsufficientFund();
+      if (errMsg.toLocaleLowerCase().includes("insufficient"))
+        return showInsufficientFund();
       toast.error(errMsg);
     } finally {
       setIsLoading(true);

@@ -77,7 +77,6 @@ export default function useListing() {
 
   const details = notificationData?.listing as MyInvestmentMarketplace;
 
-  console.log(details);
 
   const productDetails = {
     date: getDate(details?.created_at),

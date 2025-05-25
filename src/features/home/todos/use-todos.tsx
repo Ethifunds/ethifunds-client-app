@@ -52,7 +52,7 @@ export default function useTodos() {
       {
         title: "Add your BVN",
         path: "/settings?tab=profile",
-        isDone: account.user_verifications.has_verified_bvn,
+        isDone: account?.user_verifications?.has_verified_bvn,
         action: (path: string) => {
           navigate(path);
         },
@@ -92,7 +92,7 @@ export default function useTodos() {
     [
       account.has_set_pin,
       account.user_profile,
-      account.user_verifications.has_verified_bvn,
+      account?.user_verifications?.has_verified_bvn,
       hasSecurity,
       navigate,
     ],

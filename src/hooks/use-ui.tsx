@@ -3,26 +3,26 @@ import { BackBtnPayload, DialogPayload } from "@/store/ui-slice";
 import * as React from "react";
 
 type UiProps = {
-	title: string;
+  title: string;
 };
 
 export default function useUi(props: Partial<UiProps>) {
-	const { ui } = useActions();
-	React.useLayoutEffect(() => {
-		ui.changePageTitle(props?.title ?? "");
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [props.title]);
+  const { ui } = useActions();
+  React.useLayoutEffect(() => {
+    ui.changePageTitle(props?.title ?? "");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.title]);
 
-	const changeBackBtn = (payload: BackBtnPayload | null) => {
-		ui.changeBackBtn(payload);
-	};
+  const changeBackBtn = (payload: BackBtnPayload | null) => {
+    ui.changeBackBtn(payload);
+  };
 
-	const changeDialog = (payload: DialogPayload) => {
-		ui.changeDialog(payload);
-	};
+  const changeDialog = (payload: DialogPayload) => {
+    ui.changeDialog(payload);
+  };
 
-	return {
-		changeBackBtn,
-		changeDialog,
-	};
+  return {
+    changeBackBtn,
+    changeDialog,
+  };
 }

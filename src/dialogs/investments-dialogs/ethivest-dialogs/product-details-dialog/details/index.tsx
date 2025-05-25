@@ -10,7 +10,6 @@ export default React.memo(function Details(props: InvestmentProduct) {
   const { currency } = useAppSelector((state) => state.account);
   const data = props;
 
-  console.log(data);
   const statusBadge = (
     <Badge
       className={`capitalize ${data.status === "active" ? "bg-success-200/20 text-success-300" : "bg-error-200/20 text-error-300"}`}
@@ -30,7 +29,7 @@ export default React.memo(function Details(props: InvestmentProduct) {
     tenure: `${data.tenor_value} ${data.tenor_unit}`,
     section: `${data?.product_section?.name?.replace("_", " ")}`,
     label: (
-      <Badge className="bg-primary-100 capitalize text-primary">
+      <Badge className="capitalize bg-primary-100 text-primary">
         {data.product_label?.name}
       </Badge>
     ),
@@ -44,10 +43,10 @@ export default React.memo(function Details(props: InvestmentProduct) {
   };
 
   return (
-    <div className="flex flex-col gap-5 py-5 px-4">
+    <div className="flex flex-col gap-5 px-4 py-5">
       <h1 className="content-standard text-neutral-500">{data.description}</h1>
 
-      <div className="flex flex-col gap-3 rounded-md border p-2">
+      <div className="flex flex-col gap-3 p-2 border rounded-md">
         {Object.entries(infoData).map(([key, value]) => (
           <div
             key={key}

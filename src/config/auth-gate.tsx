@@ -30,11 +30,16 @@ export default React.memo(function AuthGate({
   const INACTIVITY_LIMIT = variables.INACTIVE_LIMIT * 60 * 1000;
 
   const logout = React.useCallback(async () => {
-    await logoutAccount();
-    if (!remember_me) {
-      deleteCookie();
+    try {
+      await logoutAccount();
+      if (!remember_me) {
+        deleteCookie();
+      }
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      navigate("/");
     }
-    navigate("/");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -59,7 +64,6 @@ export default React.memo(function AuthGate({
       setIsLoading(false);
       return;
     }
-
     try {
       const value = axios.interceptors.request.use(
         (config) => {

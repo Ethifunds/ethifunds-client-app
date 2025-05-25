@@ -203,7 +203,7 @@ export default function useNotifications() {
           },
         ],
       };
-      console.log(payload);
+      
       await updateNotificationSettings(payload);
 
       toast.success(`Changes to the ${section} section was successful`);

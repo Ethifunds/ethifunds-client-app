@@ -52,6 +52,7 @@ export default function TransactionTable(props: TableProps) {
 								{date.toLocaleTimeString("en-us", {
 									timeStyle: "short",
 								})}
+								
 							</TableCell>
 							<TableCell>
 								{props.sign} {amountSeparator(item.amount)}

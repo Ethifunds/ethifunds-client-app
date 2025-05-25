@@ -12,11 +12,6 @@ export default function useMetrics() {
   const query = useQuery(
     ["real-estate-product-historic-data", productId, range],
     () => getHistoricData({ productId, range }),
-    {
-      onSuccess(data) {
-        console.log(data);
-      },
-    },
   );
 
   const getFilteredData = (

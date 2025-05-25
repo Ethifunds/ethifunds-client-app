@@ -67,7 +67,6 @@ export default function useBuyEthivest() {
     { enabled: open },
     );
   
-  console.log(response)
 
   const reset = () => {
     if (isLoading) return;
@@ -118,7 +117,6 @@ export default function useBuyEthivest() {
   };
 
   const proceedToPayment = () => {
-    console.log(response);
     if (!response) return;
 
     if (formData.units > response?.total_units) {

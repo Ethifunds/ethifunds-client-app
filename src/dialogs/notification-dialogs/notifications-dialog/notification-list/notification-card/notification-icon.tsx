@@ -19,7 +19,6 @@ export default React.memo(function NotificationIcon(props: IconProps) {
     size: 20,
   };
 
-  console.log(props.type);
 
   const icons: Record<NotificationType, any> = {
     SYSTEM_NOTIFICATION: <Settings {...iconUtils} />,
@@ -31,7 +30,7 @@ export default React.memo(function NotificationIcon(props: IconProps) {
   };
 
   return (
-    <Badge className="flex size-10 grow items-center justify-center rounded-full bg-primary-100">
+    <Badge className="flex items-center justify-center rounded-full size-10 grow bg-primary-100">
       {icons[props.type]}{" "}
     </Badge>
   );

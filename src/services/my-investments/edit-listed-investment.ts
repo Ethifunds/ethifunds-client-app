@@ -7,6 +7,7 @@ type Parameters = {
   product_id: number;
   units: number;
   asking_price_per_unit: number;
+  sale_option: string;
   pin: string;
 };
 
