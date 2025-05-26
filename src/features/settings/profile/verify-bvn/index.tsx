@@ -10,6 +10,7 @@ import * as React from "react";
 import { toast } from "sonner"; 
 import { z } from "zod";
 import { formFields } from "./data";
+import whoami from "@/services/account/whoami";
 
 const validation = z.object({
   bvn: z
@@ -58,13 +59,15 @@ export default function VerifyBvn() {
   };
 
   const submit = async () => {
-    if (!formData.bvn) return; //  TODO: apply this check to this line || hasVerifiedBvn
+    if (!formData.bvn || hasVerifiedBvn) return;
     setErrorMsg("");
     setIsLoading(true);
     try {
       const formValues = validation.parse(formData);
 
       await verifyBvn({ ...formValues, bvn: Number(formValues.bvn) });
+      const account = await whoami();
+      accountActions.updateAccount(account);
 
       ui.changeDialog({
         show: true,
@@ -134,7 +137,7 @@ export default function VerifyBvn() {
         onClick={submit}
         variant={hasVerifiedBvn ? "mute" : "primary"}
         className="w-full text-white"
-        // disabled={hasVerifiedBvn}
+        disabled={hasVerifiedBvn}
       >
         {hasVerifiedBvn ? "Verified" : "Verify"}
       </AppButton>
