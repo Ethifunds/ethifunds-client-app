@@ -1,3 +1,5 @@
+import useCustomNavigation from "@/hooks/use-navigation";
+import getUserAccounts from "@/services/settings/bank/get-user-accounts";
 import getVirtualAccount from "@/services/wallet/get-virtual-accounts";
 import useActions from "@/store/actions";
 import { useAppSelector } from "@/store/hooks";
@@ -12,6 +14,7 @@ export default function useFundWallet() {
   const [confirming, setConfirming] = React.useState(false);
   const { ui } = useActions();
 
+  const { navigate } = useCustomNavigation();
   const code = currency.code;
 
   const copiedRef = React.useRef<HTMLDivElement>(null);
@@ -20,10 +23,16 @@ export default function useFundWallet() {
     return dialog.show && dialog.type === "fund_wallet";
   }, [dialog.show, dialog.type]);
 
-  const query = useQuery(
+  const { data: bankAccounts } = useQuery(
     ["account-wallets", code],
-    () => getVirtualAccount({ currency: code }),
+    () => getUserAccounts({ currency: code }),
     { enabled: open },
+  );
+
+  const query = useQuery(
+    ["account-wallets", code, bankAccounts?.length ],
+    () => getVirtualAccount({ currency: code }),
+    { enabled: bankAccounts&& bankAccounts?.length > 0 },
   );
 
   const toggleShow = (val: boolean) => {
@@ -79,6 +88,11 @@ export default function useFundWallet() {
     setConfirming(false);
   };
 
+
+  const addBankAccount = () => {
+    navigate("/settings?tab=card_bank&sub_tab=bank");
+    ui.resetDialog()
+  };
   return {
     ...query,
     open,
@@ -87,6 +101,8 @@ export default function useFundWallet() {
     confirming,
     copy,
     toggleShow,
+    bankAccounts,
     confirm,
+    addBankAccount,
   };
 }
