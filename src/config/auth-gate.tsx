@@ -28,23 +28,28 @@ export default React.memo(function AuthGate({
   const { navigate } = useCustomNavigation();
 
   const INACTIVITY_LIMIT = variables.INACTIVE_LIMIT * 60 * 1000;
-
-  const logout = React.useCallback(async () => {
+  const logout = React.useCallback(async (autoLogout = false) => {
     try {
       await logoutAccount();
       if (!remember_me) {
         deleteCookie();
       }
+
+      if (autoLogout) {
+        const path = `/?redirect=${location.pathname}${location.search}`;
+        navigate(path);
+        return;
+      }
+
       navigate("/");
     } catch (error) {
-      console.log(error);
-      navigate("/");
+      console.error(error);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const autoLogout = React.useCallback(() => {
-    logout();
+    logout(true);
   }, [logout]);
 
   const resetTimer = React.useCallback(() => {

@@ -31,7 +31,7 @@ export default function useForm() {
 	const { setCookie } = useCookie(variables.STORAGE.session, "");
 
 	const { account } = useActions();
-	const { navigate } = useCustomNavigation();
+	const { navigate, queryParams } = useCustomNavigation();
 
 	const sanitizePayload = (): FormData => {
 		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -66,7 +66,8 @@ export default function useForm() {
 		setIsLoading(true);
 		try {
 			const formValues = validate.parse(sanitizePayload());
-
+			const redirect = queryParams.get("redirect");
+			const path = redirect ? redirect : "/home";
 			const response = await loginAccount(formValues);
 			account.changeAccount(response.user);
 			account.changeToken(response.token);
@@ -79,7 +80,7 @@ export default function useForm() {
 			if (response.user.two_factor) {
 				return navigate("2fa-verify");
 			}
-			return navigate("/home");
+			return navigate(path);
 		} catch (error) {
 			const errMsg = ensureError(error);
 			setErrorMsg(errMsg.message);
