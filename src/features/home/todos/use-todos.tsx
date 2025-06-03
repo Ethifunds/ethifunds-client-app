@@ -2,6 +2,7 @@ import useCustomNavigation from "@/hooks/use-navigation";
 import ensureError from "@/lib/ensure-error";
 import getUserSecurityQuestions from "@/services/account/get-user-security-questions";
 import whoami from "@/services/account/whoami";
+import getUserAccounts from "@/services/settings/bank/get-user-accounts";
 import useActions from "@/store/actions";
 import { useAppSelector } from "@/store/hooks";
 import * as React from "react";
@@ -16,9 +17,11 @@ type Todos = {
 };
 
 export default function useTodos() {
-  const { account } = useAppSelector((state) => state.account);
+  const { currency, account } = useAppSelector((state) => state.account);
+
   const { ui, account: accountActions } = useActions();
   const [hasSecurity, setHasSecurity] = React.useState(false);
+  const [hasBankAccount, setHasBankAccount] = React.useState(false);
 
   const { navigate } = useCustomNavigation();
 
@@ -43,9 +46,15 @@ export default function useTodos() {
     }
   }, [account.email]);
 
+  const getBankAccounts = React.useCallback(async () => {
+    const response = await getUserAccounts({ currency: currency.code });
+    setHasBankAccount(response.length > 0);
+  }, [currency]);
+
   React.useLayoutEffect(() => {
     hasSecurityQuestions();
-  }, [hasSecurityQuestions]);
+    getBankAccounts();
+  }, [hasSecurityQuestions, getBankAccounts]);
 
   const todos = React.useMemo(
     (): Todos[] => [
@@ -53,6 +62,14 @@ export default function useTodos() {
         title: "Add your BVN",
         path: "/settings?tab=profile",
         isDone: account?.user_verifications?.has_verified_bvn,
+        action: (path: string) => {
+          navigate(path);
+        },
+      },
+      {
+        title: "Add your Bank Account",
+        path: "/settings?tab=card_bank&sub_tab=bank",
+        isDone: hasBankAccount,
         action: (path: string) => {
           navigate(path);
         },
