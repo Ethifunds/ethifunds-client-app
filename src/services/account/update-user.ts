@@ -6,7 +6,7 @@ import { User } from "@/types/user.types";
 type Parameters = {
   // first_name: string;
   // last_name: string;
-  // middle_name?: string;
+  middle_name: string;
   // phone_number: string;
   user_tag: string;
   // date_of_birth: string;

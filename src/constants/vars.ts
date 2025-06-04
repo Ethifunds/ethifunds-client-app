@@ -37,8 +37,8 @@ const ACTIVE: EnvironmentVariables = {
 };
 
 const CONTACTS = {
-  phone: "0814 444 4444",
-  support_email: "ethifunds.tnn@gmail.com",
+  phone: "+234 806 532 9702",
+  support_email: "ethifunds@tnncoop.com",
 };
 
 
