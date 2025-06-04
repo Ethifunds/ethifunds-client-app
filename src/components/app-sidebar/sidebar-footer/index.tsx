@@ -13,7 +13,9 @@ export default React.memo(function AppSidebarFooter() {
   const { account } = useAppSelectors("account");
   const { ui } = useActions();
   const fullName = React.useMemo(() => {
-    return `${account.user_profile?.first_name} ${account.user_profile?.last_name}`;
+    if (!account.user_profile?.first_name || !account.user_profile?.last_name)
+      return "";
+    return `${account.user_profile?.first_name.toLowerCase()} ${account.user_profile?.last_name.toLowerCase()}`;
   }, [account.user_profile?.first_name, account.user_profile?.last_name]);
 
   const showLogoutDialog = () => {
@@ -27,7 +29,7 @@ export default React.memo(function AppSidebarFooter() {
       <div className="flex items-start justify-between p-3 group-data-[collapsible=icon]:hidden">
         <div className="flex flex-col">
           {fullName && (
-            <span className="content-standard line-clamp-1 capitalize text-neutral-1000">
+            <span className="capitalize content-standard line-clamp-1 text-neutral-1000">
               {fullName}
             </span>
           )}
