@@ -43,6 +43,7 @@ export default React.memo(function AuthGate({
 
       navigate("/");
     } catch (error) {
+      navigate("/");
       console.error(error);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

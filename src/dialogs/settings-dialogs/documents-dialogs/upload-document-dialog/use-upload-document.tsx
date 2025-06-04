@@ -70,6 +70,10 @@ export default function useUploadDocument() {
   };
 
   const submit = async () => {
+    if (formData.document_type === "proof_of_address" && !formData.address) {
+      toast.error("Address is required");
+      return;
+    }
     setIsLoading(true);
     try {
       const formValues = validation.parse(formData);

@@ -74,17 +74,18 @@ export default React.memo(function ChangePinForm() {
         e.preventDefault();
         submit();
       }}
-      className="flex flex-col space-y-5 pt-10 lg:w-1/2"
+      className="flex flex-col pt-10 space-y-5 lg:w-1/2"
     >
       {errMsg && (
-        <p className="shake-animation rounded bg-error-100/20 px-2 text-center text-error-200">
+        <p className="px-2 text-center rounded shake-animation bg-error-100/20 text-error-200">
           {errMsg}
         </p>
       )}
       <Input
         name="new_pin"
         label="New Pin"
-        type="text"
+        type="password"
+        hideIcon
         maxLength={4}
         placeholder="Enter New Pin"
         value={formData.new_pin}
@@ -96,7 +97,8 @@ export default React.memo(function ChangePinForm() {
       <Input
         name="old_pin"
         label="Old Pin"
-        type="text"
+        type="password"
+        hideIcon
         maxLength={4}
         placeholder="Enter Old Pin"
         value={formData.old_pin}

@@ -1,9 +1,10 @@
 import {
-	Sidebar,
-	SidebarContent,
-	SidebarGroup,
-	SidebarGroupContent,
-	SidebarHeader,
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarHeader,
+  SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { sidebarLinks } from "./data";
 import SidebarLink from "./sidebar-link";
@@ -13,37 +14,38 @@ import AppLogo from "../app-logo";
 import AppSidebarFooter from "./sidebar-footer";
 
 export default function AppSidebar() {
-	const [activeLink, setActiveLink] = React.useState("");
-	const [currentPath, setCurrentPath] = React.useState("");
-	const { location } = useCustomNavigation();
+  const [activeLink, setActiveLink] = React.useState("");
+  const [currentPath, setCurrentPath] = React.useState("");
+  const { location } = useCustomNavigation();
 
-	React.useEffect(() => {
-		setCurrentPath(location.pathname);
-	}, [location]);
-	const props = {
-		activeLink,
-		setActiveLink,
-		currentPath,
-	};
-	return (
-		<Sidebar collapsible="icon" className="py-5">
-			<SidebarHeader>
-				<div className="mx-auto">
-					<AppLogo />
-				</div>
-			</SidebarHeader>
-			<SidebarContent className="px-3 group-data-[collapsible=icon]:px-0">
-				<SidebarGroup>
-					<SidebarGroupContent className="space-y-3">
-						{sidebarLinks.map((item) => (
-							<SidebarLink key={item.name} {...item} {...props} />
-						))}
-					</SidebarGroupContent>
-				</SidebarGroup>
-			</SidebarContent>
-			<AppSidebarFooter />
-		</Sidebar>
-	);
+  React.useEffect(() => {
+    setCurrentPath(location.pathname);
+  }, [location]);
+  const props = {
+    activeLink,
+    setActiveLink,
+    currentPath,
+  };
+  return (
+    <Sidebar collapsible="icon" className="py-5">
+      <SidebarHeader>
+        <div className="flex justify-between px-3 lg:mx-auto">
+          <AppLogo className="size-10 lg:size-20" />
+          <SidebarTrigger />
+        </div>
+      </SidebarHeader>
+      <SidebarContent className="px-3 group-data-[collapsible=icon]:px-0">
+        <SidebarGroup>
+          <SidebarGroupContent className="space-y-3">
+            {sidebarLinks.map((item) => (
+              <SidebarLink key={item.name} {...item} {...props} />
+            ))}
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+      <AppSidebarFooter />
+    </Sidebar>
+  );
 }
 
 {

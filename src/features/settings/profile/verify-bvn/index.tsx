@@ -23,14 +23,14 @@ const validation = z.object({
 
 type FormData = z.infer<typeof validation>;
 
-const init: FormData = {
-  bvn: "",
-  firstname: "",
-  lastname: "",
-};
 export default function VerifyBvn() {
   const { account } = useAppSelector((state) => state.account);
   const [isLoading, setIsLoading] = React.useState(false);
+  const init: FormData = {
+    bvn: account.user_verifications.has_verified_bvn?"***************": "",
+    firstname: account?.user_profile?.first_name ?? "",
+    lastname: account?.user_profile?.last_name ?? "",
+  };
   const [formData, setFormData] = React.useState(init);
   const { account: accountActions } = useActions();
   const [errorMsg, setErrorMsg] = React.useState("");

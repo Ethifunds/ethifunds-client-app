@@ -78,7 +78,12 @@ export default React.memo(function SavingsPreferenceDialog() {
           </div>
 
           <div>
-            <label htmlFor="contribution_date">Contribution Date</label>
+            <label htmlFor="contribution_date">
+              Contribution Date{" "}
+              <small className="cation-standard">
+                (you will be charged on this date)
+              </small>
+            </label>
             <DatePicker
               name="contribution_date"
               triggerStyle="w-full"
