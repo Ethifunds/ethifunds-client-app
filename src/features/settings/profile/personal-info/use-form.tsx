@@ -19,8 +19,7 @@ const validation = z.object({
   middle_name: z
     .string()
     .trim()
-    .min(3, "First name must be at least 3 characters long")
-    .optional(),
+    .min(3, "Middle name must be at least 3 characters long"),
   phone_number: z.string().trim().min(5, "Enter a valid Phone number"),
   username: z
     .string({ message: "Username is Required" })

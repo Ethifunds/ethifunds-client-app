@@ -22,9 +22,9 @@ export const formFields: FORM_FIELDS[] = [
   {
     name: "middle_name",
     type: "text",
-    label: "Middle Name (Optional)",
+    label: "Middle Name",
     placeholder: "Enter middle name",
-    required: false,
+    required: true,
     containerStyle: "col-span-2",
   },
   {
