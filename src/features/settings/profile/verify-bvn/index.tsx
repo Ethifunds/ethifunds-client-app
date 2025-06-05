@@ -27,7 +27,7 @@ export default function VerifyBvn() {
   const { account } = useAppSelector((state) => state.account);
   const [isLoading, setIsLoading] = React.useState(false);
   const init: FormData = {
-    bvn: account.user_verifications.has_verified_bvn?"***************": "",
+    bvn: account?.user_verifications?.has_verified_bvn?"***************": "",
     firstname: account?.user_profile?.first_name ?? "",
     lastname: account?.user_profile?.last_name ?? "",
   };
@@ -37,8 +37,8 @@ export default function VerifyBvn() {
   const { ui } = useActions();
 
   const hasVerifiedBvn = React.useMemo(
-    () => account.user_verifications.has_verified_bvn,
-    [account.user_verifications.has_verified_bvn],
+    () => account?.user_verifications?.has_verified_bvn,
+    [account?.user_verifications?.has_verified_bvn],
   );
 
   const reset = () => {
