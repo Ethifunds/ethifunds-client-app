@@ -104,7 +104,8 @@ export default React.memo(function SetPinForm() {
       <Input
         name="pin"
         label="Transaction Pin"
-        type="text"
+        type="password"
+        hideIcon
         maxLength={4}
         placeholder="Enter Pin"
         value={formData.pin}
@@ -116,7 +117,8 @@ export default React.memo(function SetPinForm() {
       <Input
         name="confirm_pin"
         label="Confirm Transaction Pin"
-        type="text"
+        type="password"
+        hideIcon
         maxLength={4}
         placeholder="Enter Pin"
         value={formData.confirm_pin}

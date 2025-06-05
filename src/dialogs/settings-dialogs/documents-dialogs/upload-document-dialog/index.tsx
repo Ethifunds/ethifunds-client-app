@@ -19,7 +19,7 @@ export default React.memo(function UploadDocumentDialog() {
       handleChange={toggleDrawer}
       direction="right"
     >
-      <div className="flex h-full flex-col gap-5 p-4">
+      <div className="flex flex-col h-full gap-5 p-4">
         <span className="content-standard text-neutral-500">
           Select and upload documents here to complete account verification.
         </span>
@@ -47,9 +47,14 @@ export default React.memo(function UploadDocumentDialog() {
 
           {formData.document_type === "proof_of_address" && (
             <div>
-              <label htmlFor="proof_of_address" className="inline-flex gap-1 items-center">
-                <span className="caption-accent"> Residential Address </span>
-                <small className="cation-standard">(must match with address in bill)</small>
+              <label
+                htmlFor="proof_of_address"
+                className="inline-flex items-center gap-1"
+              >
+                <span className="caption-accent"> Residential Address *</span>
+                <small className="cation-standard">
+                  (must match with address in bill)
+                </small>
               </label>
               <Input
                 name="proof_of_address"
@@ -58,17 +63,18 @@ export default React.memo(function UploadDocumentDialog() {
                 onChange={(e) => updateForm("address", e.target.value)}
                 className="placeholder:text-sm"
                 disabled={isLoading}
+                required
               />
             </div>
           )}
 
           {formData.document_type && (
-            <div className="flex justify-center rounded-lg border p-3">
+            <div className="flex justify-center p-3 border rounded-lg">
               <label
                 htmlFor="upload-doc"
-                className="flex cursor-pointer flex-col items-center gap-2"
+                className="flex flex-col items-center gap-2 cursor-pointer"
               >
-                <Badge className="size-10 rounded-full bg-neutral-100">
+                <Badge className="rounded-full size-10 bg-neutral-100">
                   <img src={assets.upload_icon_01} alt="upload-icon" />
                 </Badge>
                 <span className="caption-accent">
@@ -95,7 +101,7 @@ export default React.memo(function UploadDocumentDialog() {
           )}
         </div>
 
-        <div className="flex h-full grow items-end">
+        <div className="flex items-end h-full grow">
           <AppButton
             variant="primary"
             className="w-full"
