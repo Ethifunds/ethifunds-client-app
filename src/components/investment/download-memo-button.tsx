@@ -1,25 +1,19 @@
 import AppButton from "@/components/app-button";
 import { assets } from "@/constants";
-import ensureError from "@/lib/ensure-error";
-import { InvestmentProduct } from "@/types/investments.types";
 import { toast } from "sonner";
 
-export default function DownloadMemo(props: { id: InvestmentProduct["id"] }) {
+export default function DownloadMemoButton(props: { url: string }) {
   const download = async () => {
-    if (!props.id) return;
+    if (!props.url) return;
     try {
-      const fileUrl = assets.sample_pdf;
-      const link = document.createElement("a");
-      link.href = fileUrl;
-      link.setAttribute("download", "Investment_Memo.pdf");
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      const fileUrl = props.url;
+      window.open(fileUrl, "_blank");
     } catch (e) {
-      const errMsg = ensureError(e).message;
-      toast.error(errMsg);
+      toast.error("error occurred");
+      throw e;
     }
   };
+  if (!props.url) return null;
 
   return (
     <div className="flex items-center justify-between rounded-lg border p-2">

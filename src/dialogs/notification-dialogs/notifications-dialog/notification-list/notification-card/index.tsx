@@ -14,12 +14,7 @@ export default function NotificationCard(props: Notification) {
   const { notification } = useActions();
   const date = new Date(props.created_at);
 
-  const msgCn = classNames(
-    "first-letter:uppercase content-accent line-clamp-2 text-neutral-900",
-    {
-      "!text-neutral-600": props.read_at,
-    },
-  );
+
 
   const markAsRead = React.useCallback(async (id: string) => {
     try {
@@ -50,14 +45,30 @@ export default function NotificationCard(props: Notification) {
     markAsRead(props.id.toString());
   };
 
+  const title = (props as any).data?.title ?? "";
+  const message =
+    (props as any).data?.message ?? (props as any).data?.description;
+  const msgCn = classNames(
+    "first-letter:uppercase line-clamp-1 text-neutral-900",
+    {
+      "!text-neutral-600": props.read_at && !title,
+      "content-accent": !title,
+      "content-standard": title,
+    },
+  );
+
+  const titleCn = classNames("capitalize line-clamp-1 content-accent", {
+    "!text-neutral-600": props.read_at,
+  });
 
   return (
-    <div className="flex items-start justify-between gap-3">
+    <div className="flex items-start gap-3 border-b border-neutral-200 py-2">
       <NotificationIcon type={(props as any).type} />
-      <div className="flex flex-col gap-2">
-        <p className={msgCn}>{props.data.message}</p>
-        <div className="flex items-center justify-between content-standard text-neutral-700">
-          <span>
+      <div className="flex grow flex-col gap-2">
+        {title && <h1 className={titleCn}>{title}</h1>}
+        <p className={msgCn}>{message}</p>
+        <div className="content-standard flex w-full items-center justify-between text-neutral-700">
+          <span className="caption-standard">
             {date.toLocaleDateString("en-us", {
               day: "numeric",
               month: "short",

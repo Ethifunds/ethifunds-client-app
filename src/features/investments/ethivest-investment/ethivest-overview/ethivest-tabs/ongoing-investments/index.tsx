@@ -101,15 +101,15 @@ export default React.memo(function OngoingInvestments() {
               list?.map((item, idx) => (
                 <div
                   key={idx}
-                  className="flex cursor-pointer rounded-xl border p-4 transition hover:shadow-md"
-                  onClick={() => click(item.id.toString())}
+                  className="flex p-4 transition border cursor-pointer rounded-xl hover:shadow-md"
+                  onClick={() => click(item.product_id.toString())}
                 >
-                  <div className="flex grow items-center gap-5">
-                    <Badge className="flex size-12 items-center justify-center rounded-full bg-secondary-100">
+                  <div className="flex items-center gap-5 grow">
+                    <Badge className="flex items-center justify-center rounded-full size-12 bg-secondary-100">
                       <img
                         src={item.display_image}
                         alt={item.product_name}
-                        className="h-auto w-full object-fill"
+                        className="object-fill w-full h-auto"
                       />
                     </Badge>
 

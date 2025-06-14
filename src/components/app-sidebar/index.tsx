@@ -31,7 +31,7 @@ export default function AppSidebar() {
       <SidebarHeader>
         <div className="flex justify-between px-3 lg:mx-auto">
           <AppLogo className="size-10 lg:size-20" />
-          <SidebarTrigger />
+          <SidebarTrigger className="lg:hidden" />
         </div>
       </SidebarHeader>
       <SidebarContent className="px-3 group-data-[collapsible=icon]:px-0">

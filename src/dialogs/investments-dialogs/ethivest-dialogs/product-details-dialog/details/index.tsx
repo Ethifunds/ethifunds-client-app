@@ -2,9 +2,9 @@ import * as React from "react";
 import { Badge } from "@/components/ui/badge";
 import { amountSeparator } from "@/lib/amount-separator";
 import { useAppSelector } from "@/store/hooks";
-import ProductProgress from "./product-progress";
-import DownloadMemo from "./download";
+import ProductProgress from "@/components/investment/product-progress";
 import { InvestmentProduct } from "@/types/investments.types";
+import DownloadMemoButton from "@/components/investment/download-memo-button";
 
 export default React.memo(function Details(props: InvestmentProduct) {
   const { currency } = useAppSelector((state) => state.account);
@@ -69,7 +69,7 @@ export default React.memo(function Details(props: InvestmentProduct) {
         sign={currency.sign}
       />
 
-      <DownloadMemo id={data.id} />
+      <DownloadMemoButton url={data.product_memo} />
     </div>
   );
 });
