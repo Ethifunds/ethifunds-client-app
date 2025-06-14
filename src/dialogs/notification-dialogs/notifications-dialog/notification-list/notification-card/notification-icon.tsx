@@ -27,10 +27,11 @@ export default React.memo(function NotificationIcon(props: IconProps) {
     TRANSACTIONS_NOTIFICATION: <ArrowLeftRight {...iconUtils} />,
     INVESTMENT_OFFER_NOTIFICATION: <TrendingUp {...iconUtils} />,
     INVESTMENT_TRANSACTIONS_NOTIFICATION: <TrendingUp {...iconUtils} />,
+    ADMIN_NOTIFICATION: <User {...iconUtils} />,
   };
 
   return (
-    <Badge className="flex items-center justify-center rounded-full size-10 grow bg-primary-100">
+    <Badge className="flex items-center justify-center rounded-full size-10 bg-primary-100">
       {icons[props.type]}{" "}
     </Badge>
   );

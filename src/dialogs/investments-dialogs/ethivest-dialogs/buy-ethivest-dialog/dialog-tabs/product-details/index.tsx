@@ -4,8 +4,8 @@ import { EthivestTabsProps } from "../../use-buy-ethivest";
 import { Badge } from "@/components/ui/badge";
 import { amountSeparator } from "@/lib/amount-separator";
 import { useAppSelector } from "@/store/hooks";
-import ProductProgress from "./product-progress";
-import DownloadMemo from "./download";
+import ProductProgress from "@/components/investment/product-progress";
+import DownloadMemoButton from "@/components/investment/download-memo-button";
 
 export default React.memo(function ProductDetails(props: EthivestTabsProps) {
   const { currency } = useAppSelector((state) => state.account);
@@ -30,7 +30,7 @@ export default React.memo(function ProductDetails(props: EthivestTabsProps) {
     tenure: `${data.tenor_value} ${data.tenor_unit}`,
     section: `${data?.product_section?.name?.replace("_", " ")}`,
     label: (
-      <Badge className="bg-primary-100 capitalize text-primary">
+      <Badge className="capitalize bg-primary-100 text-primary">
         {data.product_label?.name}
       </Badge>
     ),
@@ -47,7 +47,7 @@ export default React.memo(function ProductDetails(props: EthivestTabsProps) {
     <TabsContent value="product_details" className="flex flex-col gap-5 py-5">
       <h1 className="content-standard text-neutral-500">{data.description}</h1>
 
-      <div className="flex flex-col gap-3 rounded-md border p-2">
+      <div className="flex flex-col gap-3 p-2 border rounded-md">
         {Object.entries(infoData).map(([key, value]) => (
           <div
             key={key}
@@ -70,7 +70,7 @@ export default React.memo(function ProductDetails(props: EthivestTabsProps) {
         sign={currency.sign}
       />
 
-      <DownloadMemo url={data.product_memo} name={data.name} />
+      <DownloadMemoButton url={data.product_memo} />
     </TabsContent>
   );
 });

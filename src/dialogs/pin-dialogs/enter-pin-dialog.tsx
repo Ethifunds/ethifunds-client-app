@@ -46,15 +46,15 @@ export default function EnterPinDialog() {
     <PopupModal
       handleClose={close}
       open={open}
-      className="relative h-60 w-full rounded-xl py-8 lg:h-auto lg:w-1/4 lg:rounded-3xl"
+      className="relative w-full py-8 h-60 rounded-xl lg:h-auto lg:w-1/4 lg:rounded-3xl"
     >
       <button
         onClick={close}
-        className="absolute right-0 top-0 flex size-8 items-center justify-center rounded-full bg-white p-2 lg:-right-8 lg:-top-8"
+        className="absolute top-0 right-0 flex items-center justify-center p-2 bg-white rounded-full size-8 lg:-right-8 lg:-top-8"
       >
         <X color="#908b8b" />
       </button>
-      <h1 className="highlight-bold text-center text-neutral-700">
+      <h1 className="text-center highlight-bold text-neutral-700">
         Enter Transaction Pin
       </h1>
       <form onSubmit={submit}>
@@ -66,6 +66,7 @@ export default function EnterPinDialog() {
             value={pin}
             valueLength={4}
             onChange={setPin}
+            masked={true}
             inputClass={inputClass}
           />
         </div>
@@ -75,7 +76,7 @@ export default function EnterPinDialog() {
             type="submit"
             isLoading={isLoading}
             variant="primary"
-            className="content-accent w-full rounded-xl py-4 text-white"
+            className="w-full py-4 text-white content-accent rounded-xl"
             disabled={isLoading}
           >
             Proceed

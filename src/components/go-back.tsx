@@ -12,6 +12,7 @@ type GoBackProps = {
 export default function GoBack(props: GoBackProps) {
   const { navigate } = useCustomNavigation();
 
+
   const goBack = () => {
     if (props.action) return props.action();
     navigate(props.path ?? -1);

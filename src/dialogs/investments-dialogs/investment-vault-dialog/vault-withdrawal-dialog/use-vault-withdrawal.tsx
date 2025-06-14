@@ -34,7 +34,7 @@ export default function useVaultWithdrawal() {
 	const [activeTab, setActiveTab] = React.useState(""); // "vault_withdrawal"| "preview" | "pin" "success" "insufficient_funds"
 	const [errMsg, setErrMsg] = React.useState("");
 	const { dialog } = useAppSelector((state) => state.ui);
-	const { navigate, queryParams } = useCustomNavigation();
+	const { queryParams } = useCustomNavigation();
 
 	const { ui } = useActions();
 
@@ -122,30 +122,25 @@ export default function useVaultWithdrawal() {
 		}
 	};
 
-	const proceedToFundWallet = () => {
-		toggleDrawer(false);
-		navigate("/wallet");
-		ui.changeDialog({
-			show: true,
-			type: "fund_wallet",
-		});
-	};
+	const proceedToFundVault = () => {
+    toggleDrawer(false);
+  };
 
-	return {
-		openDrawer,
-		activeTab,
-		activeAmount,
-		sign: currency.sign,
-		formData,
-		isLoading,
-		errMsg,
-		updateForm,
-		setAmount,
-		toggleDrawer,
-		proceedToPin,
-		proceedToPreview,
-		close,
-		submit,
-		proceedToFundWallet,
-	};
+  return {
+    openDrawer,
+    activeTab,
+    activeAmount,
+    sign: currency.sign,
+    formData,
+    isLoading,
+    errMsg,
+    updateForm,
+    setAmount,
+    toggleDrawer,
+    proceedToPin,
+    proceedToPreview,
+    close,
+    submit,
+    proceedToFundVault,
+  };
 }

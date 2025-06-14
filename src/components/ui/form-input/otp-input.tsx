@@ -6,9 +6,10 @@ interface PinInputProps {
   onChange(e: string): void;
   inputClass?: string;
   containerStyle?: string;
+  masked?: boolean;
 }
 export default function PinInput(props: PinInputProps) {
-  const { onChange, value, valueLength } = props;
+  const { onChange, value, valueLength, masked=true } = props;
 
   const containerStyle = classNames(
     "flex w-full items-center justify-center",
@@ -113,7 +114,7 @@ export default function PinInput(props: PinInputProps) {
       <input
         autoComplete="one-time-code"
         className={`${inputClass} ${digit ? "!border-2 !border-primary !bg-white" : "!bg-neutral-200"} `}
-        type="text"
+        type={masked ? "password" : "text"}
         key={idx}
         inputMode="numeric"
         pattern="\d{1}"

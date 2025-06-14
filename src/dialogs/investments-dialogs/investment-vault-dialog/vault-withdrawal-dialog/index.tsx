@@ -25,7 +25,7 @@ export default React.memo(function VaultWithdrawalDialog() {
 		proceedToPreview,
 		close,
 		submit,
-		proceedToFundWallet,
+		proceedToFundVault,
 	} = useVaultWithdrawal();
 
 	return (
@@ -64,7 +64,7 @@ export default React.memo(function VaultWithdrawalDialog() {
 				<InsufficientFundsTab
 					open={activeTab === "insufficient_funds"}
 					dismiss={close}
-					action={proceedToFundWallet}
+					action={proceedToFundVault}
 				/>
 			</Tabs>
 		</ErrorBoundary>

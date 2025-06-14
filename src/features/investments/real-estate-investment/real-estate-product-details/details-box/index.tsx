@@ -3,7 +3,7 @@ import { amountSeparator } from "@/lib/amount-separator";
 import capitalize from "@/lib/capitalize";
 import { useAppSelector } from "@/store/hooks";
 import { InvestmentProduct } from "@/types/investments.types";
-import ProductProgress from "./product-progress";
+import ProductProgress from "@/components/investment/product-progress";
 import useUi from "@/hooks/use-ui";
 
 export default function DetailsBox(props: InvestmentProduct) {
@@ -14,13 +14,13 @@ export default function DetailsBox(props: InvestmentProduct) {
   const availableUnits = Math.floor(props.total_units - props.units_sold);
 
   return (
-    <div className="w-full space-y-5 rounded-xl border border-neutral-100 p-4">
+    <div className="w-full p-4 space-y-5 border rounded-xl border-neutral-100">
       <div className="space-y-5">
         <Badge className="highlight-standard border-success-100 !bg-[#A4F4E74D] text-success-300">
           Real Estate
         </Badge>
         <div className="flex flex-col justify-between gap-2 text-neutral-1000 lg:flex-row lg:items-center">
-          <h1 className="feature-bold capitalize">{props.name}</h1>
+          <h1 className="capitalize feature-bold">{props.name}</h1>
          {props.custodian?.name && <span className="highlight-accent">
             by {capitalize(props.custodian?.name??"")} 
           </span>}

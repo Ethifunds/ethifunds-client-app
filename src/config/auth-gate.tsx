@@ -36,8 +36,8 @@ export default React.memo(function AuthGate({
       }
 
       if (autoLogout) {
-        const path = `/?redirect=${location.pathname}${location.search}`;
-        navigate(path);
+        // const path = `/?redirect=${location.pathname}${location.search}`;
+        navigate("/");
         return;
       }
 

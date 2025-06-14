@@ -35,6 +35,7 @@ export default React.memo(function CompletedInvestments() {
     () => getCompletedInvestments({ category_id }),
     {
       onSuccess: async (data) => {
+        if (!data) return setSettled(true);
         const investments = data.map((item) => item);
 
         if (investments.length < 1) return setSettled(true);
@@ -96,14 +97,14 @@ export default React.memo(function CompletedInvestments() {
                 <div
                   onClick={() => click(item.id.toString())}
                   key={item.id}
-                  className="flex cursor-pointer items-center rounded-lg border p-3 shadow"
+                  className="flex items-center p-3 border rounded-lg shadow cursor-pointer"
                 >
-                  <div className="flex flex-grow items-center gap-3">
-                    <Badge className="flex size-12 items-center justify-center rounded-full bg-secondary-100">
+                  <div className="flex items-center flex-grow gap-3">
+                    <Badge className="flex items-center justify-center rounded-full size-12 bg-secondary-100">
                       <img
                         src={item.display_image}
                         alt={item.product_name}
-                        className="h-auto w-full object-fill"
+                        className="object-fill w-full h-auto"
                       />
                     </Badge>
                     <div className="">
@@ -126,7 +127,7 @@ export default React.memo(function CompletedInvestments() {
                       </span>
                     </div>
 
-                    <Badge className="caption-standard bg-success-100/50 capitalize text-success-300">
+                    <Badge className="capitalize caption-standard bg-success-100/50 text-success-300">
                       {item.status}
                     </Badge>
                   </div>

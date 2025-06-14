@@ -29,7 +29,6 @@ export default React.memo(function ExploreMarketplace() {
     {
       enabled: !hasActions && true,
       onSuccess(data) {
-        console.log(data, "prosucst")
         setList(data.products);
       },
     },
