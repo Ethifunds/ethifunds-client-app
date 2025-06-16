@@ -56,7 +56,7 @@ export default function useForm() {
       show: true,
       type: "success_dialog",
       data,
-      action: reset,
+      dismiss: reset,
     });
   };
 
