@@ -12,9 +12,9 @@ import InvestmentVaultTransactionsPage from "@/pages/investments/investment-vaul
 import MyInvestmentsPage from "@/pages/my-investments";
 import MyInvestmentCategoryPage from "@/pages/my-investments/my-investment-category"
 import MyInvestmentTransactionPage from "@/pages/my-investments/transactions";
-import SavingsPage from "@/pages/savings"
-import SavingsOverviewPage from "@/pages/savings/savings-overview"
-import SavingsTransactionsPage from "@/pages/savings/savings-transactions";
+// import SavingsPage from "@/pages/savings"
+// import SavingsOverviewPage from "@/pages/savings/savings-overview"
+// import SavingsTransactionsPage from "@/pages/savings/savings-transactions";
 import SettingsPage from "@/pages/settings";
 import SupportPage from "@/pages/support";
 import FaqPage from "@/pages/support/faq";
@@ -34,9 +34,9 @@ const dashboardRoutes: CustomRouteProps[] = [
 	{path: "/my-investments/:categoryId/transactions", Component: MyInvestmentTransactionPage},
 
 
-	{ path: "/savings", Component: SavingsPage },
-	{ path: "/savings/overview", Component: SavingsOverviewPage },
-	{path:"/savings/:cycle_id/transactions", Component:SavingsTransactionsPage},
+	// { path: "/savings", Component: SavingsPage },
+	// { path: "/savings/overview", Component: SavingsOverviewPage },
+	// {path:"/savings/:cycle_id/transactions", Component:SavingsTransactionsPage},
 
 	{ path: "/investments", Component: InvestmentsPage },
 	{ path: "/investments/vault", Component: InvestmentVault },
