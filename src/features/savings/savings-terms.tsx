@@ -39,7 +39,7 @@ export default function SavingsTerms() {
           />
         </div>
         <div className="[&_p]:highlight-standard flex flex-col gap-5 pt-5 text-neutral-1000 lg:w-[70%]">
-          <h1 className="feature-standard">Ethicoop Savings</h1>
+          <h1 className="feature-standard">Ethisave</h1>
           <div className="space-y-5">
             <p>
               Ethicoop is a high-yield, Shariah-compliant cooperative savings

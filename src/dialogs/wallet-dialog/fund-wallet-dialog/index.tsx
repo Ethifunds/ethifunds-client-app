@@ -8,6 +8,7 @@ import FundingReceiptDialog from "./funding-receipt.dialog";
 import ErrorBoundary from "@/components/error-boundary";
 import EmptyData from "@/components/empty-data";
 import { PlusIcon } from "lucide-react";
+import { assets } from "@/constants";
 
 export default React.memo(function FundWalletDialog() {
   const {
@@ -36,11 +37,12 @@ export default React.memo(function FundWalletDialog() {
           handleChange={toggleShow}
           className=""
         >
-          <div className="hide-scrollbar h-screen overflow-auto pt-10">
-            <h1 className="content-standard px-3 text-neutral-500">
+          <div className="h-screen pt-10 overflow-auto hide-scrollbar">
+            <h1 className="px-3 content-standard text-neutral-500">
               Kindly fund your wallet by making a transfer to any of the bank
               accounts provided.
             </h1>
+
             <div className="flex flex-col gap-20 py-10">
               <Render isLoading={isFetching} isError={isError} error={error}>
                 {bankAccounts && bankAccounts?.length < 1 ? (
@@ -54,9 +56,9 @@ export default React.memo(function FundWalletDialog() {
 
                       <button
                         onClick={addBankAccount}
-                        className="button-primary flex w-fit items-center justify-center gap-2 text-white"
+                        className="flex items-center justify-center gap-2 text-white button-primary w-fit"
                       >
-                        <PlusIcon className="h-4 w-4" />
+                        <PlusIcon className="w-4 h-4" />
                         <span>Add Bank Account</span>
                       </button>
                     </div>
@@ -69,7 +71,11 @@ export default React.memo(function FundWalletDialog() {
                   />
                 ) : (
                   <React.Fragment>
-                    <div className="flex grow flex-col gap-10 p-3">
+                    <div className="flex flex-col gap-3 p-3 grow">
+                      <div className="flex items-start gap-3 p-4 text-sm rounded-lg bg-error-100/20">
+                        <img src={assets.info_icon_01} alt="info" />
+                        <p>All deposits attracts a 1% fee capped at N300</p>
+                      </div>
                       {data?.map((item) => (
                         <AccountCard key={item.id} {...item} copy={copy} />
                       ))}
@@ -85,7 +91,7 @@ export default React.memo(function FundWalletDialog() {
                         onClick={confirm}
                         isLoading={confirming}
                         variant="primary"
-                        className="highlight-accent w-full text-neutral-base_white"
+                        className="w-full highlight-accent text-neutral-base_white"
                         disabled={confirming}
                       >
                         I have made the transfer
