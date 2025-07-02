@@ -9,7 +9,7 @@ export default function Form() {
 
   return (
     <form
-      className="flex flex-col gap-4 overflow-auto rounded-xl border bg-white px-4 py-8 shadow lg:h-96 lg:rounded-3xl lg:px-8 lg:py-6 2xl:h-auto"
+      className="flex overflow-auto flex-col gap-4 px-4 py-8 bg-white rounded-xl border shadow lg:h-96 lg:rounded-3xl lg:px-8 lg:py-6 2xl:h-auto"
       onSubmit={submit}
     >
       <div className="space-y-1">
@@ -57,7 +57,7 @@ export default function Form() {
       <div>
         <Input
           name="password_confirmation"
-          type="text"
+          type="password"
           label="Confirm Password"
           placeholder="Enter Password"
           value={formData.password_confirmation}
@@ -72,7 +72,7 @@ export default function Form() {
           type="submit"
           isLoading={isLoading}
           variant="primary"
-          className="content-accent w-full rounded-xl text-white"
+          className="w-full text-white rounded-xl content-accent"
           disabled={isLoading}
         >
           Sign up

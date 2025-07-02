@@ -71,10 +71,10 @@ export default React.memo(function SellUnits() {
           )
         }
       >
-        <div className="flex flex-col h-full gap-10 px-4 py-10 overflow-auto">
-          <div className="flex items-start gap-3 p-4 rounded-lg bg-error-100/20">
+        <div className="flex overflow-auto flex-col gap-10 px-4 py-10 h-full">
+          <div className="flex gap-3 items-start px-4 py-2 rounded-lg bg-error-100/20">
             <img src={assets.info_icon_01} alt="info" />
-            <p>{warningMsg}</p>
+            <p className="caption-standard">{warningMsg}</p>
           </div>
 
           <Render
@@ -83,7 +83,7 @@ export default React.memo(function SellUnits() {
             error={error}
             loadType="simple"
           >
-            <div className="h-full space-y-5">
+            <div className="space-y-5 h-full">
               <SelectBox
                 name="product_id"
                 label="Product to sell"
@@ -97,7 +97,7 @@ export default React.memo(function SellUnits() {
               {formData.product_id && (
                 <React.Fragment>
                   {productDetails && (
-                    <div className="flex items-center justify-between gap-10 px-10 py-3 rounded-lg bg-primary-100">
+                    <div className="flex gap-10 justify-between items-center px-10 py-3 rounded-lg bg-primary-100">
                       <div className="space-y-1 text-center text-neutral-1000">
                         <span className="content-standard">
                           Available Units
@@ -153,10 +153,10 @@ export default React.memo(function SellUnits() {
                   />
 
                   <div className="space-y-2">
-                    <div className="flex items-center justify-between">
+                    <div className="flex justify-between items-center">
                       <label
                         htmlFor="asking_price"
-                        className="flex items-center gap-1"
+                        className="flex gap-1 items-center"
                       >
                         Add Asking Price Per Unit ({currency.sign})
                         <AppTooltip

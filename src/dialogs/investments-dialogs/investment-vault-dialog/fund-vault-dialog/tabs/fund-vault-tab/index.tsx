@@ -52,7 +52,7 @@ export default React.memo(function FundVaultTab(props: TabProps) {
 					handleChange={props.toggleDrawer}
 					className=""
 				>
-					<div className="flex flex-col pt-10 px-5 h-screen overflow-auto hide-scrollbar">
+					<div className="flex overflow-auto flex-col px-5 pt-10 h-screen hide-scrollbar">
 						<h1 className="content-standard text-neutral-500">
 							Fund your Investment Vault to allocate capital for Shariah-compliant investments.
 						</h1>
@@ -65,7 +65,7 @@ export default React.memo(function FundVaultTab(props: TabProps) {
 									value={props.fromValue.amount}
 									onChange={(e) => updateForm("amount", e)}
 								/>
-								<div className="flex gap-2 flex-wrap">
+								<div className="flex flex-wrap gap-2">
 									{amountList.map((item) => {
 										const cn = classNames("p-1.5 rounded bg-neutral-100 text-neutral-700", {
 											"bg-primary text-white": item.id === props.activeAmount,
@@ -91,11 +91,11 @@ export default React.memo(function FundVaultTab(props: TabProps) {
 								className="w-full"
 							/>
 						</div>
-						<div className="flex items-end grow pb-8">
+						<div className="flex items-end pb-8 grow">
 							<AppButton
 								onClick={props.proceed}
 								variant="primary"
-								className="highlight-accent w-full text-neutral-base_white"
+								className="w-full highlight-accent text-neutral-base_white"
 							>
 								Proceed
 							</AppButton>

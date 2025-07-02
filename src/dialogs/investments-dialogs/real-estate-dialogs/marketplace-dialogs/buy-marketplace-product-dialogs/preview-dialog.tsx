@@ -49,7 +49,7 @@ export default React.memo(function PreviewDialog() {
     total_cost: (
       <strong>
         {currency.sign}{" "}
-        {amountSeparator(dialog.data.purchasing_cost + charges)}{" "}
+        {amountSeparator(Number(dialog.data.purchasing_cost) + Number(charges))}{" "}
       </strong>
     ),
   };
@@ -58,7 +58,7 @@ export default React.memo(function PreviewDialog() {
     <PopupModal
       handleClose={close}
       open={open}
-      className="relative w-full overflow-auto p-8 lg:w-2/5"
+      className="overflow-auto relative p-8 w-full lg:w-2/5"
       showCloseBtn
     >
       <ErrorBoundary>
@@ -70,7 +70,7 @@ export default React.memo(function PreviewDialog() {
               return (
                 <div
                   key={key}
-                  className="caption-standard flex justify-between capitalize text-neutral-700"
+                  className="flex justify-between capitalize caption-standard text-neutral-700"
                 >
                   <span className="w-full">{key.split("_").join(" ")} </span>
                   <span className="w-full">{value}</span>

@@ -1,5 +1,6 @@
 import useCustomNavigation from "@/hooks/use-navigation";
 import { amountSeparator } from "@/lib/amount-separator";
+import capitalize from "@/lib/capitalize";
 import ensureError from "@/lib/ensure-error";
 import getProductDetails from "@/services/investments/get-product-details";
 import getMyInvestmentCategoryDetails from "@/services/my-investments/get-my-investment-category-details";
@@ -13,9 +14,9 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 const initWarningMsg =
-  "Warning message to inform the users of the sales charges";
+  "Carefully fill in the details of the units you want to sell and where you want to sell them.";
 const askingPriceMsg =
-  "Set your asking price: Choose a competitive price per unit to attract buyers and maximize your returns";
+  "Set your asking price: Choose a competitive price per unit to attract buyers. Asking price cannot be greater than the current rate";
 
 const validation = z.object({
   product_id: z
@@ -90,8 +91,6 @@ export default function useSellUnits() {
     },
   );
 
-
-
   const reset = () => {
     if (isLoading) return;
     setFormData(init);
@@ -161,26 +160,29 @@ export default function useSellUnits() {
   };
 
   const toggleAskPrice = (value: boolean) => {
+    setFormData((prev) => ({
+      ...prev,
+      asking_price: unitCosts,
+    }));
     if (value) {
       setWarningMsg(askingPriceMsg);
     } else {
       setWarningMsg(initWarningMsg);
-      setFormData((prev) => ({
-        ...prev,
-        asking_price: unitCosts,
-      }));
+      // setFormData((prev) => ({
+      //   ...prev,
+      //   asking_price: unitCosts,
+      // }));
     }
     setShowAskPrice(value);
   };
 
   const showPreview = async (payload: typeof formData) => {
-    if(!productDetails) return
+    if (!productDetails) return;
     try {
-
       const formValues = validation.omit({ pin: true }).parse(payload);
       if (formData.units > productDetails?.units_purchased) {
         throw new Error("Entered units exceeds the amount of purchased units");
-    }
+      }
 
       const data = {
         asking_price: `${currency.sign} ${amountSeparator(formValues.asking_price)}`,
@@ -211,8 +213,13 @@ export default function useSellUnits() {
     const asking_price = Number(
       formData.asking_price ? formData.asking_price : unitCosts,
     );
-
     const saleOption = queryParams.get("sale_option") ?? "";
+
+    if (asking_price > Math.floor(Number(productDetails?.unit_price) *formData.units)) {
+      toast.error("Asking price cannot be greater than the current rate");
+      setIsLoading(false);
+      return;
+    }
 
     const payload = {
       ...formData,
@@ -222,7 +229,6 @@ export default function useSellUnits() {
       sale_option: saleOption as typeof formData.sale_option,
     };
 
-    
     if (!pin) {
       return showPreview(payload);
     }
@@ -230,9 +236,10 @@ export default function useSellUnits() {
     try {
       const formValues = validation.parse(payload);
 
-      await sellInvestmentUnits(formValues);
-
-      showSuccess();
+      const response = await sellInvestmentUnits(formValues);
+      if (response?.id) {
+        showSuccess();
+      }
     } catch (error) {
       const errMsg = ensureError(error).message;
       if (errMsg.toLocaleLowerCase().includes("insufficient"))
@@ -253,10 +260,10 @@ export default function useSellUnits() {
   };
 
   const showSuccess = () => {
+    const saleOption = queryParams.get("sale_option") ?? "";
     const data = {
       title: "Congratulations!!!",
-      subtitle:
-        "You’ve successfully sold your REIT units to Ethifunds. If a counteroffer is made, you’ll be notified to review and accept or decline.",
+      subtitle: `You’ve successfully sold your units to ${capitalize(saleOption)}. If a counteroffer is made, you’ll be notified to review and accept or decline.`,
     };
     ui.changeDialog({
       show: true,

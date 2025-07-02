@@ -21,7 +21,7 @@ const validation = z.object({
 type FormData = z.infer<typeof validation>;
 
 export default function useForm(data: FormProps & { refresh: refresh }) {
-  const { params } = useCustomNavigation();
+  const { params, navigate } = useCustomNavigation();
   const productId = Number(params.productId);
   const init: FormData = {
     units: 10,
@@ -35,6 +35,7 @@ export default function useForm(data: FormProps & { refresh: refresh }) {
   );
 
   const { ui } = useActions();
+  
 
   const reset = () => {
     data.refresh();
@@ -82,10 +83,15 @@ export default function useForm(data: FormProps & { refresh: refresh }) {
   };
 
   const showSuccessDialog = () => {
+    const action = () => {
+      const categoryId = params.categoryId;
+      reset();
+      navigate(`/investments/${categoryId}`);
+    }
     ui.changeDialog({
       show: true,
       type: "real-estate-purchase-success",
-      action: reset,
+      action: action,
     });
   };
 

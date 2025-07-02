@@ -6,6 +6,8 @@ import { amountSeparator } from "@/lib/amount-separator";
 import classNames from "classnames";
 import ErrorBoundary from "@/components/error-boundary";
 import { Skeleton } from "@/components/ui/skeleton";
+import { TrendingUp } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default React.memo(function WalletBalance() {
   const {
@@ -27,7 +29,7 @@ export default React.memo(function WalletBalance() {
     },
   );
   return (
-    <div className="flex gap-5 overflow-auto py-3 lg:max-w-5xl lg:gap-10 lg:overflow-hidden lg:py-0">
+    <div className="flex overflow-auto gap-5 py-3 lg:max-w-5xl lg:gap-10 lg:overflow-hidden lg:py-0">
       <div className={container}>
         <ErrorBoundary>
           <Render
@@ -42,7 +44,7 @@ export default React.memo(function WalletBalance() {
                   <h1 className="content-standard text-neutral-700">
                     Wallet Balance
                   </h1>
-                  <h2 className="heading-4 uppercase">
+                  <h2 className="uppercase heading-4">
                     {sign} {amountSeparator(balance.wallet)}
                   </h2>
                 </div>
@@ -54,7 +56,7 @@ export default React.memo(function WalletBalance() {
                   />
                 </div>
               </div>
-              <div className="flex grow justify-end gap-5">
+              <div className="flex gap-5 justify-end grow">
                 <button
                   onClick={fundWallet}
                   className="button-primary !rounded-lg !py-2 text-white lg:w-1/3"
@@ -88,7 +90,7 @@ export default React.memo(function WalletBalance() {
                   <h1 className="content-standard text-neutral-700">
                     Investment Balance
                   </h1>
-                  <h2 className="heading-4 uppercase">
+                  <h2 className="uppercase heading-4">
                     {sign} {amountSeparator(balance.investment)}
                   </h2>
                 </div>
@@ -99,6 +101,14 @@ export default React.memo(function WalletBalance() {
                     setCurrency={changeCurrency}
                   />
                 </div>
+              </div>
+              <div className="flex gap-5 justify-end grow">
+                <Link
+                  to="/investments"
+                  className="flex gap-3 justify-between items-center py-2 w-28 text-white rounded-lg button-primary"
+                >
+                  <TrendingUp /> Invest
+                </Link>
               </div>
             </div>
           </Render>

@@ -80,12 +80,12 @@ export default React.memo(function InfiniteScroll<T>({
           {items.map((item) => renderItem(item))}
 
           {(isFetching || isFetchingNextPage) && (
-            <div className="col-span-full flex w-full justify-center py-2">
+            <div className="flex col-span-full justify-center py-2 w-full">
               <Spinner size="sm" />
             </div>
           )}
           {!hasNextPage && !isFetching && (
-            <div className="col-span-full flex justify-center py-2 text-4xl text-neutral-500">
+            <div className="flex col-span-full justify-center py-2 text-4xl text-neutral-500">
               ...
             </div>
           )}

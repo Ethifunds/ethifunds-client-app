@@ -3,6 +3,7 @@ import ErrorBoundary from "@/components/error-boundary";
 import { Badge } from "@/components/ui/badge";
 import { PopupModal } from "@/components/ui/modal";
 import { amountSeparator } from "@/lib/amount-separator";
+import capitalize from "@/lib/capitalize";
 import useActions from "@/store/actions";
 import { useAppSelector } from "@/store/hooks";
 import { X } from "lucide-react";
@@ -51,11 +52,11 @@ export default React.memo(function PreviewDialog() {
     <PopupModal
       handleClose={close}
       open={open}
-      className="relative w-full overflow-auto p-8 lg:w-2/5"
+      className="overflow-auto relative p-8 w-full lg:w-2/5"
     >
       <button
         onClick={close}
-        className="absolute right-0 top-0 flex size-8 items-center justify-center rounded-full bg-white p-2"
+        className="flex absolute top-0 right-0 justify-center items-center p-2 bg-white rounded-full size-8"
       >
         <X color="#908b8b" />
       </button>
@@ -68,9 +69,9 @@ export default React.memo(function PreviewDialog() {
               return (
                 <div
                   key={key}
-                  className="caption-standard flex justify-between capitalize text-neutral-700"
+                  className="flex justify-between caption-standard text-neutral-700"
                 >
-                  <span className="w-full">{key.split("_").join(" ")} </span>
+                  <span className="w-full">{capitalize(key.split("_").join(" "))} </span>
                   <span className="w-full">{value}</span>
                 </div>
               );

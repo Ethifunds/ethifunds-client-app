@@ -1,6 +1,7 @@
+import useCustomNavigation from "@/hooks/use-navigation";
 import ensureError from "@/lib/ensure-error";
 import { sanitizeNumInput } from "@/lib/sanitize-num-input";
-import buyMarketplaceProduct from "@/services/investments/buy-marketplace-product";
+import counterOffer from "@/services/investments/counter-offer";
 import useActions from "@/store/actions";
 import { useAppSelector } from "@/store/hooks";
 import { investmentMarketplaceProduct } from "@/types/investments.types";
@@ -9,12 +10,9 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 const validation = z.object({
-  product_id: z
-    .number({ message: "Product Id must be a number" })
-    .positive("product Id must be valid"),
-  units: z
-    .number({ message: "units must be a number" })
-    .positive("units is required"),
+  listing_id: z
+    .number({ message: "Listing Id must be a number" })
+    .positive("Listing Id must be valid"),
   pin: z.string().trim().length(4, "pin is required"),
   counter_price_per_unit: z.string().min(1, "counter price unit is required"),
 });
@@ -23,10 +21,10 @@ type FormData = z.infer<typeof validation>;
 
 export default function useForm(data: investmentMarketplaceProduct) {
   const { currency } = useAppSelector((state) => state.account);
-
+  const { params } = useCustomNavigation();
+  const listingId = Number(params.listingId);
   const init: FormData = {
-    product_id: data.product_id,
-    units: 1,
+    listing_id: listingId,
     pin: "",
     counter_price_per_unit: "",
   };
@@ -78,16 +76,12 @@ export default function useForm(data: investmentMarketplaceProduct) {
   }, [data.asking_price_per_unit, formData.counter_price_per_unit]);
 
   const showPreview = () => {
-    if (formData.units > data.units) {
-      toast.error("Entered units exceeds the amount of available units");
-      return;
-    }
     const payload = {
       seller_username: data.seller_investment_info.user.username,
       interest_rate: `${data.product.expected_roi}%`,
       counter_offer_price: counter_price_per_unit,
-      purchasing_cost: formData.units * Number(counter_price_per_unit),
-      purchasing_unit: `${formData.units} ${formData.units > 1 ? "units" : "unit"} `,
+      purchasing_cost: data.units * Number(counter_price_per_unit),
+      purchasing_unit: `${data.units} ${data.units > 1 ? "units" : "unit"} `,
     };
     ui.changeDialog({
       show: true,
@@ -104,17 +98,24 @@ export default function useForm(data: investmentMarketplaceProduct) {
     try {
       const formValues = validation.parse({
         ...formData,
-        units: Number(formData.units),
-        counter_price_per_unit,
+        counter_price_per_unit: String(counter_price_per_unit),
         pin,
       });
-      await buyMarketplaceProduct(formValues);
-      showSuccessDialog();
+      const res = await counterOffer({
+        listing_id: formValues.listing_id,
+        units: data.units,
+        pin: formValues.pin,
+        offer_price: formValues.counter_price_per_unit,
+      });
+      if (res.id) {
+        showSuccessDialog();
+      }
     } catch (err) {
       const errMsg = ensureError(err).message;
       if (errMsg.toLocaleLowerCase().includes("insufficient"))
         return showInsufficientDialog();
       toast.error(errMsg);
+      throw err;
     } finally {
       setIsLoading(false);
     }

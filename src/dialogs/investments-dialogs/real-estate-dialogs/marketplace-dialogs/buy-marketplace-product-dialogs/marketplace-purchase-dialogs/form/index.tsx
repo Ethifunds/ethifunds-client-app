@@ -17,7 +17,7 @@ export default function Form(props: FormProps) {
 
 
   return (
-    <div className="flex h-full flex-1 flex-col gap-5 overflow-auto">
+    <div className="flex overflow-auto flex-col flex-1 gap-5 h-full">
       <form className="flex flex-col gap-5">
         <Input
           name="seller_name"
@@ -31,16 +31,14 @@ export default function Form(props: FormProps) {
         <div>
           <Input
             name="units"
-            label="Select quantity"
-            type="number"
+            label="Units"
+            type="text"
             inputMode="numeric"
             containerStyle="[&_label]:text-neutral-700"
-            value={formData.units}
-            step={1}
-            min={1}
-            max={props.data.units}
-            maxLength={props.data.units.toString().length}
-            onChange={(e) => updateForm("units", e)}
+            value={props.data.units.toString()}
+            // onChange={(e) => updateForm("units", e)}
+            readOnly
+            disabled
           />
 
           <div className="flex items-center gap-1 px-1.5 text-neutral-500">
@@ -65,11 +63,11 @@ export default function Form(props: FormProps) {
           label={`Preferred Price Per Unit (${currency.sign})`}
           value={formData.counter_price_per_unit}
           containerStyle="[&_label]:text-neutral-700"
-          placeholder={`${amountSeparator(Number(props.data.asking_price_per_unit) * formData.units)}`}
+          placeholder={Number(props.data.asking_price_per_unit).toLocaleString()}
           onChange={(e) => updateForm("counter_price_per_unit", e)}
         />
       </form>
-      <div className="flex grow items-end justify-between gap-8">
+      <div className="flex gap-8 justify-between items-end grow">
         <AppButton variant="primary" onClick={showPreview} className="w-full">
           Proceed
         </AppButton>

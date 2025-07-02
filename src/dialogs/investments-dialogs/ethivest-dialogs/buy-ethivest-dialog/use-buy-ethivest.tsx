@@ -14,6 +14,7 @@ import { z } from "zod";
 const validation = z.object({
   product_id: z.number(),
   units: z.number(),
+  funding_source: z.string().min(1, "Funding source is required"),
   pin: z.string().length(4, "Pin is required"),
 });
 
@@ -26,7 +27,7 @@ export type EthivestTabsProps = {
   isLoading: boolean;
   updateForm: (
     name: keyof FormData,
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<HTMLInputElement> | string,
   ) => void;
   updateUnits: (value: number) => void;
 };
@@ -34,6 +35,7 @@ const init: FormData = {
   product_id: 0,
   units: 10,
   pin: "",
+  funding_source: "",
 };
 
 export default function useBuyEthivest() {
@@ -65,8 +67,7 @@ export default function useBuyEthivest() {
     ["ethivest-product-details-dialog", productId, open],
     () => getProductDetails({ productId: Number(productId) }),
     { enabled: open },
-    );
-  
+  );
 
   const reset = () => {
     if (isLoading) return;
@@ -77,11 +78,11 @@ export default function useBuyEthivest() {
 
   const updateForm = (
     name: keyof typeof formData,
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: React.ChangeEvent<HTMLInputElement> | string,
   ) => {
     setFormData((prev) => ({
       ...prev,
-      [name]: e.target.value,
+      [name]: typeof e === "string" ? e : e.target.value,
     }));
   };
 
@@ -124,6 +125,11 @@ export default function useBuyEthivest() {
       return;
     }
 
+    if (!formData.funding_source) {
+      toast.error("Please select a funding source");
+      return;
+    }
+
     const purchasing_cost = Math.floor(
       Number(response.unit_price) * formData.units,
     );
@@ -139,6 +145,7 @@ export default function useBuyEthivest() {
       purchasing_cost: `${currency.sign} ${amountSeparator(purchasing_cost)}`,
       available_units: `${amountSeparator(available_units)} units`,
       current_unit_price: `${currency.sign} ${amountSeparator(response.unit_price)}`,
+      funding_source: formData.funding_source.split("_").join(" "),
     };
 
     ui.changeDialog({
@@ -172,9 +179,13 @@ export default function useBuyEthivest() {
         units: Number(formData.units),
         product_id: Number(productId),
         pin,
+        funding_source:
+          formData.funding_source === "investment_vault" ? "vault" : "wallet",
       });
-      await buyUnits(formValues);
-      showSuccess();
+      const res = await buyUnits(formValues);
+      if (res.id) {
+        showSuccess();
+      }
     } catch (err) {
       const errMsg = ensureError(err).message;
       if (errMsg.toLocaleLowerCase().includes("insufficient"))
@@ -186,10 +197,10 @@ export default function useBuyEthivest() {
   };
 
   function showSuccess() {
+    const product = response?.name;
     const data = {
       title: "Investment Successful! ",
-      subtitle:
-        "Your funds are now allocated to Real Estate Investment Trust. Track your returns in your portfolio.",
+      subtitle: `Your funds are now allocated to ${product}. Track your returns in your portfolio.`,
     };
 
     ui.changeDialog({

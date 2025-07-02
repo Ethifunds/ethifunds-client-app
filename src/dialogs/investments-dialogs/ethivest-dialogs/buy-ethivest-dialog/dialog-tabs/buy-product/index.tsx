@@ -7,25 +7,38 @@ import { Input } from "@/components/ui/form-input";
 import classNames from "classnames";
 import { unitsList } from "./data";
 import { amountSeparator } from "@/lib/amount-separator";
+import useExtras from "@/hooks/use-extras";
+import SelectBox from "@/components/select-box";
 
 export default React.memo(function BuyProduct(props: EthivestTabsProps) {
   const { currency } = useAppSelector((state) => state.account);
+  const { fundingSources } = useExtras();
   const data = props.data;
   const formData = props.formData;
+
+  const allowedSources = ["user_wallet", "investment_vault"];
+  const options = fundingSources
+    .filter((item) => allowedSources.includes(item.id))
+    .map((item) => ({
+      title: item.name,
+      value: item.id,
+    }));
 
   return (
     <TabsContent
       value="buy_product"
-      className="-mt-10 flex flex-col gap-5 py-5"
+      className="flex flex-col gap-5 py-5 -mt-10"
     >
       <h1 className="content-standard text-neutral-500">
         Use the form below to buy units from this investment.
       </h1>
 
-      <div className="flex items-center justify-between gap-10 rounded-lg bg-primary-100 px-10 py-3">
+      <div className="flex gap-10 justify-between items-center px-10 py-3 rounded-lg bg-primary-100">
         <div className="space-y-1 text-center text-neutral-1000">
           <span className="content-standard">Available Units</span>
-          <h4 className="content-bold">{amountSeparator(data.total_units - data.units_sold)}</h4>
+          <h4 className="content-bold">
+            {amountSeparator(data.total_units - data.units_sold)}
+          </h4>
         </div>
         <Separator orientation="vertical" className="h-11 bg-neutral-400" />
         <div className="space-y-1 text-center text-neutral-1000">
@@ -38,9 +51,10 @@ export default React.memo(function BuyProduct(props: EthivestTabsProps) {
 
       <div className="space-y-3">
         <Input
-          label="How many units will you want to sell?"
+          label="How many units do you want to buy?"
           placeholder="Enter units"
           inputMode="numeric"
+          containerStyle="[&>label]:!normal-case"
           value={formData.units}
           onChange={(e) => props.updateForm("units", e)}
           disabled={props.isLoading}
@@ -64,13 +78,63 @@ export default React.memo(function BuyProduct(props: EthivestTabsProps) {
       </div>
 
       <Input
-        label={`Cost Price (${currency.sign})`}
-        value={amountSeparator(Math.floor(formData.units * Number(data.unit_price)))}
+        label={`Cost price (${currency.sign})`}
+        value={amountSeparator(
+          Math.floor(formData.units * Number(data.unit_price)),
+        )}
         onChange={(e) => props.updateForm("units", e)}
         className="bg-neutral-100"
         readOnly
         disabled
       />
+
+      <SelectBox
+  label="Funding Source"
+  name="funding_source"
+  value={formData.funding_source}
+  onchange={(e) => props.updateForm("funding_source", e)}
+  placeholder="--Select--"
+  options={options}
+  containerStyle={"space-y-1"}
+  className="w-full"
+/>
     </TabsContent>
   );
 });
+
+
+
+
+// const { fundingSources } = useExtras();
+
+// const updateForm = (
+//   name: FormKeys,
+//   e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement> | string,
+// ) => {
+//   if (props.updateForm) {
+//     if (typeof e === "string") {
+//       return props.updateForm(name, e);
+//     }
+//     props.updateForm(name, e.target.value);
+//   }
+// };
+
+// const options = fundingSources
+//   .filter((item) => item.id.includes("user_wallet"))
+//   .map((item) => ({
+//     title: item.name,
+//     value: item.id,
+//   }));
+
+
+
+// <SelectBox
+//   label="Fund From"
+//   name="funding_source"
+//   value={props.fromValue.funding_source}
+//   onchange={(e) => updateForm("funding_source", e)}
+//   placeholder="--Select--"
+//   options={options}
+//   containerStyle={"space-y-1"}
+//   className="w-full"
+// />;

@@ -18,11 +18,12 @@ export default function ListCard(
 
     switch (sanitizeText(props.status)) {
       case "active":
+        case "approved":
         return (statusClass = "bg-success-100/50 text-success-300");
       case "pending":
         return (statusClass = "bg-warning-100/50 text-warning-300");
       default:
-        statusClass = "bg-error-100/50 text-error-300";
+        statusClass = "bg-neutral-100/50 text-neutral-300";
     }
 
     return classNames("", statusClass);
@@ -62,8 +63,8 @@ export default function ListCard(
   };
 
   return (
-    <div className="space-y-5 rounded-lg border p-3 transition hover:bg-neutral-50 hover:shadow">
-      <div className="flex items-start justify-between">
+    <div className="p-3 space-y-5 rounded-lg border transition hover:bg-neutral-50 hover:shadow">
+      <div className="flex justify-between items-start">
         <h1 className="highlight-accent text-neutral-700">
           {props.product.name}
         </h1>
@@ -73,7 +74,7 @@ export default function ListCard(
       <div className="space-y-2">
         {Object.entries(data).map(([key, value]) => {
           return (
-            <div key={key} className="content-standard flex justify-between capitalize text-neutral-700">
+            <div key={key} className="flex justify-between capitalize content-standard text-neutral-700">
               <span>{key.split("_").join(" ")}</span>
 
               <span>{value}</span>

@@ -31,8 +31,8 @@ export default React.memo(function NotificationIcon(props: IconProps) {
   };
 
   return (
-    <Badge className="flex items-center justify-center rounded-full size-10 bg-primary-100">
-      {icons[props.type]}{" "}
+    <Badge className="flex justify-center items-center rounded-full size-10 bg-primary-100">
+      {icons[props.type] ?? <TrendingUp {...iconUtils} />}{" "}
     </Badge>
   );
 });

@@ -2,6 +2,7 @@ import React from "react";
 import eye from "./assets/eye.svg";
 import eyeSlash from "./assets/eye-slash.svg";
 import classNames from "classnames";
+import capitalize from "@/lib/capitalize";
 
 type InputNativeAttributes = React.ComponentPropsWithRef<"input">;
 
@@ -55,8 +56,8 @@ const Input = React.forwardRef<Ref, InputProps>((props: InputProps, ref) => {
 	return (
 		<div className={container}>
 			{label && (
-				<label htmlFor={name} className="capitalize ">
-					{label} {rest.required && "*"}
+				<label htmlFor={name} className="!normal-case">
+					{capitalize(label)} {rest.required && "*"}
 				</label>
 			)}
 			<input
