@@ -42,14 +42,14 @@ export default function SavingsTerms() {
           <h1 className="feature-standard">Ethisave</h1>
           <div className="space-y-5">
             <p>
-              Ethicoop is a high-yield, Shariah-compliant cooperative savings
+              Ethisave is a high-yield, Shariah-compliant cooperative savings
               wallet that enables group savings with a minimum monthly
               contribution of N50,000. The product offers quarterly dividends to
               shareholders, providing a structured, interest-free savings model
               that aligns with Islamic finance principles. <br /> Subscribers to
-              Ethicoop can benefit from automated or manual monthly
+              Ethisave can benefit from automated or manual monthly
               contributions, with the flexibility to make surplus contributions.
-              Quarterly dividends are credited to the Ethicoop wallet, accruing
+              Quarterly dividends are credited to the Ethisave wallet, accruing
               over time and becoming available for withdrawal after a one-year
               tenure. Users have the option for an early, quarterly withdrawal
               if they provide a one-month notice.
@@ -60,7 +60,7 @@ export default function SavingsTerms() {
             <img src={assets.info_icon_01} alt="info icon" />
             <p>
               By clicking Subscribe I agree to the <b>Terms</b> and{" "}
-              <b> Conditions</b> of the Ethicoop Savings
+              <b> Conditions</b> of the Ethisave Savings
             </p>
           </div>
 
