@@ -91,7 +91,7 @@ export default React.memo(function RemoveBankDialog() {
     <PopupModal
       handleClose={close}
       open={open}
-      className="relative h-60 w-full space-y-5 rounded-xl py-8 lg:h-auto lg:w-[30%] lg:rounded-3xl"
+      className="relative w-full space-y-5 rounded-xl py-8 lg:h-auto lg:w-[30%] lg:rounded-3xl"
       showCloseBtn
     >
       <div className="text-center">
@@ -109,10 +109,10 @@ export default React.memo(function RemoveBankDialog() {
       >
         {account && (
           <div className="flex flex-col gap-5">
-            <div className="flex items-center gap-3 rounded-lg bg-neutral-100/30 p-2">
+            <div className="flex gap-3 items-center p-2 rounded-lg bg-neutral-100/30">
               <Badge
                 variant={"outline"}
-                className="flex size-10 items-center justify-center rounded-full border-neutral-500"
+                className="flex justify-center items-center rounded-full size-10 border-neutral-500"
               >
                 <img
                   src={assets.bank_01}

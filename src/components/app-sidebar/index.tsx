@@ -5,6 +5,7 @@ import {
   SidebarGroupContent,
   SidebarHeader,
   SidebarTrigger,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { sidebarLinks } from "./data";
 import SidebarLink from "./sidebar-link";
@@ -17,6 +18,7 @@ export default function AppSidebar() {
   const [activeLink, setActiveLink] = React.useState("");
   const [currentPath, setCurrentPath] = React.useState("");
   const { location } = useCustomNavigation();
+  const { setOpenMobile, isMobile } = useSidebar();
 
   React.useEffect(() => {
     setCurrentPath(location.pathname);
@@ -26,6 +28,15 @@ export default function AppSidebar() {
     setActiveLink,
     currentPath,
   };
+
+  const handleSidebarLinkClick = () => {
+    if (isMobile) {
+      setTimeout(() => {
+        setOpenMobile(false);
+      }, 100);
+    }
+  };
+
   return (
     <Sidebar collapsible="icon" className="py-5">
       <SidebarHeader>
@@ -38,7 +49,12 @@ export default function AppSidebar() {
         <SidebarGroup>
           <SidebarGroupContent className="space-y-3">
             {sidebarLinks.map((item) => (
-              <SidebarLink key={item.name} {...item} {...props} />
+              <SidebarLink
+                key={item.name}
+                {...item}
+                {...props}
+                onSidebarLinkClick={handleSidebarLinkClick}
+              />
             ))}
           </SidebarGroupContent>
         </SidebarGroup>

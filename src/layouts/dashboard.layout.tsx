@@ -12,7 +12,7 @@ export default React.memo(function DashboardLayout() {
     <AuthGate>
       <SidebarProvider>
         <AppSidebar />
-        <div className="flex w-full flex-col">
+        <div className="flex flex-col w-full">
           <SidebarHeader />
           <PageTitle />
           <Outlet />

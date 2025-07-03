@@ -8,6 +8,7 @@ type SidebarLinkProps = SidebarLink & {
 	currentPath: string;
 	activeLink: string;
 	setActiveLink: React.Dispatch<React.SetStateAction<string>>;
+	onSidebarLinkClick?: () => void;
 };
 export default React.memo(function SidebarLink(link: SidebarLinkProps) {
 	const { icon, name, activeIcon, path, relativePaths, currentPath, activeLink, setActiveLink } =
@@ -36,7 +37,7 @@ export default React.memo(function SidebarLink(link: SidebarLinkProps) {
 			onMouseLeave={() => setActiveLink("")}
 		>
 			<SidebarMenuButton asChild className={cn}>
-				<Link to={path}>
+				<Link to={path} onClick={link.onSidebarLinkClick}>
 					<img src={isActive ? activeIcon : icon} alt={name} className="size-4" />
 					<span>{name}</span>
 				</Link>

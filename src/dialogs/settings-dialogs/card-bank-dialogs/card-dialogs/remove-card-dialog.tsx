@@ -95,7 +95,7 @@ export default React.memo(function RemoveCardDialog() {
     <PopupModal
       handleClose={close}
       open={open}
-      className="relative h-60 w-full space-y-5 rounded-xl py-8 lg:h-auto lg:w-[30%] lg:rounded-3xl"
+      className="relative w-full space-y-5 rounded-xl py-8 lg:h-auto lg:w-[30%] lg:rounded-3xl"
       showCloseBtn
     >
       <div className="text-center">
@@ -113,11 +113,11 @@ export default React.memo(function RemoveCardDialog() {
       >
         {card && (
           <div className="flex flex-col gap-5">
-            <div className="flex items-start justify-between rounded-lg border p-4 transition hover:bg-neutral-100/20">
-              <div className="flex grow items-center gap-3">
+            <div className="flex justify-between items-start p-4 rounded-lg border transition hover:bg-neutral-100/20">
+              <div className="flex gap-3 items-center grow">
                 <Badge
                   variant={"outline"}
-                  className="flex h-8 w-10 items-center justify-center rounded-sm border-neutral-100 p-1"
+                  className="flex justify-center items-center p-1 w-10 h-8 rounded-sm border-neutral-100"
                 >
                   <img
                     src={cardBrands[logoIdx < 0 ? 0 : logoIdx].logo}
@@ -126,11 +126,11 @@ export default React.memo(function RemoveCardDialog() {
                   />
                 </Badge>
 
-                <div className="flex grow flex-col gap-1 capitalize">
+                <div className="flex flex-col gap-1 capitalize grow">
                   <h1 className="content-bold">
                     {card.account_name.toLowerCase()}
                   </h1>
-                  <div className="caption-accent flex grow justify-between text-neutral-500">
+                  <div className="flex justify-between caption-accent grow text-neutral-500">
                     <span>**** **** **** {card.last4}</span>
                   </div>
                 </div>
