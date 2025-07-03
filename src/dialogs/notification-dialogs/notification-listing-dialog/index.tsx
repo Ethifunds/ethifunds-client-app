@@ -40,7 +40,7 @@ export default React.memo(function NotificationListingDialog() {
         >
           <div className="flex flex-col gap-8 p-4">
             <p className="content-standard text-neutral-700">{data?.message}</p>
-            <div className="space-y-5 rounded-lg border bg-neutral-50 p-3">
+            <div className="p-3 space-y-5 rounded-lg border bg-neutral-50">
               <ListingUsername
                 user={activeUserIsSeller ? account : userData!}
                 isBuyer={!activeUserIsSeller}
@@ -49,7 +49,7 @@ export default React.memo(function NotificationListingDialog() {
                 return (
                   <div
                     key={key}
-                    className="caption-standard flex items-center justify-between capitalize text-neutral-700"
+                    className="flex justify-between items-center capitalize caption-standard text-neutral-700"
                   >
                     <span className="w-full">{key.split("_").join(" ")} </span>
                     <span className="w-full">{value}</span>
@@ -58,7 +58,7 @@ export default React.memo(function NotificationListingDialog() {
               })}
             </div>
 
-            <div className="flex gap-5 [&_button]:w-full">
+          {details?.status === "pending" && <div className="flex gap-5 [&_button]:w-full">
               <AppButton
                 variant={details?.status === "pending" ? "primary" : "mute"}
                 onClick={() => submit("approved")}
@@ -76,6 +76,7 @@ export default React.memo(function NotificationListingDialog() {
                 Reject
               </AppButton>
             </div>
+              }
           </div>
         </Render>
       </ErrorBoundary>

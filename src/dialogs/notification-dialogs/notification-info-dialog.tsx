@@ -30,7 +30,7 @@ export default React.memo(function NotificationInfoDialog() {
   const message =
     (info as any).message ?? (info as any).description;
   const msgCn = classNames(
-    "first-letter:uppercase line-clamp-1 text-neutral-700",
+    "first-letter:uppercase  text-neutral-700",
   );
 
   const titleCn = classNames("capitalize line-clamp-1 content-accent");

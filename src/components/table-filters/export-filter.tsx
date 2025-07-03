@@ -51,14 +51,14 @@ export default function ExportFilter(props: ExportFilterProps) {
       name: "CSV",
       path: "csv",
     },
-    {
-      name: "PDF",
-      path: "pdf",
-    },
+    // {
+    //   name: "PDF",
+    //   path: "pdf",
+    // },
   ];
 
   return (
-    <div className="flex items-center gap-5">
+    <div className="flex gap-5 items-center">
       <h1>Export</h1>
 
       <Select
