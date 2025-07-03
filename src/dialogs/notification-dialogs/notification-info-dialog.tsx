@@ -53,6 +53,7 @@ export default React.memo(function NotificationInfoDialog() {
             Dismiss
           </button>
         </div>
+        
       </PopupModal>
     </ErrorBoundary>
   );
