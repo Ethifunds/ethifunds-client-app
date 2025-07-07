@@ -20,7 +20,7 @@ export function DatePickerWithRange({
   const onSelect = (range: DateRange | undefined) => {
     setDate(range);
     if (range?.from && range?.to) {
-      const rangeString = `${range?.from?.toISOString()}-${range?.to?.toISOString()}`;
+      const rangeString = `${range?.from?.toISOString()} - ${range?.to?.toISOString()}`;
       if (rest.handleChange) {
         rest.handleChange(rangeString);
       }

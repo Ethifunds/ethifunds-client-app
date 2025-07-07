@@ -23,7 +23,7 @@ export default React.memo(function ProductImg(props: CardImgProps) {
         <img
           src={props.display_image}
           alt={props.name}
-          className="size-full rounded object-cover"
+          className="object-cover max-h-56 rounded size-full"
         />
         <Badge className={cn}>{props?.section?.replace("_", " ")}</Badge>
       </div>

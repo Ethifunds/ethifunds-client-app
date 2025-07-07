@@ -3,6 +3,7 @@ import TabContainer from "../../../tab-container";
 import { useAppSelector } from "@/store/hooks";
 import SetPinForm from "./forms/set-pin-form";
 import ChangePinForm from "./forms/change-pin-form";
+import GoBack from "@/components/go-back";
 
 export default React.memo(function TransactionPinTab() {
   const { account } = useAppSelector((state) => state.account);
@@ -21,17 +22,9 @@ export default React.memo(function TransactionPinTab() {
       title="Transaction Pin"
       subTitle="Secure your transactions with a 4-digit PIN"
       value="transaction_pin"
-      // utilityComponent={
-      //   hasPin && (
-      //     <AppButton
-      //       variant="outline"
-      //       onClick={toggle}
-      //       className="rounded-lg border-primary py-2 text-primary"
-      //     >
-      //       {changePin ? "Set Pin" : "Change Pin"}
-      //     </AppButton>
-      //   )
-      // }
+      utilityComponent={
+       <GoBack className="absolute left-0 -top-7 text-xs"/>
+      }
     >
       {!hasPin ? <SetPinForm /> : <ChangePinForm />}
     </TabContainer>

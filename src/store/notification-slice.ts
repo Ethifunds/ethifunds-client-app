@@ -43,12 +43,20 @@ const notificationSlice = createSlice({
     },
 
     markIsRead: (state, action: PayloadAction<MarkIsRead>) => {
-      const match = state.notifications.find(
-        (item) => item.id === action.payload.id,
-      );
-      if (match) {
-        match.read_at = new Date().toISOString();
-      }
+      // const match = state.notifications.find(
+      //   (item) => item.id === action.payload.id,
+      // );
+      // if (match) {
+      //   match.read_at = new Date().toISOString();
+      // }
+      return {
+        ...state,
+        notifications: state.notifications.map((item) =>
+          item.id === action.payload.id
+            ? { ...item, read_at: new Date().toISOString() }
+            : item,
+        ),
+      };
     },
 
     changeNotificationDialog: (

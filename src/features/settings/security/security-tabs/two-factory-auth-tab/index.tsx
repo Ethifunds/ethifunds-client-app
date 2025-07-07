@@ -9,6 +9,7 @@ import ensureError from "@/lib/ensure-error";
 import { toast } from "sonner";
 import EmptyData from "@/components/empty-data";
 import { assets } from "@/constants";
+import GoBack from "@/components/go-back";
 
 export default React.memo(function TwoFactoryAuthTab() {
   const { account } = useAppSelector((state) => state.account);
@@ -53,14 +54,19 @@ export default React.memo(function TwoFactoryAuthTab() {
 "
       className="space-y-8"
       utilityComponent={
-        <AppButton
-          variant="outline"
-          className={cn}
-          onClick={enable2fa ? disable : enable}
-          isLoading={isLoading}
-        >
-          {enable2fa ? "Disable" : "Enable"} 2FA
-        </AppButton>
+        <React.Fragment>
+          <GoBack className="absolute -top-7 left-0 text-xs" />
+          <div>
+            <AppButton
+              variant="outline"
+              className={cn}
+              onClick={enable2fa ? disable : enable}
+              isLoading={isLoading}
+            >
+              {enable2fa ? "Disable" : "Enable"} 2FA
+            </AppButton>
+          </div>
+        </React.Fragment>
       }
     >
       {enable2fa ? (

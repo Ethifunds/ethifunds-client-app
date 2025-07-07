@@ -2,7 +2,7 @@ import * as React from "react";
 import { NotificationTabsProps } from "../../use-notifications";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+
 
 export default React.memo(function TabForm(props: NotificationTabsProps) {
   const form = props.formData;
@@ -57,11 +57,12 @@ export default React.memo(function TabForm(props: NotificationTabsProps) {
         </div>
       </FormSectionContainer>
 
-      <FormSectionContainer
+      {/* No login notification for now */}
+      {/* <FormSectionContainer
         title="Login Notification"
         text="Receive security alerts every time you login"
       >
-        <div className="caption-standard flex flex-col gap-5 text-neutral-700">
+        <div className="flex flex-col gap-5 caption-standard text-neutral-700">
           <RadioGroup
             defaultValue={
               form?.login_notification.notify_me ? "notify-me" : "don't-notify"
@@ -106,13 +107,14 @@ export default React.memo(function TabForm(props: NotificationTabsProps) {
             </div>
           </RadioGroup>
         </div>
-      </FormSectionContainer>
+      </FormSectionContainer> */}
 
-      <FormSectionContainer
+      {/* No wallet threshold for now */}
+      {/* <FormSectionContainer
         title="Wallet threshold"
         text="These are notifications to remind you when your wallet balance is low."
       >
-        <div className="caption-standard flex flex-col gap-5 text-neutral-700">
+        <div className="flex flex-col gap-5 caption-standard text-neutral-700">
           <RadioGroup
             defaultValue={
               form?.wallet_threshold.notify_me ? "notify-me" : "don't-notify"
@@ -157,7 +159,7 @@ export default React.memo(function TabForm(props: NotificationTabsProps) {
             </div>
           </RadioGroup>
         </div>
-      </FormSectionContainer>
+      </FormSectionContainer> */}
     </form>
   );
 });

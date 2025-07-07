@@ -7,7 +7,7 @@ type Parameters = {
 
   settings: Pick<
     NotificationSettings,
-    "notifications_from_admin" | "login_notification" | "wallet_threshold"
+    "notifications_from_admin" | "login_notification" //| "wallet_threshold"
   >[];
 };
 type Response = void;

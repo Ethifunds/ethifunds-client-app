@@ -13,7 +13,7 @@ type ContainerProps = {
 };
 export default function TabContainer(props: ContainerProps) {
   const cn = classNames(
-    "pt-8 !outline-none focus-visible:ring-0",
+    "pt-8 !outline-none focus-visible:ring-0 relative",
     props.className,
   );
   return (

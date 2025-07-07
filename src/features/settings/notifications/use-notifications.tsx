@@ -16,9 +16,9 @@ const validation = z.object({
   login_notification: z.object({
     notify_me: z.boolean(),
   }),
-  wallet_threshold: z.object({
-    notify_me: z.boolean(),
-  }),
+  // wallet_threshold: z.object({
+  //   notify_me: z.boolean(),
+  // }),
 });
 
 type InitFormData = z.infer<typeof validation>;
@@ -43,9 +43,9 @@ const init: InitFormData = {
   login_notification: {
     notify_me: false,
   },
-  wallet_threshold: {
-    notify_me: false,
-  },
+  // wallet_threshold: {
+  //   notify_me: false,
+  // },
 };
 export default function useNotifications() {
   const { queryParams } = useCustomNavigation();
@@ -197,9 +197,9 @@ export default function useNotifications() {
             login_notification: {
               notify_me: formValues.login_notification.notify_me,
             },
-            wallet_threshold: {
-              notify_me: formValues.wallet_threshold.notify_me,
-            },
+            // wallet_threshold: {
+            //   notify_me: formValues.wallet_threshold.notify_me,
+            // },
           },
         ],
       };
