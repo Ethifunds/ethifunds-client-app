@@ -1,21 +1,20 @@
 import { variables } from "@/constants";
 import axios from "@/lib/axios";
-import { generateDigits } from "@/lib/generate-digits";
 
-type Response = number | null;
+type Response = void;
 
 export async function production(): Promise<Response> {
-  const response = await axios.get(`/ethicoop/wallet/balance`);
-  return response.data.data.balance;
+  const response = await axios.post(`/ethicoop/recurring/resume`);
+  return response.data.data;
 }
 
 export async function development(): Promise<Response> {
   return new Promise((resolve) => {
-    setTimeout(() => resolve(generateDigits(9999)), 2000);
+    setTimeout(() => resolve(), 2000);
   });
 }
 
-export default async function getSavingsBalance(): Promise<Response> {
+export default async function resumeAutoFunding(): Promise<Response> {
   if (variables.NODE_ENV === "development") return development();
 
   return production();

@@ -23,7 +23,7 @@ export const users: User[] = [
       email_verified_at: "2025-01-23T23:33:25.000000Z",
       has_verified_phone: true,
       phone_verified_at: "2025-01-23T23:34:47.000000Z",
-      has_verified_bvn: false,
+      has_verified_bvn: true,
       bvn_verified_at: null,
       has_verified_nin: false,
       nin_verified_at: null,

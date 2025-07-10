@@ -1,10 +1,13 @@
 import { variables } from "@/constants";
 import axios from "@/lib/axios";
 
+
+
+
 type Response = void;
 
 export async function production(): Promise<Response> {
-  const response = await axios.post(`/ethicoop/manual-contribution`);
+  const response = await axios.post(`/ethicoop/recurring/pause`);
   return response.data.data;
 }
 
@@ -14,7 +17,7 @@ export async function development(): Promise<Response> {
   });
 }
 
-export default async function initiateManualPayment(): Promise<Response> {
+export default async function pauseAutoFunding(): Promise<Response> {
   if (variables.NODE_ENV === "development") return development();
 
   return production();

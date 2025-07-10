@@ -4,6 +4,28 @@ export type SavingsFundingSource = (typeof savingsFundingSources)[number];
 export type SavingsFundingPreference =
   (typeof savingsFundingPreference)[number];
 
+
+export type SavingsPreference = {
+  id: number;
+  user_id: number;
+  amount: number;
+  funding_source: SavingsFundingSource;
+  debit_day: number;
+  next_run_at: string;
+  last_run_at: string | null;
+  failure_count: number;
+  status: string;
+  created_at: string;
+  updated_at: string;
+};
+
+export type UpdateSavingsPreference = {
+  amount: number;
+  funding_source: SavingsFundingSource;
+  debit_day: number;
+  status: string;
+};
+
 export type Savings = {
   id: number;
   user_id: number;

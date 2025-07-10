@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { type OpportunityCard as Card, opportunityList } from "./data";
+import { type OpportunityCard as Card,  } from "./data";
 import OpportunityCard from "./opportunity-card";
 import { useQuery } from "react-query";
 import getInvestmentCategories from "@/services/investments/get-investment-categories";
@@ -32,9 +32,9 @@ export default function OpportunityList(props: { scope?: "1" | "2" }) {
 		<div className={cn}>
 			<ErrorBoundary>
 				<Render isLoading={isFetching} isError={isError} error={error}>
-					{opportunityList.map((item) => (
+					{/* {opportunityList.map((item) => (
 						<OpportunityCard key={item.title} {...item} scope={props.scope} />
-					))}
+					))} */}
 
 					{categories?.map((item) => (
 						<OpportunityCard key={item.title} {...item} {...props} />

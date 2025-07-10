@@ -1,7 +1,7 @@
 import useCustomNavigation from "@/hooks/use-navigation";
 import ensureError from "@/lib/ensure-error";
 import getOngoingSavings from "@/services/savings/get-ongoing-savings";
-import initiateManualPayment from "@/services/savings/initiate-manual-payment";
+import initiateManualPayment from "@/services/savings/initiate-withdrawal";
 import useActions from "@/store/actions";
 import { Savings } from "@/types/savings.types";
 import * as React from "react";

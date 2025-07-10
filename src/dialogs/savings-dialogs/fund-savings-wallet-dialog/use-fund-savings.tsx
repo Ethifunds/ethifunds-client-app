@@ -1,10 +1,7 @@
 import { queryClient } from "@/config/query-client-config";
 import useCustomNavigation from "@/hooks/use-navigation";
 import ensureError from "@/lib/ensure-error";
-import getSavingsPreference from "@/services/savings/get-savings-preference";
-import pauseAutoFunding from "@/services/savings/pause-auto-funding";
-import resumeAutoFunding from "@/services/savings/resume-auto-funding";
-import updateSavingsPreference from "@/services/savings/update-savings-preference";
+import fundSavingsWallet from "@/services/savings/fund-savings-wallet";
 import useActions from "@/store/actions";
 import useAppSelectors from "@/store/use-app-selectors";
 import {
@@ -12,16 +9,11 @@ import {
   savingsFundingSources,
 } from "@/types/savings.types";
 import * as React from "react";
-import { useQuery } from "react-query";
 import { toast } from "sonner";
 import { z } from "zod";
 
 const validation = z.object({
-  amount: z.number().gte(50000, "amount can not be less than 50,000"),
-  contribution_date: z
-    .number()
-    .positive("Charge Day must be grater than 0")
-    .lte(31, "Charge Day must be less than 31"),
+  amount: z.number().gte(1000, "amount can not be less than 1000"),
   funding_source: z.enum(savingsFundingSources, {
     message: `funding source must be either ${savingsFundingSources}`,
   }),
@@ -30,12 +22,11 @@ const validation = z.object({
 type FormData = z.infer<typeof validation>;
 
 const init: FormData = {
-  amount: 50000,
-  contribution_date: "" as any,
+  amount: 1000,
   funding_source: "" as FormData["funding_source"],
 };
 
-export default function useSavingsPreference() {
+export default function useFundSavings() {
   const { dialog } = useAppSelectors("ui");
   const { currency, account } = useAppSelectors("account");
   const [formData, setFormData] = React.useState(init);
@@ -45,26 +36,8 @@ export default function useSavingsPreference() {
   const { ui: uiActions } = useActions();
 
   const open = React.useMemo(() => {
-    return dialog.show && dialog.type === "savings_preference";
+    return dialog.show && dialog.type === "fund_savings";
   }, [dialog.show, dialog.type]);
-
-  const { isFetching, isError, error, data } = useQuery(
-    ["get-savings-preference"],
-    () => getSavingsPreference(),
-    {
-      enabled: open,
-    },
-  );
-
-  React.useEffect(() => {
-    if (data) {
-      setFormData({
-        amount: data.amount,
-        contribution_date: data.debit_day,
-        funding_source: data.funding_source,
-      });
-    }
-  }, [data]);
 
   const updateForm = (name: keyof typeof formData, value: string | Date) => {
     setFormData((prev) => ({
@@ -98,14 +71,11 @@ export default function useSavingsPreference() {
       const formValues = validation.parse({
         ...formData,
         amount: Number(formData.amount),
-        contribution_date: Number(formData.contribution_date),
       });
 
-      await updateSavingsPreference({
+      await fundSavingsWallet({
         amount: formValues.amount,
         funding_source: formValues.funding_source,
-        debit_day: formValues.contribution_date,
-        status: "active",
       });
 
       showSuccessDialog();
@@ -114,34 +84,6 @@ export default function useSavingsPreference() {
       if (errMsg.toLocaleLowerCase().includes("insufficient")) {
         return insufficientFundsDialog();
       }
-      toast.error(errMsg);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const disableAutoFunding = async () => {
-    setIsLoading(true);
-    try {
-      await pauseAutoFunding();
-      toast.success("Auto-Funding has been disabled");
-      toggleDrawer(false);
-    } catch (error) {
-      const errMsg = ensureError(error).message;
-      toast.error(errMsg);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const enableAutoFunding = async () => {
-    setIsLoading(true);
-    try {
-      await resumeAutoFunding();
-      toast.success("Auto-Funding has been enabled");
-      toggleDrawer(false);
-    } catch (error) {
-      const errMsg = ensureError(error).message;
       toast.error(errMsg);
     } finally {
       setIsLoading(false);
@@ -160,12 +102,11 @@ export default function useSavingsPreference() {
   const showSuccessDialog = () => {
     const data = {
       title: "Successful!!",
-      subtitle: "Your funding auto-cycle has been activated.",
+      subtitle: "Your wallet funding has been successful.",
     };
     const dismiss = () => {
       reset();
       queryClient.invalidateQueries(["ethicoop-balance"]);
-      
     };
     uiActions.changeDialog({
       show: true,
@@ -188,18 +129,13 @@ export default function useSavingsPreference() {
   return {
     open,
     isLoading,
-    isFetching,
-    isError,
-    error,
-    data,
     formData,
     sign: currency.sign,
     fundingPreferenceOptions,
     fundingSourceOptions,
     toggleDrawer,
     updateForm,
-    disableAutoFunding,
-    enableAutoFunding,
+
     submit,
   };
 }

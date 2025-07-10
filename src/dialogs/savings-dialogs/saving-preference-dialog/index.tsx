@@ -6,8 +6,14 @@ import { amountList } from "./data";
 import { amountSeparator } from "@/lib/amount-separator";
 import SelectBox from "@/components/select-box";
 import AppButton from "@/components/app-button";
-import { DatePicker } from "@/components/ui/date-picker";
 import Render from "@/components/render";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { InfoIcon } from "lucide-react";
 
 export default React.memo(function SavingsPreferenceDialog() {
   const {
@@ -15,15 +21,16 @@ export default React.memo(function SavingsPreferenceDialog() {
     isFetching,
     isError,
     error,
-    data,
     isLoading,
     formData,
     sign,
     fundingSourceOptions,
-    fundingPreferenceOptions,
     toggleDrawer,
     updateForm,
     submit,
+    data,
+    enableAutoFunding,
+    disableAutoFunding,
   } = useSavingsPreference();
 
   return (
@@ -34,20 +41,43 @@ export default React.memo(function SavingsPreferenceDialog() {
       handleChange={toggleDrawer}
       className="overflow-y-auto"
       footer={
-        <div className="">
-          <AppButton
-            variant="primary"
-            onClick={submit}
-            isLoading={isLoading}
-            disabled={data && data.cycle?.id ? false : true}
-            className="w-full"
-          >
-            Submit
-          </AppButton>
+        <div className="flex gap-3 justify-between">
+          {data?.status === "active" ? (
+            <React.Fragment>
+              <AppButton
+                variant="mute"
+                onClick={disableAutoFunding}
+                disabled={isLoading || isFetching}
+                className="w-full caption-standard bg-neutral-100"
+              >
+                Pause Auto-Funding
+              </AppButton>
+
+              <AppButton
+                variant="primary"
+                onClick={submit}
+                isLoading={isLoading}
+                disabled={isLoading || isFetching}
+                className="w-full"
+              >
+                Submit
+              </AppButton>
+            </React.Fragment>
+          ) : (
+            <AppButton
+              variant="primary"
+              onClick={enableAutoFunding}
+              isLoading={isLoading}
+              disabled={isLoading || isFetching}
+              className="w-full"
+            >
+              Enable Auto-Funding
+            </AppButton>
+          )}
         </div>
       }
     >
-      <div className="flex h-full flex-col gap-5 overflow-y-auto p-4">
+      <div className="flex overflow-y-auto flex-col gap-5 p-4 h-full">
         <Render isLoading={isFetching} isError={isError} error={error}>
           <span className="content-standard text-neutral-500">
             Shariah-compliant cooperative savings wallet that enables group
@@ -79,31 +109,35 @@ export default React.memo(function SavingsPreferenceDialog() {
 
           <div>
             <label htmlFor="contribution_date">
-              Contribution Date{" "}
-              <small className="cation-standard">
-                (you will be charged on this date)
-              </small>
+              Charge Day{" "}
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <InfoIcon className="w-4 h-4" />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    Pick a day of the month <br /> to charge your funding source
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             </label>
-            <DatePicker
+            <Input
+              type="number"
+              step={1}
+              min={1}
+              max={31}
+              placeholder="Choose a charge day"
+              value={formData.contribution_date}
+              onChange={(e) => updateForm("contribution_date", e.target.value)}
+            />
+            {/* <DatePicker
               name="contribution_date"
               triggerStyle="w-full"
               value={formData.contribution_date}
               showOutsideDays={false}
               onChange={(value) => updateForm("contribution_date", value)}
               disabled={isLoading}
-            />
-          </div>
-
-          <div>
-            <SelectBox
-              name="funding_preference"
-              label="Funding Preference"
-              placeholder="--Select--"
-              value={formData.funding_preference}
-              onchange={(e) => updateForm("funding_preference", e)}
-              options={fundingPreferenceOptions}
-              disabled={isLoading}
-            />
+            /> */}
           </div>
 
           <div>

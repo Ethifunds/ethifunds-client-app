@@ -29,6 +29,7 @@ export default React.memo(function AuthGate({
 
   const INACTIVITY_LIMIT = variables.INACTIVE_LIMIT * 60 * 1000;
   const logout = React.useCallback(async (autoLogout = false) => {
+  if (variables.NODE_ENV === "development") return;
     try {
       await logoutAccount();
       if (!remember_me) {
