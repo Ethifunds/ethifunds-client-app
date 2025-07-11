@@ -77,7 +77,8 @@ export default function useForm() {
 				handleRememberMe();
 			}
 
-			if (response.user.two_factor) {
+			if (response.user.two_factor?.is_active) {
+				console.log("two factor is active", response.user.two_factor);
 				return navigate("2fa-verify");
 			}
 			return navigate(path);
