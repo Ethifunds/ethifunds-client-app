@@ -30,37 +30,37 @@ export default function ProductCard(props: InvestmentProduct) {
     <React.Fragment>
       <ErrorBoundary>
         <div onClick={click}>
-          <div className="cursor-pointer space-y-5 rounded-lg border transition hover:shadow lg:space-y-0">
+          <div className="space-y-5 rounded-lg border transition cursor-pointer hover:shadow lg:space-y-0">
             <ProductImg
               name={props.name}
               section={props.product_section?.name}
               display_image={props.display_image}
             />
-            <CardContent className="space-y-3 px-2 py-4">
+            <CardContent className="px-2 py-4 space-y-3">
               <CardTitle className="space-y-1 md:h-16">
                 <div className="flex justify-between">
                   <ProductLabel label={props.product_label?.name} />
-                  <span className="line-clamp-1 text-sm text-neutral-500">
+                  <span className="text-sm line-clamp-1 text-neutral-500">
                     {capitalize(props.custodian?.name ?? "")}
                   </span>
                 </div>
                 <h1 className="highlight-bold line-clamp-2">{props.name}</h1>
               </CardTitle>
 
-              <div className="flex items-center gap-3">
+              <div className="flex gap-3 items-center">
                 <h1 className="highlight-bold text-neutral-1000">
                   {currency.sign} {amountSeparator(props.unit_price)}{" "}
                 </h1>
                 <span className="highlight-accent text-primary">Per Unit</span>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex gap-3 items-center">
                 <h6 className="caption-accent text-neutral-700">
                   {props.tenor_value} {props.tenor_unit} Tenure
                 </h6>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex gap-3 items-center">
                 <h1 className="highlight-bold text-success-200">
                   {props.expected_roi}%
                 </h1>
@@ -69,7 +69,7 @@ export default function ProductCard(props: InvestmentProduct) {
                 </span>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex gap-3 items-center">
                 {isSoldOut ? (
                   <h2 className="content-accent text-error-200"> Sold Out</h2>
                 ) : (

@@ -6,15 +6,15 @@ import paginate from "@/lib/paginate";
 import { SavingsTransaction } from "@/types/savings.types";
 import { savingsTransactions } from "@/constants/data/savings/savings-transactions";
 
-type Parameters = Partial<PaginationQuery> & {
-  cycle_id: string;
-};
+type Parameters = Partial<PaginationQuery> & {};
 
 type Response = PaginatedResponse<SavingsTransaction>;
 
-export async function production({cycle_id, ...data}: Parameters): Promise<Response> {
+export async function production(data: Parameters): Promise<Response> {
   const query_string = buildQueryString(data);
-  const response = await axios.get(`/ethicoop/transactions/${cycle_id}?${query_string}`);
+  const response = await axios.get(
+    `/ethicoop/wallet/transactions?${query_string}`,
+  );
   return paginate(response.data.data);
 }
 

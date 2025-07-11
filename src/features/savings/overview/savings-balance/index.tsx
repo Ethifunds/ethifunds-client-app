@@ -45,19 +45,19 @@ export default React.memo(function SavingsBalance() {
         >
           <div className="flex flex-col gap-6 h-full grow">
             <div className="flex flex-1 justify-between">
-              <div className="flex flex-col gap-5">
+              <div className="flex flex-col flex-1 gap-5">
                 <div className="flex gap-2 items-center content-standard text-neutral-700">
                   <h1 className="text-nowrap"> Ethicoop Balance </h1>
                   <button onClick={() => refetch()}>
                     <RefreshCw className="w-5 h-5" />
                   </button>
                 </div>
-                <h2 className="uppercase heading-4">
+                <h2 className="flex uppercase heading-4">
                   {sign} {amountSeparator(balance)}
                 </h2>
               </div>
 
-              <div className="flex justify-end w-full h-full">
+              <div className="flex justify-end h-full">
                 <DropdownMenu modal={false}>
                   <DropdownMenuTrigger className="!outline-non">
                     <img

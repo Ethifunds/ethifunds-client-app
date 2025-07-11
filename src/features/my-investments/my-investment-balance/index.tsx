@@ -33,7 +33,7 @@ export default React.memo(function MyInvestmentBalance() {
   );
   return (
     <ErrorBoundary>
-      <div className="flex gap-5">
+      <div className="flex overflow-auto gap-5 p-1">
         <div className={investmentContainer}>
           <Render
             isLoading={investmentBalanceQuery.isFetching}
