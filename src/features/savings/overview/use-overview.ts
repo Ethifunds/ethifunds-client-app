@@ -1,13 +1,10 @@
 import useCustomNavigation from "@/hooks/use-navigation";
-import ensureError from "@/lib/ensure-error";
 import getOngoingSavings from "@/services/savings/get-ongoing-savings";
-import initiateManualPayment from "@/services/savings/initiate-withdrawal";
 import useActions from "@/store/actions";
 import { Savings } from "@/types/savings.types";
 import * as React from "react";
 
 import { useQuery } from "react-query";
-import { toast } from "sonner";
 
 export type SavingDetailsProps = ReturnType<typeof useQuery> & {
   savings: Savings | null;
@@ -17,7 +14,6 @@ export type SavingDetailsProps = ReturnType<typeof useQuery> & {
 export default function useOverview() {
   const [savings, setSavings] = React.useState<Savings | null>(null);
   const [showManualFunding, setShowManualFunding] = React.useState(false);
-  const [initiating, setInitiating] = React.useState(false);
 
   const { queryParams } = useCustomNavigation();
   const { ui } = useActions();
@@ -43,9 +39,7 @@ export default function useOverview() {
   
   
 
-  const reset = () => {
-    setShowManualFunding(false);
-  };
+  
 
   const openSavingsDialog = () => {
     queryParams.set("action", "savings_preference");
@@ -56,36 +50,9 @@ export default function useOverview() {
     });
   };
 
-  const makeManualPayment = async () => {
-    setInitiating(true);
-    try {
-      await initiateManualPayment();
-      openSuccessDialog();
-    } catch (error) {
-      const errMsg = ensureError(error).message;
-      toast.error(errMsg);
-    }
-  };
+ 
 
-  const openSuccessDialog = () => {
-    const currentDate = new Date()
-      .toLocaleDateString("default", {
-        dateStyle: "long",
-      })
-      .split(" ")[0];
 
-    const data = {
-      title: "Successful!!",
-      subtitle: `you have successfully made payment for the month of ${currentDate}`,
-    };
-
-    ui.changeDialog({
-      show: true,
-      type: "success_dialog",
-      data,
-      dismiss: reset,
-    });
-  };
 
   React.useLayoutEffect(() => {
     queryParams.delete("action");
@@ -96,8 +63,6 @@ export default function useOverview() {
     ...query,
     savings,
     showManualFunding,
-    initiating,
     openSavingsDialog,
-    makeManualPayment,
   };
 }
