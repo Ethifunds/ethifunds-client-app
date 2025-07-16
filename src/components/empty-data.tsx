@@ -7,6 +7,7 @@ type EmptyDataProps = {
   text?: string;
   icon?: string;
   className?: string;
+  action?: React.ReactNode;
 };
 export default React.memo(function EmptyData(props: EmptyDataProps) {
   const container = classnames(
@@ -23,9 +24,10 @@ export default React.memo(function EmptyData(props: EmptyDataProps) {
       {props.title && (
         <h1 className="feature-accent text-neutral-1000">{props.title}</h1>
       )}
-      <p className="text-center font-semibold tracking-tight text-neutral-500">
+      <p className="font-semibold tracking-tight text-center text-neutral-500">
         {props.text ?? "No Data available"}
       </p>
+      {props.action && props.action}
     </div>
   );
 });

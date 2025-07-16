@@ -6,6 +6,7 @@ type DialogType =
   | "insufficient_funds"
   | "transaction_details"
   | "fund_wallet"
+  | "fund_wallet_with_paystack"
   | "funding_receipt"
   | "withdrawal"
   | "withdrawal_receipt"

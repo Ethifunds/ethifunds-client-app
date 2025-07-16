@@ -19,7 +19,7 @@ export default function EthivestTabs() {
   return (
     <ErrorBoundary>
       <Tabs
-        defaultValue={activeTab ?? "ongoing_investments"}
+        defaultValue={activeTab ?? "marketplace"}
         className="!p-0 outline-none"
       >
         <TabsList className="hide-scrollbar w-full justify-start gap-2 overflow-x-auto overflow-y-hidden rounded-none border-b-2 bg-transparent !p-0 !pb-3 lg:gap-5 lg:border-b">

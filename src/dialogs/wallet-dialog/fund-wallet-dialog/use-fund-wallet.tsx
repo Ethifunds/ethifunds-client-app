@@ -66,14 +66,14 @@ export default function useFundWallet() {
     }
   };
 
-  // const showReceipt = () => {
-  // 	toggleShow(false);
-  // 	ui.changeDialog({
-  // 		type: "funding_receipt",
-  // 		id: "",
-  // 		show: true,
-  // 	});
-  // };
+  const fundWalletWithPaystack = () => {
+    toggleShow(false);
+    ui.changeDialog({
+      type: "fund_wallet_with_paystack",
+      id: "",
+      show: true,
+    });
+  };
 
   const confirm = async () => {
     setConfirming(true);
@@ -104,5 +104,6 @@ export default function useFundWallet() {
     bankAccounts,
     confirm,
     addBankAccount,
+    fundWalletWithPaystack
   };
 }

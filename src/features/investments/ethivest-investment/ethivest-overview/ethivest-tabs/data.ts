@@ -14,12 +14,12 @@ export type EthivestTab = {
 
 export const ethivestTabs: EthivestTab[] = [
   {
-    title: "Ongoing Investments",
-    value: "ongoing_investments",
-  },
-  {
     title: "Explore Opportunities",
     value: "marketplace",
+  },
+  {
+    title: "Ongoing Investments",
+    value: "ongoing_investments",
   },
   {
     title: "Completed Investments",

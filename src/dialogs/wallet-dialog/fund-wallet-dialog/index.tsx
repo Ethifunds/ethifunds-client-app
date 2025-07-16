@@ -25,6 +25,7 @@ export default React.memo(function FundWalletDialog() {
     bankAccounts,
     confirm,
     addBankAccount,
+    fundWalletWithPaystack,
   } = useFundWallet();
 
   return (
@@ -37,7 +38,7 @@ export default React.memo(function FundWalletDialog() {
           handleChange={toggleShow}
           className=""
         >
-          <div className="h-screen pt-10 overflow-auto hide-scrollbar">
+          <div className="overflow-auto pt-10 h-screen hide-scrollbar">
             <h1 className="px-3 content-standard text-neutral-500">
               Kindly fund your wallet by making a transfer to any of the bank
               accounts provided.
@@ -47,32 +48,51 @@ export default React.memo(function FundWalletDialog() {
               <Render isLoading={isFetching} isError={isError} error={error}>
                 {bankAccounts && bankAccounts?.length < 1 ? (
                   <React.Fragment>
-                    <div className="flex flex-col items-center justify-center gap-3 text-center">
+                    <div className="flex flex-col gap-3 justify-center items-center text-center">
                       <EmptyData
                         title="Feature Unaccessible"
                         text="to access this feature, you need to add a bank account first"
                         className="p-3"
                       />
 
-                      <button
-                        onClick={addBankAccount}
-                        className="flex items-center justify-center gap-2 text-white button-primary w-fit"
-                      >
-                        <PlusIcon className="w-4 h-4" />
-                        <span>Add Bank Account</span>
-                      </button>
+                      <div className="flex flex-col gap-1">
+                        <button
+                          onClick={addBankAccount}
+                          className="flex gap-2 justify-center items-center text-white button-primary w-fit"
+                        >
+                          <PlusIcon className="w-4 h-4" />
+                          <span>Add Bank Account</span>
+                        </button>
+                        <h1>Or</h1>
+                        <button
+                          className="underline text-primary"
+                          onClick={fundWalletWithPaystack}
+                        >
+                          Fund with Paystack
+                        </button>
+                      </div>
                     </div>
                   </React.Fragment>
-                ) : data && data?.length < 1 ? (
+                ) : data && data?.length > 1 ? (
                   <EmptyData
                     title="No deposit account available"
-                    text="no deposit account available at the moment check back later"
+                    text="no deposit account available at the moment check back later, alternatively you can fund your wallet directly"
                     className="p-3"
+                    action={
+                      <div className="pt-3">
+                        <AppButton
+                          variant="primary"
+                          onClick={fundWalletWithPaystack}
+                        >
+                          Fund Wallet with Paystack
+                        </AppButton>
+                      </div>
+                    }
                   />
                 ) : (
                   <React.Fragment>
                     <div className="flex flex-col gap-3 p-3 grow">
-                      <div className="flex items-start gap-3 p-4 text-sm rounded-lg bg-error-100/20">
+                      <div className="flex gap-3 items-start p-4 text-sm rounded-lg bg-error-100/20">
                         <img src={assets.info_icon_01} alt="info" />
                         <p>All deposits attracts a 1% fee capped at N300</p>
                       </div>
