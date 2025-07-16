@@ -14,25 +14,31 @@ export default function DetailsBox(props: InvestmentProduct) {
   const availableUnits = Math.floor(props.total_units - props.units_sold);
 
   return (
-    <div className="w-full p-4 space-y-5 border rounded-xl border-neutral-100">
+    <div className="p-4 space-y-5 w-full rounded-xl border border-neutral-100">
       <div className="space-y-5">
         <Badge className="highlight-standard border-success-100 !bg-[#A4F4E74D] text-success-300">
           Real Estate
         </Badge>
-        <div className="flex flex-col justify-between gap-2 text-neutral-1000 lg:flex-row lg:items-center">
+        <div className="flex flex-col gap-2 justify-between text-neutral-1000 lg:flex-row lg:items-center">
           <h1 className="capitalize feature-bold">{props.name}</h1>
-         {props.custodian?.name && <span className="highlight-accent">
-            by {capitalize(props.custodian?.name??"")} 
-          </span>}
+          {props.custodian?.name && (
+            <span className="highlight-accent">
+              by {capitalize(props.custodian?.name ?? "")}
+            </span>
+          )}
         </div>
 
-        <div className="flex items-center justify-between lg:justify-normal lg:gap-10">
+        <div className="flex justify-between items-center lg:justify-normal lg:gap-10">
           <div className="flex flex-col gap-2 lg:flex-row lg:items-center">
             <span className="feature-bold text-success-200">
               {props.expected_roi}%
             </span>
             <span className="highlight-standard text-neutral-500">
               Expected Returns
+            </span>
+
+            <span className="highlight-accent text-neutral-900">
+              {props.tenor_value} {props.tenor_unit} tenure
             </span>
           </div>
           {isSoldOut ? (
