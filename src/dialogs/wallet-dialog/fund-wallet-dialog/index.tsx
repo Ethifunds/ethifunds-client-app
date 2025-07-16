@@ -73,7 +73,7 @@ export default React.memo(function FundWalletDialog() {
                       </div>
                     </div>
                   </React.Fragment>
-                ) : data && data?.length > 1 ? (
+                ) : data && data?.length < 1 ? (
                   <EmptyData
                     title="No deposit account available"
                     text="no deposit account available at the moment check back later, alternatively you can fund your wallet directly"
