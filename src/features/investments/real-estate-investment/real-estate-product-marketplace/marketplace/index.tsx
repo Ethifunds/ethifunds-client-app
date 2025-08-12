@@ -26,17 +26,17 @@ export default function Marketplace() {
           }
           renderItem={(item) => (
             <Link to={`${item.id}`}>
-              <Card className="cursor-pointer space-y-5 transition hover:shadow lg:space-y-0">
+              <Card className="space-y-5 transition cursor-pointer hover:shadow lg:space-y-0">
                 <CardHeader className="p-0">
                   <div className="max-h-56">
                     <img
                       src={item.product.display_image}
                       alt={item.product.name}
-                      className="size-full object-cover"
+                      className="object-cover size-full"
                     />
                   </div>
                 </CardHeader>
-                <CardContent className="space-y-3 px-2 py-4">
+                <CardContent className="px-2 py-4 space-y-3">
                   <CardTitle className="md:h-16">
                     <h1 className="highlight-bold line-clamp-2">
                       {item.product.name}
@@ -45,17 +45,27 @@ export default function Marketplace() {
                       {item.seller_investment_info.user.username}
                     </span>
                   </CardTitle>
-
-                  <div className="flex items-center gap-3">
-                    <h1 className="highlight-bold text-neutral-1000">
-                      {currency.sign} {amountSeparator(item.asking_price_per_unit)}{" "}
-                    </h1>
-                    <span className="highlight-accent text-primary">
-                      Per Unit
-                    </span>
+                  <div>
+                    <div className="flex gap-3 items-center">
+                      <h1 className="highlight-bold text-neutral-1000">
+                        {currency.sign}{" "}
+                        {amountSeparator(item.asking_price_per_unit)}{" "}
+                      </h1>
+                      <span className="highlight-accent text-primary">
+                        Per Unit
+                      </span>
+                    </div>
+                    {/* <div className="highlight-standard text-neutral-500">
+                      Min. investment{" "}
+                      {currency.sign}{" "}
+                      {amountSeparator(
+                        Number(item.product.minimum_investment) *
+                          Number(item.product.unit_price),
+                      )}
+                    </div> */}
                   </div>
 
-                  <div className="flex items-center gap-3">
+                  <div className="flex gap-3 items-center">
                     <h1 className="highlight-bold text-success-200">
                       {item.product.expected_roi}%
                     </h1>
@@ -63,8 +73,7 @@ export default function Marketplace() {
                       Expected Return
                     </span>
                   </div>
-
-                  <div className="flex items-center gap-3">
+                  <div className="flex gap-3 items-center">
                     <h1 className="highlight-bold text-neutral-1000">
                       {amountSeparator(item.units)}
                     </h1>

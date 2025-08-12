@@ -54,6 +54,14 @@ export default React.memo(function BuyProduct(props: EthivestTabsProps) {
           label="How many units do you want to buy?"
           placeholder="Enter units"
           inputMode="numeric"
+          type="number"
+          min={Number(data.minimum_investment)}
+          max={
+            data.maximum_investment
+              ? Number(data.maximum_investment)
+              : undefined
+          }
+          step={1}
           containerStyle="[&>label]:!normal-case"
           value={formData.units}
           onChange={(e) => props.updateForm("units", e)}
@@ -89,15 +97,15 @@ export default React.memo(function BuyProduct(props: EthivestTabsProps) {
       />
 
       <SelectBox
-  label="Funding Source"
-  name="funding_source"
-  value={formData.funding_source}
-  onchange={(e) => props.updateForm("funding_source", e)}
-  placeholder="--Select--"
-  options={options}
-  containerStyle={"space-y-1"}
-  className="w-full"
-/>
+        label="Funding Source"
+        name="funding_source"
+        value={formData.funding_source}
+        onchange={(e) => props.updateForm("funding_source", e)}
+        placeholder="--Select--"
+        options={options}
+        containerStyle={"space-y-1"}
+        className="w-full"
+      />
     </TabsContent>
   );
 });

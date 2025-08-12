@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { amountSeparator } from "@/lib/amount-separator";
-import capitalize from "@/lib/capitalize";
+
 import { useAppSelector } from "@/store/hooks";
 import { InvestmentProduct } from "@/types/investments.types";
 import ProductProgress from "@/components/investment/product-progress";
@@ -21,11 +21,11 @@ export default function DetailsBox(props: InvestmentProduct) {
         </Badge>
         <div className="flex flex-col gap-2 justify-between text-neutral-1000 lg:flex-row lg:items-center">
           <h1 className="capitalize feature-bold">{props.name}</h1>
-          {props.custodian?.name && (
+          {/* {props.custodian?.name && (
             <span className="highlight-accent">
               by {capitalize(props.custodian?.name ?? "")}
             </span>
-          )}
+          )} */}
         </div>
 
         <div className="flex justify-between items-center lg:justify-normal lg:gap-10">
@@ -41,6 +41,7 @@ export default function DetailsBox(props: InvestmentProduct) {
               {props.tenor_value} {props.tenor_unit} tenure
             </span>
           </div>
+
           {isSoldOut ? (
             <h2 className="highlight-accent text-error-200"> Sold Out</h2>
           ) : (
@@ -60,11 +61,20 @@ export default function DetailsBox(props: InvestmentProduct) {
           {props.description}
         </p>
       </div>
-      <h1 className="heading-4 text-neutral-1000">
-        {currency.sign}
-        {amountSeparator(props.unit_price)}{" "}
-        <span className="feature-bold text-primary">Per Unit</span>
-      </h1>
+      <div className="flex flex-wrap-reverse gap-2 justify-between items-center">
+        <h1 className="heading-4 text-neutral-1000">
+          {currency.sign}
+          {amountSeparator(props.unit_price)}{" "}
+          <span className="feature-bold text-primary">Per Unit</span>
+        </h1>
+
+        <span className="highlight-standard text-neutral-500">
+          {" "}
+          Minimum Investment:{" "}
+          {currency.sign}
+          {amountSeparator(( Number(props.minimum_investment)*Number(props.unit_price)))}
+        </span>
+      </div>
 
       <ProductProgress
         unit_price={props.unit_price}

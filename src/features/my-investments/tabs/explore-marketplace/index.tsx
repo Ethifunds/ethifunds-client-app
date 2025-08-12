@@ -34,7 +34,7 @@ export default React.memo(function ExploreMarketPlace() {
         loadingBoxClass="col-span-full"
       >
         <ErrorBoundary>
-          <div className="flex grid-cols-1 flex-col gap-5 md:grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+          <div className="flex flex-col grid-cols-1 gap-5 md:grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
             {data && data?.length < 1 ? (
               <EmptyData
                 className="col-span-full"
@@ -46,25 +46,25 @@ export default React.memo(function ExploreMarketPlace() {
                   key={item.id}
                   to={`/investments/${item.product.product_category_id}/products/${item.product_id}/marketplace/${item.id}`}
                 >
-                  <div className="cursor-pointer space-y-5 rounded-lg border border-neutral-200 bg-white text-stone-950 shadow-sm transition lg:space-y-0 hover:lg:shadow">
+                  <div className="space-y-5 bg-white rounded-lg border shadow-sm transition cursor-pointer border-neutral-200 text-stone-950 lg:space-y-0 hover:lg:shadow">
                     <div className="max-h-56">
                       <img
                         src={item.product.display_image}
                         alt={item.product.name}
-                        className="size-full object-cover"
+                        className="object-cover size-full"
                       />
                     </div>
-                    <div className="space-y-3 px-2 py-4">
+                    <div className="px-2 py-4 space-y-3">
                       <div className="md:h-16">
                         <h1 className="highlight-bold line-clamp-2">
                           {item.product.name}
                         </h1>
-                        <span className="highlight-accent line-clamp-1 text-neutral-500">
-                          {item.product.custodian?.name}
-                        </span>
+                          {/* <span className="highlight-accent line-clamp-1 text-neutral-500">
+                            {item.product.custodian?.name}
+                          </span> */}
                       </div>
 
-                      <div className="flex items-center gap-3">
+                      <div className="flex gap-3 items-center">
                         <h1 className="highlight-bold text-neutral-1000">
                           {currency.sign} {item.asking_price_per_unit}{" "}
                         </h1>
@@ -73,7 +73,7 @@ export default React.memo(function ExploreMarketPlace() {
                         </span>
                       </div>
 
-                      <div className="flex items-center gap-3">
+                      <div className="flex gap-3 items-center">
                         <h1 className="highlight-bold text-success-200">
                           {item.product.expected_roi}%
                         </h1>
@@ -82,7 +82,7 @@ export default React.memo(function ExploreMarketPlace() {
                         </span>
                       </div>
 
-                      <div className="flex items-center gap-3">
+                      <div className="flex gap-3 items-center">
                         <h1 className="highlight-bold text-neutral-1000">
                           {item.units}
                         </h1>

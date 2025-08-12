@@ -5,6 +5,7 @@ import { ethivestTabs } from "./data";
 import OngoingInvestments from "./ongoing-investments";
 import ExploreMarketplace from "./explore-marketplace";
 import CompletedInvestments from "./completed-investments";
+import { useLayoutEffect } from "react";
 
 export default function EthivestTabs() {
   const { queryParams, navigate } = useCustomNavigation();
@@ -14,6 +15,9 @@ export default function EthivestTabs() {
     navigate(`?tab=${value}`);
   };
 
+  useLayoutEffect(() => {
+    queryParams.delete("actions")
+  },[])
   
 
   return (

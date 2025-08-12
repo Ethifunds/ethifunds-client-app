@@ -9,6 +9,8 @@ import { z } from "zod";
 export type FormProps = {
   unit_price: string;
   available_units: number;
+  minimum_investment: number;
+  maximum_investment: number | null;
 };
 type refresh = () => void;
 

@@ -15,6 +15,7 @@ export type ActiveInvestmentInvestments = {
   id: number;
   user_id: number;
   product_id: number;
+  product:MyInvestmentProduct
   investment_type: string;
   status: string;
   total_invested: string;

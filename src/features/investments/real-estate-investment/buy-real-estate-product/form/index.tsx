@@ -34,7 +34,7 @@ export default function Form(props: FormProps) {
 
   return (
     <form className="space-y-5 lg:max-w-[40%]">
-      <div className="flex items-center gap-3 text-primary">
+      <div className="flex gap-3 items-center text-primary">
         <span>Wallet Balance:</span>{" "}
         {isFetching ? (
           <Spinner />
@@ -56,12 +56,16 @@ export default function Form(props: FormProps) {
           name="units"
           value={formData.units}
           inputMode="numeric"
+          type="number"
+          min={props.minimum_investment??1}
+          max={props.maximum_investment ?? undefined}
+          step={1}
           placeholder="Enter Units"
           onChange={(value) => updateForm("units", value)}
           className="rounded-lg"
           disabled={isLoading}
         />
-        <div className="content-standard flex gap-1 pl-1 text-neutral-500">
+        <div className="flex gap-1 pl-1 content-standard text-neutral-500">
           <img src={assets.info_icon_02} alt="info icon" />
           <strong>
             {currency.sign} {amountSeparator(props.unit_price)}
@@ -109,7 +113,7 @@ export default function Form(props: FormProps) {
           isLoading={isLoading}
           onClick={proceed}
           variant="primary"
-          className="w-full rounded-lg text-white"
+          className="w-full text-white rounded-lg"
         >
           Proceed to Payment
         </AppButton>

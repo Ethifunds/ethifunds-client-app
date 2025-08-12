@@ -13,16 +13,16 @@ export default function DetailsBox(props: investmentMarketplaceProduct) {
   const availableUnits = props.units;
 
   return (
-    <div className="w-full space-y-5 rounded-xl border border-neutral-100 p-4">
+    <div className="p-4 space-y-5 w-full rounded-xl border border-neutral-100">
       <div className="space-y-5">
         <Badge className="highlight-standard border-success-100 !bg-[#A4F4E74D] text-success-300">
           Real Estate
         </Badge>
-        <div className="flex flex-col justify-between gap-2 text-neutral-1000 lg:flex-row lg:items-center">
-          <h1 className="feature-bold capitalize">{props.product.name}</h1>
-          <span className="highlight-accent">
+        <div className="flex flex-col gap-2 justify-between text-neutral-1000 lg:flex-row lg:items-center">
+          <h1 className="capitalize feature-bold">{props.product.name}</h1>
+          {/* <span className="highlight-accent">
             by {capitalize(props.product.custodian.name)}
-          </span>
+          </span> */}
         </div>
         <div className="flex items-center">
           Seller's Username:
@@ -31,7 +31,7 @@ export default function DetailsBox(props: investmentMarketplaceProduct) {
           </span>
         </div>
 
-        <div className="flex items-center justify-between lg:justify-normal lg:gap-10">
+        <div className="flex justify-between items-center lg:justify-normal lg:gap-10">
           <div className="flex flex-col gap-2 lg:flex-row lg:items-center">
             <span className="feature-bold text-success-200">
               {props.product.expected_roi}%
@@ -49,6 +49,13 @@ export default function DetailsBox(props: investmentMarketplaceProduct) {
               Available Units
             </span>
           </div>
+          {/* <div className="highlight-standard text-neutral-500">
+            Min. investment {currency.sign}{" "}
+            {amountSeparator(
+              Number(props.product.minimum_investment) *
+                Number(props.product.unit_price),
+            )}
+          </div> */}
         </div>
       </div>
       {/* <div>
@@ -56,8 +63,8 @@ export default function DetailsBox(props: investmentMarketplaceProduct) {
           {props.product.description}
         </p>
       </div> */}
-      <div className="flex flex-col gap-5 lg:flex-row lg:justify-between lg:items-center">
-        <h1 className="feature-bold flex items-center gap-3 text-neutral-1000">
+      <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+        <h1 className="flex gap-3 items-center feature-bold text-neutral-1000">
           <span className="highlight-accent">Asking price</span>
           {currency.sign}
           {amountSeparator(props.asking_price_per_unit)}{" "}
@@ -71,7 +78,6 @@ export default function DetailsBox(props: investmentMarketplaceProduct) {
           })}
         </h1>
       </div>
-  
     </div>
   );
 }

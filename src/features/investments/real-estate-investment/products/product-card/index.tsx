@@ -1,19 +1,27 @@
 import { InvestmentProduct } from "@/types/investments.types";
 import { Link } from "react-router-dom";
 import * as React from "react";
-import capitalize from "@/lib/capitalize";
+import useCustomNavigation from "@/hooks/use-navigation";
+
 
 export default function ProductCard(props: InvestmentProduct) {
+const {navigate}= useCustomNavigation()
   const isSoldOut = props.total_units === props.units_sold;
   const availableUnits = Math.floor(props.total_units - props.units_sold);
 
   const path = `/investments/${props.product_category_id}/products/${props.id}`;
+  const handleClick = () => {
+    if(isSoldOut) return
+    navigate(path)
+  }
+  
   return (
     <React.Fragment>
       {/* Mobile */}
-      <Link
-        to={path}
-        className="flex flex-col items-center rounded-2xl border transition-all hover:shadow-sm active:opacity-50 lg:hidden lg:max-h-[141px]"
+      <button
+        disabled={isSoldOut}
+        onClick={handleClick}
+        className="flex flex-col items-center text-left rounded-2xl border transition-all hover:shadow-sm active:opacity-50 lg:hidden lg:max-h-[141px]"
       >
         <div className="flex flex-1 gap-5">
           <div className="w-[40%]">
@@ -26,9 +34,9 @@ export default function ProductCard(props: InvestmentProduct) {
           <div className="flex-1 py-3 space-y-2">
             <div className="text-neutral-1000">
               <h1 className="caption-bold line-clamp-1">{props.name}</h1>
-              <span className="caption-standard">
+              {/* <span className="caption-standard">
                 {capitalize(props.custodian?.name ?? "")}
-              </span>
+              </span> */}
             </div>
 
             <h2 className="caption-bold text-neutral-1000">
@@ -42,8 +50,8 @@ export default function ProductCard(props: InvestmentProduct) {
                 {props.tenor_value} {props.tenor_unit} tenure
               </span>
             </h2>
-            <div className="flex gap-5">
-              <h2 className="flex flex-col caption-bold text-neutral-1000">
+            <div className="flex flex-col gap-1">
+              <h2 className="flex gap-1 caption-bold text-neutral-1000">
                 {" "}
                 {props.expected_roi}%{" "}
                 <span className="caption-accent text-neutral-500">
@@ -56,14 +64,14 @@ export default function ProductCard(props: InvestmentProduct) {
               ) : (
                 <h2 className="flex flex-col caption-accent text-neutral-500">
                   {" "}
-                  {availableUnits}{" "}
+                  {availableUnits.toLocaleString()}{" "}
                   <span className="text-secondary">Available Units</span>
                 </h2>
               )}
             </div>
           </div>
         </div>
-      </Link>
+      </button>
 
       {/* Desktop */}
       <div className="hidden max-h-[180px] items-center rounded-2xl border transition-all hover:shadow-sm lg:flex">
@@ -78,9 +86,9 @@ export default function ProductCard(props: InvestmentProduct) {
           <div className="py-3 space-y-2">
             <div className="text-neutral-1000">
               <h1 className="feature-accent line-clamp-1">{props.name}</h1>
-              <span className="content-standard">
+              {/* <span className="content-standard">
                 {capitalize(props.custodian?.name ?? "")}
-              </span>
+              </span> */}
             </div>
 
             <h2 className="highlight-bold text-neutral-1000">

@@ -7,7 +7,7 @@ import { amountSeparator } from "@/lib/amount-separator";
 import ProductImg from "./product-img";
 import ProductLabel from "./product-label";
 import useActions from "@/store/actions";
-import capitalize from "@/lib/capitalize";
+// import capitalize from "@/lib/capitalize";
 import ErrorBoundary from "@/components/error-boundary";
 
 export default function ProductCard(props: InvestmentProduct) {
@@ -40,18 +40,28 @@ export default function ProductCard(props: InvestmentProduct) {
               <CardTitle className="space-y-1 md:h-16">
                 <div className="flex justify-between">
                   <ProductLabel label={props.product_label?.name} />
-                  <span className="text-sm line-clamp-1 text-neutral-500">
+                  {/* <span className="text-sm line-clamp-1 text-neutral-500">
                     {capitalize(props.custodian?.name ?? "")}
-                  </span>
+                  </span> */}
                 </div>
                 <h1 className="highlight-bold line-clamp-2">{props.name}</h1>
               </CardTitle>
 
-              <div className="flex gap-3 items-center">
-                <h1 className="highlight-bold text-neutral-1000">
-                  {currency.sign} {amountSeparator(props.unit_price)}{" "}
-                </h1>
-                <span className="highlight-accent text-primary">Per Unit</span>
+              <div>
+                <div className="flex gap-3 items-center">
+                  <h1 className="highlight-bold text-neutral-1000">
+                    {currency.sign} {amountSeparator(props.unit_price)}{" "}
+                  </h1>
+                  <span className="highlight-accent text-primary">
+                    Per Unit
+                  </span>
+                </div>
+                <div className="caption-standard text-neutral-700">
+                  Min. investment {currency.sign}{" "}
+                  {amountSeparator(
+                    Number(props.minimum_investment) * Number(props.unit_price),
+                  )}
+                </div>
               </div>
 
               <div className="flex gap-3 items-center">

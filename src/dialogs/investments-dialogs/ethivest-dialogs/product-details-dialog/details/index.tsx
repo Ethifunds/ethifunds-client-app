@@ -23,7 +23,7 @@ export default React.memo(function Details(props: InvestmentProduct) {
   const infoData = {
     status: statusBadge,
     investment_name: data.name,
-    trustee: data?.custodian?.name,
+    // trustee: data?.custodian?.name,
     expected_return: `${amountSeparator(data.expected_roi)}%`,
     current_unit_price: `${currency.sign} ${data.unit_price}`,
     tenure: `${data.tenor_value} ${data.tenor_unit}`,
@@ -34,6 +34,14 @@ export default React.memo(function Details(props: InvestmentProduct) {
       </Badge>
     ),
     available_units: `${amountSeparator(available_units)} Units`,
+    min_investment: `${currency.sign} ${amountSeparator(
+      Number(data.minimum_investment) * Number(data.unit_price),
+    )}`,
+    max_investment: data.maximum_investment
+      ? `${currency.sign} ${amountSeparator(
+          Number(data.maximum_investment) * Number(data.unit_price),
+        )}`
+      : "N/A",
     investment_due_date: new Date(data.funding_deadline).toLocaleDateString(
       "en-us",
       {
@@ -46,7 +54,7 @@ export default React.memo(function Details(props: InvestmentProduct) {
     <div className="flex flex-col gap-5 px-4 py-5">
       <h1 className="content-standard text-neutral-500">{data.description}</h1>
 
-      <div className="flex flex-col gap-3 p-2 border rounded-md">
+      <div className="flex flex-col gap-3 p-2 rounded-md border">
         {Object.entries(infoData).map(([key, value]) => (
           <div
             key={key}

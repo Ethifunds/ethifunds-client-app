@@ -7,6 +7,7 @@ import useActions from "@/store/actions";
 import { useAppSelector } from "@/store/hooks";
 import { InvestmentProduct } from "@/types/investments.types";
 import * as React from "react";
+import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -33,7 +34,7 @@ export type EthivestTabsProps = {
 };
 const init: FormData = {
   product_id: 0,
-  units: 10,
+  units: 0,
   pin: "",
   funding_source: "",
 };
@@ -67,7 +68,18 @@ export default function useBuyEthivest() {
     ["ethivest-product-details-dialog", productId, open],
     () => getProductDetails({ productId: Number(productId) }),
     { enabled: open },
-  );
+    );
+  
+  useEffect(()=> {
+    if(open && response) {
+      setFormData({
+        ...init, 
+        product_id: response.id,
+        units: Number(response.minimum_investment),
+        // funding_source: "user_wallet",
+      })
+    }
+  },[open, response])
 
   const reset = () => {
     if (isLoading) return;
@@ -140,8 +152,8 @@ export default function useBuyEthivest() {
 
     const data = {
       section: response.product_section.name,
-      trustee: response?.custodian?.name,
-      interest_rate: `${response.expected_roi}% ROI`,
+      // trustee: response?.custodian?.name,
+      expected_return: `${response.expected_roi}%`,
       purchasing_cost: `${currency.sign} ${amountSeparator(purchasing_cost)}`,
       available_units: `${amountSeparator(available_units)} units`,
       current_unit_price: `${currency.sign} ${amountSeparator(response.unit_price)}`,
