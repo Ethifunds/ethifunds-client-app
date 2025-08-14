@@ -52,7 +52,7 @@ export default React.memo(function NotificationUserInvestmentDialog() {
     investment_name: investmentDetails?.name,
     units_purchased: amountSeparator(details.units_purchased),
     amount_invested: `${currency.sign} ${amountSeparator(details.total_invested)}`,
-    RIO: amountSeparator(details.total_roi),
+    expected_return: amountSeparator(details.total_roi),
     status: details.status,
   };
 
@@ -60,7 +60,7 @@ export default React.memo(function NotificationUserInvestmentDialog() {
     <PopupModal
       handleClose={close}
       open={open}
-      className="relative h-full w-full overflow-auto p-8 lg:w-1/2"
+      className="overflow-auto relative p-8 w-full h-full lg:w-1/2"
       showCloseBtn
     >
       <ErrorBoundary>
@@ -73,12 +73,12 @@ export default React.memo(function NotificationUserInvestmentDialog() {
           <div className="flex flex-col gap-8">
             <h1 className="highlight-standard text-neutral-1000">Details</h1>
             <p className="content-standard text-neutral-700">{data?.message}</p>
-            <div className="space-y-5 rounded-lg border bg-neutral-50 p-3">
+            <div className="p-3 space-y-5 rounded-lg border bg-neutral-50">
               {Object.entries(productDetails).map(([key, value]) => {
                 return (
                   <div
                     key={key}
-                    className="caption-standard flex justify-between capitalize text-neutral-700"
+                    className="flex justify-between capitalize caption-standard text-neutral-700"
                   >
                     <span className="w-full">{key.replace("_", " ")} </span>
                     <span className="w-full">{value}</span>

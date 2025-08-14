@@ -7,6 +7,7 @@ import getMyInvestmentCategoryDetails from "@/services/my-investments/get-my-inv
 import sellInvestmentUnits from "@/services/my-investments/sell-investment-units";
 import useActions from "@/store/actions";
 import { useAppSelector } from "@/store/hooks";
+import { InvestmentCategory } from "@/types/investments.types";
 import { ActiveInvestmentInvestments } from "@/types/my-investments.types";
 import * as React from "react";
 import { useQuery } from "react-query";
@@ -54,7 +55,7 @@ export default function useSellUnits() {
   const [showAskPrice, setShowAskPrice] = React.useState(false);
 
   const [productList, setProductList] = React.useState<
-    (ActiveInvestmentInvestments & { name: string; unit_price: string })[]
+    (ActiveInvestmentInvestments & { name: string; unit_price: string; category: InvestmentCategory })[]
   >([]);
 
   const { params, queryParams } = useCustomNavigation();
@@ -78,6 +79,7 @@ export default function useSellUnits() {
           return {
             name: res.name,
             unit_price: res.unit_price,
+            category: res.category,
             ...item,
           };
         });
@@ -189,6 +191,7 @@ export default function useSellUnits() {
         number_of_units_to_sell: amountSeparator(formValues.units),
         value_of_the_units: `${amountSeparator(formValues.asking_price * formValues.units)}`,
         sale_option: formValues.sale_option,
+        investment_type: productDetails.category.display_title,
       };
 
       ui.changeDialog({
