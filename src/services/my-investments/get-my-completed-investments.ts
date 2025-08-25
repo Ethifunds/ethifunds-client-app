@@ -71,7 +71,7 @@ export async function development(): Promise<Response> {
               status: "active",
               created_at: "2025-02-08T01:47:36.000000Z",
               updated_at: "2025-02-08T01:47:36.000000Z",
-            },
+            } as any,
           },
         ]),
       2000,
