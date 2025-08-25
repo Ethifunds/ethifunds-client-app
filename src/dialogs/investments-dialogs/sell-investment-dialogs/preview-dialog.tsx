@@ -37,7 +37,6 @@ export default React.memo(function PreviewDialog() {
     date: new Date().toLocaleDateString("en-us", {
       dateStyle: "full",
     }),
-    investment_type: "Real Estate Investment",
     ...dialog.data,
     status: <Badge className="bg-primary-100 text-primary"> pending </Badge>,
     expected_earnings: (
