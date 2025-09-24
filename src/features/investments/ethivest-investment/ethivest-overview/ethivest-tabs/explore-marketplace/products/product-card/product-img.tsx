@@ -7,6 +7,7 @@ type CardImgProps = {
   display_image: string;
   name: string;
   section: string;
+  status: string;
 };
 
 export default React.memo(function ProductImg(props: CardImgProps) {
@@ -17,15 +18,24 @@ export default React.memo(function ProductImg(props: CardImgProps) {
     "bg-[#E9FCDE]": section === "sme financing",
   });
 
+  const statusCn = classNames(
+    "absolute right-2 bottom-3 capitalize text-neutral-1000 bg-red-600 text-white capitalize",
+    {},
+  );
+
   return (
     <CardHeader className="p-0">
       <div className="relative max-h-56">
         <img
           src={props.display_image}
           alt={props.name}
-          className="object-cover w-full h-56 rounded"
+          className="h-56 w-full rounded object-cover"
         />
         <Badge className={cn}>{props?.section?.replace("_", " ")}</Badge>
+
+        {props?.status === "closed" && (
+          <Badge className={statusCn}>{props?.status}</Badge>
+        )}
       </div>
     </CardHeader>
   );

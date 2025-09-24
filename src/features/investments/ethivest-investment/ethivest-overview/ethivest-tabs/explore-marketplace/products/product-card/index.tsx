@@ -17,6 +17,7 @@ export default function ProductCard(props: InvestmentProduct) {
   const availableUnits = Math.floor(props.total_units - props.units_sold);
 
   const click = () => {
+    if (props.status === "closed") return;
     ui.changeDialog({
       show: true,
       type: "buy_ethivest_product",
@@ -24,19 +25,18 @@ export default function ProductCard(props: InvestmentProduct) {
     });
   };
 
-  
-
   return (
     <React.Fragment>
       <ErrorBoundary>
         <div onClick={click}>
-          <div className="space-y-5 rounded-lg border transition cursor-pointer hover:shadow lg:space-y-0">
+          <div className={`space-y-5 rounded-lg border transition hover:shadow lg:space-y-0 ${props.status === "closed" ? "cursor-not-allowed" : "cursor-pointer"}`}>
             <ProductImg
               name={props.name}
               section={props.product_section?.name}
               display_image={props.display_image}
+              status={props.status}
             />
-            <CardContent className="px-2 py-4 space-y-3">
+            <CardContent className="space-y-3 px-2 py-4">
               <CardTitle className="space-y-1 md:h-16">
                 <div className="flex justify-between">
                   <ProductLabel label={props.product_label?.name} />
@@ -48,7 +48,7 @@ export default function ProductCard(props: InvestmentProduct) {
               </CardTitle>
 
               <div>
-                <div className="flex gap-3 items-center">
+                <div className="flex items-center gap-3">
                   <h1 className="highlight-bold text-neutral-1000">
                     {currency.sign} {amountSeparator(props.unit_price)}{" "}
                   </h1>
@@ -64,13 +64,13 @@ export default function ProductCard(props: InvestmentProduct) {
                 </div>
               </div>
 
-              <div className="flex gap-3 items-center">
+              <div className="flex items-center gap-3">
                 <h6 className="caption-accent text-neutral-700">
                   {props.tenor_value} {props.tenor_unit} Tenure
                 </h6>
               </div>
 
-              <div className="flex gap-3 items-center">
+              <div className="flex items-center gap-3">
                 <h1 className="highlight-bold text-success-200">
                   {props.expected_roi}%
                 </h1>
@@ -79,7 +79,7 @@ export default function ProductCard(props: InvestmentProduct) {
                 </span>
               </div>
 
-              <div className="flex gap-3 items-center">
+              <div className="flex items-center gap-3">
                 {isSoldOut ? (
                   <h2 className="content-accent text-error-200"> Sold Out</h2>
                 ) : (

@@ -20,7 +20,7 @@ export async function production({
   categoryId,
 }: Parameters): Promise<Response> {
   const response = await axios.get(
-    `/investment/product/category/${categoryId}?status=active`,
+    `/investment/product/category/${categoryId}?status=active&status=closed`,
   );
   return response.data.data;
 }

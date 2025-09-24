@@ -31,7 +31,7 @@ export const investmentProducts: InvestmentProduct[] = [
     bond_issuer: null,
     bond_interest_rate: null,
     hybrid_components: [],
-    status: "active",
+    status: "closed",
     created_at: "2025-02-07T00:58:07.000000Z",
     updated_at: "2025-02-07T00:58:07.000000Z",
     custodian: {
