@@ -1,43 +1,69 @@
 import { PaginatedResponse } from "@/types/global.types";
 
 type PaginatePayload<T> = {
-	current_page: number;
-	data: T[];
-	first_page_url: string;
-	from: number;
-	last_page: number;
-	last_page_url: string;
-	next_page_url: string | null;
-	path: string;
-	per_page: number;
-	prev_page_url: string | null;
-	to: number;
-	total: number;
+  current_page: number;
+  data: T[];
+  first_page_url: string;
+  from: number;
+  last_page: number;
+  last_page_url: string;
+  next_page_url: string | null;
+  path: string;
+  per_page: number;
+  prev_page_url: string | null;
+  to: number;
+  total: number;
 };
 
-export default function paginate<T>(params: PaginatePayload<T>): PaginatedResponse<T> {
-	const page = params.current_page;
-	const limit = Math.max(1, params.per_page);
-	const offset = (Math.max(1, page) - 1) * limit;
+// Type guard to check if params is already a PaginatedResponse
+function isPaginatedResponse<T>(params: any): params is PaginatedResponse<T> {
+  return (
+    params &&
+    typeof params === "object" &&
+    "docs" in params &&
+    "totalDocs" in params &&
+    "limit" in params &&
+    "page" in params &&
+    "totalPages" in params &&
+    "hasNextPage" in params &&
+    "nextPage" in params &&
+    "hasPrevPage" in params &&
+    "prevPage" in params &&
+    "pagingCounter" in params
+  );
+}
 
-	const totalDocs = params.total;
-	const totalPages = Math.ceil(totalDocs / limit);
-	const hasNextPage = page < totalPages;
-	const hasPrevPage = page > 1;
-	const docs = params.data;
+export default function paginate<T>(
+  params: PaginatePayload<T> | PaginatedResponse<T>,
+): PaginatedResponse<T> {
+  // If params is already in PaginatedResponse format, return it as-is
+  if (isPaginatedResponse<T>(params)) {
+    return params;
+  }
 
-	return {
-		docs,
-		totalDocs,
-		limit,
-		totalPages,
-		page,
-		pagingCounter: offset + 1,
-		hasNextPage,
-		hasPrevPage,
-		nextPage: hasNextPage ? page + 1 : null,
-		prevPage: hasPrevPage ? page - 1 : null,
-	};
+  // Otherwise, transform from PaginatePayload format
+  const page = params.current_page;
+  const limit = Math.max(1, params.per_page);
+  const offset = (Math.max(1, page) - 1) * limit;
+
+  const totalDocs = params.total;
+  const totalPages = Math.ceil(totalDocs / limit);
+  const hasNextPage = page < totalPages;
+  const hasPrevPage = page > 1;
+  const docs = params.data;
+
+  return {
+    docs,
+    totalDocs,
+    limit,
+    totalPages,
+    page,
+    pagingCounter: offset + 1,
+    hasNextPage,
+    hasPrevPage,
+    nextPage: hasNextPage ? page + 1 : null,
+    prevPage: hasPrevPage ? page - 1 : null,
+  };
 }
 
 // {
